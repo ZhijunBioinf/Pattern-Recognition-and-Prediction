@@ -40,14 +40,14 @@ git clone https://github.com/voutcn/megahit.git
 cd megahit
 make
 ```
-可执行程序megahit  
+可执行程序`megahit`  
 2. velvet
 ```
 git clone https://github.com/manogenome/velvet.git
 cd velvet
 make
 ```
-可执行程序velveth和velvetg  
+可执行程序`velveth`和`velvetg`  
 3. minia
 ```
 wget -c https://github.com/GATB/minia/releases/download/v2.0.7/minia-v2.0.7-Source.tar.gz
@@ -58,7 +58,7 @@ cd build
 cmake ..
 make -j8
 ```
-可执行程序minia放在bin目录下  
+可执行程序`minia`放在bin目录下  
 4. SPAdes
  ``` 
  wget -c http://spades.bioinf.spbau.ru/release3.9.0/SPAdes-3.9.0-Linux.tar.gz
@@ -74,5 +74,5 @@ cd kmergenie-1.7016
 make
 ./kmergenie
 ```
-可执行程序kmergenie  
+可执行程序`kmergenie`  
 
