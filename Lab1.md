@@ -1,7 +1,7 @@
 # 基因组组装
 ## 实验目的  
 1. 熟悉基因组从头组装原理及步骤  
-2. 掌握soapdenovo, velvet, SPAdes等短序列拼装软件使用  
+2. 掌握megahit(soapdenovo系列), velvet, minia, SPAdes等短序列拼装软件使用  
 
 ## 两种组装策略  
    1. Overlap/layout/consensus
@@ -33,12 +33,26 @@
 > [浏览软件库](https://omictools.com/genome-assembly-category)
 
 ## 上机操作  
-**软件下载与编译**
+###软件下载与编译
 1. megahit (soapdenovo2后续版本，支持GPU)
 ```
 git clone https://github.com/voutcn/megahit.git
 cd megahit
 make
 ```
+2. velvet
+```
+git clone https://github.com/manogenome/velvet.git
+cd velvet
+make
+/velveth和velvetg两个程序为主程序
+```
+3. minia
+
+
+4. SPAdes
+ 
+
+5. KmerGenie (option)
 
 
