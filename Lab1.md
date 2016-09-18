@@ -1,13 +1,14 @@
 # 基因组组装
 ## 实验目的  
 1. 熟悉基因组从头组装原理及步骤  
-2. 掌握soapdenovo, velvet等短序列拼装软件使用  
+2. 掌握soapdenovo, velvet, SPAdes等短序列拼装软件使用  
 
 ## 两种组装策略  
    1. Overlap/layout/consensus
    2. De Bruijn k-mer graphs  
 
-第一种策略主要应用在长reads组装上，如sanger测序数据和第三代测序数据，组装软件包括phrap, cap3等。  第二种策略主要应用于短reads数据组装上，包括velvet, soapdenovo, ABYSS等。      
+第一种策略主要应用在长reads组装上，如sanger测序数据和第三代测序数据，组装软件包括phrap, cap3等。  第二种策略主要应用于短reads数据组装上，包括velvet, soapdenovo, ABYSS等。  
+
 **Overlap/layout/consensus基本步骤**  
 > 1. Calculate all overlaps. 计算重叠片断  
 > 2. Cluster based on overlap. 重叠片断聚类  
@@ -18,7 +19,15 @@
 > 2. Construct contigs，搜索路径  
 > 3. Scaffolding and fill gaps，构建scaffold并填洞  
 
+本实验主要介绍使用第二种策略的组装软件  
+
 ## 如何选择合适k  
 1. 多试几个k，看组装效果
 2. 利用如[KmerGenie](http://kmergenie.bx.psu.edu/)进行辅助选择  
-3. 
+ 
+## 如何选择组装软件  
+1. 选择你熟悉的软件  
+2. 选择大家使用多的软件
+3. 选择适合项目性质的软件，如基因组大小，染色体倍性，杂合度，宏基因组，转录组等
+> [浏览软件](https://omictools.com/genome-assembly-category)
+
