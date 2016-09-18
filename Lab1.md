@@ -28,6 +28,9 @@
 ## 如何选择组装软件  
 1. 选择你熟悉的软件  
 2. 选择大家使用多的软件
-3. 选择适合项目性质的软件，如基因组大小，染色体倍性，杂合度，宏基因组，转录组等  
-> [浏览软件](https://omictools.com/genome-assembly-category)
+3. 选择适合项目性质的软件，如基因组大小，染色体倍性，杂合度，数据类型，宏基因组，转录组等
+
+> [浏览软件库](https://omictools.com/genome-assembly-category)
+
+## 上机操作  
 
