@@ -39,6 +39,7 @@
 git clone https://github.com/voutcn/megahit.git
 cd megahit
 make
+./megahit
 ```
 可执行程序`megahit`  
 2. velvet
@@ -46,6 +47,8 @@ make
 git clone https://github.com/manogenome/velvet.git
 cd velvet
 make
+./velveth
+./velvetg
 ```
 可执行程序`velveth`和`velvetg`  
 3. minia
@@ -57,6 +60,7 @@ mkdir build
 cd build
 cmake ..
 make -j8
+./bin/minia
 ```
 可执行程序`minia`放在bin目录下  
 4. SPAdes
@@ -75,4 +79,6 @@ make
 ./kmergenie
 ```
 可执行程序`kmergenie`  
+
+##数据下载
 
