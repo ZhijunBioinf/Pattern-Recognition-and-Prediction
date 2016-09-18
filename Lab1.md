@@ -19,7 +19,7 @@
 > 2. Construct contigs，搜索路径  
 > 3. Scaffolding and fill gaps，构建scaffold并填洞  
 
-本实验主要介绍使用第二种策略的组装软件  
+本实验主要介绍使用第二种策略的组装软件soapdenovo, velvet和SPAdes的使用  
 
 ## 如何选择合适k  
 1. 多试几个k，看组装效果
@@ -33,4 +33,11 @@
 > [浏览软件库](https://omictools.com/genome-assembly-category)
 
 ## 上机操作  
+**软件下载与编译**
+```
+git clone https://github.com/voutcn/megahit.git
+cd megahit
+make
+```
+
 
