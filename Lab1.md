@@ -33,6 +33,13 @@
 > [浏览软件库](https://omictools.com/genome-assembly-category)
 
 ## 上机操作  
+**登录服务器**
+```
+# Linux机器上登录
+ssh -l public 172.28.137.55
+# Windows机器上登录用putty客户端
+
+```
 ###软件下载与编译
 1. megahit (soapdenovo2后续版本，支持GPU)
 ```
@@ -68,6 +75,8 @@ make -j8
  wget -c http://spades.bioinf.spbau.ru/release3.9.0/SPAdes-3.9.0-Linux.tar.gz
  tar zxvf SPAdes-3.9.0-Linux.tar.gz
  cd SPAdes-3.9.0-Linux
+ # 测试SPAdes
+ ./bin/spades.py --test
 ```
 SPAdes可以下载已经编译好的程序，解压缩后直接可执行。  
 5. KmerGenie (option)
@@ -82,12 +91,25 @@ make
 
 ##数据下载  
 ```
-curl -O https://s3.amazonaws.com/public.ged.msu.edu/ecoli-reads-5m-dn-paired.fa.gz
-#下载参考基因组
-curl -O https://s3.amazonaws.com/public.ged.msu.edu/ecoliMG1655.fa.gz
+数据存放在服务器位置：
+/bs1/data/genomeLab/reads_1.fq.gz
+/bs1/data/genomeLab/reads_2.fq.gz
+#参考基因组
+/bs1/data/genomeLab/ref.fa
 ```
 ##组装  
 ```
-velveth ecoli.21 21 -shortPaired -fasta.gz ecoli-reads-5m-dn-paired.fa.gz
-velvetg ecoli.21 -exp_cov auto
+# 新建目录
+mkdir lab1
+cd lab1
+ln -s /bs1/data/genomeLab/reads_1.fq.gz /bs1/data/genomeLab/reads_2.fq.gz ./
+
+
+velveth ecoli.velvet 21 -shortPaired -fastq.gz -separate reads_1.fq.gz reads_2.fq.gz
+velvetg ecoli.velvet -exp_cov auto
+
+minia -in reads_1.fq.gz,reads_2.fq.gz -kmer-size 21 -out ecoli_minia
+
+spades.py -t 4 -1 reads_1.fq.gz -2 reads_2.fq.gz -o ecoli_spades
+
 ```
