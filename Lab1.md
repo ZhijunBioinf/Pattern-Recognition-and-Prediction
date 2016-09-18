@@ -1,4 +1,8 @@
 # 基因组组装
+## 实验目的  
+1. 熟悉基因组从头组装原理及步骤  
+2. 掌握soapdenovo, velvet等短序列拼装软件使用  
+
 ## 两种组装策略  
    1. Overlap/layout/consensus
    2. De Bruijn k-mer graphs  
@@ -10,7 +14,7 @@
 > 3. Do a multiple sequence alignment. 多序列比对,取一致序列  
 
 **De Bruijin k-mer graphs基本步骤**  
-> 1. Building the k-mer graph  
-> 2. Construct contigs  
-> 3. Scaffolding and fill gaps  
+> 1. Building the k-mer graph，构建k-mer图  
+> 2. Construct contigs，搜索路径  
+> 3. Scaffolding and fill gaps，构建scaffold并填洞  
 
