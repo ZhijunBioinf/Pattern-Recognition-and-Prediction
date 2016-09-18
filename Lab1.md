@@ -34,6 +34,7 @@
 
 ## 上机操作  
 **软件下载与编译**
+1. megahit (soapdenovo2后续版本，支持GPU)
 ```
 git clone https://github.com/voutcn/megahit.git
 cd megahit
