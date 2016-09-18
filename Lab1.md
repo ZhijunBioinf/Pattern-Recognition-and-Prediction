@@ -14,7 +14,11 @@
 > 3. Do a multiple sequence alignment. 多序列比对,取一致序列  
 
 **De Bruijin k-mer graphs基本步骤**  
-> 1. Building the k-mer graph，构建k-mer图  
+> 1. Building the k-mer graph，构建k-mer图，有的软件会在之前加一步，对reads进行纠错  
 > 2. Construct contigs，搜索路径  
 > 3. Scaffolding and fill gaps，构建scaffold并填洞  
 
+## 如何选择合适k  
+1. 多试几个k，看组装效果
+2. 利用如[KmerGenie](http://kmergenie.bx.psu.edu/)进行辅助选择  
+3. 
