@@ -41,7 +41,6 @@ cd megahit
 make
 ```
 可执行程序megahit  
-
 2. velvet
 ```
 git clone https://github.com/manogenome/velvet.git
@@ -49,7 +48,6 @@ cd velvet
 make
 ```
 可执行程序velveth和velvetg  
-
 3. minia
 ```
 wget -c https://github.com/GATB/minia/releases/download/v2.0.7/minia-v2.0.7-Source.tar.gz
@@ -61,7 +59,6 @@ cmake ..
 make -j8
 ```
 可执行程序minia放在bin目录下  
-
 4. SPAdes
  ``` 
  wget -c http://spades.bioinf.spbau.ru/release3.9.0/SPAdes-3.9.0-Linux.tar.gz
@@ -69,7 +66,6 @@ make -j8
  cd SPAdes-3.9.0-Linux
 ```
 SPAdes可以下载已经编译好的程序，解压缩后直接可执行。  
-
 5. KmerGenie (option)
 ```
 wget -c http://kmergenie.bx.psu.edu/kmergenie-1.7016.tar.gz
