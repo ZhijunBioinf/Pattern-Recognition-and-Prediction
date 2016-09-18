@@ -9,8 +9,7 @@
 > 2. Cluster based on overlap. 重叠片断聚类  
 > 3. Do a multiple sequence alignment. 多序列比对,取一致序列  
 
-
-** De Bruijin k-mer graphs基本步骤 **  
+**De Bruijin k-mer graphs基本步骤**  
 > 1. Building the k-mer graph  
 > 2. Construct contigs  
 > 3. Scaffolding and fill gaps  
