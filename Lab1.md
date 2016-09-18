@@ -80,5 +80,14 @@ make
 ```
 可执行程序`kmergenie`  
 
-##数据下载
-
+##数据下载  
+```
+curl -O https://s3.amazonaws.com/public.ged.msu.edu/ecoli-reads-5m-dn-paired.fa.gz
+#下载参考基因组
+curl -O https://s3.amazonaws.com/public.ged.msu.edu/ecoliMG1655.fa.gz
+```
+##组装  
+```
+velveth ecoli.21 21 -shortPaired -fasta.gz ecoli-reads-5m-dn-paired.fa.gz
+velvetg ecoli.21 -exp_cov auto
+```
