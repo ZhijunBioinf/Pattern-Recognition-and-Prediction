@@ -1,7 +1,8 @@
 # 基因组组装
 ## 实验目的  
 1. 熟悉基因组从头组装原理及步骤  
-2. 掌握megahit(soapdenovo系列), velvet, minia, SPAdes等短序列拼装软件使用  
+2. 掌握velvet, minia, SPAdes等短序列拼装软件使用 
+3. 熟悉用quast评价组装效果  
 
 ## 两种组装策略  
    1. Overlap/layout/consensus
@@ -41,25 +42,23 @@ ssh -l public 172.28.137.55
 
 ```
 ###软件下载与编译
-1. megahit (soapdenovo2后续版本，支持GPU)
+组装软件：`velvet`, `minia`, `SPAdes`  
+评价软件：`quast`
 ```
-git clone https://github.com/voutcn/megahit.git
-cd megahit
-make
-./megahit
-```
-可执行程序`megahit`  
-2. velvet
-```
+#新建一个目录lab1，本实验所有数据和输出都放入该目录中  
+mkdir lab1
+cd lab1
+mkdir data
+mkdir soft
+mkdir result
+cd soft
+# 安装velvet
 git clone https://github.com/manogenome/velvet.git
 cd velvet
 make
 ./velveth
 ./velvetg
-```
-可执行程序`velveth`和`velvetg`  
-3. minia
-```
+#安装minia
 wget -c https://github.com/GATB/minia/releases/download/v2.0.7/minia-v2.0.7-Source.tar.gz
 tar zxvf minia-v2.0.7-Source.tar.gz
 cd minia-v2.0.7-Source
@@ -68,48 +67,46 @@ cd build
 cmake ..
 make -j8
 ./bin/minia
-```
-可执行程序`minia`放在bin目录下  
-4. SPAdes
- ``` 
+#安装SPAdes
  wget -c http://spades.bioinf.spbau.ru/release3.9.0/SPAdes-3.9.0-Linux.tar.gz
  tar zxvf SPAdes-3.9.0-Linux.tar.gz
  cd SPAdes-3.9.0-Linux
  # 测试SPAdes
  ./bin/spades.py --test
-```
-SPAdes可以下载已经编译好的程序，解压缩后直接可执行。  
-5. KmerGenie (option)
-```
+#安装quast
+curl -O -L https://downloads.sourceforge.net/project/quast/quast-2.3.tar.gz
+tar xzf quast-2.3.tar.gz
+# 安装kmergenie
 wget -c http://kmergenie.bx.psu.edu/kmergenie-1.7016.tar.gz
 tar zxvf kmergenie-1.7016.tar.gz
 cd kmergenie-1.7016
 make
 ./kmergenie
 ```
-可执行程序`kmergenie`  
 
 ##数据下载  
 ```
 数据存放在服务器位置：
-/bs1/data/genomeLab/reads_1.fq.gz
-/bs1/data/genomeLab/reads_2.fq.gz
+/bs1/data/genomeLab/lab1/data/reads_1.fq.gz
+/bs1/data/genomeLab/lab1/data/reads_2.fq.gz
 #参考基因组
-/bs1/data/genomeLab/ref.fa
+/bs1/data/genomeLab/lab1/data/ref.fa
 ```
 ##组装  
 ```
-# 新建目录
-mkdir lab1
-cd lab1
-ln -s /bs1/data/genomeLab/reads_1.fq.gz /bs1/data/genomeLab/reads_2.fq.gz ./
+# 准备数据
+cd data
+ln -s /bs1/data/genomeLab/lab1/data/reads_1.fq.gz /bs1/data/genomeLab/lab1/data/reads_2.fq.gz ./
 
+cd ../result
+[path to] velveth ecoli.velvet 21 -shortPaired -fastq.gz -separate ../data/reads_1.fq.gz ../data/reads_2.fq.gz
+[path to] velvetg ecoli.velvet -exp_cov auto
 
-velveth ecoli.velvet 21 -shortPaired -fastq.gz -separate reads_1.fq.gz reads_2.fq.gz
-velvetg ecoli.velvet -exp_cov auto
+[path to] minia -in ../data/reads_1.fq.gz,../data/reads_2.fq.gz -kmer-size 21 -out ecoli.minia
 
-minia -in reads_1.fq.gz,reads_2.fq.gz -kmer-size 21 -out ecoli_minia
+[path to] spades.py -t 4 -1 ../data/reads_1.fq.gz -2 ../data/reads_2.fq.gz -o ecoli.spades
 
-spades.py -t 4 -1 reads_1.fq.gz -2 reads_2.fq.gz -o ecoli_spades
+#组装效果评价
+[path to] quast.py -R ../data/ref.fa ecoli.velvet/contigs.fa ecoli.minia.contigs.fa ecoli.spades/scaffolds.fasta
 
 ```
