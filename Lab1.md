@@ -120,4 +120,6 @@ less quast_results/latest/report.txt
 ```
 ###作业  
 1. 不同k-mer值对组装的影响  
-2. 
+2. 熟悉和理解基因组组装一些术语名词，如N50, NG50, contig, scaffold, gap等
+ 
+
