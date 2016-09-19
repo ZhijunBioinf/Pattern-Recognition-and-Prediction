@@ -1,10 +1,11 @@
-# 基因组组装
-## 实验目的  
+# 实验一 基因组组装
+## 一、实验目的  
 1. 熟悉基因组从头组装原理及步骤  
 2. 掌握velvet, minia, SPAdes等短序列拼装软件使用 
 3. 熟悉用quast评价组装效果  
 
-## 两种组装策略  
+## 二、基因组组装组装原理与方法  
+### 两种策略  
    1. Overlap/layout/consensus
    2. De Bruijn k-mer graphs  
 
@@ -20,13 +21,13 @@
 > 2. Construct contigs，搜索路径  
 > 3. Scaffolding and fill gaps，构建scaffold并填洞  
 
-本实验主要介绍使用第二种策略的组装软件soapdenovo, velvet和SPAdes的使用  
+本实验主要介绍使用第二种策略的组装软件velvet, minia和SPAdes的使用  
 
-## 如何选择合适k  
+### 如何选择合适k  
 1. 多试几个k，看组装效果
 2. 利用如[KmerGenie](http://kmergenie.bx.psu.edu/)进行辅助选择  
  
-## 如何选择组装软件  
+### 如何选择组装软件  
 1. 选择你熟悉的软件  
 2. 选择大家使用多的软件
 3. 选择适合项目性质的软件，如基因组大小，染色体倍性，杂合度，数据类型，宏基因组，转录组等
