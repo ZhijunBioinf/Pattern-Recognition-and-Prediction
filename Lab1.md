@@ -34,7 +34,7 @@
 
 > [浏览软件库](https://omictools.com/genome-assembly-category)
 
-## 上机操作  
+## 二、上机操作  
 **登录服务器**
 ```
 # Linux机器上登录
@@ -42,7 +42,7 @@ ssh -l public 172.28.137.55
 # Windows机器上登录用putty客户端
 
 ```
-###软件下载与编译
+### 软件下载与编译
 组装软件：`velvet`, `minia`, `SPAdes`  
 评价软件：`quast`
 ```
@@ -90,7 +90,7 @@ make
 ./kmergenie
 ```
 
-##数据下载  
+### 数据下载  
 ```
 数据存放在服务器位置：
 /bs1/data/genomeLab/lab1/data/reads_1.fq.gz
@@ -98,7 +98,7 @@ make
 #参考基因组
 /bs1/data/genomeLab/lab1/data/ref.fa
 ```
-##组装  
+### 组装  
 ```
 # 准备数据
 cd data
@@ -122,5 +122,5 @@ less quast_results/latest/report.txt
 ###作业  
 1. 不同k-mer值对组装的影响  
 2. 熟悉和理解基因组组装一些术语名词，如N50, NG50, contig, scaffold, gap等
- 
+
 
