@@ -5,7 +5,7 @@
 3. 掌握应用bwa, samtools的使用  
 4. 理解SAM, BAM文件格式  
 
-## 二、先导知识  
+## 二、知识回顾  
 
 ### 比对的两种策略  
 1. Global alignment
@@ -19,8 +19,10 @@
 > 1. 速度
 > 2. 准确性
  
-
 Mapping软件众多，比较有名的包括bwa, soap, bowtie, novoalign  
 另外，由于真核生物mRNA不含有内含子，与一般的DNA mapping软件要求不一样，故转录组mapping使用的软件也不一样，转录组mapping软件比较有名的包括：STAR, hisat  
 本实验主要介绍一般意义上的DNA mapping软件的使用。  
+
+## 三、上机操作  
+
 
