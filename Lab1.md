@@ -122,7 +122,7 @@ less quast_results/latest/report.txt
 ###作业  
 1. 不同k-mer值对组装的影响，尝试用kmergenie辅助选择k  
 2. 熟悉和理解基因组组装一些术语名词，如N50, NG50, contig, scaffold, gap等
-3. 理解k-mer频次分布图，如何估算根据k-mer频次分布图估算基因组大小  
+3. 理解k-mer频次分布图，如何根据k-mer频次分布图估算基因组大小及杂合度  
 
 
 
