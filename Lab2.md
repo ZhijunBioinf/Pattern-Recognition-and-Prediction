@@ -23,6 +23,16 @@ Mapping软件众多，比较有名的包括bwa, soap, bowtie, novoalign
 另外，由于真核生物mRNA不含有内含子，与一般的DNA mapping软件要求不一样，故转录组mapping使用的软件也不一样，转录组mapping软件比较有名的包括：STAR, hisat  
 本实验主要介绍一般意义上的DNA mapping软件的使用。  
 
+### What makes mapping challenging?（挑战）
+1. Volume of data
+2. Garbage reads
+3. Errors in reads, and quality scores
+4. Repeat elements and multicopy sequence
+5. SNPs/SNVs
+6. Indels
+7. Splicing (transcriptome)
+
+
 ## 三、上机操作  
 ### 安装软件  
 ```
