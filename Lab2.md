@@ -15,6 +15,7 @@
 我们熟悉的blast和blat均属于第二类。   
 另外，不同长度的reads比对所用的策略也不一样，对于短reads，基于local alignment的软件如blast, blat不适合。  
 将短的reads回帖到长的参考基因组上，这一过程称之为mapping。一般reads数目很大，读长短，参考基因组较长，对于mapping软件有两个要求：
+
 1. 速度
 2. 准确性
 3. 
