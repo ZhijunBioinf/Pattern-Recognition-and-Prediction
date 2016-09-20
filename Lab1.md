@@ -125,3 +125,4 @@ less quast_results/latest/report.txt
 3. 理解k-mer频次分布图，如何估算根据k-mer频次分布图估算基因组大小  
 
 
+
