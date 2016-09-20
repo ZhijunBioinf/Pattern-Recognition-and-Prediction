@@ -4,7 +4,10 @@
 2. 理解全局比对和局部比对的区别和应用  
 3. 掌握应用bwa, samtools的使用  
 4. 理解SAM, BAM文件格式  
+5. 
+
 ## 二、先导知识  
+
 ### 比对的两种策略  
 1. Global alignment
 2. Local alignment
