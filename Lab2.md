@@ -11,7 +11,6 @@
 1. Global alignment
 2. Local alignment
 
-
 我们熟悉的blast和blat均属于第二类。   
 另外，不同长度的reads比对所用的策略也不一样，对于短reads，基于local alignment的软件如blast, blat不适合。  
 将短的reads回帖到长的参考基因组上，这一过程称之为mapping。一般reads数目很大，读长短，参考基因组较长，对于mapping软件有两个要求：
@@ -32,20 +31,28 @@ Mapping软件众多，比较有名的包括bwa, soap, bowtie, novoalign
 6. Indels
 7. Splicing (transcriptome)
 
+### 几个影响mapping速度的参数  
+1. How many mismatches to allow?
+2. Report how many matches?
+3. Require best match, or first/any that fit criteria?
 
 ## 三、上机操作  
 ### 安装软件  
 ```
+# 安装bwa
+# 安装bowtie
+# 安装samtools
+# 安装igv
 
 ```
 ### 实验数据  
 ```
 
 ```
-### 
+### Mapping and viewer  
 
 ## 四、作业与思考  
-
+1. 
 
 ## 五、参考资料  
 
