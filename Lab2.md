@@ -78,12 +78,34 @@ cd IGV_2.3.81
 
 ### 实验数据  
 ```
-
+/bs1/data/genomeLab/lab2/data/REL606.fa
+/bs1/data/genomeLab/lab2/data/SRR098038.fastq.gz
 ```
 ### Mapping and viewer  
+```
+# 准备数据和index参考基因组
+cd data
+ln -s /bs1/data/genomeLab/lab2/data/REL606.fa /bs1/data/genomeLab/lab2/data/SRR098038.fastq.gz ./
+samtools faidx REL606.fa
+mkdir index
+cd index
+ln -s ../REL606.fa ./
+bwa index REL606.fa
 
+cd ../../result
+bwa aln ../data/index/REL606.fa ../data/SRR098038.fastq.gz  > SRR098038.sai
+bwa samse ../data/index/REL606.fa SRR098038.sai ../data/SRR098038.fastq.gz > SRR098038.sam
+samtools view -b SRR098038.sam > SRR098038.bam
+samtools sort -o SRR098038.sort.bam SRR098038.bam
+samtools index SRR098038.sort.bam
+
+# 显示比对结果  
+samtools tview SRR098038.sorted.bam ../data/REL606.fa
+
+```
 ## 四、作业与思考  
-1. 
+1. 先组装，得到contigs，然后将contigs用bwa mem比对到参考基因组上  
+2. 用igv查看比对情况  
 
 ## 五、参考资料  
 
