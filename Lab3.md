@@ -49,11 +49,11 @@ cat ./anno/prokka.txt
 下载地址：http://www.sanger.ac.uk/science/tools/artemis  
 将prokka注释得到的gff文件拷到本地电脑上，用scp  
 打开Artemis，装载注释结果  
-    1. Start Artemis  
-    2. Click OK  
-    3. Go to File -> Open File Manager  
-    4. Navigate to the ~/Downloads folder  
-    5. Choose the prokka.gff file yoiu copied from Amazon
+>    1. Start Artemis  
+>    2. Click OK  
+>    3. Go to File -> Open File Manager  
+>    4. Navigate to the ~/Downloads folder  
+>    5. Choose the prokka.gff file yoiu copied from Amazon
 
 ## 四、作业与思考  
 
