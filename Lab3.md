@@ -36,7 +36,24 @@ prokka --setupdb
 prokka --version
 
 ```
+### Run Prokka on the contigs  
+```
+cd ../result
+ln -s ../data/contigs.fasta ./
+prokka --outdir anno --prefix prokka contigs.fasta
+cat ./anno/prokka.txt
 
+```
+### 用Artemis查看注释结果  
+这一部分是在本地台式机上完成。  
+下载地址：http://www.sanger.ac.uk/science/tools/artemis  
+将prokka注释得到的gff文件拷到本地电脑上，用scp  
+打开Artemis，装载注释结果  
+  Start Artemis
+  Click OK
+  Go to File -> Open File Manager
+  Navigate to the ~/Downloads folder
+  Choose the prokka.gff file yoiu copied from Amazon
 ## 四、作业与思考  
 
 
