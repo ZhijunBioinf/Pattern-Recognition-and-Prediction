@@ -105,7 +105,7 @@ samtools tview SRR098038.sorted.bam ../data/REL606.fa
 ```
 ## 四、作业与思考  
 1. 先组装，得到contigs，然后将contigs用bwa mem比对到参考基因组上  
-2. 用igv查看比对情况  
+2. 用igv显示比对结果   
 
 ## 五、参考资料  
 
