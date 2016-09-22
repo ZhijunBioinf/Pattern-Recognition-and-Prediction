@@ -47,7 +47,7 @@ cat ./anno/prokka.txt
 ### 用Artemis查看注释结果  
 这一部分是在本地台式机上完成。  
 下载地址：http://www.sanger.ac.uk/science/tools/artemis  
-将prokka注释得到的prokka.gff文件拷到本地电脑上，用scp  
+将prokka注释得到的prokka.gff文件拷到本地电脑上(用scp)  
 打开Artemis，装载注释结果  
 >    1. Start Artemis  
 >    2. Click OK  
