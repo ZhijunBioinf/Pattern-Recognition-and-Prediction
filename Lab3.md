@@ -60,3 +60,5 @@ cat ./anno/prokka.txt
 2. 了解真核生物基因组注释软件，如[Augustus](http://bioinf.uni-greifswald.de/augustus/), [GlimmerHMM](http://ccb.jhu.edu/software/glimmerhmm/), [maker](http://www.yandell-lab.org/software/maker.html)
 
 ## 五、参考文献  
+1. [prokka github](https://github.com/tseemann/prokka)
+ 
