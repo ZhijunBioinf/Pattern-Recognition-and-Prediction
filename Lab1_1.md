@@ -58,7 +58,7 @@ cd soft
 # 安装velvet
 git clone https://github.com/manogenome/velvet.git
 cd velvet
-make
+make MAXKMERLENGTH=90 # 默认K最大为31
 ./velveth
 ./velvetg
 
