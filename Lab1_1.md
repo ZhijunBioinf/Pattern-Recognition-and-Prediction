@@ -54,13 +54,13 @@ mkdir soft
 mkdir result
 cd soft
 
+# 说明：本实验所需软件已经下载到/bs1/data/genomeLab/lab1/soft/，可以直接将这些软件连接到soft目录下使用
 # 安装velvet
 git clone https://github.com/manogenome/velvet.git
 cd velvet
 make
 ./velveth
 ./velvetg
-# 备注：velvet在服务器上编译有问题，velvet已经编译好放在/biosoft/bin目录中
 
 # 安装minia
 wget -c https://github.com/GATB/minia/releases/download/v2.0.7/minia-v2.0.7-Source.tar.gz
@@ -108,7 +108,7 @@ ln -s /bs1/data/genomeLab/lab1/data/reads_1.fq.gz /bs1/data/genomeLab/lab1/data/
 cd ../result
 [path to]/velveth ecoli.velvet 21 -shortPaired -fastq.gz -separate ../data/reads_1.fq.gz ../data/reads_2.fq.gz
 [path to]/velvetg ecoli.velvet -exp_cov auto
-# 注：[path to]为程序所在的路径，本例中应该是/biosoft/bin
+# 注：[path to]为程序所在的路径，以下类似
 
 [path to]/minia -in ../data/reads_1.fq.gz,../data/reads_2.fq.gz -kmer-size 21 -out ecoli.minia
 
