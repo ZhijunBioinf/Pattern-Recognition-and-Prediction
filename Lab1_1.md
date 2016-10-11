@@ -40,7 +40,7 @@
 # Linux机器上登录
 ssh -l public 172.28.137.55
 # Windows机器上登录用putty客户端
-
+# 登录服务器后请建立自己的目录，以学号+姓名拼音命名，以后的实验数据和结果都放入这个目录
 ```
 ### 软件下载与编译
 组装软件：`velvet`, `minia`, `SPAdes`  
@@ -60,6 +60,7 @@ cd velvet
 make
 ./velveth
 ./velvetg
+# 备注：velvet在服务器上编译有问题，velvet已经编译好放在/biosoft/bin目录中
 
 # 安装minia
 wget -c https://github.com/GATB/minia/releases/download/v2.0.7/minia-v2.0.7-Source.tar.gz
@@ -105,15 +106,16 @@ cd data
 ln -s /bs1/data/genomeLab/lab1/data/reads_1.fq.gz /bs1/data/genomeLab/lab1/data/reads_2.fq.gz ./
 
 cd ../result
-[path to] velveth ecoli.velvet 21 -shortPaired -fastq.gz -separate ../data/reads_1.fq.gz ../data/reads_2.fq.gz
-[path to] velvetg ecoli.velvet -exp_cov auto
+[path to]/velveth ecoli.velvet 21 -shortPaired -fastq.gz -separate ../data/reads_1.fq.gz ../data/reads_2.fq.gz
+[path to]/velvetg ecoli.velvet -exp_cov auto
+# 注：[path to]为程序所在的路径，本例中应该是/biosoft/bin/velveth 和/biosoft/bin/velvetg
 
-[path to] minia -in ../data/reads_1.fq.gz,../data/reads_2.fq.gz -kmer-size 21 -out ecoli.minia
+[path to]/minia -in ../data/reads_1.fq.gz,../data/reads_2.fq.gz -kmer-size 21 -out ecoli.minia
 
-[path to] spades.py -t 4 -1 ../data/reads_1.fq.gz -2 ../data/reads_2.fq.gz -o ecoli.spades
+[path to]/spades.py -t 4 -1 ../data/reads_1.fq.gz -2 ../data/reads_2.fq.gz -o ecoli.spades
 
 #组装效果评价
-[path to] quast.py -R ../data/ref.fa ecoli.velvet/contigs.fa ecoli.minia.contigs.fa ecoli.spades/scaffolds.fasta
+[path to]/quast.py -R ../data/ref.fa ecoli.velvet/contigs.fa ecoli.minia.contigs.fa ecoli.spades/scaffolds.fasta
 
 #查看评价结果
 less quast_results/latest/report.txt 
