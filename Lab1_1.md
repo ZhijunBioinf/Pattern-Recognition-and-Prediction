@@ -108,7 +108,7 @@ ln -s /bs1/data/genomeLab/lab1/data/reads_1.fq.gz /bs1/data/genomeLab/lab1/data/
 cd ../result
 [path to]/velveth ecoli.velvet 21 -shortPaired -fastq.gz -separate ../data/reads_1.fq.gz ../data/reads_2.fq.gz
 [path to]/velvetg ecoli.velvet -exp_cov auto
-# 注：[path to]为程序所在的路径，本例中应该是/biosoft/bin/velveth 和/biosoft/bin/velvetg
+# 注：[path to]为程序所在的路径，本例中应该是/biosoft/bin
 
 [path to]/minia -in ../data/reads_1.fq.gz,../data/reads_2.fq.gz -kmer-size 21 -out ecoli.minia
 
@@ -122,7 +122,7 @@ less quast_results/latest/report.txt
 
 ```
 ## 四、作业  
-1. 不同k-mer值对组装的影响，尝试用kmergenie辅助选择k  
+1. 不同k-mer值对组装的影响，对velvet和minia用31和51进行组装，比较组装效果  
 2. 熟悉和理解基因组组装一些术语名词，如N50, NG50, contig, scaffold, gap等
 3. 理解k-mer频次分布图，如何根据k-mer频次分布图估算基因组大小及杂合度  
  
