@@ -22,6 +22,10 @@ canu \
  -p ecoli -d ecoli-auto \
  genomeSize=4.8m \
  -pacbio-raw pacbio_filtered.fastq
+
+# 组装结果
+ecoli-auto/ecoli.contigs.fasta
+
 ```
 
 ## 分步法  
