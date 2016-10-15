@@ -115,7 +115,10 @@ cd ../result
 [path to]/spades.py -t 4 -1 ../data/reads_1.fq.gz -2 ../data/reads_2.fq.gz -o ecoli.spades
 
 #组装效果评价
-[path to]/quast.py -R ../data/ref.fa ecoli.velvet/contigs.fa ecoli.minia.contigs.fa ecoli.spades/scaffolds.fasta
+[path to]/quast.py -R /bs1/data/genomeLab/lab1/data/ref.fa \
+   ecoli.velvet/contigs.fa \
+   ecoli.minia.contigs.fa \
+   ecoli.spades/scaffolds.fasta
 
 #查看评价结果
 less quast_results/latest/report.txt 
