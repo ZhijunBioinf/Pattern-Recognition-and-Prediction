@@ -14,7 +14,7 @@ ln -s /bs1/data/genomeLab/lab1.2/data/selfSampleData/pacbio_filtered.fastq ./
 
 ```
 
-## 一步法  
+### 一步法  
 By default, canu will correct the reads, then trim the reads, then assemble the reads to unitigs.
 
 ```
@@ -28,7 +28,7 @@ ecoli-auto/ecoli.contigs.fasta
 
 ```
 
-## 分步法  
+### 分步法  
 ```
 第一步：纠错
 canu -correct \
