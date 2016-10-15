@@ -45,3 +45,6 @@ canu -assemble \
 ```
 ## 四、作业与思考  
 ## 五、参考文献  
+http://canu.readthedocs.io/en/latest/index.html  
+https://github.com/PacificBiosciences/GenomicConsensus  
+
