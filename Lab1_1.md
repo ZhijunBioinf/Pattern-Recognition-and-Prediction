@@ -35,32 +35,26 @@
 > [浏览软件库](https://omictools.com/genome-assembly-category)
 
 ## 三、上机操作  
-**登录服务器**
+
+### 设置环境变量和工作目录  
 ```
-# Linux机器上登录
-ssh -l public 172.28.137.55
-# Windows机器上登录用putty客户端
-# 登录服务器后请建立自己的目录，以学号+姓名拼音命名，以后的实验数据和结果都放入这个目录
-```
-### 软件下载与编译
-组装软件：`velvet`, `minia`, `SPAdes`  
-评价软件：`quast`
-```
+module add bioinfo
 #新建一个目录lab1，本实验所有数据和输出都放入该目录中  
 mkdir lab1
 cd lab1
 mkdir data
-mkdir soft
 mkdir result
-cd soft
 
+```
+### 软件下载与编译（选做）
+组装软件：`velvet`, `minia`, `SPAdes`  
+评价软件：`quast`
+```
 # 说明：本实验所需软件已经下载到/bs1/data/genomeLab/lab1/soft/，可以直接将这些软件连接到soft目录下使用
 # 安装velvet
 git clone https://github.com/manogenome/velvet.git
 cd velvet
 make MAXKMERLENGTH=90 # 默认K最大为31
-./velveth
-./velvetg
 
 # 安装minia
 cd ../
@@ -71,15 +65,11 @@ mkdir build
 cd build
 cmake ..
 make -j8
-./bin/minia
 
 # 安装SPAdes
 cd ../../
  wget -c http://spades.bioinf.spbau.ru/release3.9.0/SPAdes-3.9.0-Linux.tar.gz
  tar zxvf SPAdes-3.9.0-Linux.tar.gz
- cd SPAdes-3.9.0-Linux
- # 测试SPAdes
- ./bin/spades.py --test
 
 # 安装quast
 cd ../
@@ -91,10 +81,9 @@ wget -c http://kmergenie.bx.psu.edu/kmergenie-1.7016.tar.gz
 tar zxvf kmergenie-1.7016.tar.gz
 cd kmergenie-1.7016
 make
-./kmergenie
 ```
 
-### 数据下载  
+### 准备数据  
 ```
 数据存放在服务器位置：
 /bs1/data/genomeLab/lab1/data/reads_1.fq.gz
