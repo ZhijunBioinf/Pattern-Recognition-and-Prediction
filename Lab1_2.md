@@ -51,6 +51,6 @@ If you have Illumina sequences available, [Pilon](http://www.broadinstitute.org/
 
 ## 四、作业与思考  
 ## 五、参考文献  
-http://canu.readthedocs.io/en/latest/index.html  
-https://github.com/PacificBiosciences/GenomicConsensus  
-Koren S, Walenz BP, Berlin K, Miller JR, Phillippy AM. [Canu: scalable and accurate long-read assembly via adaptive k-mer weighting and repeat separation.](http://biorxiv.org/content/early/2016/08/24/071282) bioRxiv. (2016).
+1. http://canu.readthedocs.io/en/latest/index.html  
+2. https://github.com/PacificBiosciences/GenomicConsensus  
+3. Koren S, Walenz BP, Berlin K, Miller JR, Phillippy AM. [Canu: scalable and accurate long-read assembly via adaptive k-mer weighting and repeat separation.](http://biorxiv.org/content/early/2016/08/24/071282) bioRxiv. (2016).
