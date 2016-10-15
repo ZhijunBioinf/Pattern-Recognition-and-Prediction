@@ -4,8 +4,14 @@
 ## 三、上机操作  
 
 ```
-设置环境变量
+# 登录服务器
+# 设置环境变量
 module bioinfo
+# 准备工作目录和数据
+mkdir lab1_2
+cd lab1_2
+ln -s /bs1/data/genomeLab/lab1.2/data/selfSampleData/pacbio_filtered.fastq ./
+
 ```
 
 ## 一步法  
@@ -15,7 +21,7 @@ By default, canu will correct the reads, then trim the reads, then assemble the 
 canu \
  -p ecoli -d ecoli-auto \
  genomeSize=4.8m \
- -pacbio-raw p6.25x.fastq
+ -pacbio-raw pacbio_filtered.fastq
 ```
 
 ## 分步法  
@@ -24,7 +30,7 @@ canu \
 canu -correct \
   -p ecoli -d ecoli \
   genomeSize=4.8m \
-  -pacbio-raw  p6.25x.fastq
+  -pacbio-raw pacbio_filtered.fastq
 第二步：trim reads
 canu -trim \
   -p ecoli -d ecoli \
@@ -47,7 +53,14 @@ If you have Illumina sequences available, [Pilon](http://www.broadinstitute.org/
 1. 用miniasm组装同样的数据  
 2. 比较miniasm和canu组装的结果  
 
+### miniasm组装  
 ```
+# Overlap
+minimap -Sw5 -L100 -m0 -t8 pacbio_filtered.fastq pacbio_filtered.fastq | gzip -1 > reads.paf.gz
+# Layout
+miniasm -f pacbio_filtered.fastq reads.paf.gz > reads.gfa
+# 将gfa转换为fasta
+awk '/^S/{print ">"$2"\n"$3}' reads.gfa | fold > miniasm.fa
 
 ```
 
