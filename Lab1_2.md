@@ -3,11 +3,15 @@
 ## 二、知识回顾  
 ## 三、上机操作  
 ```
-软件安装
+软件安装（选做）
 git clone https://github.com/marbl/canu.git
 canu软件已经下载到服务器，存放路径：/bs1/data/genomeLab/lab1.2/soft/
 cd canu/src
 make -j8
+```
+```
+设置环境变量
+source /biosoft/setup.sh
 
 # By default, canu will correct the reads, then trim the reads, then assemble the reads to unitigs.
 一步法
