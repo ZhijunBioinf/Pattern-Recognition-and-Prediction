@@ -96,6 +96,11 @@ samtools tview SRR098038.sorted.bam ../data/REL606.fa
 1. 先组装，得到contigs，然后将contigs用bwa mem比对到参考基因组上  
 2. 用igv显示比对结果   
 
+```
+# 组装
+minia -in SRR098038.fastq.gz -kmer-size 23 -out minia_asm
+
+```
 ## 五、参考资料  
 
 
