@@ -63,6 +63,7 @@ make MAXKMERLENGTH=90 # 默认K最大为31
 ./velvetg
 
 # 安装minia
+cd ../
 wget -c https://github.com/GATB/minia/releases/download/v2.0.7/minia-v2.0.7-Source.tar.gz
 tar zxvf minia-v2.0.7-Source.tar.gz
 cd minia-v2.0.7-Source
@@ -73,6 +74,7 @@ make -j8
 ./bin/minia
 
 # 安装SPAdes
+cd ../../
  wget -c http://spades.bioinf.spbau.ru/release3.9.0/SPAdes-3.9.0-Linux.tar.gz
  tar zxvf SPAdes-3.9.0-Linux.tar.gz
  cd SPAdes-3.9.0-Linux
@@ -80,6 +82,7 @@ make -j8
  ./bin/spades.py --test
 
 # 安装quast
+cd ../
 curl -O -L https://downloads.sourceforge.net/project/quast/quast-2.3.tar.gz
 tar xzf quast-2.3.tar.gz
 
