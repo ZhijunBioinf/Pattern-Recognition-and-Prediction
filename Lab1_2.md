@@ -43,6 +43,12 @@ canu -assemble \
   
 
 ```
+
+While Canu corrects sequences and has 99% identity or greater with PacBio or Nanopore sequences, for the best accuracy we recommend polishing with a sequence-specific tool. We recommend [Quiver](https://github.com/PacificBiosciences/GenomicConsensus) for PacBio and [Nanopolish](http://github.com/jts/nanopolish) for Oxford Nanpore data.
+
+If you have Illumina sequences available, [Pilon](http://www.broadinstitute.org/software/pilon/) can also be used to polish either PacBio or Oxford Nanopore assemblies.
+
+
 ## 四、作业与思考  
 ## 五、参考文献  
 http://canu.readthedocs.io/en/latest/index.html  
