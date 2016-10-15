@@ -1,8 +1,8 @@
-# 基因组组装 -- nanopore序列组装  
+# 基因组组装 -- pacbio和nanopore序列组装  
 ## 一、实验目的  
 ## 二、知识回顾  
 ## 三、上机操作  
-···
+```
 软件安装
 git clone https://github.com/marbl/canu.git
 canu软件已经下载到服务器，存放路径：/bs1/data/genomeLab/lab1.2/soft/
@@ -42,6 +42,6 @@ canu -assemble \
   -pacbio-corrected ecoli/trimming/ecoli.trimmedReads.fasta.gz
   
 
-···
+```
 ## 四、作业与思考  
 ## 五、参考文献  
