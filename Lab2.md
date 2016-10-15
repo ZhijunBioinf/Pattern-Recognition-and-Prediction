@@ -37,44 +37,33 @@ Mapping软件众多，比较有名的包括bwa, soap, bowtie, novoalign
 3. Require best match, or first/any that fit criteria?
 
 ## 三、上机操作  
-### 安装软件  
+### 设置环境变量和准备工作目录  
 ```
-# 准备工作目录
+module add bioinfo
+
 mkdir lab2
 cd lab2
 mkdir data
-mkdir soft
 mkdir result
-
+```
+### 安装软件（选做）  
+```
 cd soft
-
 # 安装bwa
 git clone https://github.com/lh3/bwa.git
 cd bwa 
 make
-./bwa
-
-# 安装bowtie2
-git clone https://github.com/BenLangmead/bowtie2.git
-cd bowtie2
-make
-./bowtie2
 
 # 安装samtools
 curl -O -L https://github.com/samtools/samtools/releases/download/1.3.1/samtools-1.3.1.tar.bz2
 tar jxvf samtools-1.3.1.tar.bz2
 cd samtools-1.3.1
 make
-./samtools
 
 # 安装igv
 curl -O http://data.broadinstitute.org/igv/projects/downloads/IGV_2.3.81.zip
 unzip IGV_2.3.81.zip
-cd IGV_2.3.81
-./igv.sh
-
-```
->> 提示：上述软件已经下载到/bs1/data/genomeLab/lab2/soft/，可以直接拷到你的工作目录下。  
+``` 
 
 ### 实验数据  
 ```
