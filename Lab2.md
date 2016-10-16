@@ -97,6 +97,8 @@ samtools tview SRR098038.sorted.bam ../data/REL606.fa
 2. 用igv显示比对结果   
 
 ```
+# 选K值
+kmergenie SRR098038.fastq.gz
 # 组装
 minia -in SRR098038.fastq.gz -kmer-size 23 -out minia_asm
 
