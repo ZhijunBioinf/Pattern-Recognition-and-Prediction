@@ -102,7 +102,7 @@ kmergenie SRR098038.fastq.gz
 # 组装
 minia -in SRR098038.fastq.gz -kmer-size 23 -out SRR098038
 # mapping
-bwa mem data/REL606.fa SRR098038.contigs.fa | samtools view -b - | samtools sort - SRR098038.sort
+bwa mem ../data/index/REL606.fa SRR098038.contigs.fa | samtools view -b - | samtools sort - SRR098038.sort
 # 结果文件为SRR098038.sort.bam
 
 ```
