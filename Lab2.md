@@ -100,7 +100,10 @@ samtools tview SRR098038.sorted.bam ../data/REL606.fa
 # 选K值
 kmergenie SRR098038.fastq.gz
 # 组装
-minia -in SRR098038.fastq.gz -kmer-size 23 -out minia_asm
+minia -in SRR098038.fastq.gz -kmer-size 23 -out SRR098038
+# mapping
+bwa mem data/REL606.fa SRR098038.contigs.fa | samtools view -b - | samtools sort - SRR098038.sort
+# 结果文件为SRR098038.sort.bam
 
 ```
 ## 五、参考资料  
