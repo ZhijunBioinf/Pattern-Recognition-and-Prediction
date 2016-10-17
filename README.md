@@ -9,7 +9,7 @@
 > 设置环境变量：`module add bioinfo`  
 
 **生物信息学非常有用的一行代码集成**
-[Bioinformatics one-liners](https://github.com/lukeping/oneliners)
+      [Bioinformatics one-liners](https://github.com/lukeping/oneliners)
 
 ## 实验一 基因组组装  
    [基于短读段（Illumina）的基因组组装](https://github.com/lukeping/GenomicLab/blob/master/Lab1_1.md)  
