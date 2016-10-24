@@ -16,6 +16,9 @@
 ## 三、上机操作  
 ### 数据准备
 ```
+# 设置环境变量
+module add bioinfo
+
 # 基因组数据  
 /bs1/data/genomeLab/lab3/data/contigs.fasta
 
@@ -27,7 +30,7 @@ mkdir soft
 mkdir result
 
 ```
-### 安装软件  
+### 安装软件（选做）  
 ```
 cd soft
 git clone https://github.com/tseemann/prokka.git
@@ -44,7 +47,7 @@ prokka --outdir anno --prefix prokka contigs.fasta
 cat ./anno/prokka.txt
 
 ```
-### 用Artemis查看注释结果  
+### 用Artemis查看注释结果（选做）  
 这一部分是在本地台式机上完成。  
 下载地址：http://www.sanger.ac.uk/science/tools/artemis  
 将prokka注释得到的prokka.gff文件拷到本地电脑上(用scp)  
