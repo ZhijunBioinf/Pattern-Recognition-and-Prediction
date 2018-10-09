@@ -3,7 +3,7 @@
 **登录服务器**
 
 > Linux机器上登录  
-> `ssh -l public 172.28.215.241`  
+> `ssh -l public 10.100.128.161`  (校园内网登录，密码public123)
 > Windows机器上登录用[putty](https://the.earth.li/~sgtatham/putty/latest/x86/putty.exe)客户端  
 > 登录服务器后请建立自己的目录，以学号+姓名拼音命名，实验数据和结果都放入这个目录  
 > 设置环境变量：`module add bioinfo`  
