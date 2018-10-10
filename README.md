@@ -1,9 +1,12 @@
-# 基因组学 实验
+# 基因组学 实验  
+
+** 上机之前 **
+请熟悉集群使用基础，参考[这里](https://github.com/hnnd/bcl)  
 
 **登录服务器**
 
 > Linux机器上登录  
-> `ssh -l username 10.100.128.161`  (校园内网登录，公共用户名public,密码public123)  
+> `ssh -l username 10.100.128.160`  (校园内网登录，公共用户名public,密码public123)  
 > Windows机器上登录用[putty](https://the.earth.li/~sgtatham/putty/latest/x86/putty.exe)客户端  
 > 登录服务器后请建立自己的目录，以学号+姓名拼音命名，实验数据和结果都放入这个目录  
 > 设置环境变量：`module add bioinfo`  
