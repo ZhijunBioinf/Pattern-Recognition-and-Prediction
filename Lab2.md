@@ -2,7 +2,7 @@
 ## 一、实验目的  
 1. 理解比对（mapping, alignment）的含义  
 2. 理解全局比对和局部比对的区别和应用  
-3. 掌握应用bwa, samtools的使用  
+3. 掌握应用bwa, minimap2, samtools的使用  
 4. 理解SAM, BAM文件格式  
 
 ## 二、知识回顾  
@@ -51,18 +51,18 @@ mkdir results
 /data/lab/genomic/lab02/data/SRR098038.fastq.gz （illumina reads）
 /data/lab/genomic/lab02/data/pb_ecoli_0001.fastq （pacbio reads）
 ```
-### Mapping using bwa   
+### (一) Mapping using bwa   
 
-#### 准备数据和index参考基因组  
+#### 1. 准备数据和index参考基因组  
 ```
 $ cd data
-$ ln -s /data/lab/genomic/lab02/data/REL606.fa /data/lab/genomic/lab02/data/SRR098038.fastq.gz ./
+$ ln -s /data/lab/genomic/lab02/data/REL606.fa /data/lab/genomic/lab02/data/reads_* ../data/pb_ecoli_0001.fastq ./
 $ samtools faidx REL606.fa
 $ mkdir index
 $ cd index
 $ ln -s ../REL606.fa ./
 ```
-#### 建索引文件  
+#### 2. 建索引文件  
 work_bwaIndex.sh  
 ```
 #PBS -N bwaIdx_W
@@ -72,7 +72,7 @@ cd $PBS_O_WORKDIR
 bwa index REL606.fa
 ```
 
-#### Mapping the reads to the reference genome using bwa  
+#### 3. Mapping the reads to the reference genome using bwa  
 ```
 cd ../../result
 ```
@@ -82,22 +82,53 @@ work_bwa.sh
 #PBS -l nodes=1:ppn=1
 #PBS -j oe
 cd $PBS_O_WORKDIR
-bwa aln ../data/index/REL606.fa ../data/SRR098038.fastq.gz  > SRR098038.sai
-bwa samse ../data/index/REL606.fa SRR098038.sai ../data/SRR098038.fastq.gz > SRR098038.sam
-samtools view -b SRR098038.sam > SRR098038.bam
-samtools sort -o SRR098038.sort.bam SRR098038.bam
-samtools index SRR098038.sort.bam
+bwa mem ../data/index/REL606.fa ../data/reads_1.fq.gz ../data/reads_2.fq.gz > mapping.sam
+samtools view -b mapping.sam > mapping.bam
+samtools sort -o mapping.sort.bam mapping.bam
+samtools index mapping.sort.bam
 ```
-work_bwa2.sh
+work_bwa2.sh (using pipe)  
+```
+#PBS -N bwa_pipe
+#PBS -l nodes=1:ppn=1
+#PBS -j oe
+cd $PBS_O_WORKDIR
+bwa mem ../data/index/REL606.fa ../data/reads_1.fq.gz ../data/reads_2.fq.gz | \
+ samtools view -b - | \
+ samtools sort -o mapping.sort.2.bam -
+samtools index mapping.sort.2.bam
+```
+### (二)Mapping the short reads to the reference genome using minimap2  
+
+work_minimap2.sh  
+```
+#PBS -N minimap2
+#PBS -l nodes=1:ppn=1
+#PBS -j oe
+cd $PBS_O_WORKDIR
+minimap2 -ax sr ../data/REL606.fa ../data/reads_1.fq.gz ../data/reads_2.fq.gz |\
+ samtools view -b - |\
+ samtools sort -o mapping.sort.mm.bam -
+samtools index mapping.sort.mm.bam
 ```
 
+### (三) Mapping the long reads to the reference genome using minimap2  
+work_minimap_pb.sh  
 ```
+#PBS -N minimap2_pb
+#PBS -l nodes=1:ppn=1
+#PBS -j oe
+cd $PBS_O_WORKDIR
+minimap2 -ax map-pb ../data/REL606.fa ../data/REL606.fa ../data/pb_ecoli_0001.fastq |\
+ samtools view -b - |\
+ samtools sort -o mapping.sort.pb.bam -
+samtools index mapping.sort.pb.bam
+```
+### (四) 显示和比较比对结果  
+使用IGV查看比对结果  
 
-#### 显示比对结果  
-```
-samtools tview SRR098038.sorted.bam ../data/REL606.fa
 
-```
+
 ## 四、作业与思考  
 1. 先组装，得到contigs，然后将contigs用bwa mem比对到参考基因组上  
 2. 用igv显示比对结果   
