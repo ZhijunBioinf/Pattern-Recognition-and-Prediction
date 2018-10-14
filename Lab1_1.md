@@ -100,7 +100,6 @@ cd $PBS_O_WORKDIR
 #PBS -j oe
 cd $PBS_O_WORKDIR
 spades.py -t 4 -1 ../data/reads_1.fq.gz -2 ../data/reads_2.fq.gz -o ecoli.spades
-[path to]/spades.py -t 4 -1 ../data/reads_1.fq.gz -2 ../data/reads_2.fq.gz -o ecoli.spades
 
 #组装效果评价
 quast -R /data/lab/genomic/lab01/data/ref.fa \
