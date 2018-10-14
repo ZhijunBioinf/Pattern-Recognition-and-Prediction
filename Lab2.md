@@ -39,56 +39,62 @@ Mapping软件众多，比较有名的包括bwa, soap, bowtie, novoalign
 ## 三、上机操作  
 ### 设置环境变量和准备工作目录  
 ```
-module add bioinfo
-
-mkdir lab2
-cd lab2
+mkdir lab02
+cd lab02
 mkdir data
-mkdir result
+mkdir results
 ```
-### 安装软件（选做）  
-```
-cd soft
-# 安装bwa
-git clone https://github.com/lh3/bwa.git
-cd bwa 
-make
-
-# 安装samtools
-curl -O -L https://github.com/samtools/samtools/releases/download/1.3.1/samtools-1.3.1.tar.bz2
-tar jxvf samtools-1.3.1.tar.bz2
-cd samtools-1.3.1
-make
-
-# 安装igv
-curl -O http://data.broadinstitute.org/igv/projects/downloads/IGV_2.3.81.zip
-unzip IGV_2.3.81.zip
-``` 
 
 ### 实验数据  
 ```
-/bs1/data/genomeLab/lab2/data/REL606.fa
-/bs1/data/genomeLab/lab2/data/SRR098038.fastq.gz
+/data/lab/genomic/lab02/data/REL606.fa (参考序列)
+/data/lab/genomic/lab02/data/SRR098038.fastq.gz （illumina reads）
+/data/lab/genomic/lab02/data/pb_ecoli_0001.fastq （pacbio reads）
 ```
-### Mapping and viewer  
-```
-# 准备数据和index参考基因组
-cd data
-ln -s /bs1/data/genomeLab/lab2/data/REL606.fa /bs1/data/genomeLab/lab2/data/SRR098038.fastq.gz ./
-samtools faidx REL606.fa
-mkdir index
-cd index
-ln -s ../REL606.fa ./
-bwa index REL606.fa
+### Mapping using bwa   
 
+#### 准备数据和index参考基因组  
+```
+$ cd data
+$ ln -s /data/lab/genomic/lab02/data/REL606.fa /data/lab/genomic/lab02/data/SRR098038.fastq.gz ./
+$ samtools faidx REL606.fa
+$ mkdir index
+$ cd index
+$ ln -s ../REL606.fa ./
+```
+#### 建索引文件  
+work_bwaIndex.sh  
+```
+#PBS -N bwaIdx_W
+#PBS -l nodes=1:ppn=1
+#PBS -j oe
+cd $PBS_O_WORKDIR
+bwa index REL606.fa
+```
+
+#### Mapping the reads to the reference genome using bwa  
+```
 cd ../../result
+```
+work_bwa.sh
+```
+#PBS -N bwa
+#PBS -l nodes=1:ppn=1
+#PBS -j oe
+cd $PBS_O_WORKDIR
 bwa aln ../data/index/REL606.fa ../data/SRR098038.fastq.gz  > SRR098038.sai
 bwa samse ../data/index/REL606.fa SRR098038.sai ../data/SRR098038.fastq.gz > SRR098038.sam
 samtools view -b SRR098038.sam > SRR098038.bam
 samtools sort -o SRR098038.sort.bam SRR098038.bam
 samtools index SRR098038.sort.bam
+```
+work_bwa2.sh
+```
 
-# 显示比对结果  
+```
+
+#### 显示比对结果  
+```
 samtools tview SRR098038.sorted.bam ../data/REL606.fa
 
 ```
