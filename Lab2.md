@@ -51,7 +51,7 @@ mkdir results
 /data/lab/genomic/lab02/data/SRR098038.fastq.gz （illumina reads）
 /data/lab/genomic/lab02/data/pb_ecoli_0001.fastq （pacbio reads）
 ```
-### (一) Mapping using bwa   
+### (一) Mapping the short reads to the reference genome using bwa   
 
 #### 1. 准备数据和index参考基因组  
 ```
@@ -62,7 +62,7 @@ $ mkdir index
 $ cd index
 $ ln -s ../REL606.fa ./
 ```
-#### 2. 建索引文件  
+#### 2. 建索引  
 work_bwaIndex.sh  
 ```
 #PBS -N bwaIdx_W
