@@ -1,4 +1,4 @@
-# 实验二 基因组比对  
+# 实验二 Mapping  
 ## 一、实验目的  
 1. 理解比对（mapping, alignment）的含义  
 2. 理解全局比对和局部比对的区别和应用  
@@ -128,21 +128,11 @@ samtools index mapping.sort.pb.bam
 使用IGV查看比对结果  
 ![](./igv_snapshot.png) 
 
-
 ## 四、作业与思考  
-1. 先组装，得到contigs，然后将contigs用bwa mem比对到参考基因组上  
-2. 用igv显示比对结果   
- 
-```
-# 选K值
-kmergenie SRR098038.fastq.gz
-# 组装
-minia -in SRR098038.fastq.gz -kmer-size 23 -out SRR098038
-# mapping
-bwa mem ../data/index/REL606.fa SRR098038.contigs.fa | samtools view -b - | samtools sort -o contig_mapping.sort.bam -
-# 结果文件为contig_mapping.sort.bam
+1. 先组装，得到contigs，assemble short reads using SPAdes, assemble pacbio long reads using canu | mecat | miniasm  
+2. 然后将contigs用bwa mem比对到参考基因组上  
+3. 用igv显示比对结果   
 
-```
 ## 五、参考资料  
 [bwa](https://github.com/lh3/bwa)  
 [minimap2](https://github.com/lh3/minimap2)  
