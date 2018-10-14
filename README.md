@@ -7,9 +7,7 @@
 
 > Linux机器上登录  
 > `ssh -l username 10.100.128.160`  (校园内网登录，公共用户名public,密码public123)  
-> Windows机器上登录用[putty](https://the.earth.li/~sgtatham/putty/latest/x86/putty.exe)客户端  
-> 登录服务器后请建立自己的目录，以学号+姓名拼音命名，实验数据和结果都放入这个目录  
-> 设置环境变量：`module add bioinfo`  
+> Windows机器上登录用[putty](https://the.earth.li/~sgtatham/putty/latest/x86/putty.exe)客户端   
 
 ## 实验一 基因组组装(Assemble)  
    [基于短读段（Illumina）的基因组组装](https://github.com/hnnd/GenomicLab/blob/master/Lab1_1.md)  
