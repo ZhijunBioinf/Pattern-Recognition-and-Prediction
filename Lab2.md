@@ -126,13 +126,13 @@ samtools index mapping.sort.pb.bam
 ```
 ### (四) 显示和比较比对结果  
 使用IGV查看比对结果  
-
+![](./igv_snapshot.png) 
 
 
 ## 四、作业与思考  
 1. 先组装，得到contigs，然后将contigs用bwa mem比对到参考基因组上  
 2. 用igv显示比对结果   
-![](./igv_snapshot.png)  
+ 
 ```
 # 选K值
 kmergenie SRR098038.fastq.gz
@@ -144,5 +144,8 @@ bwa mem ../data/index/REL606.fa SRR098038.contigs.fa | samtools view -b - | samt
 
 ```
 ## 五、参考资料  
-
+[bwa](https://github.com/lh3/bwa)  
+[minimap2](https://github.com/lh3/minimap2)  
+[samtools](http://www.htslib.org/)  
+[IGV](http://software.broadinstitute.org/software/igv/)  
 
