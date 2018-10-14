@@ -132,7 +132,7 @@ samtools index mapping.sort.pb.bam
 ## 四、作业与思考  
 1. 先组装，得到contigs，然后将contigs用bwa mem比对到参考基因组上  
 2. 用igv显示比对结果   
-
+![](./igv_snapshot.png)  
 ```
 # 选K值
 kmergenie SRR098038.fastq.gz
