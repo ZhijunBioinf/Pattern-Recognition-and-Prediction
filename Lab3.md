@@ -16,37 +16,34 @@
 ## 三、上机操作  
 ### 数据准备
 ```
-# 设置环境变量
-module add bioinfo
-
 # 基因组数据  
-/bs1/data/genomeLab/lab3/data/contigs.fasta
+/data/lab/genomic/lab03/data/contigs.fasta
 
 # 新建工作目录
-mkdir lab3
-cd lab3
+mkdir lab03
+cd lab03
 mkdir data
-mkdir soft
-mkdir result
+mkdir results
 
 ```
-### 安装软件（选做）  
-```
-cd soft
-git clone https://github.com/tseemann/prokka.git
-cd 
-prokka --setupdb
-prokka --version
 
-```
 ### Run Prokka on the contigs  
 ```
-cd ../result
+cd ../results
 ln -s ../data/contigs.fasta ./
-prokka --outdir anno --prefix prokka contigs.fasta
-cat ./anno/prokka.txt
 
 ```
+
+work_prokka.sh  
+```
+#PBS -N prokka
+#PBS -l nodes=1:ppn=1
+#PBS -j oe
+cd $PBS_O_WORKDIR
+prokka --outdir anno --prefix PROKKA contigs.fasta
+
+```
+
 ### 用Artemis查看注释结果（选做）  
 这一部分是在本地台式机上完成。  
 下载地址：http://www.sanger.ac.uk/science/tools/artemis  
