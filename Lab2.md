@@ -48,7 +48,7 @@ mkdir results
 ### 实验数据  
 ```
 /data/lab/genomic/lab02/data/REL606.fa (参考序列)
-/data/lab/genomic/lab02/data/SRR098038.fastq.gz （illumina reads）
+/data/lab/genomic/lab02/data/reads_1.fq.gz, /data/lab/genomic/lab02/data/reads_2.fq.gz （illumina reads）
 /data/lab/genomic/lab02/data/pb_ecoli_0001.fastq （pacbio reads）
 ```
 ### (一) Mapping the short reads to the reference genome using bwa   
@@ -119,7 +119,7 @@ work_minimap_pb.sh
 #PBS -l nodes=1:ppn=1
 #PBS -j oe
 cd $PBS_O_WORKDIR
-minimap2 -ax map-pb ../data/REL606.fa ../data/REL606.fa ../data/pb_ecoli_0001.fastq |\
+minimap2 -ax map-pb ../data/REL606.fa ../data/pb_ecoli_0001.fastq |\
  samtools view -b - |\
  samtools sort -o mapping.sort.pb.bam -
 samtools index mapping.sort.pb.bam
