@@ -17,7 +17,7 @@
 ### 数据准备
 ```
 # 基因组数据  
-/data/lab/genomic/lab03/data/contigs.fasta
+/data/lab/genomic/lab03/data/REL606.fa
 
 # 新建工作目录
 mkdir lab03
@@ -30,7 +30,6 @@ mkdir results
 ### Run Prokka on the contigs  
 ```
 cd ../results
-ln -s ../data/contigs.fasta ./
 
 ```
 
@@ -40,7 +39,7 @@ work_prokka.sh
 #PBS -l nodes=1:ppn=1
 #PBS -j oe
 cd $PBS_O_WORKDIR
-prokka --outdir anno --prefix PROKKA contigs.fasta
+prokka --outdir anno --prefix PROKKA ../data/REL606.fa
 
 ```
 
