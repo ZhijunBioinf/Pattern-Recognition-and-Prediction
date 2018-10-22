@@ -104,6 +104,7 @@ drwxrwxr-x 3 wangys wangys  4096 Oct 22 08:30 theVoid.contig-dpp-500-500
 1. 尝试用其他原核生物基因预测软件进行基因预测，如[GLIMMER](http://ccb.jhu.edu/software/glimmer/index.shtml)，或者[GeneMark](http://topaz.gatech.edu/GeneMark/)，并比较不同软件注释结果有什么不同
 2. 了解真核生物基因组注释软件，如[Augustus](http://bioinf.uni-greifswald.de/augustus/), [GlimmerHMM](http://ccb.jhu.edu/software/glimmerhmm/), [maker](http://www.yandell-lab.org/software/maker.html)
 
-## 五、参考文献  
+## 五、参考资料  
 1. [prokka github](https://github.com/tseemann/prokka)
+2. [maker tutoria](http://gmod.org/wiki/MAKER_Tutorial)
  
