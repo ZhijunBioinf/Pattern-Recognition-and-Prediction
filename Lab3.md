@@ -55,18 +55,20 @@ prokka --outdir anno --prefix PROKKA ../data/REL606.fa
 # create control files for maker
 $ maker -CTL
 ```
-会产生4个参数设置文件：  
+会产生4个参数设置文件：
+```
 -rw-rw-r-- 1 wangys wangys  1479 Oct 22 08:22 maker_bopts.ctl  
 -rw-rw-r-- 1 wangys wangys   893 Oct 22 08:22 maker_evm.ctl  
 -rw-rw-r-- 1 wangys wangys  1488 Oct 22 08:22 maker_exe.ctl  
 -rw-rw-r-- 1 wangys wangys  4765 Oct 22 08:22 maker_opts.ctl  
-
+```
 编辑maker_opts.ctl文件，改变以下几个参数，几他的用默认参数：  
+```
 genome=../data/dpp_contig.fasta  
 est=../data/dpp_est.fasta  
 protein=../data/dpp_protein.fasta  
 est2genome=1  
-
+```
 work_maker.sh
 ```
 #PBS -N maker
@@ -80,12 +82,12 @@ maker
 ```
 $ cd dpp_contig.maker.output/dpp_contig_datastore/05/1F/contig-dpp-500-500
 $ ls -l
-```
 -rw-rw-r-- 1 wangys wangys 65341 Oct 22 08:30 contig-dpp-500-500.gff  
 -rw-rw-r-- 1 wangys wangys   717 Oct 22 08:30 contig-dpp-500-500.maker.proteins.fasta  
 -rw-rw-r-- 1 wangys wangys  4443 Oct 22 08:30 contig-dpp-500-500.maker.transcripts.fasta  
 -rw-rw-r-- 1 wangys wangys  4120 Oct 22 08:30 run.log  
 drwxrwxr-x 3 wangys wangys  4096 Oct 22 08:30 theVoid.contig-dpp-500-500  
+```
 
 ### 用Artemis查看注释结果（选做）  
 这一部分是在本地台式机上完成。  
