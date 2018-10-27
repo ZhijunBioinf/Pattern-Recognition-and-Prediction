@@ -50,7 +50,7 @@ prokka --outdir anno --prefix PROKKA ../data/REL606.fa
 ```
 注释结果存放在anno目录中，查看结果，了解基因组注释常见的几种格式。  
 
-## （二）真核生物基因组溈--maker  
+## （二）真核生物基因组--maker  
 ```
 # create control files for maker
 $ maker -CTL
