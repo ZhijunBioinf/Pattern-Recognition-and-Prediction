@@ -106,5 +106,5 @@ drwxrwxr-x 3 wangys wangys  4096 Oct 22 08:30 theVoid.contig-dpp-500-500
 
 ## 五、参考资料  
 1. [prokka github](https://github.com/tseemann/prokka)
-2. [maker tutoria](http://gmod.org/wiki/MAKER_Tutorial)
+2. [maker tutorial](http://gmod.org/wiki/MAKER_Tutorial)
  
