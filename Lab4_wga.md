@@ -25,8 +25,24 @@ work_nucmer.sh
 #PBS -j oe
 cd $PBS_O_WORKDIR
 nucmer -p X23_B011 ../data/X23.fasta ../data/B011.fasta
+dnadiff -p X23_B011 -d X23_B011.delta
 ```
 结果文件：X23_B011.delta  
+dnadiff 结果  
+```
+OUTPUT:
+    .report  - Summary of alignments, differences and SNPs
+    .delta   - Standard nucmer alignment output
+    .1delta  - 1-to-1 alignment from delta-filter -1
+    .mdelta  - M-to-M alignment from delta-filter -m
+    .1coords - 1-to-1 coordinates from show-coords -THrcl .1delta
+    .mcoords - M-to-M coordinates from show-coords -THrcl .mdelta
+    .snps    - SNPs from show-snps -rlTHC .1delta
+    .rdiff   - Classified ref breakpoints from show-diff -rH .mdelta
+    .qdiff   - Classified qry breakpoints from show-diff -qH .mdelta
+    .unref   - Unaligned reference IDs and lengths (if applicable)
+    .unqry   - Unaligned query IDs and lengths (if applicable)
+```
 查看结果  
 ```
 $ mummerplot --layout --medium X23_B011.delta 
@@ -34,6 +50,7 @@ $ mummerplot --layout --medium --png -p X23_B011 X23_B011.delta
 ```
 ![](./X23_B011.png)
 
+[mummer使用说明](https://github.com/mummer4/mummer/blob/master/MANUAL.md)
 
 ### 2. 多基因组WGA
 
@@ -43,11 +60,11 @@ $ cat ../data/*.fasta > genome.fasta
 
 work_mauve.sh  
 ```
-#PBS -N nucmer
+#PBS -N mauve
 #PBS -l nodes=1:ppn=1
 #PBS -j oe
 cd $PBS_O_WORKDIR
-progressiveMauve --layout --output=my_seqs.xmfa genome.fasta 
+progressiveMauve --output=my_seqs.xmfa genome.fasta 
 ```
 查看结果  
 ```
