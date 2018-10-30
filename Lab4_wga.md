@@ -64,7 +64,7 @@ work_mauve.sh
 #PBS -l nodes=1:ppn=1
 #PBS -j oe
 cd $PBS_O_WORKDIR
-progressiveMauve --output=my_seqs.xmfa genome.fasta 
+mauveAligner --output=my_seqs.xmfa genome.fasta 
 ```
 查看结果  
 ```
