@@ -32,7 +32,7 @@ nucmer -p X23_B011 ../data/X23.fasta ../data/B011.fasta
 $ mummerplot --layout --medium X23_B011.delta 
 $ mummerplot --layout --medium --png -p X23_B011 X23_B011.delta 
 ```
-
+![](./X23_B011.png)
 
 ### 2. 多个基因组WGA
 
