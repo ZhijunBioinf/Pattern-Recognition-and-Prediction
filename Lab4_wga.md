@@ -75,3 +75,6 @@ $ Mauve
 ## 四、作业与思考  
 
 ## 五、参考文献  
+1. [mummer](https://github.com/mummer4/mummer)  
+2. [Mauve](http://darlinglab.org/mauve/mauve.html)  
+3. [Modern software for whole genome alignment visualization](https://www.biostars.org/p/302859/)  
