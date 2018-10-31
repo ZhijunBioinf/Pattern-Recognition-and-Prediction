@@ -74,6 +74,8 @@ $ Mauve
 
 ## 四、作业与思考  
 1. 真核生物基因组全基因组比对，[参考这里](http://genomewiki.ucsc.edu/index.php/Whole_genome_alignment_howto)  
+2. 如何基于全基因组序列比对构建物种进化树
+
 ## 五、参考文献  
 1. [mummer](https://github.com/mummer4/mummer)  
 2. [Mauve](http://darlinglab.org/mauve/mauve.html)  
