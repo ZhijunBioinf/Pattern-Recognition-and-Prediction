@@ -68,7 +68,7 @@ mauveAligner --output=my_seqs.xmfa genome.fasta
 ```
 查看结果  
 ```
-$ Mauve
+$ Mauve my_seqs.xmfa
 ```
 ![](./mauve.png)
 
