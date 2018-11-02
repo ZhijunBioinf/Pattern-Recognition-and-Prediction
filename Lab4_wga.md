@@ -70,7 +70,7 @@ mauveAligner --output=my_seqs.xmfa genome.fasta
 ```
 $ Mauve my_seqs.xmfa
 ```
-![](./mauve.png)
+![](./mauve.jpg)
 
 ## 四、作业与思考  
 1. 真核生物基因组全基因组比对，[参考这里](http://genomewiki.ucsc.edu/index.php/Whole_genome_alignment_howto)  
