@@ -18,6 +18,25 @@ RNA-Seq项目分析包括以下几个步骤：
  
 本实验主要介绍DESeq2的使用，DESeq2是用来做差异基因分析的一套R软件包，  
 
+
+### 数据说明  
+
+| RUN	| Class	| Cultivar |	Status |	Group	| Description |
+| === | === | === | === | === | === |
+| SRR7760302	| IRGA409_T	| BR-IRGA 409	| tolerant to heat stress	| BR-IRGA 409 treated_spikelet	| high temperature treatment (38C) for 7 hrs |
+| SRR7760301	| IRGA409_T	| BR-IRGA 409	| tolerant to heat stress	| BR-IRGA 409 treated_spikelet	| high temperature treatment (38C) for 7 hrs |
+| SRR7760300	| IRGA409_T	| BR-IRGA 409	| tolerant to heat stress	| BR-IRGA 409 treated_spikelet	| high temperature treatment (38C) for 7 hrs |
+| SRR7760299	| IRGA409_C	| BR-IRGA 409	| tolerant to heat stress	| BR-IRGA 409 control_spikelet	| control condition (29C) for 7 hrs |
+| SRR7760298	| IRGA409_C	| BR-IRGA 409	| tolerant to heat stress	| BR-IRGA 409 control_spikelet	| control condition (29C) for 7 hrs |
+| SRR7760297	| IRGA409_C	| BR-IRGA 409	| tolerant to heat stress	| BR-IRGA 409 control_spikelet	| control condition (29C) for 7 hrs |
+| SRR7760296	| IRGA428_T	| IRGA 428	| sensitive to heat stress	| IRGA 428 treated_spikelet	| high temperature treatment (38C) for 7 hrs |
+| SRR7760295	| IRGA428_T	| IRGA 428	| sensitive to heat stress	| IRGA 428 treated_spikelet	| high temperature treatment (38C) for 7 hrs |
+| SRR7760294	| IRGA428_T	| IRGA 428	| sensitive to heat stress	| IRGA 428 treated_spikelet	| high temperature treatment (38C) for 7 hrs |
+| SRR7760293	| IRGA428_C	| IRGA 428	| sensitive to heat stress	| IRGA 428 control_spikelet	| control condition (29C) for 7 hrs |
+| SRR7760292	| IRGA428_C	| IRGA 428	| sensitive to heat stress	| IRGA 428 control_spikelet	| control condition (29C) for 7 hrs |
+| SRR7760291	| IRGA428_C	| IRGA 428	| sensitive to heat stress	| IRGA 428 control_spikelet	| control condition (29C) for 7 hrs |
+
+
 ## 三、上机操作  
 
 ## 四、作业与思考  
