@@ -1,4 +1,4 @@
-# 实验四   
+# 实验五 RNA-Seq分析   
 ## 一、实验目的  
 1. 了解生物的RNA种类，真核生物mRNA的特点及如何分离纯化
 2. 了解RNA、DNA比对的区别
@@ -22,7 +22,7 @@ RNA-Seq项目分析包括以下几个步骤：
 ### 数据说明  
 
 | RUN	| Class	| Cultivar |	Status |	Group	| Description |
-| === | === | === | === | === | === |
+| --- | --- | --- | --- | --- | --- |
 | SRR7760302	| IRGA409_T	| BR-IRGA 409	| tolerant to heat stress	| BR-IRGA 409 treated_spikelet	| high temperature treatment (38C) for 7 hrs |
 | SRR7760301	| IRGA409_T	| BR-IRGA 409	| tolerant to heat stress	| BR-IRGA 409 treated_spikelet	| high temperature treatment (38C) for 7 hrs |
 | SRR7760300	| IRGA409_T	| BR-IRGA 409	| tolerant to heat stress	| BR-IRGA 409 treated_spikelet	| high temperature treatment (38C) for 7 hrs |
