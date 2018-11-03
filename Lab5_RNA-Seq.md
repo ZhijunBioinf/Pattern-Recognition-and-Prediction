@@ -42,7 +42,7 @@ RNA-Seq项目分析包括以下几个步骤：
 ### 1. Mapping  
 work_mapping.sh  
 ```
-#PBS -N nucmer
+#PBS -N hisat2
 #PBS -l nodes=1:ppn=1
 #PBS -j oe
 cd $PBS_O_WORKDIR
@@ -53,6 +53,16 @@ hisat2 -p 1 \
 -q /data/lab/genomic/lab05/data/SRR7760${i}.fastq \
 -S SRR7760$i.sam >SRR7760${i}.log;
 done
+```
+
+### 2. Count  
+work_count.sh  
+```
+#PBS -N hisat2
+#PBS -l nodes=1:ppn=1
+#PBS -j oe
+cd $PBS_O_WORKDIR
+
 ```
 
 ## 四、作业与思考  
