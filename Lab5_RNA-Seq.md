@@ -60,10 +60,14 @@ done
 ### 2. Count  
 work_count.sh  
 ```
-#PBS -N hisat2
+#PBS -N counting
 #PBS -l nodes=1:ppn=1
 #PBS -j oe
 cd $PBS_O_WORKDIR
+TPMCalculator -g /data/lab/genomic/lab05/ref/Oryza_sativa.IRGSP-1.0.41.gtf -d ./
+```
+### 3. Merge the counting matrix  
+```
 
 ```
 
