@@ -90,11 +90,21 @@ sed -i '1c\GeneID\tSRR7760291\tSRR7760292\tSRR7760293\tSRR7760294\tSRR7760295\tS
 ```
 require(tidyverse)
 require(DESeq2)
-cts <- read_tsv("counts.tsv")
-colData <- 
+cts <- read_tsv("counts.tsv") %>% as.data.frame()
+colData <- data.frame(SampleID=c("SRR7760291","SRR7760292","SRR7760293",
+                                 "SRR7760294","SRR7760295","SRR7760296",
+                                 "SRR7760297","SRR7760298","SRR7760299",
+                                 "SRR7760300","SRR7760301","SRR7760302"), 
+                      Group=c(rep("IRGA428_C",3),
+                              rep("IRGA428_T",3),
+                              rep("IRGA409_C",3),
+                              rep("IRGA409_T",3)))
+
 ```
 
 ## 四、作业与思考  
 
 ## 五、参考文献  
-
+1. [DESeq2](https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html) 
+2. [TPMcalculator](https://github.com/ncbi/TPMCalculator)  
+3. [HISAT2](https://ccb.jhu.edu/software/hisat2/manual.shtml)
