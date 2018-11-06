@@ -68,7 +68,18 @@ TPMCalculator -g /data/lab/genomic/lab05/ref/Oryza_sativa.IRGSP-1.0.41.gtf -d ./
 ```
 ### 3. Merge the counting matrix  
 ```
-
+paste <(cut -f 1,6 SRR7760291.sort_genes.out) \
+<(cut -f 6 SRR7760292.sort_genes.out) \
+<(cut -f 6 SRR7760293.sort_genes.out) \
+<(cut -f 6 SRR7760294.sort_genes.out) \
+<(cut -f 6 SRR7760295.sort_genes.out) \
+<(cut -f 6 SRR7760296.sort_genes.out) \
+<(cut -f 6 SRR7760297.sort_genes.out) \
+<(cut -f 6 SRR7760298.sort_genes.out) \
+<(cut -f 6 SRR7760299.sort_genes.out) \
+<(cut -f 6 SRR7760300.sort_genes.out) \
+<(cut -f 6 SRR7760301.sort_genes.out) \
+<(cut -f 6 SRR7760302.sort_genes.out) > counts.tsv
 ```
 
 ## 四、作业与思考  
