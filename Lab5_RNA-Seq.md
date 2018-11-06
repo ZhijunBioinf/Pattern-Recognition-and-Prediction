@@ -85,7 +85,7 @@ paste <(cut -f 1,6 SRR7760291.sort_genes.out) \
 sed -i '1c\GeneID\tSRR7760291\tSRR7760292\tSRR7760293\tSRR7760294\tSRR7760295\tSRR7760296\tSRR7760297\tSRR7760298\tSRR7760299\tSRR7760300\tSRR7760301\tSRR7760302' counts.tsv 
 ```
 
-### DE analysis  
+### 4. DE analysis  
 
 ```
 require(tidyverse)
@@ -112,6 +112,7 @@ write.csv(res.IRGA409[order(res.IRGA409$pvalue),],"Results_409.csv")
 ```
 
 ## 四、作业与思考  
+比较两种水稻品种经热处理后基因表达变化情况有什么差异。  
 
 ## 五、参考文献  
 1. [DESeq2](https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html) 
