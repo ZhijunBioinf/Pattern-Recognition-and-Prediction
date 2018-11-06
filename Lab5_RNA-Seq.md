@@ -80,6 +80,18 @@ paste <(cut -f 1,6 SRR7760291.sort_genes.out) \
 <(cut -f 6 SRR7760300.sort_genes.out) \
 <(cut -f 6 SRR7760301.sort_genes.out) \
 <(cut -f 6 SRR7760302.sort_genes.out) > counts.tsv
+
+# Replace the header line
+sed -i '1c\GeneID\tSRR7760291\tSRR7760292\tSRR7760293\tSRR7760294\tSRR7760295\tSRR7760296\tSRR7760297\tSRR7760298\tSRR7760299\tSRR7760300\tSRR7760301\tSRR7760302' counts.tsv 
+```
+
+### DE analysis  
+
+```
+require(tidyverse)
+require(DESeq2)
+cts <- read_tsv("counts.tsv")
+colData <- 
 ```
 
 ## 四、作业与思考  
