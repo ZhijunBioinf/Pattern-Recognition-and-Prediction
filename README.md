@@ -9,8 +9,7 @@
 > `ssh -l username 10.100.128.160`  (校园内网登录，公共用户名public,密码public123)  
 > Windows机器上登录用[putty](https://the.earth.li/~sgtatham/putty/latest/x86/putty.exe)客户端   
 
-## 实验一 基因组组装(Assemble)  
-   [基于短读段（Illumina）的基因组组装](https://github.com/hnnd/GenomicLab/blob/master/Lab1_1.md)  
+## [实验一 基因组组装(Assemble)](https://github.com/hnnd/GenomicLab/blob/master/Lab1_1.md)   
 ## [实验二 基因组比对(Mapping)](https://github.com/hnnd/GenomicLab/blob/master/Lab2.md)  
 ## [实验三 基因组注释(Annotation)](https://github.com/hnnd/GenomicLab/blob/master/Lab3.md)  
 ## [实验四 全基因组比对(WGA)](https://github.com/hnnd/GenomicLab/blob/master/Lab4_wga.md)
