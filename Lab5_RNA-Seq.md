@@ -91,15 +91,24 @@ sed -i '1c\GeneID\tSRR7760291\tSRR7760292\tSRR7760293\tSRR7760294\tSRR7760295\tS
 require(tidyverse)
 require(DESeq2)
 cts <- read_tsv("counts.tsv") %>% as.data.frame()
+rownames(cts) <- cts$GeneID
+cts <- cts[,-1]
 colData <- data.frame(SampleID=c("SRR7760291","SRR7760292","SRR7760293",
                                  "SRR7760294","SRR7760295","SRR7760296",
                                  "SRR7760297","SRR7760298","SRR7760299",
                                  "SRR7760300","SRR7760301","SRR7760302"), 
-                      Group=c(rep("IRGA428_C",3),
+                      Group=factor(c(rep("IRGA428_C",3),
                               rep("IRGA428_T",3),
                               rep("IRGA409_C",3),
-                              rep("IRGA409_T",3)))
-
+                              rep("IRGA409_T",3))))
+dds <- DESeqDataSetFromMatrix(countData = cts,
+                              colData = colData,
+                              design = ~ Group)
+dds <- DESeq(dds)
+res.IRGA428 <- results(dds, contrast=c("Group","IRGA428_C","IRGA428_T"))
+res.IRGA409 <- results(dds, contrast=c("Group","IRGA409_C","IRGA409_T"))
+write.csv(res.IRGA428[order(res.IRGA428$pvalue),],"Results_428.csv")
+write.csv(res.IRGA409[order(res.IRGA409$pvalue),],"Results_409.csv")
 ```
 
 ## 四、作业与思考  
