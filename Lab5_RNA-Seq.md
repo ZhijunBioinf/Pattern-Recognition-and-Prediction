@@ -52,8 +52,7 @@ hisat2 -p 1 \
 -x /data/lab/genomic/lab05/ref/index/osa \
 -q /data/lab/genomic/lab05/data/SRR7760${i}.fastq | \
 samtools view -b - | \
-samtools sort -o SRR7760$i.sort.bam - >SRR7760${i}.log;
-done
+samtools sort -o SRR7760${i}.sort.bam - >SRR7760${i}.log;
 done
 ```
 
