@@ -16,7 +16,7 @@ gunzip *.faa.gz
 ```
 makeblastdb -in zebrafish.1.protein.faa -dbtype prot
 ```
-3. 运行blastp
+3. 运行blastp  
 我们先取2条序列试一下  
 ```
 head -n 11 mouse.1.protein.faa > mm-first.faa
@@ -44,6 +44,12 @@ colnames(blast_out1) <- c("qseqid", "sseqid", "pident", "length", "mismatch", "g
 colnames(blast_out2) <- c("qseqid", "sseqid", "pident", "length", "mismatch", "gapopen", "qstart", "qend", "sstart", "send", "evalue", "bitscore")
 hist(blast_out1$evalue)
 hist(blast_out2$evalue)
+hist(blast_out1$bitscore) 
+hist(blast_out2$bitscore) 
+plot(blast_out1$pident, blast_out1$bitscore)
+plot(blast_out2$pident, blast_out2$bitscore)
+plot(blast_out1$pident  * (blast_out1$qend - blast_out1$qstart), blast_out1$bitscore)
 ```
 思考题：如果只统计the best hsp evalue，要如何改？  
 
+二、
