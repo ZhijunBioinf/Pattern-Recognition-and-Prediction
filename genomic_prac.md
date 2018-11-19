@@ -36,4 +36,14 @@ cd $PBS_O_WORKDIR
 blastp -query mouse.1.protein.faa -db zebrafish.1.protein.faa -out mouse.1.zebrafish.txt -outfmt 6
 blastp -query mouse.2.protein.faa -db zebrafish.1.protein.faa -out mouse.2.zebrafish.txt -outfmt 6
 ```
+4. Visualizing BLAST score distributions in RStudio  
+```
+blast_out1 <- read.table('mouse.1.zebrafish.txt', sep='\t')
+blast_out2 <- read.table('mouse.2.zebrafish.txt', sep='\t')
+colnames(blast_out1) <- c("qseqid", "sseqid", "pident", "length", "mismatch", "gapopen", "qstart", "qend", "sstart", "send", "evalue", "bitscore")
+colnames(blast_out2) <- c("qseqid", "sseqid", "pident", "length", "mismatch", "gapopen", "qstart", "qend", "sstart", "send", "evalue", "bitscore")
+hist(blast_out1$evalue)
+hist(blast_out2$evalue)
+```
+思考题：如果只统计the best hsp evalue，要如何改？  
 
