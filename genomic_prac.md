@@ -127,9 +127,16 @@ curl -O ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/744/635/GCF_000744635.1_A
 gunzip *.gz
 ```
 1. 对蛋白序列进行all-to-all blast  
-
+做Blast之前请改下序列名，在各自序列名后面加上GCF编号，如将```WP_003333770.1```改成```WP_003333770.1:GCF_000010165```，将所有蛋白序列合并到一个文件```all_pro.faa```，建索引```makeblastdb -in all_pro.faa -dbtype prot```。  
+blastAll.sh
 ```
-
+#!/bin/bash
+#PBS -S /bin/bash
+#PBS -N blast_all
+#PBS -l nodes=1:ppn=1
+#PBS -j oe
+cd $PBS_O_WORKDIR
+blastp -query all_pro.faa -db all_pro.faa -out allBlast.tsv -outfmt 6 -evalue 1e-10
 ```
 2. 提取每个hit的e-value或score值，构建一个表征两条序列的相似性的特征值  
 3. 用mcl进行聚类  
