@@ -24,6 +24,9 @@ blastp -query mm-first.faa -db zebrafish.1.protein.faa
 blastp -query mm-first.faa -db zebrafish.1.protein.faa -out mm-first.x.zebrafish.txt
 blastp -query mm-first.faa -db zebrafish.1.protein.faa -outfmt 6
 less mm-first.x.zebrafish.txt
+
+head -n 5000 mouse.1.protein.faa > mouse.1_sub5k.faa
+head -n 5000 mouse.2.protein.faa > mouse.2.sub5k.faa
 ```
 blast1.sh  
 ```
@@ -33,8 +36,8 @@ blast1.sh
 #PBS -l nodes=1:ppn=1
 #PBS -j oe
 cd $PBS_O_WORKDIR
-blastp -query mouse.1.protein.faa -db zebrafish.1.protein.faa -out mouse.1.zebrafish.txt -outfmt 6
-blastp -query mouse.2.protein.faa -db zebrafish.1.protein.faa -out mouse.2.zebrafish.txt -outfmt 6
+blastp -query mouse.1_sub5k.faa -db zebrafish.1.protein.faa -out mouse.1.zebrafish.txt -outfmt 6
+blastp -query mouse.2_sub5k.faa -db zebrafish.1.protein.faa -out mouse.2.zebrafish.txt -outfmt 6
 ```
 4. Visualizing BLAST score distributions in RStudio  
 ```
