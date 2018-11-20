@@ -57,6 +57,8 @@ plot(blast_out1$pident  * (blast_out1$qend - blast_out1$qstart), blast_out1$bits
 目前在GenBank RefSeq中有66个菌株的基因组序列已经释放，[https://www.ncbi.nlm.nih.gov/genome/?term=txid55080[Organism:exp]](https://www.ncbi.nlm.nih.gov/genome/?term=txid55080[Organism:exp])，我们需要对这66个菌株的蛋白进行聚类分析，构建基因家族  
 
 2.1 数据准备：  
+请完成以下表格，收集基因组信息：[https://docs.qq.com/sheet/DUEZiWFBEcktGTWRO](https://docs.qq.com/sheet/DUEZiWFBEcktGTWRO)  
+
 ```
 curl -O ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/282/015/GCF_000282015.1_Brevibacillus.strCF112_v1.0/GCF_000282015.1_Brevibacillus.strCF112_v1.0_protein.faa.gz
 curl -O ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/282/075/GCF_000282075.1_Brevibacillus.strBC25_v1.0/GCF_000282075.1_Brevibacillus.strBC25_v1.0_protein.faa.gz
@@ -68,6 +70,9 @@ curl -O ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/003/013/475/GCF_003013475.1_A
 curl -O ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/003/400/265/GCF_003400265.1_ASM340026v1/GCF_003400265.1_ASM340026v1_protein.faa.gz
 curl -O ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/001/423/865/GCF_001423865.2_ASM142386v2/GCF_001423865.2_ASM142386v2_protein.faa.gz
 curl -O ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/900/114/075/GCF_900114075.1_IMG-taxon_2687453682_annotated_assembly/GCF_900114075.1_IMG-taxon_2687453682_annotated_assembly_protein.faa.gz
+.
+.
+.
 gunzip *.gz
 ```
 1. 对蛋白序列进行all-to-all blast  
