@@ -54,8 +54,9 @@ plot(blast_out1$pident  * (blast_out1$qend - blast_out1$qstart), blast_out1$bits
 
 ## 二、根据blast结果对蛋白序列进行聚类 -- 构建基因家族  
 任务：构建Brevibacillus基因家族  
-目前在GenBank RefSeq中有10个菌株的基因组序列已经释放，[https://www.ncbi.nlm.nih.gov/genome/genomes/13663](https://www.ncbi.nlm.nih.gov/genome/genomes/13663)，我们对这10个菌株的蛋白进行聚类分析，构建基因家族  
-数据准备：  
+目前在GenBank RefSeq中有66个菌株的基因组序列已经释放，[https://www.ncbi.nlm.nih.gov/genome/?term=txid55080[Organism:exp]](https://www.ncbi.nlm.nih.gov/genome/?term=txid55080[Organism:exp])，我们需要对这66个菌株的蛋白进行聚类分析，构建基因家族  
+
+2.1 数据准备：  
 ```
 curl -O ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/282/015/GCF_000282015.1_Brevibacillus.strCF112_v1.0/GCF_000282015.1_Brevibacillus.strCF112_v1.0_protein.faa.gz
 curl -O ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/282/075/GCF_000282075.1_Brevibacillus.strBC25_v1.0/GCF_000282075.1_Brevibacillus.strBC25_v1.0_protein.faa.gz
