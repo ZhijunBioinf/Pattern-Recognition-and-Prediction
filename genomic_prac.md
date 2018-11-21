@@ -58,7 +58,7 @@ plot(blast_out1$pident  * (blast_out1$qend - blast_out1$qstart), blast_out1$bits
 ## 二、根据blast结果对蛋白序列进行聚类 -- 构建基因家族  
 任务：构建Brevibacillus基因家族  
 目前在GenBank中有66个菌株的基因组序列已经释放，[https://www.ncbi.nlm.nih.gov/genome/?term=txid55080[Organism:exp]](https://www.ncbi.nlm.nih.gov/genome/?term=txid55080[Organism:exp])，但在RefSeq中只有61个菌株有基因组序列，我们需要对这61个菌株的蛋白进行聚类分析，构建基因家族  
-
+![](https://micans.org/mcl/img/fa75.png)
 2.1 数据准备：  
 请完成以下表格，收集基因组信息：[https://docs.qq.com/sheet/DUEZiWFBEcktGTWRO](https://docs.qq.com/sheet/DUEZiWFBEcktGTWRO)  
 
@@ -138,7 +138,8 @@ blastAll.sh
 cd $PBS_O_WORKDIR
 blastp -query all_pro.faa -db all_pro.faa -out allBlast.tsv -outfmt 6 -evalue 1e-10
 ```
-2. 提取每个hit的e-value或score值，构建一个表征两条序列的相似性的特征值  
+2. 提取每个hit的score值，构建一个表征两条序列的相似性的特征值  
+
 3. 用mcl进行聚类  
 
 
