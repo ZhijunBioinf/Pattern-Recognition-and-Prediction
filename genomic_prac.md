@@ -151,7 +151,7 @@ work_mcl.sh
 ```
 #!/bin/bash
 #PBS -S /bin/bash
-#PBS -N blast_all
+#PBS -N MCL
 #PBS -l nodes=1:ppn=1
 #PBS -j oe
 cd $PBS_O_WORKDIR
