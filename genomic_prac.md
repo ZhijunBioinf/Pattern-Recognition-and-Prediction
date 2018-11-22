@@ -167,4 +167,6 @@ clm dist --chain out.data.mci.I{14,20,40}
 ```
 统计有多少基因家族，每个基因家族中每个菌株基因数。  
 
+# 3. Reference  
+1. [MCL](http://orthomcl.org)  
 
