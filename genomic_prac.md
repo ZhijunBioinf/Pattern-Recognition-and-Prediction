@@ -166,7 +166,7 @@ mcxdump -icl out.data.mci.I40 -tabr data.tab -o dump.data.mci.I40
 clm dist --chain out.data.mci.I{14,20,40}
 ```
 统计有多少基因家族，每个基因家族中每个菌株基因数。  
-![](https://github.com/hnnd/GenomicLab/edit/master/Rplot01.png)
+![](https://github.com/hnnd/GenomicLab/blob/master/Rplot01.png)
 # 3. Reference  
 1. [MCL](https://micans.org/mcl)  
 2. [OrthoMCL](http://orthomcl.org/orthomcl)  
