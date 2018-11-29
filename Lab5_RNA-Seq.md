@@ -42,10 +42,11 @@ RNA-Seq项目分析包括以下几个步骤：
 ### 1. Mapping  
 work_mapping.sh  
 ```
-#PBS -N hisat2
-#PBS -l nodes=1:ppn=1
-#PBS -j oe
-cd $PBS_O_WORKDIR
+#!/bin/bash
+#$ -S /bin/bash
+#$ -N hisat2
+#$ -j y
+#$ -cwd
 for i in $(seq 291 302);
 do 
 hisat2 -p 1 \
@@ -59,10 +60,11 @@ done
 ### 2. Count  
 work_count.sh  
 ```
-#PBS -N counting
-#PBS -l nodes=1:ppn=1
-#PBS -j oe
-cd $PBS_O_WORKDIR
+#!/bin/bash
+#$ -S /bin/bash
+#$ -N count
+#$ -j y
+#$ -cwd
 TPMCalculator -g /data/lab/genomic/lab05/ref/Oryza_sativa.IRGSP-1.0.41.gtf -d ./
 ```
 ### 3. Merge the counting matrix  
