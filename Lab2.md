@@ -65,10 +65,12 @@ $ ln -s ../REL606.fa ./
 #### 2. 建索引  
 work_bwaIndex.sh  
 ```
-#PBS -N bwaIdx_W
-#PBS -l nodes=1:ppn=1
-#PBS -j oe
-cd $PBS_O_WORKDIR
+#!/bin/bash
+#$ -S /bin/bash
+#$ -N INDEX
+#$ -j y
+#$ -cwd
+
 bwa index REL606.fa
 ```
 
@@ -78,10 +80,11 @@ cd ../../result
 ```
 work_bwa.sh
 ```
-#PBS -N bwa
-#PBS -l nodes=1:ppn=1
-#PBS -j oe
-cd $PBS_O_WORKDIR
+#!/bin/bash
+#$ -S /bin/bash
+#$ -N bwa
+#$ -j y
+#$ -cwd
 bwa mem ../data/index/REL606.fa ../data/reads_1.fq.gz ../data/reads_2.fq.gz > mapping.sam
 samtools view -b mapping.sam > mapping.bam
 samtools sort -o mapping.sort.bam mapping.bam
@@ -89,10 +92,11 @@ samtools index mapping.sort.bam
 ```
 work_bwa2.sh (using pipe)  
 ```
-#PBS -N bwa_pipe
-#PBS -l nodes=1:ppn=1
-#PBS -j oe
-cd $PBS_O_WORKDIR
+#!/bin/bash
+#$ -S /bin/bash
+#$ -N bwa_pipe
+#$ -j y
+#$ -cwd
 bwa mem ../data/index/REL606.fa ../data/reads_1.fq.gz ../data/reads_2.fq.gz | \
  samtools view -b - | \
  samtools sort -o mapping.sort.2.bam -
@@ -102,10 +106,11 @@ samtools index mapping.sort.2.bam
 
 work_minimap2.sh  
 ```
-#PBS -N minimap2
-#PBS -l nodes=1:ppn=1
-#PBS -j oe
-cd $PBS_O_WORKDIR
+#!/bin/bash
+#$ -S /bin/bash
+#$ -N minimap2
+#$ -j y
+#$ -cwd
 minimap2 -ax sr ../data/REL606.fa ../data/reads_1.fq.gz ../data/reads_2.fq.gz |\
  samtools view -b - |\
  samtools sort -o mapping.sort.mm.bam -
@@ -115,10 +120,11 @@ samtools index mapping.sort.mm.bam
 ### (三) Mapping the long reads to the reference genome using minimap2  
 work_minimap_pb.sh  
 ```
-#PBS -N minimap2_pb
-#PBS -l nodes=1:ppn=1
-#PBS -j oe
-cd $PBS_O_WORKDIR
+#!/bin/bash
+#$ -S /bin/bash
+#$ -N minimap2
+#$ -j y
+#$ -cwd
 minimap2 -ax map-pb ../data/REL606.fa ../data/pb_ecoli_0001.fastq |\
  samtools view -b - |\
  samtools sort -o mapping.sort.pb.bam -
