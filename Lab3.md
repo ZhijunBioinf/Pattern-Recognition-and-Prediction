@@ -41,10 +41,11 @@ cd ../results
 
 work_prokka.sh  
 ```
-#PBS -N prokka
-#PBS -l nodes=1:ppn=1
-#PBS -j oe
-cd $PBS_O_WORKDIR
+#!/bin/bash
+#$ -S /bin/bash
+#$ -N prokka
+#$ -j y
+#$ -cwd
 prokka --outdir anno --prefix PROKKA ../data/REL606.fa
 
 ```
@@ -71,10 +72,11 @@ est2genome=1
 ```
 work_maker.sh
 ```
-#PBS -N maker
-#PBS -l nodes=1:ppn=1
-#PBS -j oe
-cd $PBS_O_WORKDIR
+#!/bin/bash
+#$ -S /bin/bash
+#$ -N maker
+#$ -j y
+#$ -cwd
 maker
 ```
 真核生物基因组注释比较复杂，这里只是向大家介绍了maker的一般使用，如果要使用maker注释新的基因组，建议参阅：[http://gmod.org/wiki/MAKER_Tutorial](http://gmod.org/wiki/MAKER_Tutorial)  
