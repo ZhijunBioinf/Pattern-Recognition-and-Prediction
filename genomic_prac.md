@@ -31,10 +31,10 @@ head -n 5000 mouse.2.protein.faa > mouse.2.sub5k.faa
 blast1.sh  
 ```
 #!/bin/bash
-#PBS -S /bin/bash
-#PBS -N Blast1
-#PBS -l nodes=1:ppn=1
-#PBS -j oe
+#$ -S /bin/bash
+#$ -N blast
+#$ -j y
+#$ -cwd
 cd $PBS_O_WORKDIR
 blastp -query mouse.1_sub5k.faa -db zebrafish.1.protein.faa -out mouse.1.zebrafish.txt -outfmt 6
 blastp -query mouse.2_sub5k.faa -db zebrafish.1.protein.faa -out mouse.2.zebrafish.txt -outfmt 6
@@ -134,11 +134,10 @@ gunzip *.gz
 blastAll.sh
 ```
 #!/bin/bash
-#PBS -S /bin/bash
-#PBS -N blast_all
-#PBS -l nodes=1:ppn=1
-#PBS -j oe
-cd $PBS_O_WORKDIR
+#$ -S /bin/bash
+#$ -N blastall
+#$ -j y
+#$ -cwd
 blastp -query all_pro.faa -db all_pro.faa -out allBlast.tsv -outfmt 6 -evalue 1e-10
 ```
 2. 提取每个hit的score值，构建一个表征两条序列的相似性的特征值  
@@ -150,11 +149,10 @@ cut -f 1,2,12 allBlast.tsv > allBlast.abc
 work_mcl.sh
 ```
 #!/bin/bash
-#PBS -S /bin/bash
-#PBS -N MCL
-#PBS -l nodes=1:ppn=1
-#PBS -j oe
-cd $PBS_O_WORKDIR
+#$ -S /bin/bash
+#$ -N MCL
+#$ -j y
+#$ -cwd
 
 mcxload -abc allBlast.abc --stream-mirror -write-tab data.tab -o data.mci
 mcl data.mci -I 1.4
