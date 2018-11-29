@@ -90,7 +90,7 @@ velveth ecoli.velvet 57 -shortPaired -fastq.gz -separate ../data/reads_1.fq.gz .
 velvetg ecoli.velvet -exp_cov auto
 ```
 #### 2.用minia组装  
-# 新建一个脚本文件，work_minia.sh，写入下列内容:  
+新建一个脚本文件，work_minia.sh，写入下列内容:  
 ```
 #!/bin/bash
 #$ -S /bin/bash
@@ -101,7 +101,7 @@ velvetg ecoli.velvet -exp_cov auto
 ```
 
 #### 3. 用SPAdes组装  
-#新建一个脚本文件，work_spades.sh，写入下列内容:  
+新建一个脚本文件，work_spades.sh，写入下列内容:  
 ```
 #!/bin/bash
 #$ -S /bin/bash
