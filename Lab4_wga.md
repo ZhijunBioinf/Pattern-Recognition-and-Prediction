@@ -20,10 +20,11 @@ $ cd ../results
 
 work_nucmer.sh
 ```
-#PBS -N nucmer
-#PBS -l nodes=1:ppn=1
-#PBS -j oe
-cd $PBS_O_WORKDIR
+#!/bin/bash
+#$ -S /bin/bash
+#$ -N nucmer
+#$ -j y
+#$ -cwd
 nucmer -p X23_B011 ../data/X23.fasta ../data/B011.fasta
 dnadiff -p X23_B011 -d X23_B011.delta
 ```
@@ -60,10 +61,11 @@ $ cat ../data/*.fasta > genome.fasta
 
 work_mauve.sh  
 ```
-#PBS -N mauve
-#PBS -l nodes=1:ppn=1
-#PBS -j oe
-cd $PBS_O_WORKDIR
+#!/bin/bash
+#$ -S /bin/bash
+#$ -N mauve
+#$ -j y
+#$ -cwd
 mauveAligner --output=my_seqs.xmfa genome.fasta 
 ```
 查看结果  
