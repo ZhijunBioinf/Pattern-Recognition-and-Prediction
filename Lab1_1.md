@@ -56,58 +56,70 @@ mkdir result
 /data/lab/genomic/lab01/data/ref.fa
 ```
 ### 组装  
+#### 准备数据  
 ```
-# 准备数据
 cd data
 ln -s /data/lab/genomic/lab01/data/reads_1.fq.gz /data/lab/genomic/lab01/data/reads_2.fq.gz ./
-
 cd ../result
-
-# 估算k值
+```
+#### 估算k值  
+```
 $ ls ../data/reads_* > reads.file
-# 新建一个脚本文件，work_kmer.sh，写入以下内容
-#PBS -N kmer
-#PBS -l nodes=1:ppn=1
-#PBS -j oe
-cd $PBS_O_WORKDIR
+```
+新建一个脚本文件，work_kmer.sh，写入以下内容:  
+```
+#!/bin/bash
+#$ -S /bin/bash
+#$ -N kmer
+#$ -cwd
+#$ -j y
 /opt/bio/kmergenie-1.7048/kmergenie reads.file
+```
 
-结束后查看结果，选择最优k值
+结束后查看结果，选择最优k值57  
 
-# 用velvet组装
-# 新建一个脚本文件，work_velvet.sh，写下下列内容
-
-#PBS -N velvet
-#PBS -l nodes=1:ppn=1
-#PBS -j oe
-cd $PBS_O_WORKDIR
-
+#### 1. 用velvet组装
+新建一个脚本文件，work_velvet.sh，写下下列内容:  
+```
+#!/bin/bash
+#$ -S /bin/bash
+#$ -N velvet
+#$ -cwd
+#$ -j y
 velveth ecoli.velvet 57 -shortPaired -fastq.gz -separate ../data/reads_1.fq.gz ../data/reads_2.fq.gz
 velvetg ecoli.velvet -exp_cov auto
-
-# 2.用minia组装
-# 新建一个脚本文件，work_minia.sh，写入下列内容
-#PBS -N minia
-#PBS -l nodes=1:ppn=1
-#PBS -j oe
-cd $PBS_O_WORKDIR
+```
+#### 2.用minia组装  
+# 新建一个脚本文件，work_minia.sh，写入下列内容:  
+```
+#!/bin/bash
+#$ -S /bin/bash
+#$ -N minia
+#$ -cwd
+#$ -j y
 /opt/bio/bin/minia -in ../data/reads_1.fq.gz,../data/reads_2.fq.gz -kmer-size 57 -out ecoli.minia
+```
 
-#3 用SPAdes组装
-#新建一个脚本文件，work_spades.sh，写入下列内容
-#PBS -N minia
-#PBS -l nodes=1:ppn=4
-#PBS -j oe
-cd $PBS_O_WORKDIR
+#### 3. 用SPAdes组装  
+#新建一个脚本文件，work_spades.sh，写入下列内容:  
+```
+#!/bin/bash
+#$ -S /bin/bash
+#$ -N spades
+#$ -cwd
+#$ -j y
 spades.py -t 4 -1 ../data/reads_1.fq.gz -2 ../data/reads_2.fq.gz -o ecoli.spades
+```
 
-#组装效果评价
+#### 组装效果评价  
+```
 quast -R /data/lab/genomic/lab01/data/ref.fa \
    ecoli.velvet/contigs.fa \
    ecoli.minia.contigs.fa \
    ecoli.spades/scaffolds.fasta
-
-#查看评价结果
+```
+#### 查看评价结果  
+```
 less quast_results/latest/report.txt 
 
 ```
