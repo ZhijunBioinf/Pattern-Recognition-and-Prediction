@@ -129,7 +129,7 @@ curl -O ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/454/065/GCF_000454065.1_A
 curl -O ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/744/635/GCF_000744635.1_ASM74463v1/GCF_000744635.1_ASM74463v1_protein.faa.gz
 gunzip *.gz
 ```
-1. 对蛋白序列进行all-to-all blast  
+1. 对蛋白序列进行两两比对   
 做Blast之前请改下序列名，在各自序列名后面加上GCF编号，如将```WP_003333770.1```改成```WP_003333770.1:GCF_000010165```，将所有蛋白序列合并到一个文件```all_pro.faa```，建索引```makeblastdb -in all_pro.faa -dbtype prot```。  
 blastAll.sh
 ```
@@ -140,6 +140,19 @@ blastAll.sh
 #$ -cwd
 blastp -query all_pro.faa -db all_pro.faa -out allBlast.tsv -outfmt 6 -evalue 1e-10
 ```
+Blast速度太慢！！！建设大家换成diamond比对，diamond速度是blast的500-20000倍。  
+首先对蛋白序列进行建库，`diamond makedb --in all_pro.faa -d allpep`，然后用diamond进行两两比对  
+
+work_diamond.sh
+```
+#!/bin/bash
+#$ -S /bin/bash
+#$ -N diamond
+#$ -j y
+#$ -cwd
+diamond blastp -d allpep -q all_pro.faa -o allBlast.tsv -f 6
+```
+
 2. 提取每个hit的score值，构建一个表征两条序列的相似性的特征值  
 
 ```
