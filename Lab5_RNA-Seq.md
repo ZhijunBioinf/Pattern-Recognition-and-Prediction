@@ -65,7 +65,7 @@ work_count.sh
 #$ -N count
 #$ -j y
 #$ -cwd
-TPMCalculator -g /data/lab/genomic/lab05/ref/Oryza_sativa.IRGSP-1.0.41.gtf -d ./
+TPMCalculator -g /data/lab/genomic/lab05/ref/Oryza_sativa.IRGSP-1.0.41.gtf -d ./ -a
 ```
 ### 3. Merge the counting matrix  
 ```
