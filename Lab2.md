@@ -76,7 +76,7 @@ bwa index REL606.fa
 
 #### 3. Mapping the reads to the reference genome using bwa  
 ```
-cd ../../result
+cd ../../results
 ```
 work_bwa.sh
 ```
