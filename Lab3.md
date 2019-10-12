@@ -35,7 +35,7 @@ mkdir results
 
 ## (一) 原核生物基因组注释--prokka    
 ```
-cd ../results
+cd results
 
 ```
 
