@@ -35,7 +35,6 @@ blast1.sh
 #$ -N blast
 #$ -j y
 #$ -cwd
-cd $PBS_O_WORKDIR
 blastp -query mouse.1_sub5k.faa -db zebrafish.1.protein.faa -out mouse.1.zebrafish.txt -outfmt 6
 blastp -query mouse.2_sub5k.faa -db zebrafish.1.protein.faa -out mouse.2.zebrafish.txt -outfmt 6
 ```
