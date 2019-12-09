@@ -194,7 +194,7 @@ clm dist --chain out.data.mci.I{14,20,40}
 
 
 ## 扩展  
-比较上述基于单拷贝基因构建的物种进化树与[GtoTree](https://github.com/AstrobioMike/GToTree)构建的进化树有什么不同？  
+比较上述基于单拷贝基因构建的物种进化树与[GToTree](https://github.com/AstrobioMike/GToTree)构建的进化树有什么不同？  
 
 # 3. Reference  
 1. [MCL](https://micans.org/mcl)  
