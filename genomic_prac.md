@@ -177,6 +177,18 @@ clm dist --chain out.data.mci.I{14,20,40}
 ```
 统计有多少基因家族，每个基因家族中每个菌株基因数。  
 ![](https://github.com/hnnd/GenomicLab/blob/master/Rplot01.png)
+
+## 三、构建物种进化树（自行完成）  
+1. 提取单拷贝基因家族的基因序列  
+单拷贝基因家族：所分析的每个物种有且只有一个基因的基因家族。  
+理解为什么要选择单拷贝基因？  
+
+2. 多序列比对  
+对每个单拷贝基因家族进行多序列比对。 mafft/muscle ...  
+
+3. 比对后序列合并  
+将  
+4. 构建进化树  
 # 3. Reference  
 1. [MCL](https://micans.org/mcl)  
 2. [OrthoMCL](http://orthomcl.org/orthomcl)  
