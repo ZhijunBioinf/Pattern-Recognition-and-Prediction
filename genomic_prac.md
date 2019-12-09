@@ -187,8 +187,15 @@ clm dist --chain out.data.mci.I{14,20,40}
 对每个单拷贝基因家族进行多序列比对。 mafft/muscle ...  
 
 3. 比对后序列合并  
-将  
+将各家族多序列比对后的序列进行合并，形成一个psudo molecular sequences alignment  
+
 4. 构建进化树  
+基于合并后的序列构建进化树。 fasttree
+
+
+## 扩展  
+比较上述基于单拷贝基因构建的物种进化树与[GtoTree](https://github.com/AstrobioMike/GToTree)构建的进化树有什么不同？  
+
 # 3. Reference  
 1. [MCL](https://micans.org/mcl)  
 2. [OrthoMCL](http://orthomcl.org/orthomcl)  
