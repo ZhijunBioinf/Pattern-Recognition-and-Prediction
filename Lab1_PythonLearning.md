@@ -9,3 +9,5 @@
 >> ```python3
 >> print("Hello World!")
 >> ```
+
+## 2. 变量
