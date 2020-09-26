@@ -252,10 +252,10 @@ iter_m = 0
 while x1 < 10:
   x1 = x1+1
   iter_m = iter_m+1
-  if x1 % 2 == 0: # 如果x1能被2整除，则打印提示，并结束本次循环
+  if x1 % 2 == 0: # 如果x1是偶数，则打印提示，并结束本次循环
     print('x1 is a even number!')
     continue
-  print('Iteration %d: x1 is a even number %d' % (iter_m, x1))
+  print('Iteration %d: x1 is a even number %d' % (iter_m, x1)) # 如果x1是奇数，打印提示与数值
 ```
 
 ## 4. 读写文件
