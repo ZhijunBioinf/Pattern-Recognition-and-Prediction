@@ -333,4 +333,5 @@ pwd() # 获得当前工作路径，更快捷！
 ## 7. 正则表达式
 参考[Python基础教程(crossin全60课)](https://github.com/dai0992/Pattern-Recognition-and-Prediction/blob/master/Python基础教程(crossin全60课).pdf)中p126-p135.
 
-
+## 作业
+尽可能练习每一条命令。犯错越多，进步越快！
