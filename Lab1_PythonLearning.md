@@ -253,17 +253,25 @@ while x1 < 10:
 
 ## 4. 读写文件
 比如有一个文件：data.txt，内容如下
-> Hi man!
-> I am a file.
-> Try read my mind and print it onto screen!
+> Hi man! <br>
+> I am a file. <br>
+> Try read my mind and print it onto screen! <br>
 
 一次性读所有内容，并输出到屏幕
 ```python
 f = open('data.txt') # 使用open函数打开文件，并返回文件句柄给变量f
-data = f.read() # 使用read函数一次性读取所有内容（当文件很大时，慎用！！）
+data = f.readlines() # 使用read函数一次性读取所有内容（当文件很大时，慎用！！）
 print(data) # 一次性打印所有内容到屏幕
 f.close() # 关闭文件（不论多复杂的程序，一旦打开过文件，记得最后一定要关闭文件）
+
+读一行处理一行，并将处理结果写到一个新文件中
+```python
+f = open('data.txt')
+line = f.readline()
+iter_num = 1
+while line != '':
 ```
+
 
 
 ## 5. 函数
