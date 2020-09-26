@@ -206,8 +206,8 @@ while x1 < 20:
   print('Iteration %d: x1 is %d' % (iter_m, x1))
 ```
 
-**for循环语句格式(同样注意判断条件后面的冒号不能丢)**
-> for ... in ...: <br>
+**for循环语句格式(同样注意循环范围后面的冒号不能丢)**
+> for ... in 循环范围: <br>
 >> 执行的内容1 <br>
 >> 执行的内容2 <br>
 ```python
@@ -229,13 +229,13 @@ for i in range(0,5):
 ```python
 x1 = 2
 iter_m = 0
-while 1:
+while 1: # 最粗暴的判断条件，1代表无限循环，即死循环
   x1 = x1+1
   iter_m = iter_m+1
   print('Iteration %d: x1 is %d' % (iter_m, x1))
   if x1 > 10:
     print('x1 is more than 10 and the while loop should be break!')
-    break
+    break # 如果没有break语句，循环将无限进行下去
 ```
 
 **continue: 满足条件则结束`本次`循环**
@@ -251,7 +251,19 @@ while x1 < 10:
   print('Iteration %d: x1 is a even number %d' % (iter_m, x1))
 ```
 
-## 4. 输入输出
+## 4. 读写文件
+比如有一个文件：data.txt，内容如下
+> Hi man!
+> I am a file.
+> Try read my mind and print it onto screen!
+
+一次性读所有内容，并输出到屏幕
+```python
+f = open('data.txt') # 使用open函数打开文件，并返回文件句柄给变量f
+data = f.read() # 使用read函数一次性读取所有内容（当文件很大时，慎用！！）
+print(data) # 一次性打印所有内容到屏幕
+f.close() # 关闭文件（不论多复杂的程序，一旦打开过文件，记得最后一定要关闭文件）
+```
 
 
 ## 5. 函数
