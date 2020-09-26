@@ -308,7 +308,7 @@ sayHello('Jack', 'Rose') # 输出：Jack says Hello to Rose!
 ```
 
 ## 6. 模块(module)
-Python的模块，类似于R、Perl中的扩展包package，MATLAB中的工具箱
+Python的模块，类似于R、Perl中的扩展包package，MATLAB中的工具箱toolbox
 ```python
 import os # 引入操作系统os模块
 os.getcwd() # 获得当前工作路径(current working directory, cwd)，如果不导入os模块，无法使用该函数
@@ -316,12 +316,14 @@ dir(os) # 获得os模块中的所有函数和变量
 
 # 每次使用os.getcwd太麻烦，而且os模块中很多函数用不着，导入后浪费资源
 from os import getcwd # 只导入getcwd函数
-getcwd() # 获得当前路径，函数前不用输入模块名
+getcwd() # 获得当前工作路径，函数前不用输入模块名
+
+# 获得工作路径竟然要输入6个字母，人家Linux都只用3个字母pwd
+from os import getcwd as pwd # 只导入getcwd函数，并且重新命名为pwd
+pwd() # 获得当前工作路径，更快捷！
 ```
 
 ## 7. 正则表达式
 参考[Python基础教程(crossin全60课)](https://github.com/dai0992/Pattern-Recognition-and-Prediction/blob/master/Python基础教程(crossin全60课).pdf)中p126-p135.
-
-
 
 
