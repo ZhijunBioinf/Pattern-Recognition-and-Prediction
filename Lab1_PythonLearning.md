@@ -66,10 +66,12 @@ str1 = 'good'
 str2 = 'student'
 str3 = str1 + ' ' + str2
 str4 = 'I\'m a ' + str1 + ' ' + str2
+
 str_and_num = str1 + 666 # 字符串和数字相加会报错
 str_and_num = str1 + str(666) # 用str函数把数字转换为字符串，不会报错
 str_and_num = 'good %d' % 666 # 用%对字符串进行格式化，另外有%f, %.2f, %s等
 "%s's score is %d" % ('Mike', 90) # 同时用多个%对多个变量格式化
+
 # 假如我们有一个字符串列表
 str_list = ['apple', 'pear', 'orange']
 '-'.join(str_list) # 输出'apple-pear-orange'，以短横线将各字符串元素连接
@@ -142,16 +144,19 @@ x2 = 8
 x1 < 3 # True
 x1 == x2 # False
 x1 != x2 # True
+
 # -------- and ---------
 x1 < 10 and x2 < 10 # True
 x1 < 10 and x2 > 10 # False
 x1 > 10 and x2 < 10 # False
 x1 > 10 and x2 > 10 # False
+
 # -------- or ---------
 x1 < 10 or x2 < 10 # True
 x1 < 10 or x2 > 10 # True
 x1 > 10 or x2 < 10 # True
 x1 > 10 or x2 > 10 # False
+
 # -------- not ---------
 not(x1<10) # False
 not(x1>10) # True
