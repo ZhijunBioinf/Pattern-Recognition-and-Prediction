@@ -193,12 +193,63 @@ if x1 < 10:
 ```
 
 ### 3.3 循环语句
-格式(同样注意判断条件后面的冒号不能丢)
+**while循环语句格式(同样注意判断条件后面的冒号不能丢)**
 > while 判断条件:
 >> 执行的内容1
 >> 执行的内容2
+```python
+iter_m = 0
+x1 = 2
+while x1 < 20:
+  x1 = x1*2
+  iter_m = iter_m+1
+  print('Iteration %d: x1 is %d' % (iter_m, x1))
+```
 
+**for循环语句格式(同样注意判断条件后面的冒号不能丢)**
+> for ... in ...:
+>> 执行的内容1
+>> 执行的内容2
+```python
+x1 = 2
+for i in range(5,10): # 这里使用了range函数产生5到10之间的整数，但不包括10
+  x1 = x1*i
+  print('i in range(5,10) is %d: x1 is %d' % (i, x1))
+```
 
+**循环的嵌套**
+```python
+for i in range(0,5):
+  for j in range(0,i+1): # 好好体会这里j循环的范围，是随着外层i的取值变化的
+    print('*', end='')
+  print()
+```
+
+**break: 满足条件则结束`本层`循环**
+```python
+x1 = 2
+iter_m = 0
+while 1:
+  x1 = x1+1
+  iter_m = iter_m+1
+  print('Iteration %d: x1 is %d' % (iter_m, x1))
+  if x1 > 10:
+    print('x1 is more than 10 and the while loop should be break!')
+    break
+```
+
+**continue: 满足条件则结束`本次`循环**
+```python
+x1 = 2
+iter_m = 0
+while x1 < 10:
+  x1 = x1+1
+  iter_m = iter_m+1
+  if x1 % 2 == 0: # 如果x1能被2整除，则打印提示，并结束本次循环
+    print('x1 is a even number!')
+    continue
+  print('Iteration %d: x1 is a even number %d' % (iter_m, x1))
+```
 
 ## 4. 输入输出
 
