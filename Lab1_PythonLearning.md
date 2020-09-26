@@ -68,6 +68,10 @@ str_and_num = str1 + 666 # 字符串和数字相加会报错
 str_and_num = str1 + str(666) # 用str函数把数字转换为字符串，不会报错
 str_and_num = 'good %d' % 666 # 用%对字符串进行格式化，另外有%f, %.2f, %s等
 "%s's score is %d" % ('Mike', 90) # 同时用多个%对多个变量格式化
+# 假如我们有一个字符串列表
+str_list = ['apple', 'pear', 'orange']
+'-'.join(str_list) # 输出'apple-pear-orange'，以短横线将各字符串元素连接
+''.join(str_list) # 输出'applepearorange', 连接符可以是空串
 ```
 
 字符串分割
@@ -78,5 +82,22 @@ section = 'Come on. Let\'s go. Go go go.'
 section.split('.') # 指定'.'为分隔符
 ```
 
+字符串的索引和切片
+```python
+word = 'helloworld'
+word[0] # 输出'h'
+word[-2] # 输出'l'
+word[0] = 'w' # 会报错，字符串不允许通过索引修改其中字符。如果想修改，只有先转换成列表（用list函数），修改后再用空串将列表中每个字符连接成字符串（用''.join(yourList)）
+word[:5] # 输出'hello', 切片规则和list相同
+'^_^'.join(word) # 输出''h^_^e^_^l^_^l^_^o^_^w^_^o^_^r^_^l^_^d''，（我只是耍个帅 ^_^）
+```
 
+### 2.5 字典（类似Perl中的哈希）
+字典是键/值对(key:value)的集合，每个键值对之间用逗号分隔，整个字典包括在花括号中
+> 1. 键必须是唯一的
+> 2. 键只能是基本数据类型，如整数、浮点数、字符串、逻辑值，list不能作为键
+> 3. 值没有要求
+```python
+score = {'萧峰':95, '段誉':97, '虚竹':90, True:'Good brother', 100:'Perfect score'}
+```
 
