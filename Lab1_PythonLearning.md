@@ -5,9 +5,9 @@
 > 1）下载[Python](https://www.python.org/downloads/)，按步骤安装，在"Advanced Options"时，勾选"Add Python to environment variables"。
 > 2）验证是否安装成功：打开"命令提示符"（桌面按快捷键"Win+r"，输入cmd，回车），在命令行里输入python，如果看到python的版本信息，说明安装成功。
 > 3）第一声啼哭：在命令行输入
->> ```python
->> print("Hello World!")
->> ```
+```python
+print("Hello World!")
+```
 
 ## 2. 数据结构
 ### 2.1 基本数据类型
