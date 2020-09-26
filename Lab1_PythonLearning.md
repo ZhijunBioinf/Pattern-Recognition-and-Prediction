@@ -157,14 +157,47 @@ not(x1>10) # True
 
 ### 3.2 判断语句
 格式
-> if 判断条件: <br>
->> 执行的内容1 <br>
->> 执行的内容2 <br>
+> if 判断条件:
+>> 执行的内容1
+>> 执行的内容2
 
 **特别说明：判断条件后面的`冒号`不能少，if内部的语句需要有`统一的缩进`，一般用4个空格或按一次tab键，并且整个文件要统一，不能空格和tab混用**
 ```python
 if x1 < 10:
+  print('x1 is less than 10') # 命令行会自动输出3个点，需要按一次tab键，然后再输入print命令，按2次回车，输出结果
+
+# and判断
+if x1 < 10 and x2 < 10:
+  print('x1 and x2 are both less than 10')
+
+# if...else...语句
+if x1 < x2:
+  print('x1 is less than x2')
+else:
+  print('x1 is more than x2')
+
+# if...elif...else语句
+if x1 > x2: # 可以通过设置x1, x2的大小，来得到不同的输出
+  print('x1 is more than x2')
+elif x1 > 10:
+  print('x1 is less than x2, but x1 is more than 10')
+else:
+  print('x1 is less than x2, and x1 is less than 10')
+
+# if的嵌套
+if x1 < 10:
+  if x2 > 10:
+    print('x1 is less than 10, but x2 is more than 10')
+  else:
+    print('x1 and x2 are both less than 10')
 ```
+
+### 3.3 循环语句
+格式(同样注意判断条件后面的冒号不能丢)
+> while 判断条件:
+>> 执行的内容1
+>> 执行的内容2
+
 
 
 ## 4. 输入输出
