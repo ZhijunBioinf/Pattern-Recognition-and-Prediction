@@ -257,29 +257,71 @@ while x1 < 10:
 > I am a file. <br>
 > Try read my mind and print it onto screen! <br>
 
-一次性读所有内容，并输出到屏幕
+一次性读所有内容，并一次性将所有内容写到一个新文件中
 ```python
 f = open('data.txt') # 使用open函数打开文件，并返回文件句柄给变量f
-data = f.readlines() # 使用read函数一次性读取所有内容（当文件很大时，慎用！！）
-print(data) # 一次性打印所有内容到屏幕
-f.close() # 关闭文件（不论多复杂的程序，一旦打开过文件，记得最后一定要关闭文件）
-
-读一行处理一行，并将处理结果写到一个新文件中
-```python
-f = open('data.txt')
-line = f.readline()
-iter_num = 1
-while line != '':
+data = f.read() # 使用read函数一次性读取所有内容（当文件很大时，慎用！！）
+f_out = open('data_out.txt', 'w') # 'w'表示写文件，什么都不加表示读文件
+f_out.write(data) # 将所有内容写到新文件
+f_out.close() # 关闭'data_out.txt'（不论多复杂的程序，一旦打开过文件，记得最后一定要关闭文件）
+f.close() # 关闭'data.txt'
 ```
 
-
+读一行处理一行，并将处理结果逐行写到一个新文件中
+```python
+f = open('data.txt')
+line = f.readline() # 使用readline函数读取一行
+f_out = open('data_out.txt', 'w')
+iter_m = 1
+while line != '': # 当读到文件末尾，什么都没有，则结束循环
+  line = str(iter_m) + ': ' + line # 在当前内容之前加上行号和一个冒号
+  f_out.write(line) # 将处理后的行写到文件
+  iter_m = iter_m+1 # 行号累加
+  line = f.readline() # 读取新行（一定要读取新行，否则一直停留在第一行，即死循环）
+f_out.close()
+f.close()
+```
 
 ## 5. 函数
+最简单的函数
+```python
+# 定义sayHello函数
+def sayHello(): # 注意括号后的冒号
+  print('Hello world!')
+# 调用sayHello函数
+sayHello() # 输出：Hello world!
+```
+
+带参数的函数
+```python
+# 定义包含1个参数的sayHello函数
+def sayHello(who): # 一个参数
+  print(who + ' says Hello!')
+# 调用sayHello函数
+sayHello('Jack') # 输出：Jack says Hello!
+
+# 定义包含2个参数的sayHello函数
+def sayHello(who, friend): # 一个参数
+  print('%s says Hello to %s!' % (who, friend))
+# 调用sayHello函数
+sayHello('Jack', 'Rose') # 输出：Jack says Hello to Rose!
+```
+
+## 6. 模块(module)
+Python的模块，类似于R、Perl中的扩展包package，MATLAB中的工具箱
+```python
+import os # 引入操作系统os模块
+os.getcwd() # 获得当前工作路径(current working directory, cwd)，如果不导入os模块，无法使用该函数
+dir(os) # 获得os模块中的所有函数和变量
+
+# 每次使用os.getcwd太麻烦，而且os模块中很多函数用不着，导入后浪费资源
+from os import getcwd # 只导入getcwd函数
+getcwd() # 获得当前路径，函数前不用输入模块名
+```
+
+## 7. 正则表达式
+参考[Python基础教程(crossin全60课)](https://github.com/dai0992/Pattern-Recognition-and-Prediction/blob/master/Python基础教程(crossin全60课).pdf)中p126-p135.
 
 
-## 6. 正则表达式
-
-
-## 7. 模块
 
 
