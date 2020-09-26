@@ -1,7 +1,7 @@
 # 实验一：Python快速入门
 参考：[Python基础教程(crossin全60课)](https://github.com/dai0992/Pattern-Recognition-and-Prediction/blob/master/Python基础教程(crossin全60课).pdf)
 
-## 1. 安装Python
+## 1. 安装并运行Python
 > 1）下载[Python](https://www.python.org/downloads/)，按步骤安装，在"Advanced Options"时，勾选"Add Python to environment variables"。<br>
 > 2）验证是否安装成功：打开"命令提示符"（桌面按快捷键"Win+r"，输入cmd，回车），在命令行里输入python，如果看到python的版本信息，说明安装成功。<br>
 > 3）第一声啼哭：在命令行输入 <br>
@@ -29,9 +29,9 @@ myBool = True # 逻辑型变量
 **几个无效的变量名**
 > 2dog, my-name
 
-### 2.3 list
+### 2.3 列表(list)
 ```python
-myList1 = [4, 2, 3, 2, 5, 1] # 用一对中括号创建一个列表型变量，每个元素都是整数
+myList1 = [4, 2, 3, 2, 5, 1] # 用一对`中括号`创建一个列表型变量，每个元素都是整数
 myList2 = ['meat', 'egg', 'fish', 'milk'] # 每个元素都是字符串
 myList3 = [365, 'everyday', 0.618, True] # 每个元素也可以是不同的基本数据类型
 myList3[1] # 会输出'everyday', python中的元素计数从0开始（不同于R、MATLAB，但和其他大多数语言相同）
@@ -92,12 +92,58 @@ word[:5] # 输出'hello', 切片规则和list相同
 '^_^'.join(word) # 输出''h^_^e^_^l^_^l^_^o^_^w^_^o^_^r^_^l^_^d''，（我只是耍个帅 ^_^）
 ```
 
-### 2.5 字典（类似Perl中的哈希）
-字典是键/值对(key:value)的集合，每个键值对之间用逗号分隔，整个字典包括在花括号中
-> 1. 键必须是唯一的
-> 2. 键只能是基本数据类型，如整数、浮点数、字符串、逻辑值，list不能作为键
-> 3. 值没有要求
+### 2.5 字典（dictionary, 类似Perl中的哈希hash）
+字典是键/值对(key:value)的集合，每个键值对之间用逗号分隔，整个字典包括在`花括号`中
+> 1) 键必须是唯一的
+> 2) 键只能是基本数据类型，如整数、浮点数、字符串、逻辑值，list不能作为键
+> 3) 值没有要求
+> 4) 键值对没有顺序，因此无法用索引访问字典中的内容，需要用键来访问
 ```python
-score = {'萧峰':95, '段誉':97, '虚竹':90, True:'Good brother', 100:'Perfect score'}
+score = {'萧峰':95, '段誉':97, '虚竹':90, True:'Good brother', 100:'Perfect score'} # 用大括号建立一个字典
+score['虚竹'] # 输出键对应的值：90
+score[True] # 输出键对应的值：'Good brother'
+score['虚竹'] = 99 # 修改“虚竹”的得分（后期有无崖子和天山童姥的百余年功力）
+score['慕容复'] = 88 # 增加“慕容复”的得分
+del(score[100]) # 删除键为100的键值对（注意这里100不是索引，而是score的一个键）
 ```
+
+### 2.6 元组(tuple)
+和列表list类似，但是元组中的元素不可更改，元组用`小括号`创建。元组和list同样有索引、切片、遍历等操作
+```python
+position = (147, 258) # 创建一个只包含数字的元组
+weather = ('sunny', 'cloudy', 'rainy') # 创建一个只包含字符串的元组
+weather_id = (1, 'sunny', 2, 'cloudy', 3, 'rainy') # 创建一个包含数字和字符串的元组
+weather_id[:2] # 输出(1, 'sunny')
+```
+
+### 2.7 数据类型转换
+```python
+int('123') # 输出：123, 字符串转整数
+float('6.6') # 输出：6.6, 字符串转小数
+str(168) # 输出：'168', 数字转字符串
+bool(0) # 输出：False, 数字转逻辑值
+int('abc') # 会报错，字符串abc不可能转成数字，不符合常识
+
+bool(-3) # 输出：True
+bool(False) # 输出：False, 此时的False是python中的特殊关键字，代表0
+bool('False') # 输出：True, 此时'False'只是个不为空的字符串
+bool('') # 输出：False, 什么都没有
+bool(' ') # 输出：True, 看上去空，实际有一个空格
+```
+
+
+## 3. 程序控制
+
+
+## 4. 输入输出
+
+
+## 5. 函数
+
+
+## 6. 正则表达式
+
+
+## 7. 模块
+
 
