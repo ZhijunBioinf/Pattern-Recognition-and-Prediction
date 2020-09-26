@@ -34,12 +34,14 @@ myBool = True # 逻辑型变量
 myList1 = [4, 2, 3, 2, 5, 1] # 用一对`中括号`创建一个列表型变量，每个元素都是整数
 myList2 = ['meat', 'egg', 'fish', 'milk'] # 每个元素都是字符串
 myList3 = [365, 'everyday', 0.618, True] # 每个元素也可以是不同的基本数据类型
+
 myList3[1] # 会输出'everyday', python中的元素计数从0开始（不同于R、MATLAB，但和其他大多数语言相同）
 myList3[4] # 会报错，4代表'myList3'中的第5个元素，不存在！
 myList3[2] = 'happy' # 将其中的第3个元素0.618修改为字符串'happy'
 myList3.append(666.666) # 在myList3的尾巴上增加1个元素，这里使用了list的append方法/函数
 myList3[4] # 不会报错，会输出 666.666
 del(myList3[1]) # 将第2个元素'everyday'删除
+
 # 此时myList3的内容为[365, 'happy', True, 666.666]
 myList3[-1] # 表示索引/选取最后1个元素（特别要注意和正向索引的区别，正向从0、负向从1计数）
 myList3[1:3] # 输出['happy', True], 这里使用了切片索引（特别特别注意：冒号前的切片包括、冒号后的切片不包括，这是初学python最坑的地方）
