@@ -1,3 +1,4 @@
-模式识别与预测-上机实验（以Python实现）
+# 模式识别与预测-上机实验（以Python实现）
 
-Lab1_PythonLearning
+## 实验一 [Python快速入门](https://github.com/dai0992/Pattern-Recognition-and-Prediction/blob/master/Lab1_PythonLearning.md)
+
