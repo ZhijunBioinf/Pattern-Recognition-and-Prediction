@@ -1,5 +1,5 @@
 # 实验一：Python快速入门
-参考：[Python基础教程(crossin全60课)](https://github.com/dai0992/Pattern-Recognition-and-Prediction/blob/master/Python基础教程(crossin全60课).pdf)
+参考：[Python基础教程(crossin全60课)](https://github.com/dai0992/Pattern-Recognition-and-Prediction/blob/master/Lab1_PythonLearning/Python基础教程(crossin全60课).pdf)
 
 ## 1. 安装并运行Python
 > 1）下载[Python](https://www.python.org/downloads/)，按步骤安装，在"Advanced Options"时，勾选"Add Python to environment variables"。<br>
