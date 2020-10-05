@@ -1,6 +1,6 @@
 # 模式识别与预测-实验（以Python实现）
 
-## 实验一 [Python快速入门](https://github.com/dai0992/Pattern-Recognition-and-Prediction/blob/master/Lab1_PythonLearning.md)
+## 实验一 [Python快速入门](https://github.com/dai0992/Pattern-Recognition-and-Prediction/blob/master/Lab1_PythonLearning/PythonLearning.md)
 
 ## 实验二 [序列表征/数值化1(以剪接位点识别为例)](https://github.com/dai0992/Pattern-Recognition-and-Prediction/blob/master/Lab2_SplicingSequencesCoding/sequence_coding.md)
 
