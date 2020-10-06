@@ -6,7 +6,7 @@
 * 研究表明，人类的许多疾病就是由RNA剪接异常引起。例如，地中海贫血症患者的珠蛋白基因中，约有1/4的核苷酸突变发生在内含子的5’端或3’端边界保守序列上。
 * RNA剪接发生的位置被称作剪接位点，其中，内含子的5’端(外显子-内含子的边界点)为`供体位点`(常为GT)，内含子的3’端(内含子-外显子的边界点)为`受体位点`(AG)。剪接位点是RNA剪接的识别信号，也是RNA正确剪接的关键因素。
 
-![Sequence of splice sites](https://github.com/dai0992/Pattern-Recognition-and-Prediction/blob/master/images/splice_signal1.jpg?raw=true)
+![Sequence of splice sites](https://github.com/dai0992/Pattern-Recognition-and-Prediction/blob/master/Lab2_SplicingSequencesCoding/splice_signal1.jpg?raw=true)
 
 ## 2. 剪接位点预测的研究现状
 * DNA序列中有更多的GT、AG为非剪接位点。因此，我们面临着一个极度不平衡的分类任务，即从含有大量非剪接位点的GT、AG中识别出极少量的真实剪接位点。
