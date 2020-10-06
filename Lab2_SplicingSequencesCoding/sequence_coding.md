@@ -1,8 +1,15 @@
 # 实验二：序列表征/数值化1(以剪接位点识别为例)
 
 
-## 1. 安装并运行Python
-> 1）下载[Python](https://www.python.org/downloads/)，按步骤安装，在"Advanced Options"时，勾选"Add Python to environment variables"。<br>
+## 1. 真核基因中的RNA剪接
+* RNA剪接是指将前体mRNA中的内含子剪除，将留下的外显子拼接起来形成成熟mRNA的过程，它对真核基因表达起着关键作用。
+* 一旦剪接过程发生错误，会使成熟mRNA丢失一段外显子或保留一段内含子，从而影响基因的正常表达。
+* 研究表明，人类的许多疾病就是由RNA剪接异常引起。例如，地中海贫血症患者的珠蛋白基因中，约有1/4的核苷酸突变发生在内含子的5’端或3’端边界保守序列上。
+* RNA剪接发生的位置被称作剪接位点，其中，内含子的5’端(外显子-内含子的边界点)为`供体位点`，内含子的3’端(内含子-外显子的边界点)为`受体位点`。<br>
+剪接位点是RNA剪接的识别信号，也是RNA正确剪接的关键因素。
+
+![Sequence of splice sites](https://github.com/dai0992/Pattern-Recognition-and-Prediction/blob/master/images/splice_signal1.jpg?raw=true)
+
 
 ## 作业
 尽可能练习每一条命令。犯错越多，进步越快！
