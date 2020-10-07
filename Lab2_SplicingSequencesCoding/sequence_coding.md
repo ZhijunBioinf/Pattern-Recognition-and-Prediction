@@ -25,7 +25,7 @@
 * k-spaced组分特征兼顾序列组分信息和碱基之间的不同尺度关联效应，并且特征维数与序列长度无关。
 
 ## 5. 序列表征
-```shell
+```sh
 # 首先要安装Python的包管理工具pip
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py   # 下载安装脚本
 python3 get-pip.py    # 运行安装脚本
@@ -68,7 +68,7 @@ def file2matrix(filename, KMAX, bpTable):
 
 if __name__ == '__main__':
 	filename = 'EI_true1.seq'
-	KMAX = 1
+	KMAX = 4
 	bpTable = {}
 	for m in ('A','T','C','G'):
 		for n in ('A','T','C','G'):
