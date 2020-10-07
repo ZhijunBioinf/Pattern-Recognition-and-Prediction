@@ -75,8 +75,9 @@ if __name__ == '__main__':
 			bpTable[m+n] = 0
 
 	kSpaceMat, SeqNum = file2matrix(filename, KMAX, bpTable)
-	np.savetxt('EI_true1_kSpace.txt', kSpaceMat, fmt='%g', delimiter=',')
-	print('The number of sequences is %d. Matrix of features is saved in %s' % SeqNum)
+	outputFileName = 'EI_true1_kSpace.txt'
+	np.savetxt(outputFileName, kSpaceMat, fmt='%g', delimiter=',')
+	print('The number of sequences is %d. Matrix of features is saved in %s' % (SeqNum, outputFileName))
 	
 ```
 
