@@ -18,7 +18,14 @@
 * 从HS<sup>3</sup>D数据集的所有虚假剪接位点序列中，随机抽取2796/2880条虚假供体/受体位点序列，与所有真实剪接位点序列构建正负样本均衡的数据集。
 * 供体(EI)、受体(IE)位点序列：[EI_true.seq, EI_false.seq; IE_true.seq, IE_false.seq](https://github.com/dai0992/Pattern-Recognition-and-Prediction/blob/master/Lab2_SplicingSequencesCoding/EI-true-false_IE-true-false_seq.zip)
 
-## 4. 
+## 4. 基于序列组分的特征：k-spaced氨基酸/碱基对组分
+* 被k个任意碱基隔开的碱基对(base pairs)在核酸序列中的出现频率。
+* 例如：k = 2时，需计算被2个碱基隔开的所有16种碱基对在序列中的出现频率。
+* 通常需要设定一个k的上限，比如KMAX = 4，分别计算k = 0, 1, ..., kMAX时的组分特征。对于任意一条核酸序列，其k-spaced碱基对组分特征维数为：16x(KMAX+1)
+* k-spaced组分特征兼顾序列组分信息和碱基之间的不同尺度关联效应，并且特征维数与序列长度无关。
+
+## 5. 序列表征
+
 
 ## 作业
 自己独立编写序列表征程序。不怕报错，犯错越多，进步越快！
