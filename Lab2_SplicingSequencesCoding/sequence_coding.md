@@ -33,7 +33,11 @@ python3 get-pip.py    # 运行安装脚本
 pip3 install --user numpy scipy matplotlib -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
-参考程序：读取'EI_true1.seq', 计算kSpace特征。将以下代码保存为一个.py文件，运行结果写入到'EI_true1_kSpace.txt'
+参考程序：读取'EI_true1.seq', 计算kSpace特征。将以下代码保存为一个.py文件(如kSpaceCoding.py)，运行结果写入到'EI_true1_kSpace.txt'
+```sh
+# 运行程序（可自行在主函数中更改KMAX的值，观察结果。每次在文件中更改参数很麻烦，可自己上网搜索如何通过命令行传递参数）
+python3 kSpaceCoding.py
+```
 ```python3
 import numpy as np # 导入numpy包，并重命名为np
 
