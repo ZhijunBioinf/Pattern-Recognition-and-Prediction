@@ -18,21 +18,19 @@
 * 从HS<sup>3</sup>D数据集的所有虚假剪接位点序列中，随机抽取2796/2880条虚假供体/受体位点序列，与所有真实剪接位点序列构建正负样本均衡的数据集。
 * 供体(EI)、受体(IE)位点序列：[EI_true.seq, EI_false.seq; IE_true.seq, IE_false.seq](https://github.com/dai0992/Pattern-Recognition-and-Prediction/blob/master/Lab2_SplicingSequencesCoding/EI-true-false_IE-true-false_seq.zip)
 
-## 4. 基于序列组分的特征：k-spaced氨基酸/碱基对组分
+## 4. 基于序列组分的特征：k-spaced氨基酸/碱基对组分[9]
 * 被k个任意碱基隔开的碱基对(base pairs)在核酸序列中的出现频率。
 * 例如：k = 2时，需计算被2个碱基隔开的所有16种碱基对在序列中的出现频率。
 * 通常需要设定一个k的上限，比如KMAX = 4，分别计算k = 0, 1, ..., kMAX时的组分特征。对于任意一条核酸序列，其k-spaced碱基对组分特征维数为：16x(KMAX+1)
 * k-spaced组分特征兼顾序列组分信息和碱基之间的不同尺度关联效应，并且特征维数与序列长度无关。
 
 ## 5. 序列表征
-```bash
-# 首先要安排Python的包管理工具pip
+```shell
+# 首先要安装Python的包管理工具pip
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py   # 下载安装脚本
 python3 get-pip.py    # 运行安装脚本
 # 安装3个常用的数值计算、作图包(numpy, scipy, matplotlib)
 pip3 install --user numpy scipy matplotlib -i https://pypi.tuna.tsinghua.edu.cn/simple
-# 进入python
-python3
 ```
 
 参考程序：读取'EI_true1.seq', 计算kSpace特征。将以下代码保存为一个.py文件，运行结果写入到'EI_true1_kSpace.txt'
@@ -94,7 +92,7 @@ if __name__ == '__main__':
 [6] Degroeve S, Saeys Y, Baets B D, et al. SpliceMachine: predicting splice sites from high-dimensional local context representations [J]. Bioinformatics. 2005,21:1332-1338. <br>
 [7] Meher P K, Sahu T K, Rao A R. Prediction of donor splice sites using random forest with a new sequence encoding approach [J]. Biodata Mining. 2016,9:4. <br>
 [8] Pollastro P, Rampone S. HS3D, a dataset of Homo sapiens splice regions and its extraction procedure from a major public database [J]. International Journal of Modern Physics C, 2002, 13(8):1105–1117.
-
+[9] Chen Y Z, Tang Y R, Sheng Z Y, et al. Prediction of mucin-type O-glycosylation sites in mammalian proteins using the composition of k-spaced amino acid pairs [J]. BMC Bioinformatics, 2008, 9(1):101-112.
 
 ## 致谢
 剪接位点研究背景，部分摘自湖南农业大学博士学位论文《基于卡方决策表的分子序列信号位点预测》(2019)。<br>
