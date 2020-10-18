@@ -1,6 +1,12 @@
 # 实验一：Python快速入门
 参考：[Python基础教程(crossin全60课)](https://github.com/dai0992/Pattern-Recognition-and-Prediction/blob/master/Lab1_PythonLearning/Python基础教程(crossin全60课).pdf)
 
+## 实验目的
+* 1）认识Python
+* 2）掌握Python的基本数据结构及常用操作
+* 3）理解Python的程序控制：条件语句、循环语句
+* 4）了解Python的函数定义与调用
+
 ## 1. 安装并运行Python
 > 1）下载[Python](https://www.python.org/downloads/)，按步骤安装，在"Advanced Options"时，勾选"Add Python to environment variables"。<br>
 > 2）验证是否安装成功：打开"命令提示符"（桌面按快捷键"Win+r"，输入cmd，回车），在命令行里输入python，如果看到python的版本信息，说明安装成功。<br>
