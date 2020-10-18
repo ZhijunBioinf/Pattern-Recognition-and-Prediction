@@ -22,18 +22,18 @@ python3 kSpaceCoding_general.py EI_true.seq EI_true_kSpace.txt 4
 import numpy as np # 导入numpy包，并重命名为np
 import sys # 导入sys包，用于从命令行传递参数给python程序
 
-def file2matrix(filename, bpTable, KMAX=2): # 为KMAX提供默认参数（与实验二不同）
+# 为KMAX提供默认参数（与实验二不同）
+def file2matrix(filename, bpTable, KMAX=2):
+	fr = open(filename) # 打开文件
 	fr = open(filename) # 打开文件
 	
-	fr = open(filename) # 打开文件
 	arrayOLines = fr.readlines() # 读取所有内容
-	
 	fr.close() # 及时关闭文件
 
 	numberOfLines = len(arrayOLines) # 得到文件行数
 	returnMat = np.zeros((numberOfLines, 16*(KMAX+1))) # 为返回的结果矩阵开辟内存
 	lineNum = 0
-
+	
 	for line in arrayOLines:
 		line = line.strip() # 删除空白符，包括行尾回车符
 		listFromLine = line.split(': ') # 以': '为分隔符进行切片
@@ -72,17 +72,3 @@ if __name__ == '__main__':
 ## 作业
 自己独立编写序列表征程序。不怕报错，犯错越多，进步越快！
 
-## 参考文献
-[1] Staden R. Computer methods to locate signals in nucleic acid sequences [J]. Nucleic Acids Research. 1984, 12(2):505. <br>
-[2] Zhang M Q, Marr T G. A weight array method for splicing signal analysis [J]. Computer applications in the biosciences: CABIOS, 1993, 9(5):499-509. <br>
-[3] Pertea M, Lin X Y, Salzberg S L. GeneSplicer: a new computational method for splice site prediction [J]. Nucleic Acids Research. 2001, 29:1185-1190. <br>
-[4] Reese M G, Eeckman F H, Kulp D, et al. Improved splice site detection in Genie [J]. Journal of Computational Biology, 1997, 4(3):311-323. <br>
-[5] Rogozin I B, Milanesi L. Analysis of donor splice signals in different organisms [J]. Journal of Molecular Evolution, 1997, 45(1):50-59. <br>
-[6] Degroeve S, Saeys Y, Baets B D, et al. SpliceMachine: predicting splice sites from high-dimensional local context representations [J]. Bioinformatics. 2005,21:1332-1338. <br>
-[7] Meher P K, Sahu T K, Rao A R. Prediction of donor splice sites using random forest with a new sequence encoding approach [J]. Biodata Mining. 2016,9:4. <br>
-[8] Pollastro P, Rampone S. HS3D, a dataset of Homo sapiens splice regions and its extraction procedure from a major public database [J]. International Journal of Modern Physics C, 2002, 13(8):1105–1117. <br>
-[9] Chen Y Z, Tang Y R, Sheng Z Y, et al. Prediction of mucin-type O-glycosylation sites in mammalian proteins using the composition of k-spaced amino acid pairs [J]. BMC Bioinformatics, 2008, 9(1):101-112.
-
-## 致谢
-剪接位点研究背景，部分摘自湖南农业大学博士学位论文《基于卡方决策表的分子序列信号位点预测》(2019)。<br>
-感谢曾莹博士提供其学位论文！
