@@ -6,7 +6,7 @@
 * 3）使用朴素贝叶斯（Naive Bayes, NB）完成剪接位点识别
 
 ## 1. 训练集与测试集构建
-* 1）编写更好用的k-spaced碱基对组分特征表征程序（用于HS3D数据的供体真实/虚假位点序列表征）
+* 1）编写更好用的k-spaced碱基对组分特征表征程序（用于HS3D数据的供体真实/虚假位点序列表征）<br>
 参考程序：kSpaceCoding_general.py, 该程序避免了每次在程序中修改文件名和其他参数的麻烦。
 ```python3
 import numpy as np # 导入numpy包，并重命名为np
@@ -67,7 +67,7 @@ python3 kSpaceCoding_general.py EI_true.seq EI_true_kSpace.txt 4
 python3 kSpaceCoding_general.py EI_false.seq EI_false_kSpace.txt 4
 ```
 
-* 2）以序列表征文件构建训练集、测试集
+* 2）以序列表征文件构建训练集、测试集 <br>
 参考程序：getTrainTest.py
 ```python3
 import numpy as np
@@ -97,8 +97,8 @@ print('Generate training set(%d%%) and test set(%d%%): Done!' % ((1-testSize)*10
 ```
 
 ```bash
-# 获得训练集与测试集：在命令行指定true数据、false数据、train输出文件、test输出文件
-python3 kSpaceCoding_general.py EI_false.seq EI_false_kSpace.txt 4
+# 构建训练集与测试集：在命令行指定true位点数据、false位点数据、train文件、test文件
+python3 getTrainTest.py EI_true_kSpace.txt EI_false_kSpace.txt EI_train.txt EI_test.txt
 ```
 
 ## 2. 以KNN进行剪接位点识别
@@ -109,5 +109,9 @@ pip3 install --user sklearn -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 
 ## 作业
-自己独立编写序列表征程序。不怕报错，犯错越多，进步越快！
+1. 尽量看懂`参考程序`的每一行代码。
+2. 参考程序中，供体位点序列的第71、72位保守二核苷酸GT是在程序中指定的，试着改写程序，实现从命令行传递`位置信息`给程序。
+3. 参考程序中，测试集的比例是在程序中指定的，试着改写程序，实现从命令行传递`划分比例`给程序。
+4. 熟练使用sklearn包中的不同分类器。
+不怕报错，犯错越多，进步越快！~_~
 
