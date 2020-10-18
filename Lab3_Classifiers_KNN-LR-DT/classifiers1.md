@@ -27,7 +27,7 @@ import sys # 导入sys包，用于从命令行传递参数给python程序
 def file2matrix(filename, bpTable, KMAX=2): # 为KMAX提供默认参数（与实验二不同）
 	fr = open(filename) # 打开文件
 	arrayOLines = fr.readlines() # 读取所有内容
-	del(arrayOLines[:4]) # 删除头4行
+	del(arrayOLines[:4]) # 删除头4行（避免了运行程序之前，另外使用sed删除头4行）
 	fr.close() # 及时关闭文件
 	
 	numberOfLines = len(arrayOLines) # 得到文件行数
