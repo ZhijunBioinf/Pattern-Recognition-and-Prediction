@@ -6,23 +6,11 @@
 * 3）使用朴素贝叶斯（Naive Bayes, NB）完成剪接位点识别
 
 ## 1. 训练集与测试集构建
-* 1）编写更好用的k-spaced碱基对组分特征表征程序（只可用于HS3D数据的供体位点序列表征）
-```bash
-# 安装机器学习包sklearn
-pip3 install --user sklearn -i https://pypi.tuna.tsinghua.edu.cn/simple
-```
-
+* 1）编写更好用的k-spaced碱基对组分特征表征程序（用于HS3D数据的供体真实/虚假位点序列表征）
 参考程序：kSpaceCoding_general.py, 该程序避免了每次在程序中修改文件名和其他参数的麻烦。
-```bash
-# 建立供体位点序列文件的软链接
-ln -s ../lab_02/EI_true.seq ../lab_02/EI_false.seq ./
-# 获得供体真实位点序列表征结果：在命令行指定序列文件名为'EI_true.seq'，输出结果文件名为'EI_true_kSpace.txt'，KMAX值为4
-python3 kSpaceCoding_general.py EI_true.seq EI_true_kSpace.txt 4
-```
-
 ```python3
 import numpy as np # 导入numpy包，并重命名为np
-import sys # 导入sys包，用于从命令行传递参数给python程序
+import sys # 导入sys包，其中的argv函数用于从命令行传递参数给python程序
 
 def file2matrix(filename, bpTable, KMAX=2): # 为KMAX提供默认参数(updated)
 	fr = open(filename) # 打开文件
@@ -69,6 +57,56 @@ if __name__ == '__main__':
 	print('The number of sequences is %d. Matrix of features is saved in %s' % (SeqNum, outputFileName))
 	
 ```
+
+```bash
+# 建立供体位点序列文件的软链接
+ln -s ../lab_02/EI_true.seq ../lab_02/EI_false.seq ./
+# 获得供体真实位点序列表征结果：在命令行指定序列文件名为'EI_true.seq'，输出结果文件名为'EI_true_kSpace.txt'，KMAX值为4
+python3 kSpaceCoding_general.py EI_true.seq EI_true_kSpace.txt 4
+# 获得供体虚假位点序列表征结果：在命令行指定序列文件名为'EI_false.seq'，输出结果文件名为'EI_false_kSpace.txt'，KMAX值为4
+python3 kSpaceCoding_general.py EI_false.seq EI_false_kSpace.txt 4
+```
+
+* 2）以序列表征文件构建训练集、测试集
+参考程序：getTrainTest.py
+```python3
+import numpy as np
+import sys
+from random import sample # 导入sample函数，用于从虚假位点数据中随机抽取样本
+from sklearn.model_selection import train_test_split # 用于产生训练集、测试集
+
+trueSiteFileName = sys.argv[1]
+falseSiteFileName = sys.argv[2]
+trueSitesData = np.loadtxt(trueSiteFileName, delimiter = ',') # 载入true位点数据
+numOfTrue = len(trueSitesData)
+falseSitesData = np.loadtxt(falseSiteFileName, delimiter = ',') # 载入false位点数据
+randVec = sample(range(numOfTrue), len(trueSitesData)) # 随机产生true位点样本个数的随机向量
+falseSitesData = falseSitesData[randVec,] # 以随机向量从false位点数据中抽取样本
+
+Data = np.vstack((trueSitesData, falseSitesData)) # 按行将true位点与false位点数据组合
+Y = np.vstack((np.ones((numOfTrue,1)),np.zeros((numOfTrue,1)))) # 产生Y列向量
+testSize = 0.3 # 测试集30%，训练集70%
+X_train, X_test, y_train, y_test = train_test_split(Data, Y, test_size = testSize, random_state = 0)
+
+trainingSetFileName = sys.argv[3]
+testSetFileName = sys.argv[4]
+np.savetxt(trainingSetFileName, np.hstack((y_train, X_train)), fmt='%g', delimiter=',') # 将Y与X以列组合后，保存到文件
+np.savetxt(testSetFileName, np.hstack((y_test, X_test)), fmt='%g', delimiter=',')
+print('Generate training set(%d%%) and test set(%d%%): Done!' % ((1-testSize)*100, testSize*100))
+
+```
+
+```bash
+# 获得训练集与测试集：在命令行指定true数据、false数据、train输出文件、test输出文件
+python3 kSpaceCoding_general.py EI_false.seq EI_false_kSpace.txt 4
+```
+
+## 2. 以KNN进行剪接位点识别
+```bash
+# 安装机器学习包sklearn
+pip3 install --user sklearn -i https://pypi.tuna.tsinghua.edu.cn/simple
+```
+
 
 ## 作业
 自己独立编写序列表征程序。不怕报错，犯错越多，进步越快！
