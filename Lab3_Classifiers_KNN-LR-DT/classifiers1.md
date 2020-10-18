@@ -1,9 +1,9 @@
 # 实验三：分类器之KNN、Decision Tree、Naive Bayes
 
 ## 实验目的
-* 1）使用K近邻（K-nearest neighbor, KNN）完成剪接位点识别
+* 1）使用K近邻（K-Nearest Neighbor, KNN）完成剪接位点识别
 * 2）使用决策树（Decision Tree, DT）完成剪接位点识别
-* 3）使用朴素贝叶斯（Naive Bayes）完成剪接位点识别
+* 3）使用朴素贝叶斯（Naive Bayes, NB）完成剪接位点识别
 
 ## 1. 训练集与测试集构建
 * 1）编写通用的k-spaced碱基对组分特征表征程序
@@ -14,7 +14,7 @@ pip3 install --user sklearn -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 参考程序：kSpaceCoding_general.py, 通用程序避免了每次在程序中修改文件名和其他参数的麻烦。
 ```bash
-# 获得供体真实位点序列表征结果：在命令行指定序列文件名'EI_true.seq'、输出结果文件名'EI_true_kSpace.txt'与KMAX值
+# 获得供体真实位点序列表征结果：在命令行指定序列文件名为'EI_true.seq'，输出结果文件名为'EI_true_kSpace.txt'，KMAX值为4
 python3 kSpaceCoding_general.py EI_true.seq EI_true_kSpace.txt 4
 ```
 
@@ -24,7 +24,10 @@ import sys # 导入sys包，用于从命令行传递参数给python程序
 
 def file2matrix(filename, bpTable, KMAX=2): # 为KMAX提供默认参数（与实验二不同）
 	fr = open(filename) # 打开文件
+	
+	fr = open(filename) # 打开文件
 	arrayOLines = fr.readlines() # 读取所有内容
+	
 	fr.close() # 及时关闭文件
 
 	numberOfLines = len(arrayOLines) # 得到文件行数
