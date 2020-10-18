@@ -1,8 +1,9 @@
 # 实验三：分类器之KNN、Decision Tree、Naive Bayes
 
 ## 实验目的
-* 1）了解剪接位点识别的研究背景
-* 2）编程实现DNA序列的k-spaced碱基对组分特征表征/数值化
+* 1) 使用K近邻（K-nearest neighbor, KNN）分类器完成剪接位点识别
+* 2) 使用决策树（Decision Tree, DT）分类器完成剪接位点识别
+* 3) 使用（Decision Tree, DT）分类器完成剪接位点识别
 
 ## 1. 真核基因中的RNA剪接
 * RNA剪接是指将前体mRNA中的内含子剪除，将留下的外显子拼接起来形成成熟mRNA的过程，它对真核基因表达起着关键作用。
