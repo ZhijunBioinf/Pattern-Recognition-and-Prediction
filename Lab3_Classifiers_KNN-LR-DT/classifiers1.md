@@ -26,7 +26,6 @@ import sys # 导入sys包，用于从命令行传递参数给python程序
 def file2matrix(filename, bpTable, KMAX=2):
 	fr = open(filename) # 打开文件
 	fr = open(filename) # 打开文件
-	
 	arrayOLines = fr.readlines() # 读取所有内容
 	fr.close() # 及时关闭文件
 
