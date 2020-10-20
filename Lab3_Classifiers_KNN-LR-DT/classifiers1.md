@@ -1,10 +1,10 @@
-# 实验三：分类器之KNN、Decision Tree、Naive Bayes
+# 实验三：分类器之KNN, Logistic Regression, Decision Tree
 
 ## 实验目的
 * 1）提取供体真实位点与虚假位点序列的k-space组分特征；构建训练集与测试集
 * 2）使用K近邻（K-Nearest Neighbor, KNN）完成剪接位点识别
-* 3）使用决策树（Decision Tree, DT）完成剪接位点识别
-* 4）使用朴素贝叶斯（Naive Bayes, NB）完成剪接位点识别
+* 3）使用逻辑斯蒂回归（Logistic Regression, LR）完成剪接位点识别
+* 4）使用决策树（Decision Tree, DT）完成剪接位点识别
 
 ## 1. 训练集与测试集构建
 * 1）编写更好用的k-spaced碱基对组分特征表征程序（用于HS3D数据的供体真实/虚假位点序列表征）<br>
