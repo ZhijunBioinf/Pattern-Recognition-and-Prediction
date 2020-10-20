@@ -108,11 +108,98 @@ python3 getTrainTest.py EI_true_kSpace.txt EI_false_kSpace.txt EI_train.txt EI_t
 pip3 install --user sklearn -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
+参考程序：myKNN.py
+```python3
+import numpy as np
+from sklearn import neighbors # 导入KNN包
+import sys
+
+train = np.loadtxt(sys.argv[1], delimiter=',') # 载入训练集，在命令行指定文件名
+test = np.loadtxt(sys.argv[2], delimiter=',') # 载入测试集
+
+n_neighbors = int(sys.argv[3]) # 在命令行指定邻居数
+weights = 'uniform' # 每个邻居的权重相等
+clf = neighbors.KNeighborsClassifier(n_neighbors, weights=weights) # 创建一个KNN的实例
+trX = train[:,1:]
+trY = train[:,0]
+clf.fit(trX, trY) # 训练模型
+
+teX = test[:,1:]
+teY = test[:,0]
+predY = clf.predict(teX) # 预测测试集
+Acc = sum(predY==teY)/len(teY) # 计算预测正确的样本数
+print('Prediction Accuracy of KNN: %g%%' % (Acc*100))
+```
+
+```bash
+# KNN分类器：在命令行指定训练集、测试集、近邻数K
+python3 myKNN.py EI_train.txt EI_test.txt 10
+```
+
+## 3. 以Logistic回归进行剪接位点识别
+参考程序：myLR.py
+```python3
+import numpy as np
+from sklearn import neighbors # 导入KNN包
+import sys
+
+train = np.loadtxt(sys.argv[1], delimiter=',') # 载入训练集，在命令行指定文件名
+test = np.loadtxt(sys.argv[2], delimiter=',') # 载入测试集
+
+n_neighbors = int(sys.argv[3]) # 在命令行指定邻居数
+weights = 'uniform' # 每个邻居的权重相等
+clf = neighbors.KNeighborsClassifier(n_neighbors, weights=weights) # 创建一个KNN的实例
+trX = train[:,1:]
+trY = train[:,0]
+clf.fit(trX, trY) # 训练模型
+
+teX = test[:,1:]
+teY = test[:,0]
+predY = clf.predict(teX) # 预测测试集
+Acc = sum(predY==teY)/len(teY) # 计算预测正确的样本数
+print('Prediction Accuracy of KNN: %g%%' % (Acc*100))
+```
+
+```bash
+# LR分类器：在命令行指定训练集、测试集、近邻数K
+python3 myLR.py EI_train.txt EI_test.txt
+```
+
+## 4. 以Decision Tree进行剪接位点识别
+参考程序：myDT.py
+```python3
+import numpy as np
+from sklearn import neighbors # 导入KNN包
+import sys
+
+train = np.loadtxt(sys.argv[1], delimiter=',') # 载入训练集，在命令行指定文件名
+test = np.loadtxt(sys.argv[2], delimiter=',') # 载入测试集
+
+n_neighbors = int(sys.argv[3]) # 在命令行指定邻居数
+weights = 'uniform' # 每个邻居的权重相等
+clf = neighbors.KNeighborsClassifier(n_neighbors, weights=weights) # 创建一个KNN的实例
+trX = train[:,1:]
+trY = train[:,0]
+clf.fit(trX, trY) # 训练模型
+
+teX = test[:,1:]
+teY = test[:,0]
+predY = clf.predict(teX) # 预测测试集
+Acc = sum(predY==teY)/len(teY) # 计算预测正确的样本数
+print('Prediction Accuracy of KNN: %g%%' % (Acc*100))
+```
+
+```bash
+# DT分类器：在命令行指定训练集、测试集、近邻数K
+python3 myDT.py EI_train.txt EI_test.txt
+```
+
+
 
 ## 作业
 1. 尽量看懂`参考程序`的每一行代码。
 2. 参考程序kSpaceCoding_general.py中，供体位点序列的第71、72位保守二核苷酸GT是在程序中指定的，试着改写程序，实现从命令行传递`位置信息`给程序。
 3. 参考程序getTrainTest.py中，测试集的比例是在程序中指定的，试着改写程序，实现从命令行传递`划分比例`给程序。
-4. 熟练使用sklearn包中的不同分类器。
+4. 熟练使用sklearn包中的不同分类器。 <br>
 不怕报错，犯错越多，进步越快！~_~
 
