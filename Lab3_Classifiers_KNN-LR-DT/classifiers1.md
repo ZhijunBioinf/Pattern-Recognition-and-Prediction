@@ -83,6 +83,7 @@ from sklearn.model_selection import train_test_split # 用于产生训练集、�
 trueSiteFileName = sys.argv[1]
 falseSiteFileName = sys.argv[2]
 trueSitesData = np.loadtxt(trueSiteFileName, delimiter = ',') # 载入true位点数据
+numOfTrue = len(trueSitesData)
 falseSitesData = np.loadtxt(falseSiteFileName, delimiter = ',') # 载入false位点数据
 numOfFalse = len(falseSitesData)
 randVec = sample(range(numOfFalse), len(trueSitesData)) # 随机产生true位点样本个数的随机向量
