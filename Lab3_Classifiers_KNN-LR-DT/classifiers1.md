@@ -186,8 +186,8 @@ print('Prediction Accuracy of KNN: %g%%' % (Acc*100))
 
 # Export the tree in Graphviz format
 graphFileName = sys.argv[3] # 从命令行指定图文件名称
-dot_data = tree.export_graphviz(clf, out_file=None)
-graph = graphviz.Source(dot_data)
+dotData = tree.export_graphviz(clf, out_file=None)
+graph = graphviz.Source(dotData)
 graph.render(graphFileName)
 print('The tree in Graphviz format is saved in "%s.pdf".' % graphFileName)
 ```
@@ -203,7 +203,7 @@ python3 myDT.py EI_train.txt EI_test.txt EISplicing_DecisionTreeGraph
 ## 作业
 1. 尽量看懂`参考程序`的每一行代码。
 2. 参考程序kSpaceCoding_general.py中，供体位点序列的第71、72位保守二核苷酸GT是在程序中指定的，试着改写程序，实现从命令行传递`位置信息`给程序。
-3. 参考程序getTrainTest.py中，测试集的比例是在程序中指定的，试着改写程序，实现从命令行传递`划分比例`给程序。
+3. 参考程序getTrainTest.py中，测试集的比例testSize是在程序中指定的，试着改写程序，实现从命令行传递`划分比例`给程序。
 4. 熟练使用sklearn包中的不同分类器。 <br>
 不怕报错，犯错越多，进步越快！
 
