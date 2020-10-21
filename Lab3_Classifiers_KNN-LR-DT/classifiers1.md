@@ -56,7 +56,6 @@ if __name__ == '__main__':
 	kSpaceMat, SeqNum = file2matrix(filename, bpTable, KMAX)
 	np.savetxt(outputFileName, kSpaceMat, fmt='%g', delimiter=',')
 	print('The number of sequences is %d. Matrix of features is saved in %s' % (SeqNum, outputFileName))
-	
 ```
 
 ```bash
@@ -69,6 +68,11 @@ python3 kSpaceCoding_general.py EI_false.seq EI_false_kSpace.txt 4
 ```
 
 * 2）以序列表征文件构建训练集、测试集 <br>
+```bash
+# 首先安装机器学习包sklearn
+pip3 install --user sklearn -i https://pypi.tuna.tsinghua.edu.cn/simple
+```
+
 参考程序：getTrainTest.py
 ```python3
 import numpy as np
@@ -94,7 +98,6 @@ testSetFileName = sys.argv[4]
 np.savetxt(trainingSetFileName, np.hstack((y_train, X_train)), fmt='%g', delimiter=',') # 将Y与X以列组合后，保存到文件
 np.savetxt(testSetFileName, np.hstack((y_test, X_test)), fmt='%g', delimiter=',')
 print('Generate training set(%d%%) and test set(%d%%): Done!' % ((1-testSize)*100, testSize*100))
-
 ```
 
 ```bash
@@ -103,11 +106,6 @@ python3 getTrainTest.py EI_true_kSpace.txt EI_false_kSpace.txt EI_train.txt EI_t
 ```
 
 ## 2. 以KNN进行剪接位点识别
-```bash
-# 安装机器学习包sklearn
-pip3 install --user sklearn -i https://pypi.tuna.tsinghua.edu.cn/simple
-```
-
 参考程序：myKNN.py
 ```python3
 import numpy as np
@@ -168,15 +166,14 @@ python3 myLR.py EI_train.txt EI_test.txt 100
 参考程序：myDT.py
 ```python3
 import numpy as np
-from sklearn import neighbors # 导入KNN包
+from sklearn import tree # 导入Decision Trees包
 import sys
+import graphviz # 导入Graphviz包
 
-train = np.loadtxt(sys.argv[1], delimiter=',') # 载入训练集，在命令行指定文件名
+train = np.loadtxt(sys.argv[1], delimiter=',') # 载入训练集
 test = np.loadtxt(sys.argv[2], delimiter=',') # 载入测试集
 
-n_neighbors = int(sys.argv[3]) # 在命令行指定邻居数
-weights = 'uniform' # 每个邻居的权重相等
-clf = neighbors.KNeighborsClassifier(n_neighbors, weights=weights) # 创建一个KNN的实例
+clf = tree.DecisionTreeClassifier() # 创建一个DT的实例
 trX = train[:,1:]
 trY = train[:,0]
 clf.fit(trX, trY) # 训练模型
@@ -186,13 +183,21 @@ teY = test[:,0]
 predY = clf.predict(teX) # 预测测试集
 Acc = sum(predY==teY)/len(teY) # 计算预测正确的样本数
 print('Prediction Accuracy of KNN: %g%%' % (Acc*100))
+
+# Export the tree in Graphviz format
+graphFileName = sys.argv[3] # 从命令行指定图文件名称
+dot_data = tree.export_graphviz(clf, out_file=None)
+graph = graphviz.Source(dot_data)
+graph.render(graphFileName)
+print('The tree in Graphviz format is saved in "%s.pdf".' % graphFileName)
 ```
 
 ```bash
+# 安装Graphviz绘图包
+pip3 install --user graphviz -i https://pypi.tuna.tsinghua.edu.cn/simple
 # DT分类器：在命令行指定训练集、测试集、近邻数K
-python3 myDT.py EI_train.txt EI_test.txt
+python3 myDT.py EI_train.txt EI_test.txt EISplicing_DecisionTreeGraph
 ```
-
 
 
 ## 作业
@@ -202,3 +207,7 @@ python3 myDT.py EI_train.txt EI_test.txt
 4. 熟练使用sklearn包中的不同分类器。 <br>
 不怕报错，犯错越多，进步越快！
 
+## 参考
+* KNN手册：[sklearn.neighbors.KNeighborsClassifier](https://scikit-learn.org/stable/modules/neighbors.html#nearest-neighbors-classification)
+* LR手册：[sklearn.linear_model.LogisticRegression](https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression)
+* DT手册：[sklearn.tree.DecisionTreeClassifier](https://scikit-learn.org/stable/modules/tree.html#classification)
