@@ -158,8 +158,8 @@ print('Prediction Accuracy of LR: %g%%' % (Acc*100))
 ```
 
 ```bash
-# LR分类器：在命令行指定训练集、测试集、近邻数K
-python3 myLR.py EI_train.txt EI_test.txt 100
+# LR分类器：在命令行指定训练集、测试集、迭代次数
+python3 myLR.py EI_train.txt EI_test.txt 1000
 ```
 
 ## 4. 以Decision Tree进行剪接位点识别
@@ -195,7 +195,7 @@ print('The tree in Graphviz format is saved in "%s.pdf".' % graphFileName)
 ```bash
 # 安装Graphviz绘图包
 pip3 install --user graphviz -i https://pypi.tuna.tsinghua.edu.cn/simple
-# DT分类器：在命令行指定训练集、测试集、近邻数K
+# DT分类器：在命令行指定训练集、测试集、DT图文件名
 python3 myDT.py EI_train.txt EI_test.txt EISplicing_DecisionTreeGraph
 ```
 
