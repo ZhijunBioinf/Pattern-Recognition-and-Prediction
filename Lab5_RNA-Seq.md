@@ -2,7 +2,7 @@
 ## 一、实验目的  
 1. 了解生物的RNA种类，真核生物mRNA的特点及如何分离纯化
 2. 了解RNA、DNA比对的区别
-3. 掌握DESeq2分析差异表达基因(Differential Expressed Genes, DEGs)方法
+3. 掌握DESeq2分析差异表达基因(Differentially Expressed Genes, DEGs)方法
 
 ## 二、知识回顾  
 * 转录组测序(RNA-Seq)应用非常广泛，目前测序市场有超过一半做的是转录组。  
