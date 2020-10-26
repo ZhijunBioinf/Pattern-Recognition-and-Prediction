@@ -46,13 +46,13 @@ work_mapping.sh
 #$ -N hisat2
 #$ -j y
 #$ -cwd
-for i in $(seq 291 302);
+for i in $(seq 291 302)
 do 
 hisat2 -p 1 \
 -x /data/lab/genomic/lab05/ref/index/osa \
 -q /data/lab/genomic/lab05/data/SRR7760${i}.fastq | \
 samtools view -b - | \
-samtools sort -o SRR7760${i}.sort.bam - >SRR7760${i}.log;
+samtools sort -o SRR7760${i}.sort.bam - > SRR7760${i}.log
 done
 ```
 
@@ -117,4 +117,4 @@ write.csv(res.IRGA409[order(res.IRGA409$pvalue),],"Results_409.csv")
 ## 五、参考文献  
 1. [DESeq2](https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html) 
 2. [TPMcalculator](https://github.com/ncbi/TPMCalculator)  
-3. [HISAT2](https://ccb.jhu.edu/software/hisat2/manual.shtml)
+3. [HISAT2](http://daehwankimlab.github.io/hisat2/manual/)
