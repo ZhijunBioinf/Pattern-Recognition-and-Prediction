@@ -47,7 +47,7 @@ OUTPUT:
 查看结果  
 ```
 $ mummerplot --layout --small --postscript -p X23_B011 X23_B011.delta
-$ ps2pad X23_B011.ps
+$ ps2pdf X23_B011.ps
 ```
 ![](./X23_B011.pdf)
 
@@ -70,6 +70,7 @@ mauveAligner --output=my_seqs.xmfa genome.fasta
 ```
 查看结果  
 ```
+# Note: Mauve 需要运行时间较长
 $ Mauve my_seqs.xmfa
 ```
 ![](./mauve.jpg)
