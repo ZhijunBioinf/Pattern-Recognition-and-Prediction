@@ -8,6 +8,12 @@
 Whole-genome alignment (WGA) is the prediction of evolutionary relationships at the nucleotide level between two or more genomes. It combines aspects of both colinear sequence alignment and gene orthology prediction, and is typically more challenging to address than either of these tasks due to the size and complexity of whole genomes. Despite the difficulty of this problem, numerous methods have been developed for its solution because WGAs are valuable for genome-wide analyses, such as phylogenetic inference, genome annotation, and function prediction. In this chapter, we discuss the meaning and significance of WGA and present an overview of the methods that address it. We also examine the problem of evaluating whole-genome aligners and offer a set of methodological challenges that need to be tackled in order to make the most effective use of our rapidly growing databases of whole genomes.  
 
 ## 三、上机操作  
+### 进入genomelab环境
+```
+source /opt/miniconda3/bin/activate
+conda activate genomelab
+```
+
 ### 数据存放位置及工作目录准备  
 ```
 /data/lab/genomic/lab04/data
@@ -68,7 +74,7 @@ work_mauve.sh
 #$ -cwd
 mauveAligner --output=my_seqs.xmfa genome.fasta 
 ```
-查看结果  
+查看结果 
 ```
 # Note: Mauve 需要运行时间较长
 $ Mauve my_seqs.xmfa
