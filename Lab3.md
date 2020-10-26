@@ -51,6 +51,7 @@ work_prokka.sh
 #$ -N prokka
 #$ -j y
 #$ -cwd
+source /opt/miniconda3/bin/activate
 conda activate prokka
 prokka --outdir anno --prefix PROKKA ../data/REL606.fa
 
