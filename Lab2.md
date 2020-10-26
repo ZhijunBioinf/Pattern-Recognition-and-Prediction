@@ -1,118 +1,147 @@
-# 实验三 基因组注释  
+# 实验二 Mapping  
 ## 一、实验目的  
-1. 理解基因组注释，了解原核生物与真核生物基因结构的差异
-2. 掌握原核生物基因组注释方法(prokka)
-3. 了解真核生物基因组注释方法（maker）
-4. 了解常见基因组注释文件格式，如gff, bed
+1. 理解比对（mapping, alignment）的含义  
+2. 理解全局比对和局部比对的区别和应用  
+3. 掌握应用bwa, minimap2, samtools的使用  
+4. 理解SAM, BAM文件格式  
 
+## 二、知识回顾  
 
-## 二、知识回顾与要求  
-生物的遗传信息物质是DNA，DNA是基因的载体，基因是生物行使功能的单位，支持着生命的基本构造和性能，将基因组所有基因找出来是基因组注释的第一步。目前一般基因组项目一般流程是首先组装得到基因组草图(draft)，然后对草图进行基因预测和基因功能预测，即所谓的基因组注释。基因组注释结果的好坏会直接影响后续的分析，所以基因组注释对于基因组项目非常关键。   
-原核生物与真核生物由于基因结构不同，基因预测方法也不一样。真核生物基因组注释比较复杂，一般由基因组中心或相关专业人员完成。原核生物基因组注释相对比较简单，已有较成熟的基因组注释软件。    
+### 比对的两种策略  
+1. Global alignment
+2. Local alignment
 
-### 原核生物与真核生物基因结构差异
-> 原核生物：不含内含子 -》RNA与DNA序列一致  
-> 真核生物：含有内含子
+我们熟悉的blast和blat均属于第二类。   
+另外，不同长度的reads比对所用的策略也不一样，对于短reads，基于local alignment的软件如blast, blat不适合。  
+将短的reads回帖到长的参考基因组上，这一过程称之为mapping。一般reads数目很大，读长短，参考基因组较长，对于mapping软件有两个要求：
 
-### 实验要求  
-1. 掌握用prokka注释原核生物基因组  
-2. 掌握用maker注释真核生物基因组  
+> 1. 速度
+> 2. 准确性
+ 
+Mapping软件众多，比较有名的包括bwa, soap, bowtie, novoalign  
+另外，由于真核生物mRNA不含有内含子，与一般的DNA mapping软件要求不一样，故转录组mapping使用的软件也不一样，转录组mapping软件比较有名的包括：STAR, hisat  
+本实验主要介绍一般意义上的DNA mapping软件的使用。  
+
+### What makes mapping challenging?（挑战）
+1. Volume of data
+2. Garbage reads
+3. Errors in reads, and quality scores
+4. Repeat elements and multicopy sequence
+5. SNPs/SNVs
+6. Indels
+7. Splicing (transcriptome)
+
+### 几个影响mapping速度的参数  
+1. How many mismatches to allow?
+2. Report how many matches?
+3. Require best match, or first/any that fit criteria?
 
 ## 三、上机操作  
-### 首先进入genomelab环境
+### 设置环境变量和准备工作目录  
 ```
-source /opt/miniconda3/bin/activate
-conda activate genomelab
-```
-
-### 数据存放位置  
-```
-/data/lab/genomic/lab03/data/
-```
-
-### 数据及工作目录准备  
-```
-mkdir lab03
-cd lab03
-ln -s /data/lab/genomic/lab03/data/ ./
+mkdir lab02
+cd lab02
+mkdir data
 mkdir results
-
 ```
 
-## (一) 原核生物基因组注释--prokka    
+### 实验数据  
 ```
-cd results
-
+/data/lab/genomic/lab02/data/REL606.fa (参考序列)
+/data/lab/genomic/lab02/data/reads_1.fq.gz, /data/lab/genomic/lab02/data/reads_2.fq.gz （illumina reads）
+/data/lab/genomic/lab02/data/pb_ecoli_0001.fastq （pacbio reads）
 ```
+### (一) Mapping the short reads to the reference genome using bwa   
 
-work_prokka.sh  
+#### 1. 准备数据和index参考基因组  
+```
+$ cd data
+$ ln -s /data/lab/genomic/lab02/data/REL606.fa /data/lab/genomic/lab02/data/reads_* ../data/pb_ecoli_0001.fastq ./
+$ samtools faidx REL606.fa
+$ mkdir index
+$ cd index
+$ ln -s ../REL606.fa ./
+```
+#### 2. 建索引  
+work_bwaIndex.sh  
 ```
 #!/bin/bash
 #$ -S /bin/bash
-#$ -N prokka
+#$ -N INDEX
 #$ -j y
 #$ -cwd
-conda activate prokka
-prokka --outdir anno --prefix PROKKA ../data/REL606.fa
-```
-注释结果存放在anno目录中，查看结果，了解基因组注释常见的几种格式。  
 
-## （二）真核生物基因组--maker  
+bwa index REL606.fa
 ```
-# create control files for maker
-$ maker -CTL
+
+#### 3. Mapping the reads to the reference genome using bwa  
 ```
-会产生4个参数设置文件：
+cd ../../results
 ```
--rw-rw-r-- 1 wangys wangys  1479 Oct 22 08:22 maker_bopts.ctl  
--rw-rw-r-- 1 wangys wangys   893 Oct 22 08:22 maker_evm.ctl  
--rw-rw-r-- 1 wangys wangys  1488 Oct 22 08:22 maker_exe.ctl  
--rw-rw-r-- 1 wangys wangys  4765 Oct 22 08:22 maker_opts.ctl  
-```
-编辑maker_opts.ctl文件，改变以下几个参数，几他的用默认参数：  
-```
-genome=../data/dpp_contig.fasta  
-est=../data/dpp_est.fasta  
-protein=../data/dpp_protein.fasta  
-est2genome=1  
-```
-work_maker.sh
+work_bwa.sh
 ```
 #!/bin/bash
 #$ -S /bin/bash
-#$ -N maker
+#$ -N bwa
 #$ -j y
 #$ -cwd
-maker
+bwa mem ../data/index/REL606.fa ../data/reads_1.fq.gz ../data/reads_2.fq.gz > mapping.sam
+samtools view -b mapping.sam > mapping.bam
+samtools sort -o mapping.sort.bam mapping.bam
+samtools index mapping.sort.bam
 ```
-真核生物基因组注释比较复杂，这里只是向大家介绍了maker的一般使用，如果要使用maker注释新的基因组，建议参阅：[http://gmod.org/wiki/MAKER_Tutorial](http://gmod.org/wiki/MAKER_Tutorial)  
-查看结果文件：  
+work_bwa2.sh (using pipe)  
 ```
-$ cd dpp_contig.maker.output/dpp_contig_datastore/05/1F/contig-dpp-500-500
-$ ls -l
--rw-rw-r-- 1 wangys wangys 65341 Oct 22 08:30 contig-dpp-500-500.gff  
--rw-rw-r-- 1 wangys wangys   717 Oct 22 08:30 contig-dpp-500-500.maker.proteins.fasta  
--rw-rw-r-- 1 wangys wangys  4443 Oct 22 08:30 contig-dpp-500-500.maker.transcripts.fasta  
--rw-rw-r-- 1 wangys wangys  4120 Oct 22 08:30 run.log  
-drwxrwxr-x 3 wangys wangys  4096 Oct 22 08:30 theVoid.contig-dpp-500-500  
+#!/bin/bash
+#$ -S /bin/bash
+#$ -N bwa_pipe
+#$ -j y
+#$ -cwd
+bwa mem ../data/index/REL606.fa ../data/reads_1.fq.gz ../data/reads_2.fq.gz | \
+ samtools view -b - | \
+ samtools sort -o mapping.sort.2.bam -
+samtools index mapping.sort.2.bam
+```
+### (二)Mapping the short reads to the reference genome using minimap2  
+
+work_minimap2.sh  
+```
+#!/bin/bash
+#$ -S /bin/bash
+#$ -N minimap2
+#$ -j y
+#$ -cwd
+minimap2 -ax sr ../data/REL606.fa ../data/reads_1.fq.gz ../data/reads_2.fq.gz |\
+ samtools view -b - |\
+ samtools sort -o mapping.sort.mm.bam -
+samtools index mapping.sort.mm.bam
 ```
 
-### 用Artemis查看注释结果（选做）  
-这一部分是在本地台式机上完成。  
-下载地址：http://www.sanger.ac.uk/science/tools/artemis  
-将prokka注释得到的prokka.gff文件拷到本地电脑上(用scp)  
-打开Artemis，装载注释结果  
->    1. Start Artemis  
->    2. Click OK  
->    3. Go to File -> Open File Manager  
->    4. Navigate to the folder  
->    5. Choose the prokka.gff file you copied from the server
+### (三) Mapping the long reads to the reference genome using minimap2  
+work_minimap_pb.sh  
+```
+#!/bin/bash
+#$ -S /bin/bash
+#$ -N minimap2
+#$ -j y
+#$ -cwd
+minimap2 -ax map-pb ../data/REL606.fa ../data/pb_ecoli_0001.fastq |\
+ samtools view -b - |\
+ samtools sort -o mapping.sort.pb.bam -
+samtools index mapping.sort.pb.bam
+```
+### (四) 显示和比较比对结果  
+使用IGV查看比对结果  
+![](./igv_snapshot.png) 
 
 ## 四、作业与思考  
-1. 尝试用其他原核生物基因预测软件进行基因预测，如[GLIMMER](http://ccb.jhu.edu/software/glimmer/index.shtml)，或者[GeneMark](http://topaz.gatech.edu/GeneMark/)，并比较不同软件注释结果有什么不同
-2. 了解真核生物基因组注释软件，如[Augustus](http://bioinf.uni-greifswald.de/augustus/), [GlimmerHMM](http://ccb.jhu.edu/software/glimmerhmm/), [maker](http://www.yandell-lab.org/software/maker.html)
+1. 先组装，得到contigs，assemble short reads using SPAdes, assemble pacbio long reads using canu | mecat | miniasm  
+2. 然后将contigs用bwa mem比对到参考基因组上  
+3. 用igv显示比对结果   
 
 ## 五、参考资料  
-1. [prokka github](https://github.com/tseemann/prokka)
-2. [maker tutorial](http://gmod.org/wiki/MAKER_Tutorial)
- 
+[bwa](https://github.com/lh3/bwa)  
+[minimap2](https://github.com/lh3/minimap2)  
+[samtools](http://www.htslib.org/)  
+[IGV](http://software.broadinstitute.org/software/igv/)  
+
