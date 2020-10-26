@@ -2,13 +2,12 @@
 ## 一、实验目的  
 1. 了解生物的RNA种类，真核生物mRNA的特点及如何分离纯化
 2. 了解RNA、DNA比对的区别
-3. 掌握DESeq2分析DE基因方法
+3. 掌握DESeq2分析差异表达基因(Differential Expressed Gene, DEG)方法
 
 ## 二、知识回顾  
-转录组测序（RNA-Seq）应用非常广泛，目前测序市场有超过一半做的是转录组。  
-转录组没序是对生物体内所有的RNA进行测序，一般可以按测序鞋标不同而分为  
-mRNA，microRNA, total RNA测序，传统意义上的RNA-Seq指的是mRNA测序。一般  
-RNA-Seq项目分析包括以下几个步骤：
+* 转录组测序(RNA-Seq)应用非常广泛，目前测序市场有超过一半做的是转录组。  
+* 转录组测序是对生物体内所有的RNA进行测序，一般可以按测序目标不同而分为mRNA, microRNA, total RNA测序，传统意义上的RNA-Seq指的是mRNA测序。
+* 一般RNA-Seq项目分析包括以下几个步骤：
 
 > 1. 序列质控
 > 2. 将得到的clean reads 回帖到参考基因组
