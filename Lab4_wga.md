@@ -19,7 +19,9 @@ conda activate genomelab
 /data/lab/genomic/lab04/data
 $ mkdir data results
 $ cd data
-$ ln -s /data/lab/genomic/lab04/data/*.fasta ./
+$ ln -s /data/lab/genomic/lab04/data/B011.fasta
+$ ln -s /data/lab/genomic/lab04/data/NF2.fasta
+$ ln -s /data/lab/genomic/lab04/data/X23.fasta
 $ cd ../results
 ```
 ### 1. 两个基因组WGA  
