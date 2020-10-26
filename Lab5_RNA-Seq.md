@@ -43,7 +43,16 @@
 source /opt/miniconda3/bin/activate
 conda activate genomelab
 ```
+### 数据存放位置及工作目录准备  
+```
+Data: /data/lab/genomic/lab05/data
+Ref: /data/lab/genomic/lab05/ref
 
+$ ln -s /data/lab/genomic/lab05/data/
+$ ln -s /data/lab/genomic/lab05/ref/
+$ mkdir results
+$ cd results
+```
 ### 1. Mapping  
 work_mapping.sh  
 ```
@@ -55,8 +64,8 @@ work_mapping.sh
 for i in $(seq 291 302)
 do 
 hisat2 -p 1 \
--x /data/lab/genomic/lab05/ref/index/osa \
--q /data/lab/genomic/lab05/data/SRR7760${i}.fastq | \
+-x ../ref/index/osa \
+-q ../data/SRR7760${i}.fastq | \
 samtools view -b - | \
 samtools sort -o SRR7760${i}.sort.bam - > SRR7760${i}.log
 done
@@ -70,7 +79,7 @@ work_count.sh
 #$ -N count
 #$ -j y
 #$ -cwd
-TPMCalculator -g /data/lab/genomic/lab05/ref/Oryza_sativa.IRGSP-1.0.41.gtf -d ./ -a
+TPMCalculator -g ../ref/Oryza_sativa.IRGSP-1.0.41.gtf -d ./ -a
 ```
 ### 3. Merge the counting matrix  
 ```
