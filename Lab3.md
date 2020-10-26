@@ -19,6 +19,12 @@
 2. 掌握用maker注释真核生物基因组  
 
 ## 三、上机操作  
+### 首先进入genomelab环境
+```
+source /opt/miniconda3/bin/activate
+conda activate genomelab
+```
+
 ### 数据存放位置  
 ```
 /data/lab/genomic/lab03/data/
@@ -46,6 +52,7 @@ work_prokka.sh
 #$ -N prokka
 #$ -j y
 #$ -cwd
+conda activate prokka
 prokka --outdir anno --prefix PROKKA ../data/REL606.fa
 
 ```
