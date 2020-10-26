@@ -38,6 +38,12 @@
 
 
 ## 三、上机操作  
+### 进入genomelab环境
+```
+source /opt/miniconda3/bin/activate
+conda activate genomelab
+```
+
 ### 1. Mapping  
 work_mapping.sh  
 ```
