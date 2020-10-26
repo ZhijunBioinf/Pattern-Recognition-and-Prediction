@@ -46,10 +46,10 @@ OUTPUT:
 ```
 查看结果  
 ```
-$ mummerplot --layout --medium X23_B011.delta 
-$ mummerplot --layout --medium --png -p X23_B011 X23_B011.delta 
+$ mummerplot --layout --small --postscript -p X23_B011 X23_B011.delta
+$ ps2pad X23_B011.ps
 ```
-![](./X23_B011.png)
+![](./X23_B011.pdf)
 
 [mummer使用说明](https://github.com/mummer4/mummer/blob/master/MANUAL.md)
 
