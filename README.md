@@ -1,7 +1,7 @@
 # 基因组学 实验  
 
 **上机之前**  
-请熟悉集群使用基础，参考[这里](https://github.com/hnnd/bcl)  
+请熟悉集群使用基础，参考[这里](https://github.com/ZhijunBioinf/bcl)  
 
 **登录服务器**
 
