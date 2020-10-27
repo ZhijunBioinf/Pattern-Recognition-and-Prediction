@@ -6,7 +6,7 @@
 
 ## 实验三 [分类器之kNN、Logistic回归、决策树](https://github.com/ZhijunBioinf/Pattern-Recognition-and-Prediction/blob/master/Lab3_Classifiers_KNN-LR-DT/classifiers1.md)
 
-## 实验四 [分类器之朴素贝叶斯、支持向量分类]
+## 实验四 [分类器之朴素贝叶斯、支持向量分类](https://github.com/ZhijunBioinf/Pattern-Recognition-and-Prediction/blob/master/Lab4_Classifiers_Bayes-SVM/classifiers2.md)
 
 ## 实验五 [序列表征/数值化2(以定量构效关系建模为例)]
 
