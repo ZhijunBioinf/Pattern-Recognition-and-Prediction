@@ -63,9 +63,9 @@ work_mapping.sh
 #$ -cwd
 for i in $(seq 291 302)
 do 
-hisat2 -p 1 -x ../ref/index/osa -q ../data/SRR7760${i}.fastq | \
-samtools view -b - | \
-samtools sort -o SRR7760${i}.sort.bam - > SRR7760${i}.log
+ hisat2 -p 1 -x ../ref/index/osa -q ../data/SRR7760${i}.fastq | \
+ samtools view -b - | \
+ samtools sort -o SRR7760${i}.sort.bam - > SRR7760${i}.log
 done
 ```
 
