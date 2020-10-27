@@ -80,7 +80,7 @@ Acc = sum(predY==teY)/len(teY) # 计算预测正确的样本数
 print('Prediction Accuracy of SVC: %g%%(%d/%d)' % (Acc*100, sum(predY==teY), len(teY)))
 ```
 
-* SVM运行时间较长，将命令写到脚本中再用qsub提交任务
+* SVM运行时间较长，将命令写到脚本中再用qsub提交任务 <br>
 work_mySVC.sh
 ```bash
 #!/bin/bash
