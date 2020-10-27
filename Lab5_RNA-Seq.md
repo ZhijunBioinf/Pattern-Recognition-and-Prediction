@@ -61,6 +61,8 @@ work_mapping.sh
 #$ -N hisat2
 #$ -j y
 #$ -cwd
+source /opt/miniconda3/bin/activate
+conda activate genomelab
 for i in $(seq 291 302)
 do 
  hisat2 -p 1 -x ../ref/index/osa -q ../data/SRR7760${i}.fastq | \
