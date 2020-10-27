@@ -199,7 +199,7 @@ pip3 install --user graphviz -i https://pypi.tuna.tsinghua.edu.cn/simple
 # DT分类器：在命令行指定训练集、测试集、DT图文件名
 python3 myDT.py EI_train.txt EI_test.txt EISplicing_DecisionTreeGraph
 ```
-
+[获得的DT树](https://github.com/ZhijunBioinf/Pattern-Recognition-and-Prediction/blob/master/Lab3_Classifiers_KNN-LR-DT/EISplicing_DecisionTreeGraph.pdf)
 
 ## 作业
 1. 尽量看懂`参考程序`的每一行代码。
