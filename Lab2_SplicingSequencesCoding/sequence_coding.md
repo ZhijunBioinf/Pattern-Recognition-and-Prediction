@@ -48,47 +48,45 @@ python3 kSpaceCoding.py
 import numpy as np # 导入numpy包，并重命名为np
 
 def file2matrix(filename, KMAX, bpTable):
-	fr = open(filename) # 打开文件
-	arrayOLines = fr.readlines() # 读取所有内容
-	fr.close() # 及时关闭文件
+    fr = open(filename) # 打开文件
+    arrayOLines = fr.readlines() # 读取所有内容
+    fr.close() # 及时关闭文件
 
-	numberOfLines = len(arrayOLines) # 得到文件行数
-	returnMat = np.zeros((numberOfLines, 16*(KMAX+1))) # 为返回的结果矩阵开辟内存
-	lineNum = 0
+    numberOfLines = len(arrayOLines) # 得到文件行数
+    returnMat = np.zeros((numberOfLines, 16*(KMAX+1))) # 为返回的结果矩阵开辟内存
+    lineNum = 0
 
-	for line in arrayOLines:
-		line = line.strip() # 删除空白符，包括行尾回车符
-		listFromLine = line.split(': ') # 以': '为分隔符进行切片
-		nt_seq = list(listFromLine[1]) # 取出核酸序列并转换成list
-		del(nt_seq[70:72]) # 删除位于第71，72位的供体位点
-		
-		kSpaceVec = []
-		for k in range(KMAX+1): # 计算不同k条件下的kSpace特征
-			bpFreq = bpTable.copy() # bpTable是一个字典型变量，一定要用字典的copy函数，Python函数参数使用的址传递
+    for line in arrayOLines:
+        line = line.strip() # 删除空白符，包括行尾回车符
+        listFromLine = line.split(': ') # 以': '为分隔符进行切片
+        nt_seq = list(listFromLine[1]) # 取出核酸序列并转换成list
+        del(nt_seq[70:72]) # 删除位于第71，72位的供体位点
+        
+        kSpaceVec = []
+        for k in range(KMAX+1): # 计算不同k条件下的kSpace特征
+            bpFreq = bpTable.copy() # bpTable是一个字典型变量，一定要用字典的copy函数，Python函数参数使用的址传递
 
-			for m in range(len(nt_seq)-k-1): # 扫描序列，并计算不同碱基对的频率
-				bpFreq[nt_seq[m]+nt_seq[m+1+k]] += 1 # 序列的子串会自动在字典中寻找对应的key，很神奇！否则要自己写if语句匹配
-			bpFreqVal = list(bpFreq.values()) # 取出bpFreq中的值并转换成list
-			kSpaceVec.extend(np.array(bpFreqVal)/(len(nt_seq)-k-1)) # 每个k下的特征，需除以查找的所有子串数
+            for m in range(len(nt_seq)-k-1): # 扫描序列，并计算不同碱基对的频率
+                bpFreq[nt_seq[m]+nt_seq[m+1+k]] += 1 # 序列的子串会自动在字典中寻找对应的key，很神奇！否则要自己写if语句匹配
+            bpFreqVal = list(bpFreq.values()) # 取出bpFreq中的值并转换成list
+            kSpaceVec.extend(np.array(bpFreqVal)/(len(nt_seq)-k-1)) # 每个k下的特征，需除以查找的所有子串数
 
-		returnMat[lineNum,:] = kSpaceVec
-		lineNum += 1
-	return returnMat, lineNum
-
+        returnMat[lineNum,:] = kSpaceVec
+        lineNum += 1
+    return returnMat, lineNum
 
 if __name__ == '__main__':
-	filename = 'EI_true1.seq'
-	KMAX = 4
-	bpTable = {}
-	for m in ('A','T','C','G'):
-		for n in ('A','T','C','G'):
-			bpTable[m+n] = 0
+    filename = 'EI_true1.seq'
+    KMAX = 4
+    bpTable = {}
+    for m in ('A','T','C','G'):
+        for n in ('A','T','C','G'):
+            bpTable[m+n] = 0
 
-	kSpaceMat, SeqNum = file2matrix(filename, KMAX, bpTable)
-	outputFileName = 'EI_true1_kSpace.txt'
-	np.savetxt(outputFileName, kSpaceMat, fmt='%g', delimiter=',')
-	print('The number of sequences is %d. Matrix of features is saved in %s' % (SeqNum, outputFileName))
-	
+    kSpaceMat, SeqNum = file2matrix(filename, KMAX, bpTable)
+    outputFileName = 'EI_true1_kSpace.txt'
+    np.savetxt(outputFileName, kSpaceMat, fmt='%g', delimiter=',')
+    print('The number of sequences is %d. Matrix of features is saved in %s' % (SeqNum, outputFileName))
 ```
 
 ## 作业
