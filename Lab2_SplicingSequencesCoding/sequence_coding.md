@@ -28,18 +28,21 @@
 * 通常需要设定一个k的上限，比如KMAX = 4，分别计算k = 0, 1, ..., KMAX时的组分特征。对于任意一条核酸序列，其k-spaced碱基对组分特征维数为：16x(KMAX+1)
 * k-spaced组分特征兼顾序列组分信息和碱基之间的不同尺度关联效应，并且特征维数与序列长度无关。
 
-## 5. 工作目录准备、序列表征、Python包准备
+## 5. 工作目录准备与Python包准备
 ```sh
 # 建立lab_02文件夹
 $ mkdir lab_02
 $ cd lab_02
+
 # 首先要安装Python的包管理工具pip
 $ curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py   # 下载安装脚本
 $ python3 get-pip.py    # 运行安装脚本
-# 安装3个常用的数值计算、作图包(numpy, scipy, matplotlib)
+
+# 安装3个常用包：矩阵运算包numpy、数值计算scipy包、矩阵作图包matplotlib
 $ pip3 install --user numpy scipy matplotlib -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
+## 6. 序列表征
 * 参考程序：kSpaceCoding.py
 * 将以下代码保存为一个.py文件(如kSpaceCoding.py). 程序功能：读取'EI_true1.seq', 计算kSpace特征，并将结果保存至输出文件(如'EI_true1_kSpace.txt')
 ```python3
