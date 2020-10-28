@@ -6,6 +6,14 @@
 * 3）使用逻辑斯蒂回归（Logistic Regression, LR）完成剪接位点识别
 * 4）使用决策树（Decision Tree, DT）完成剪接位点识别
 
+## 准备工作目录
+```
+$ mkdir lab_03
+$ cd lab_03
+# 建立lab_02路径中供体true位点、false位点序列文件的软链接
+$ ln -s ../lab_02/EI_true.seq ../lab_02/EI_false.seq ./
+```
+
 ## 1. 训练集与测试集构建
 * 1）编写更好用的k-spaced碱基对组分特征表征程序（用于HS3D数据的供体真实/虚假位点序列表征）<br>
 参考程序：kSpaceCoding_general.py, 该程序避免了每次在程序中修改文件名和其他参数的麻烦。
@@ -59,11 +67,6 @@ if __name__ == '__main__':
 ```
 
 ```bash
-# 建立lab_03文件夹
-$ mkdir lab_03
-$ cd lab_03
-# 建立供体位点序列文件的软链接
-$ ln -s ../lab_02/EI_true.seq ../lab_02/EI_false.seq ./
 # 获得供体真实位点序列表征结果：在命令行指定序列文件名为'EI_true.seq'，输出结果文件名为'EI_true_kSpace.txt'，KMAX值为4
 $ python3 kSpaceCoding_general.py EI_true.seq EI_true_kSpace.txt 4
 # 获得供体虚假位点序列表征结果：在命令行指定序列文件名为'EI_false.seq'，输出结果文件名为'EI_false_kSpace.txt'，KMAX值为4
