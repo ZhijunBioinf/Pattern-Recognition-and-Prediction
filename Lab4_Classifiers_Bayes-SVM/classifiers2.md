@@ -4,6 +4,14 @@
 * 1）使用朴素贝叶斯(Naive Bayes, NB)完成剪接位点识别
 * 2）使用支持向量分类(Support Vector Classification, SVC)完成剪接位点识别
 
+## 准备工作目录
+```
+$ mkdir lab_04
+$ cd lab_04
+# 建立lab_03路径中供体位点训练集、测试集文件的软链接
+$ ln -s ../lab_03/EI_train.txt ../lab_03/EI_test.txt ./
+```
+
 ## 1. 以NB进行剪接位点识别
 参考程序：myNB.py
 ```python3
@@ -28,7 +36,7 @@ print('Prediction Accuracy of NB: %g%%(%d/%d)' % (Acc*100, sum(predY==teY), len(
 
 ```bash
 # NB分类器：在命令行指定训练集、测试集
-python3 myNB.py EI_train.txt EI_test.txt
+$ python3 myNB.py EI_train.txt EI_test.txt
 ```
 
 ## 2. 以SVC进行剪接位点识别
@@ -111,7 +119,7 @@ echo
 ```
 ```
 # qsub提交任务
-qsub work_mySVC.sh
+$ qsub work_mySVC.sh
 ```
 
 * 尝试更多的选项搭配，看精度变化，比如数据不规格化时，各种核函数、是否寻优、不同交叉验证次数等情形的预测精度。
