@@ -53,7 +53,7 @@ from random import sample
 train = np.loadtxt(sys.argv[1], delimiter=',') # 载入训练集
 test = np.loadtxt(sys.argv[2], delimiter=',') # 载入测试集
 
-train = train[sample(range(len(train)), 500),] # 考虑到SVM运行时间较长，从train中随机抽500样本用于后续建模
+train = train[sample(range(len(train)), 200),] # 考虑到SVM运行时间较长，从train中随机抽200样本用于后续建模
 trX = train[:,1:]
 trY = train[:,0]
 teX = test[:,1:]
