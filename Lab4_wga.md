@@ -36,8 +36,14 @@ work_nucmer.sh
 nucmer -p X23_B011 ../data/X23.fasta ../data/B011.fasta
 dnadiff -p X23_B011 -d X23_B011.delta
 ```
+
+```
+# 提交任务
+$ qsub work_nucmer.sh
+```
+
 结果文件：X23_B011.delta  
-dnadiff 结果  
+dnadiff 结果
 ```
 OUTPUT:
     .report  - Summary of alignments, differences and SNPs
@@ -52,6 +58,7 @@ OUTPUT:
     .unref   - Unaligned reference IDs and lengths (if applicable)
     .unqry   - Unaligned query IDs and lengths (if applicable)
 ```
+
 查看结果  
 ```
 $ mummerplot --layout --small --postscript -p X23_B011 X23_B011.delta
@@ -76,9 +83,15 @@ work_mauve.sh
 #$ -cwd
 mauveAligner --output=my_seqs.xmfa genome.fasta 
 ```
+
+```
+# 提交任务
+$ qsub work_mauve.sh
+```
+
 查看结果 
 ```
-# Note: Mauve 需要运行时间较长
+# Note: Mauve运行时间较长
 $ Mauve my_seqs.xmfa
 ```
 ![](./mauve.jpg)
