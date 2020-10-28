@@ -16,7 +16,9 @@ conda activate genomelab
 
 ### 数据存放位置及工作目录准备  
 ```
-/data/lab/genomic/lab04/data
+# Data: /data/lab/genomic/lab04/data
+$ mkdir lab04_WGA
+$ cd lab04_WGA
 $ mkdir data results
 $ cd data
 $ ln -s /data/lab/genomic/lab04/data/B011.fasta
@@ -24,8 +26,8 @@ $ ln -s /data/lab/genomic/lab04/data/NF2.fasta
 $ ln -s /data/lab/genomic/lab04/data/X23.fasta
 $ cd ../results
 ```
-### 1. 两个基因组WGA  
 
+### 1. 两个基因组WGA
 work_nucmer.sh
 ```
 #!/bin/bash
