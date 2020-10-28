@@ -7,12 +7,27 @@
 * 3）理解Python的程序控制：条件语句、循环语句
 * 4）了解Python的函数定义与调用
 
+## 准备工作目录
+```
+$ mkdir your_PattRecogLab_directory
+$ cd your_PattRecogLab_directory
+$ mkdir lab_01
+$ cd lab_01
+```
+
 ## 1. 安装并运行Python
-> 1）下载[Python](https://www.python.org/downloads/)，按步骤安装，在"Advanced Options"时，勾选"Add Python to environment variables"。<br>
-> 2）验证是否安装成功：打开"命令提示符"（桌面按快捷键"Win+r"，输入cmd，回车），在命令行里输入python，如果看到python的版本信息，说明安装成功。<br>
-> 3）第一声啼哭：在命令行输入 <br>
-```python
-print("Hello World!")
+### 1.1 安装
+* Windows系统：下载[Python](https://www.python.org/downloads/)，按步骤安装，在"Advanced Options"时，勾选"Add Python to environment variables"。
+* Linux, Mac系统自带Python
+
+### 1.2 运行
+* Windows系统：Win+R打开'运行'，输入cmd
+* Linux系统：远程用Xshell, Putty, MobaXterm都可以
+* Mac系统：本地打开Terminal App
+```
+$ python3
+# 第一声啼哭：在命令行输入
+>>> print("Hello World!")
 ```
 
 ## 2. 数据结构
