@@ -48,11 +48,17 @@ conda activate genomelab
 Data: /data/lab/genomic/lab05/data
 Ref: /data/lab/genomic/lab05/ref
 
+$ mkdir lab05_RNASeq
+$ cd lab05_RNASeq
+
+# 建立data和ref的软链接
 $ ln -s /data/lab/genomic/lab05/data/
 $ ln -s /data/lab/genomic/lab05/ref/
+
 $ mkdir results
 $ cd results
 ```
+
 ### 1. Mapping  
 work_mapping.sh  
 ```
@@ -61,6 +67,7 @@ work_mapping.sh
 #$ -N hisat2
 #$ -j y
 #$ -cwd
+
 source /opt/miniconda3/bin/activate
 conda activate genomelab
 for i in $(seq 291 302)
