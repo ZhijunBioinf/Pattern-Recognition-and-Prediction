@@ -68,7 +68,7 @@ $ ps2pdf X23_B011.ps X23_B011.pdf
 ```
 
 比对结果：
-![](./X23_B011.pdf)
+[X23_B011.pdf](https://github.com/ZhijunBioinf/GenomicLab/blob/dzj/X23_B011.pdf)
 
 [mummer使用说明](https://github.com/mummer4/mummer/blob/master/MANUAL.md)
 
@@ -103,7 +103,7 @@ $ Mauve my_seqs.xmfa
 > 1. 安装[Mauve](http://darlinglab.org/mauve/download.htmla)
 > 2. 将my_seqs.xmfa下载到本地，用Mauve打开，观察结果
 
-![](./mauve.jpg)
+[mauve.jpg](https://github.com/ZhijunBioinf/GenomicLab/blob/dzj/mauve.jpg)
 
 ## 四、作业与思考  
 1. 真核生物基因组全基因组比对，[参考这里](http://genomewiki.ucsc.edu/index.php/Whole_genome_alignment_howto)  
