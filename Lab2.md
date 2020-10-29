@@ -37,12 +37,12 @@ Mapping软件众多，比较有名的包括bwa, soap, bowtie, novoalign
 3. Require best match, or first/any that fit criteria?
 
 ## 三、上机操作  
-### 设置环境变量和准备工作目录  
+### 创建工作目录  
 ```
-mkdir lab02
-cd lab02
-mkdir data
-mkdir results
+$ mkdir lab02
+$ cd lab02
+$ mkdir data
+$ mkdir results
 ```
 
 ### 实验数据  
@@ -74,6 +74,11 @@ work_bwaIndex.sh
 bwa index REL606.fa
 ```
 
+```
+# 用qsub提交任务至计算节点
+$ qsub work_bwaIndex.sh
+```
+
 #### 3. Mapping the reads to the reference genome using bwa  
 ```
 cd ../../results
@@ -90,6 +95,12 @@ samtools view -b mapping.sam > mapping.bam
 samtools sort -o mapping.sort.bam mapping.bam
 samtools index mapping.sort.bam
 ```
+
+```
+# 用qsub提交任务至计算节点
+$ qsub work_bwa.sh
+```
+
 work_bwa2.sh (using pipe)  
 ```
 #!/bin/bash
@@ -102,6 +113,7 @@ bwa mem ../data/index/REL606.fa ../data/reads_1.fq.gz ../data/reads_2.fq.gz | \
  samtools sort -o mapping.sort.2.bam -
 samtools index mapping.sort.2.bam
 ```
+
 ### (二)Mapping the short reads to the reference genome using minimap2  
 
 work_minimap2.sh  
@@ -117,6 +129,11 @@ minimap2 -ax sr ../data/REL606.fa ../data/reads_1.fq.gz ../data/reads_2.fq.gz |\
 samtools index mapping.sort.mm.bam
 ```
 
+```
+# 用qsub提交任务至计算节点
+$ qsub work_minimap2.sh
+```
+
 ### (三) Mapping the long reads to the reference genome using minimap2  
 work_minimap_pb.sh  
 ```
@@ -130,6 +147,12 @@ minimap2 -ax map-pb ../data/REL606.fa ../data/pb_ecoli_0001.fastq |\
  samtools sort -o mapping.sort.pb.bam -
 samtools index mapping.sort.pb.bam
 ```
+
+```
+# 用qsub提交任务至计算节点
+$ qsub work_minimap_pb.sh
+```
+
 ### (四) 显示和比较比对结果  
 使用IGV查看比对结果  
 ![](./igv_snapshot.png) 
