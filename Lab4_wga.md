@@ -98,7 +98,8 @@ $ Mauve my_seqs.xmfa
 ```
 * 本地安装[Mauve](http://darlinglab.org/mauve/download.htmla)
 
-将my_seqs.xmfa下载到本地，用Mauve打开，观察结果![](./mauve.jpg)
+将my_seqs.xmfa下载到本地，用Mauve打开，观察结果
+![](./mauve.jpg)
 
 ## 四、作业与思考  
 1. 真核生物基因组全基因组比对，[参考这里](http://genomewiki.ucsc.edu/index.php/Whole_genome_alignment_howto)  
