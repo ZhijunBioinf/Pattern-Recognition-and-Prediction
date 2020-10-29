@@ -66,9 +66,7 @@ OUTPUT:
 $ mummerplot --layout --small --postscript -p X23_B011 X23_B011.delta
 $ ps2pdf X23_B011.ps
 ```
-
 ![](./X23_B011.pdf)
-
 [mummer使用说明](https://github.com/mummer4/mummer/blob/master/MANUAL.md)
 
 ### 2. 多基因组WGA
