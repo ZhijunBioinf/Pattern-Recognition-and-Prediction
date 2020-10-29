@@ -40,8 +40,8 @@
 ## 三、上机操作  
 ### 进入genomelab环境
 ```
-source /opt/miniconda3/bin/activate
-conda activate genomelab
+$ source /opt/miniconda3/bin/activate
+$ conda activate genomelab
 ```
 ### 数据存放位置及工作目录准备  
 ```
@@ -90,7 +90,7 @@ TPMCalculator -g ../ref/Oryza_sativa.IRGSP-1.0.41.gtf -d ./ -a
 ```
 ### 3. Merge the counting matrix  
 ```
-paste <(cut -f 1,6 SRR7760291.sort_genes.out) \
+$ paste <(cut -f 1,6 SRR7760291.sort_genes.out) \
 <(cut -f 6 SRR7760292.sort_genes.out) \
 <(cut -f 6 SRR7760293.sort_genes.out) \
 <(cut -f 6 SRR7760294.sort_genes.out) \
@@ -104,7 +104,7 @@ paste <(cut -f 1,6 SRR7760291.sort_genes.out) \
 <(cut -f 6 SRR7760302.sort_genes.out) > counts.tsv
 
 # Replace the header line
-sed -i '1c\GeneID\tSRR7760291\tSRR7760292\tSRR7760293\tSRR7760294\tSRR7760295\tSRR7760296\tSRR7760297\tSRR7760298\tSRR7760299\tSRR7760300\tSRR7760301\tSRR7760302' counts.tsv 
+$ sed -i '1c\GeneID\tSRR7760291\tSRR7760292\tSRR7760293\tSRR7760294\tSRR7760295\tSRR7760296\tSRR7760297\tSRR7760298\tSRR7760299\tSRR7760300\tSRR7760301\tSRR7760302' counts.tsv 
 ```
 
 ### 4. DE analysis(使用R包实现)
