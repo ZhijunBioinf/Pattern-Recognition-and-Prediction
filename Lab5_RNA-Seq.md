@@ -48,8 +48,8 @@ $ conda activate genomelab
 Data: /data/lab/genomic/lab05/data
 Ref: /data/lab/genomic/lab05/ref
 
-$ mkdir lab05_RNASeq
-$ cd lab05_RNASeq
+$ mkdir lab5
+$ cd lab5
 
 # 建立data和ref的软链接
 $ ln -s /data/lab/genomic/lab05/data/
@@ -78,6 +78,11 @@ do
 done
 ```
 
+```
+# 提交任务
+$ qsub work_mapping.sh
+```
+
 ### 2. Count  
 work_count.sh  
 ```
@@ -88,6 +93,12 @@ work_count.sh
 #$ -cwd
 TPMCalculator -g ../ref/Oryza_sativa.IRGSP-1.0.41.gtf -d ./ -a
 ```
+
+```
+# 提交任务
+$ qsub work_count.sh
+```
+
 ### 3. Merge the counting matrix  
 ```
 $ paste <(cut -f 1,6 SRR7760291.sort_genes.out) \
