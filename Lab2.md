@@ -44,8 +44,8 @@ $ conda activate genomelab
 ```
 ### 创建工作目录  
 ```
-$ mkdir lab02
-$ cd lab02
+$ mkdir lab2
+$ cd lab2
 $ mkdir data
 $ mkdir results
 ```
