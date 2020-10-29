@@ -37,14 +37,13 @@
 
 ## 三、上机操作  
 
-### 设置环境变量和工作目录  
+### 创建工作目录  
 ```
 #新建一个目录lab1，本实验所有数据和输出都放入该目录中  
-mkdir lab1
-cd lab1
-mkdir data
-mkdir result
-
+$ mkdir lab1
+$ cd lab1
+$ mkdir data
+$ mkdir result
 ```
 
 ### 数据存放位置  
@@ -58,9 +57,9 @@ mkdir result
 ### 组装  
 #### 准备数据  
 ```
-cd data
-ln -s /data/lab/genomic/lab01/data/reads_1.fq.gz /data/lab/genomic/lab01/data/reads_2.fq.gz ./
-cd ../result
+$ cd data
+$ ln -s /data/lab/genomic/lab01/data/reads_1.fq.gz /data/lab/genomic/lab01/data/reads_2.fq.gz ./
+$ cd ../result
 ```
 #### 估算k值  
 ```
@@ -76,6 +75,10 @@ $ ls ../data/reads_* > reads.file
 /opt/bio/kmergenie-1.7048/kmergenie reads.file
 ```
 
+```
+# 用qsub提交任务至计算节点
+$ qsub work_kmer.sh
+```
 结束后查看结果，选择最优k值57  
 
 #### 1. 用velvet组装
@@ -89,6 +92,12 @@ $ ls ../data/reads_* > reads.file
 velveth ecoli.velvet 57 -shortPaired -fastq.gz -separate ../data/reads_1.fq.gz ../data/reads_2.fq.gz
 velvetg ecoli.velvet -exp_cov auto
 ```
+
+```
+# 用qsub提交任务至计算节点
+$ qsub work_velvet.sh
+```
+
 #### 2.用minia组装  
 新建一个脚本文件，work_minia.sh，写入下列内容:  
 ```
@@ -98,6 +107,11 @@ velvetg ecoli.velvet -exp_cov auto
 #$ -cwd
 #$ -j y
 /opt/bio/bin/minia -in ../data/reads_1.fq.gz,../data/reads_2.fq.gz -kmer-size 57 -out ecoli.minia
+```
+
+```
+# 用qsub提交任务至计算节点
+$ qsub work_minia.sh
 ```
 
 #### 3. 用SPAdes组装  
@@ -111,18 +125,24 @@ velvetg ecoli.velvet -exp_cov auto
 spades.py -t 4 -1 ../data/reads_1.fq.gz -2 ../data/reads_2.fq.gz -o ecoli.spades
 ```
 
+```
+# 用qsub提交任务至计算节点
+$ qsub work_spades.sh
+```
+
 #### 组装效果评价  
 ```
-quast -R /data/lab/genomic/lab01/data/ref.fa \
+# 可直接在命令行执行
+$ quast -R /data/lab/genomic/lab01/data/ref.fa \
    ecoli.velvet/contigs.fa \
    ecoli.minia.contigs.fa \
    ecoli.spades/scaffolds.fasta
 ```
 #### 查看评价结果  
 ```
-less quast_results/latest/report.txt 
-
+$ less quast_results/latest/report.txt 
 ```
+
 ## 四、作业  
 1. 不同k-mer值对组装的影响，对velvet和minia用31和57进行组装，比较组装效果  
 2. 熟悉和理解基因组组装一些术语名词，如N50, NG50, contig, scaffold, gap等
