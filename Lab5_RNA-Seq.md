@@ -59,7 +59,7 @@ $ mkdir results
 $ cd results
 ```
 
-### 1. Mapping(较慢，需要数个小时)
+### 1. Mapping(较慢，需要数小时)
 work_mapping.sh  
 ```
 #!/bin/bash
