@@ -36,7 +36,11 @@
 > [浏览软件库](https://omictools.com/genome-assembly-category)
 
 ## 三、上机操作  
-
+### 进入genomelab环境
+```
+source /opt/miniconda3/bin/activate
+conda activate genomelab
+```
 ### 创建工作目录  
 ```
 #新建一个目录lab1，本实验所有数据和输出都放入该目录中  
