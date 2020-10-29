@@ -21,8 +21,8 @@
 ## 三、上机操作
 ### 进入genomelab环境
 ```
-source /opt/miniconda3/bin/activate
-conda activate genomelab
+$ source /opt/miniconda3/bin/activate
+$ conda activate genomelab
 ```
 ### 数据存放位置  
 ```
@@ -31,11 +31,10 @@ conda activate genomelab
 
 ### 数据及工作目录准备  
 ```
-mkdir lab03
-cd lab03
-ln -s /data/lab/genomic/lab03/data/ ./
-mkdir results
-
+$ mkdir lab3
+$ cd lab3
+$ ln -s /data/lab/genomic/lab03/data/ ./
+$ mkdir results
 ```
 
 ## (一) 原核生物基因组注释--prokka    
@@ -54,7 +53,11 @@ work_prokka.sh
 source /opt/miniconda3/bin/activate
 conda activate prokka
 prokka --outdir anno --prefix PROKKA ../data/REL606.fa
+```
 
+```
+# 用qsub提交任务至计算节点
+$ qsub work_prokka.sh
 ```
 注释结果存放在anno目录中，查看结果，了解基因组注释常见的几种格式。  
 
@@ -86,6 +89,12 @@ work_maker.sh
 #$ -cwd
 maker
 ```
+
+```
+# 用qsub提交任务至计算节点
+$ qsub work_maker.sh
+```
+
 真核生物基因组注释比较复杂，这里只是向大家介绍了maker的一般使用，如果要使用maker注释新的基因组，建议参阅：[http://gmod.org/wiki/MAKER_Tutorial](http://gmod.org/wiki/MAKER_Tutorial)  
 查看结果文件：  
 ```
