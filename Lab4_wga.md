@@ -10,15 +10,15 @@ Whole-genome alignment (WGA) is the prediction of evolutionary relationships at 
 ## 三、上机操作  
 ### 进入genomelab环境
 ```
-source /opt/miniconda3/bin/activate
-conda activate genomelab
+$ source /opt/miniconda3/bin/activate
+$ conda activate genomelab
 ```
 
 ### 数据存放位置及工作目录准备  
 ```
 # Data: /data/lab/genomic/lab04/data
-$ mkdir lab04_WGA
-$ cd lab04_WGA
+$ mkdir lab4
+$ cd lab4
 $ mkdir data results
 $ cd data
 $ ln -s /data/lab/genomic/lab04/data/B011.fasta
@@ -87,16 +87,18 @@ mauveAligner --output=my_seqs.xmfa genome.fasta
 ```
 
 ```
-# 提交任务
+# 提交任务（Note: Mauve运行时间较长）
 $ qsub work_mauve.sh
 ```
 
 查看结果 
 ```
-# Note: Mauve运行时间较长
+# 需要X11图形支持
 $ Mauve my_seqs.xmfa
 ```
-![](./mauve.jpg)
+* 本地安装[Mauve](http://darlinglab.org/mauve/download.htmla)
+
+将my_seqs.xmfa下载到本地，用Mauve打开，观察结果![](./mauve.jpg)
 
 ## 四、作业与思考  
 1. 真核生物基因组全基因组比对，[参考这里](http://genomewiki.ucsc.edu/index.php/Whole_genome_alignment_howto)  
