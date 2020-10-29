@@ -91,14 +91,16 @@ mauveAligner --output=my_seqs.xmfa genome.fasta
 $ qsub work_mauve.sh
 ```
 
-查看结果 
+查看结果
+* 集群上查看（Note: 需要X11图形支持）
 ```
-# 需要X11图形支持
 $ Mauve my_seqs.xmfa
 ```
-* 本地安装[Mauve](http://darlinglab.org/mauve/download.htmla)
 
-将my_seqs.xmfa下载到本地，用Mauve打开，观察结果
+* Windows系统查看
+> 1. 安装[Mauve](http://darlinglab.org/mauve/download.htmla)
+> 2. 将my_seqs.xmfa下载到本地，用Mauve打开，观察结果
+
 ![](./mauve.jpg)
 
 ## 四、作业与思考  
