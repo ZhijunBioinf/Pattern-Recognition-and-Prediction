@@ -37,6 +37,11 @@ Mapping软件众多，比较有名的包括bwa, soap, bowtie, novoalign
 3. Require best match, or first/any that fit criteria?
 
 ## 三、上机操作  
+### 进入genomelab环境
+```
+source /opt/miniconda3/bin/activate
+conda activate genomelab
+```
 ### 创建工作目录  
 ```
 $ mkdir lab02
