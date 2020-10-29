@@ -59,7 +59,7 @@ $ mkdir results
 $ cd results
 ```
 
-### 1. Mapping  
+### 1. Mapping(较慢，需要数个小时)
 work_mapping.sh  
 ```
 #!/bin/bash
@@ -107,9 +107,14 @@ paste <(cut -f 1,6 SRR7760291.sort_genes.out) \
 sed -i '1c\GeneID\tSRR7760291\tSRR7760292\tSRR7760293\tSRR7760294\tSRR7760295\tSRR7760296\tSRR7760297\tSRR7760298\tSRR7760299\tSRR7760300\tSRR7760301\tSRR7760302' counts.tsv 
 ```
 
-### 4. DE analysis  
+### 4. DE analysis(使用R包实现)
+```R
+if(require(tidyverse) == FALSE)
+  install.packages("tidyverse", repos = "https://mirror.lzu.edu.cn/CRAN/")
+if(require(DESeq2) == FALSE)
+  install.packages("BiocManager", repos = "https://mirror.lzu.edu.cn/CRAN/")
+  BiocManager::install("DESeq2")
 
-```
 require(tidyverse)
 require(DESeq2)
 cts <- read_tsv("counts.tsv") %>% as.data.frame()
