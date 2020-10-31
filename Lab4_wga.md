@@ -70,7 +70,7 @@ $ ps2pdf X23_B011.ps X23_B011.pdf
 比对结果：
 [X23_B011.pdf](https://github.com/ZhijunBioinf/GenomicLab/blob/dzj/X23_B011.pdf)
 
-[mummer使用说明](https://github.com/mummer4/mummer/blob/master/MANUAL.md)
+[mummer使用说明](http://mummer.sourceforge.net/manual/)
 
 ### 2. 多基因组WGA
 
