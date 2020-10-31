@@ -100,7 +100,7 @@ $ Mauve my_seqs.xmfa
 ```
 
 * Windows系统查看
-> 1. 安装[Mauve](http://darlinglab.org/mauve/download.htmla)
+> 1. 安装[Mauve](http://darlinglab.org/mauve/download.html)
 > 2. 将my_seqs.xmfa下载到本地，用Mauve打开，观察结果
 
 [mauve.jpg](https://github.com/ZhijunBioinf/GenomicLab/blob/dzj/mauve.jpg)
