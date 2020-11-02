@@ -59,7 +59,7 @@ $ mkdir results
 $ cd results
 ```
 
-### 1. Mapping(较慢，需要数小时)
+### 1. Mapping(较慢，运行约8小时)
 work_mapping.sh  
 ```
 #!/bin/bash
@@ -83,7 +83,7 @@ done
 $ qsub work_mapping.sh
 ```
 
-### 2. Count  
+### 2. Count（运行约1小时）
 work_count.sh  
 ```
 #!/bin/bash
@@ -99,7 +99,7 @@ TPMCalculator -g ../ref/Oryza_sativa.IRGSP-1.0.41.gtf -d ./ -a
 $ qsub work_count.sh
 ```
 
-### 3. Merge the counting matrix  
+### 3. Merge the counting matrix（直接运行paste, sed命令）
 ```
 $ paste <(cut -f 1,6 SRR7760291.sort_genes.out) \
 <(cut -f 6 SRR7760292.sort_genes.out) \
