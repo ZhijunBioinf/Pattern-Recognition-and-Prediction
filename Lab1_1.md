@@ -93,6 +93,8 @@ $ qsub work_kmer.sh
 #$ -N velvet
 #$ -cwd
 #$ -j y
+source /opt/miniconda3/bin/activate
+conda activate genomelab
 velveth ecoli.velvet 57 -shortPaired -fastq.gz -separate ../data/reads_1.fq.gz ../data/reads_2.fq.gz
 velvetg ecoli.velvet -exp_cov auto
 ```
@@ -126,6 +128,8 @@ $ qsub work_minia.sh
 #$ -N spades
 #$ -cwd
 #$ -j y
+source /opt/miniconda3/bin/activate
+conda activate genomelab
 spades.py -t 4 -1 ../data/reads_1.fq.gz -2 ../data/reads_2.fq.gz -o ecoli.spades
 ```
 
