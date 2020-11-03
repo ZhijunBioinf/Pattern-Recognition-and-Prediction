@@ -10,7 +10,8 @@
 * 定量构效关系(Quantitative Structure-Acitivity Relationship, QSAR)是以分子的基本理化性质与相应的生理活性为基础，通过数学或统计学手段定量研究有机小分子（如抑制剂等）与生物大分子（如受体、酶等）间的相互作用。
 * QSAR可用于高效生物活性分子化合物筛选、药物的环境毒性评价、新药设计与合成等。
 
-![Schematic of general approach used in QSAR](./SchematicOfGeneralApproachInQSAR.jpg)
+Ref: Nongonierma AB, FitzGerald RJ. Learnings from quantitative structure–activity relationship (QSAR) studies with respect to food protein-derived bioactive peptides: a review. RSC advances. 2016;6(79):75400-13.
+![](./SchematicOfGeneralApproachInQSAR.jpg)
 
 ## 2. ACEI研究现状
 * DNA序列中有更多的GT、AG为非剪接位点。因此，我们面临着一个极度不平衡的分类任务，即从含有大量非剪接位点的GT、AG中识别出极少量的真实剪接位点。
