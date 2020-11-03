@@ -98,7 +98,7 @@ if __name__ == '__main__':
 
 ```
 ```sh
-# 运行程序AA531Coding.py实现以AA531表征序列。在命令行指定ACE抑制剂三肽序列文件名'ACEtriPeptidesSequencesActivities.txt'、AA531属性文件名'AA531properties.txt'、序列长度、输出文件名。
+# 运行程序AA531Coding.py实现以AA531表征序列。在命令行指定ACE抑制剂三肽序列文件名、AA531属性文件名、序列长度、输出文件名。
 $ python3 AA531Coding.py ACEtriPeptidesSequencesActivities.txt AA531properties.txt 3 result.txt
 ```
 
@@ -106,8 +106,8 @@ $ python3 AA531Coding.py ACEtriPeptidesSequencesActivities.txt AA531properties.t
 自己独立编写序列表征程序。不怕报错，犯错越多，进步越快！
 
 ## 参考文献
-[1] 代志军. 特征选择与样本选择用于癌分类与药物构效关系研究(湖南农业大学博士学位论文). 2014.
-[2] Nongonierma AB, FitzGerald RJ. Learnings from quantitative structure–activity relationship (QSAR) studies with respect to food protein-derived bioactive peptides: a review. RSC advances. 2016, 6(79): 75400-75413.
-[3] 王晓丹, 薛璐, 胡志和, 等. ACE抑制肽构效关系研究进展[J]. 食品科学, 2017, 38(5): 305-310.
-[4] 刘静, 彭剑秋, 管骁. 基于多元线性回归的血管紧张素转化酶抑制肽定量构效关系建模研究[J]. 分析科学学报, 2012, 28(1): 16-22.
+>[1] 代志军. 特征选择与样本选择用于癌分类与药物构效关系研究(湖南农业大学博士学位论文). 2014.
+>[2] Nongonierma AB, FitzGerald RJ. Learnings from quantitative structure–activity relationship (QSAR) studies with respect to food protein-derived bioactive peptides: a review. RSC advances. 2016, 6(79): 75400-75413.
+>[3] 王晓丹, 薛璐, 胡志和, 等. ACE抑制肽构效关系研究进展[J]. 食品科学, 2017, 38(5): 305-310.
+>[4] 刘静, 彭剑秋, 管骁. 基于多元线性回归的血管紧张素转化酶抑制肽定量构效关系建模研究[J]. 分析科学学报, 2012, 28(1): 16-22.
 
