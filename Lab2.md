@@ -61,7 +61,9 @@ $ mkdir results
 #### 1. 准备数据和index参考基因组  
 ```
 $ cd data
-$ ln -s /data/lab/genomic/lab02/data/REL606.fa /data/lab/genomic/lab02/data/reads_* ../data/pb_ecoli_0001.fastq ./
+$ ln -s /data/lab/genomic/lab02/data/REL606.fa
+$ ln -s /data/lab/genomic/lab02/data/reads_*
+$ ln -s /data/lab/genomic/lab02/data/pb_ecoli_0001.fastq
 $ samtools faidx REL606.fa
 $ mkdir index
 $ cd index
