@@ -91,6 +91,9 @@ work_count.sh
 #$ -N count
 #$ -j y
 #$ -cwd
+
+source /opt/miniconda3/bin/activate
+conda activate genomelab
 TPMCalculator -g ../ref/Oryza_sativa.IRGSP-1.0.41.gtf -d ./ -a
 ```
 
