@@ -27,7 +27,7 @@
 * 对于每条ACE三肽序列，以每个位置氨基酸对应的531个理化属性依次替换序列，可获得531x3 = 1593个特征。
 * [AA531properties.txt](https://github.com/ZhijunBioinf/Pattern-Recognition-and-Prediction/blob/master/Lab5_PeptideSequencesCoding/AA531properties.txt)
 
-## 5. 工作目录准备与Python包准备
+## 5. 工作目录准备
 ```sh
 # 建立lab_05文件夹
 $ mkdir lab_05
