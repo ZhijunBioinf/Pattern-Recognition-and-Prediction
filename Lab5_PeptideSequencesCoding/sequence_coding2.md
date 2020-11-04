@@ -53,7 +53,7 @@ def file2matrix(filename, seqLength, AA531Dict):
     for line in arrayOLines:
         line = line.strip() # 删除空白符，包括行尾回车符
         listFromLine = line.split('\t') # 以'\t'为分隔符进行切片
-        AASeq = list(listFromLine[0]) # 取出氨基酸序列并转换成list
+        AASeq = listFromLine[0] # 取出氨基酸序列
         Y[lineNum] = float(listFromLine[1]) # 取出活性值Y
         
         feaVec = []
@@ -61,7 +61,7 @@ def file2matrix(filename, seqLength, AA531Dict):
             if AA in AA531Dict.keys(): # 如果序列中的氨基酸在AA531Dict中有对应的key，才进行替换
                 feaVec.extend(AA531Dict[AA])
             else: # 否则以0替换
-                print('Warning: nonregular amino acid found! Coding sequence with 531 zeros. Sequence(%d): %s' % (lineNum, AASeq))
+                print('Warning: nonregular amino acid found! Coding "%s" in "%s"(seqId: %d) with 531 zeros.' % (AA, AASeq, lineNum))
                 feaVec.extend([0.0]*531)
                 Y[lineNum] = -1
 
