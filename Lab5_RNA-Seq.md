@@ -122,6 +122,13 @@ $ sed -i '1c\GeneID\tSRR7760291\tSRR7760292\tSRR7760293\tSRR7760294\tSRR7760295\
 ```
 
 ### 4. DE analysis(使用R包实现)
+* 如果在genomelab环境，其中的R没有安装以下需要的包，可以退出环境
+```
+# 退出到登录集群时的默认环境
+$ conda activate
+# 进入到R环境
+$ R
+```
 ```R
 if(require(tidyverse) == FALSE)
   install.packages("tidyverse", repos = "https://mirror.lzu.edu.cn/CRAN/")
