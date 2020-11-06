@@ -126,7 +126,7 @@ $ sed -i '1c\GeneID\tSRR7760291\tSRR7760292\tSRR7760293\tSRR7760294\tSRR7760295\
 * 可以退出到登录集群时的默认环境，其中的R版本已经安装好tidyverse, DESeq2包，不需另外安装
 ```
 $ conda activate
-# 进入到R环境
+# 进入R
 $ R
 ```
 ```R
