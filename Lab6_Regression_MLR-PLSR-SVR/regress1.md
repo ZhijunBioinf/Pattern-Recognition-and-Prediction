@@ -1,16 +1,16 @@
-# 实验六：分类器之KNN, Logistic Regression, Decision Tree
+# 实验六：回归模型之MLR, PLSR, SVR
 
 ## 实验目的
-* 1）提取供体真实位点与虚假位点序列的k-space组分特征；构建训练集与测试集
-* 2）使用K近邻（K-Nearest Neighbor, KNN）完成剪接位点识别
-* 3）使用逻辑斯蒂回归（Logistic Regression, LR）完成剪接位点识别
-* 4）使用决策树（Decision Tree, DT）完成剪接位点识别
+* 1）根据[实验五]()对ACE抑制剂多肽序列表征的AA531特征，构建训练集与测试集
+* 2）使用多元线性回归(Multiple Linear Regression, MLR)完成ACE抑制剂活性预测
+* 3）使用偏最小二乘回归(Partial Least Squares Regression, PLSR)完成ACE抑制剂活性预测
+* 4）使用支持向量回归(Support Vector Regression, SVR)完成ACE抑制剂活性预测
 
 ## 准备工作目录
 ```
-$ mkdir lab_03
-$ cd lab_03
-# 建立lab_02路径中供体true位点、false位点序列文件的软链接
+$ mkdir lab_06
+$ cd lab_06
+# 建立lab_05路径中供体true位点、false位点序列文件的软链接
 $ ln -s ../lab_02/EI_true.seq ../lab_02/EI_false.seq ./
 ```
 
