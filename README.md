@@ -10,7 +10,7 @@
 
 ## 实验五 [序列表征/数值化2(以定量构效关系建模为例)](https://github.com/ZhijunBioinf/Pattern-Recognition-and-Prediction/blob/master/Lab5_PeptideSequencesCoding/sequence_coding2.md)
 
-## 实验六 [回归模型之多元线性回归、偏最小二乘回归、支持向量回归]
+## 实验六 [回归模型之多元线性回归、偏最小二乘回归、支持向量回归](https://github.com/ZhijunBioinf/Pattern-Recognition-and-Prediction/blob/master/Lab6_Regression_MLR-PLSR-SVR/regress1.md)
 
 ## 实验七 [特征降维(PCA)与特征选择(MIC-mRMR、SVM-RFE、随机森林)]
 
