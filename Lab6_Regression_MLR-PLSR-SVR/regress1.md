@@ -42,7 +42,7 @@ $ python3 getTrainTest_regression.py ACEtriPeptides_YandAA531.txt 0.2 ACE_train.
 ```
 
 ## 2. 以MLR完成ACE抑制剂活性预测
-参考程序：myMLR.py
+* 参考程序：myMLR.py
 ```python3
 import numpy as np
 from sklearn import linear_model # 导入MLR包
@@ -90,7 +90,7 @@ $ python3 myMLR.py ACE_train.txt ACE_test.txt 0 ObsdYvsPredY_MLR.pdf
 ```
 
 ## 3. 以Logistic回归进行剪接位点识别
-参考程序：myLR.py
+* 参考程序：myLR.py
 ```python3
 import numpy as np
 from sklearn import linear_model # 导入线性模型包
@@ -118,7 +118,7 @@ $ python3 myLR.py EI_train.txt EI_test.txt 1000
 ```
 
 ## 4. 以Decision Tree进行剪接位点识别
-参考程序：myDT.py
+* 参考程序：myDT.py
 ```python3
 import numpy as np
 from sklearn import tree # 导入Decision Trees包
