@@ -89,32 +89,79 @@ plt.savefig(plotFileName)
 $ python3 myMLR.py ACE_train.txt ACE_test.txt 0 ObsdYvsPredY_MLR.pdf
 ```
 
-## 3. 以Logistic回归进行剪接位点识别
-* 参考程序：myLR.py
+## 3. 以PLSR完成ACE抑制剂活性预测
+* 参考程序：myPLSR.py
 ```python3
 import numpy as np
-from sklearn import linear_model # 导入线性模型包
+from sklearn.cross_decomposition import PLSRegression # 导入PLSR包
 import sys
+import matplotlib.pyplot as plt
+from sklearn.model_selection import cross_val_predict # 导入交叉验证包
 
-train = np.loadtxt(sys.argv[1], delimiter=',') # 载入训练集
-test = np.loadtxt(sys.argv[2], delimiter=',') # 载入测试集
+def optimise_pls_cv(X, y, nCompMax): # 以交叉验证技术获得不同潜变量个数情形下的MSE
+    MSEVec = []
+    nCompVec = np.arange(1, nCompMax)
+    for n_comp in nCompVec:
+        pls = PLSRegression(n_components=n_comp) # 创建一个PLSR的实例
+        y_cv = cross_val_predict(pls, X, y, cv=10) # 获得10次交叉的预测Y
+        mse = sum((y - y_cv.ravel()) ** 2)/len(y) # 计算MSE, NOTE: y_cv维度为2，需转成向量
+        MSEVec.append(mse)
+    bestNComp = np.argmin(MSEVec) # 获得最小MSE对应的下标，即最优潜变量个数
+    
+    with plt.style.context('ggplot'): # 以潜变量个数为x轴，对应的MSE为y轴，作图
+        plt.plot(nCompVec, np.array(MSEVec), '-v', color='blue', mfc='blue') # 带标记点的折线图
+        plt.plot(nCompVec[bestNComp], np.array(MSEVec)[bestNComp], 'P', ms=10, mfc='red') # 在图上标记出最小MSE对应的点
+        plt.xlabel('Number of PLS components')
+        plt.xticks = nCompVec
+        plt.ylabel('MSE')
+        plt.title('Optimise the number of PLS components')
+        plt.savefig('optimizePLSComponents.pdf')
+        
+    return bestNComp
 
-maxIterations = int(sys.argv[3]) # 在命令行指定最大迭代次数
-clf = linear_model.LogisticRegression(max_iter=maxIterations) # 创建一个LR的实例
-trX = train[:,1:]
-trY = train[:,0]
-clf.fit(trX, trY) # 训练模型
+if __name__ == '__main__':
+    train = np.loadtxt(sys.argv[1], delimiter='\t') # 载入训练集
+    test = np.loadtxt(sys.argv[2], delimiter='\t') # 载入测试集
+    nCompMax = int(sys.argv[3]) # 潜变量个数上限
+    modelName = 'PLSR'
 
-teX = test[:,1:]
-teY = test[:,0]
-predY = clf.predict(teX) # 预测测试集
-Acc = sum(predY==teY)/len(teY) # 计算预测正确的样本数
-print('Prediction Accuracy of LR: %g%%(%d/%d)' % (Acc*100, sum(predY==teY), len(teY)))
+    trX = train[:,1:]
+    trY = train[:,0]
+    bestNComp = optimise_pls_cv(trX, trY, nCompMax)+1 # 得到最优潜变量个数（特征降维思想）
+    print('The best number of PLS components: %d' % bestNComp)
+    reg = PLSRegression(n_components = bestNComp) # 创建一个PLSR的实例
+    reg.fit(trX, trY) # 训练模型
+
+    teX = test[:,1:]
+    teY = test[:,0]
+    predY = reg.predict(teX) # 预测测试集
+    predY = predY.ravel() # NOTE: predY维度为2，需转成向量
+
+    R2 = 1- sum((teY - predY) ** 2) / sum((teY - teY.mean()) ** 2)
+    RMSE = np.sqrt(sum((teY - predY) ** 2)/len(teY))
+    print('Predicted R2(coefficient of determination) of %s: %g' % (modelName, R2))
+    print('Predicted RMSE(root mean squared error) of %s: %g' % (modelName, RMSE))
+
+    # Plot outputs
+    plotFileName = sys.argv[4]
+    plt.figure()
+    plt.scatter(teY, predY,  color='black') # 做测试集的真实Y值vs预测Y值的散点图
+    parameter = np.polyfit(teY, predY, 1) # 插入拟合直线
+    f = np.poly1d(parameter)
+    plt.plot(teY, f(teY), color='blue', linewidth=3)
+    plt.xlabel('Observed Y')
+    plt.ylabel('Predicted Y')
+    plt.title('Prediction performance using %s' % modelName)
+    r2text = 'Predicted R2: %g' % R2
+    textPosX = min(teY) + 0.2*(max(teY)-min(teY))
+    textPosY = max(predY) - 0.2*(max(predY)-min(predY))
+    plt.text(textPosX, textPosY, r2text, bbox=dict(edgecolor='red', fill=False, alpha=0.5))
+    plt.savefig(plotFileName)
 ```
 
 ```bash
-# LR分类器：在命令行指定训练集、测试集、迭代次数
-$ python3 myLR.py EI_train.txt EI_test.txt 1000
+# PLSR模型：在命令行指定训练集、测试集、最大潜变量个数、图名
+$ python3 myPLSR.py ACE_train.txt ACE_test.txt 20 ObsdYvsPredY_PLSR.pdf
 ```
 
 ## 4. 以Decision Tree进行剪接位点识别
@@ -163,6 +210,6 @@ $ python3 myDT.py EI_train.txt EI_test.txt EISplicing_DecisionTreeGraph
 不怕报错，犯错越多，进步越快！
 
 ## 参考
-* KNN手册：[sklearn.neighbors.KNeighborsClassifier](https://scikit-learn.org/stable/modules/neighbors.html#nearest-neighbors-classification)
-* LR手册：[sklearn.linear_model.LogisticRegression](https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression)
+* MLR手册：[sklearn.linear_model.LinearRegression](https://scikit-learn.org/stable/modules/linear_model.html#ordinary-least-squares)
+* PLSR手册：[sklearn.cross_decomposition.PLSRegression](https://scikit-learn.org/stable/modules/cross_decomposition.html)
 * DT手册：[sklearn.tree.DecisionTreeClassifier](https://scikit-learn.org/stable/modules/tree.html#classification)
