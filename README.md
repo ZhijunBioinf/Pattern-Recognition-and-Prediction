@@ -5,8 +5,8 @@
 
 **登录服务器**
 
-> Linux机器上登录  
-> `ssh -l username 10.100.128.160`  (校园内网登录，公共用户名public,密码public123)  
+> Linux或Mac上登录集群
+> `ssh -l username 10.100.128.160`  (须校园内网登录)  
 > Windows机器上登录用[putty](https://the.earth.li/~sgtatham/putty/latest/x86/putty.exe)客户端   
 
 ## [实验一 基因组组装(Assemble)](https://github.com/ZhijunBioinf/GenomicLab/blob/dzj/Lab1_1.md)   
