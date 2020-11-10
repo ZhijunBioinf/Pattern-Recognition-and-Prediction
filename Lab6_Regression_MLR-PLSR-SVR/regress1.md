@@ -41,28 +41,43 @@ print('Generate training set(%d%%) and test set(%d%%): Done!' % ((1-testSize)*10
 $ python3 getTrainTest_regression.py ACEtriPeptides_YandAA531.txt 0.2 ACE_train.txt ACE_test.txt
 ```
 
-## 2. 以KNN进行剪接位点识别
-参考程序：myKNN.py
+## 2. 以MLR完成ACE抑制剂活性预测
+参考程序：myMLR.py
 ```python3
 import numpy as np
-from sklearn import neighbors # 导入KNN包
+from sklearn import linear_model # 导入MLR包
 import sys
+import matplotlib.pyplot as plt
 
-train = np.loadtxt(sys.argv[1], delimiter=',') # 载入训练集，在命令行指定文件名
-test = np.loadtxt(sys.argv[2], delimiter=',') # 载入测试集
+train = np.loadtxt(sys.argv[1], delimiter='\t') # 载入训练集
+test = np.loadtxt(sys.argv[2], delimiter='\t') # 载入测试集
+isNormalizeX = bool(int(sys.argv[3])) # 是否标准化每个x
 
-n_neighbors = int(sys.argv[3]) # 在命令行指定邻居数
-weights = 'uniform' # 每个邻居的权重相等
-clf = neighbors.KNeighborsClassifier(n_neighbors, weights=weights) # 创建一个KNN的实例
+reg = linear_model.LinearRegression(normalize = isNormalizeX) # 创建一个MLR的实例
 trX = train[:,1:]
 trY = train[:,0]
-clf.fit(trX, trY) # 训练模型
+reg.fit(trX, trY) # 训练模型
 
 teX = test[:,1:]
 teY = test[:,0]
-predY = clf.predict(teX) # 预测测试集
-Acc = sum(predY==teY)/len(teY) # 计算预测正确的样本数
-print('Prediction Accuracy of KNN: %g%%(%d/%d)' % (Acc*100, sum(predY==teY), len(teY)))
+predY = reg.predict(teX) # 预测测试集
+
+R2 = 1- sum((teY - predY) ** 2) / sum((teY - teY.mean()) ** 2)
+RMSE = np.sqrt(sum((teY - predY) ** 2)/len(teY))
+print('Predicted R2(coefficient of determination) of MLR: %g' % R2)
+print('Predicted RMSE(root mean squared error) of MLR: %g' % RMSE)
+
+# Plot outputs
+plt.scatter(teY, predY,  color='black') # 做测试集的真实Y值vs预测Y值的散点图
+parameter = np.polyfit(teY, predY, 1) # 插入拟合直线
+f = np.poly1d(parameter)
+plt.plot(teY, f(teY), color='blue', linewidth=3)
+plt.xlabel('Observed Y')
+plt.ylabel('Predicted Y')
+plt.title('Prediction performance using MLR')
+fig, ax = plt.subplots()
+ax.annotate('Predicted R2: %g' % R2, xy=(2,1), xytext(3,1.5))
+plt.savefig('ObsdY-PredY-MLR.pdf')
 ```
 
 ```bash
