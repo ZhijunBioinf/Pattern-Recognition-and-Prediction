@@ -52,6 +52,7 @@ import matplotlib.pyplot as plt
 train = np.loadtxt(sys.argv[1], delimiter='\t') # 载入训练集
 test = np.loadtxt(sys.argv[2], delimiter='\t') # 载入测试集
 isNormalizeX = bool(int(sys.argv[3])) # 是否标准化每个x
+modelName = 'MLR'
 
 reg = linear_model.LinearRegression(normalize = isNormalizeX) # 创建一个MLR的实例
 trX = train[:,1:]
@@ -64,25 +65,28 @@ predY = reg.predict(teX) # 预测测试集
 
 R2 = 1- sum((teY - predY) ** 2) / sum((teY - teY.mean()) ** 2)
 RMSE = np.sqrt(sum((teY - predY) ** 2)/len(teY))
-print('Predicted R2(coefficient of determination) of MLR: %g' % R2)
-print('Predicted RMSE(root mean squared error) of MLR: %g' % RMSE)
+print('Predicted R2(coefficient of determination) of %s: %g' % (modelName, R2))
+print('Predicted RMSE(root mean squared error) of %s: %g' % (modelName, RMSE))
 
 # Plot outputs
+plotFileName = sys.argv[4]
 plt.scatter(teY, predY,  color='black') # 做测试集的真实Y值vs预测Y值的散点图
 parameter = np.polyfit(teY, predY, 1) # 插入拟合直线
 f = np.poly1d(parameter)
 plt.plot(teY, f(teY), color='blue', linewidth=3)
 plt.xlabel('Observed Y')
 plt.ylabel('Predicted Y')
-plt.title('Prediction performance using MLR')
-fig, ax = plt.subplots()
-ax.annotate('Predicted R2: %g' % R2, xy=(2,1), xytext(3,1.5))
-plt.savefig('ObsdY-PredY-MLR.pdf')
+plt.title('Prediction performance using %s' % modelName)
+r2text = 'Predicted R2: %g' % R2
+textPosX = min(teY) + 0.2*(max(teY)-min(teY))
+textPosY = max(predY) - 0.2*(max(predY)-min(predY))
+plt.text(textPosX, textPosY, r2text, bbox=dict(edgecolor='red', fill=False, alpha=0.5))
+plt.savefig(plotFileName)
 ```
 
 ```bash
-# KNN分类器：在命令行指定训练集、测试集、近邻数K
-$ python3 myKNN.py EI_train.txt EI_test.txt 10
+# MLR模型：在命令行指定训练集、测试集、是否对特征标准化、图名
+$ python3 myMLR.py ACE_train.txt ACE_test.txt 0 ObsdYvsPredY_MLR.pdf
 ```
 
 ## 3. 以Logistic回归进行剪接位点识别
