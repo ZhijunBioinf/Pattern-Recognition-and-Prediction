@@ -160,56 +160,128 @@ if __name__ == '__main__':
 ```
 
 ```bash
-# PLSR模型：在命令行指定训练集、测试集、最大潜变量个数、图名
+# PLSR模型：在命令行指定训练集、测试集、最大潜变量个数(e.g.: 20)、图名
 $ python3 myPLSR.py ACE_train.txt ACE_test.txt 20 ObsdYvsPredY_PLSR.pdf
 ```
 
-## 4. 以Decision Tree进行剪接位点识别
-* 参考程序：myDT.py
+## 4. 以SVR完成ACE抑制剂活性预测
+* 参考程序：mySVR.py
 ```python3
 import numpy as np
-from sklearn import tree # 导入Decision Trees包
+from sklearn import svm # 导入svm包
 import sys
-import graphviz # 导入Graphviz包
+from sklearn import preprocessing # 导入数据预处理包
+from sklearn.model_selection import GridSearchCV # 导入参数寻优包
+import matplotlib.pyplot as plt
 
-train = np.loadtxt(sys.argv[1], delimiter=',') # 载入训练集
-test = np.loadtxt(sys.argv[2], delimiter=',') # 载入测试集
+def optimise_svm_cv(X, y, kernelFunction, numOfFolds):
+    C_range = np.power(2, np.arange(-1, 6, 1.0)) # 指定C的范围
+    gamma_range = np.power(2, np.arange(0, -8, -1.0)) # 指定g的范围
+    epsilon_range = np.power(2, np.arange(-8, -1, 1.0)) # 指定p的范围
+    parameters = dict(gamma=gamma_range, C=C_range, epsilon=epsilon_range) # 将c, g, p组成字典，用于参数的grid遍历
+    
+    reg = svm.SVR(kernel=kernelFunction) # 创建一个SVR的实例
+    grid = GridSearchCV(reg, param_grid=parameters, cv=numOfFolds) # 创建一个GridSearchCV实例
+    grid.fit(X, y) # grid寻优c, g, p
+    print("The best parameters are %s with a score of %g" % (grid.best_params_, grid.best_score_))
+    return grid
 
-clf = tree.DecisionTreeClassifier() # 创建一个DT的实例
-trX = train[:,1:]
-trY = train[:,0]
-clf.fit(trX, trY) # 训练模型
+if __name__ == '__main__':
+    train = np.loadtxt(sys.argv[1], delimiter='\t') # 载入训练集
+    test = np.loadtxt(sys.argv[2], delimiter='\t') # 载入测试集
+    modelName = 'SVR'
 
-teX = test[:,1:]
-teY = test[:,0]
-predY = clf.predict(teX) # 预测测试集
-Acc = sum(predY==teY)/len(teY) # 计算预测正确的样本数
-print('Prediction Accuracy of DT: %g%%(%d/%d)' % (Acc*100, sum(predY==teY), len(teY)))
+    trX = train[:,1:]
+    trY = train[:,0]
+    teX = test[:,1:]
+    teY = test[:,0]
 
-# Export the tree in Graphviz format
-graphFileName = sys.argv[3] # 从命令行指定图文件名称
-dotData = tree.export_graphviz(clf, out_file=None)
-graph = graphviz.Source(dotData)
-graph.render(graphFileName)
-print('The tree in Graphviz format is saved in "%s.pdf".' % graphFileName)
+    isScale = int(sys.argv[3]) # 建模前，是否将每个特征归一化到[-1,1]
+    kernelFunction = sys.argv[4] # {‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’}, default=’rbf’
+    numOfFolds = int(sys.argv[5]) # 是否寻找最优参数：c, g, p
+
+    if isScale:
+        min_max_scaler = preprocessing.MinMaxScaler(feature_range=(-1,1))
+        trX = min_max_scaler.fit_transform(trX)
+        teX = min_max_scaler.transform(teX)
+
+    if numOfFolds > 2: # 如果k-fold > 2, 则进行参数寻优
+        grid = optimise_svm_cv(trX, trY, kernelFunction, numOfFolds)
+        bestC = grid.best_params_['C']
+        bestGamma = grid.best_params_['gamma']
+        bestEpsilon = grid.best_params_['epsilon']
+        reg = svm.SVR(kernel=kernelFunction, C=bestC, gamma=bestGamma, epsilon=bestEpsilon)
+    else: # 否则不寻优，使用svm默认参数
+        reg = svm.SVR(kernel=kernelFunction)
+        
+    reg.fit(trX, trY) # 训练模型
+    predY = reg.predict(teX) # 预测测试集
+
+    R2 = 1- sum((teY - predY) ** 2) / sum((teY - teY.mean()) ** 2)
+    RMSE = np.sqrt(sum((teY - predY) ** 2)/len(teY))
+    print('Predicted R2(coefficient of determination) of %s: %g' % (modelName, R2))
+    print('Predicted RMSE(root mean squared error) of %s: %g' % (modelName, RMSE))
+
+    # Plot outputs
+    plotFileName = sys.argv[6]
+    plt.figure()
+    plt.scatter(teY, predY,  color='black') # 做测试集的真实Y值vs预测Y值的散点图
+    parameter = np.polyfit(teY, predY, 1) # 插入拟合直线
+    f = np.poly1d(parameter)
+    plt.plot(teY, f(teY), color='blue', linewidth=3)
+    plt.xlabel('Observed Y')
+    plt.ylabel('Predicted Y')
+    plt.title('Prediction performance using %s' % modelName)
+    r2text = 'Predicted R2: %g' % R2
+    textPosX = min(teY) + 0.2*(max(teY)-min(teY))
+    textPosY = max(predY) - 0.2*(max(predY)-min(predY))
+    plt.text(textPosX, textPosY, r2text, bbox=dict(edgecolor='red', fill=False, alpha=0.5))
+    plt.savefig(plotFileName)
+    
 ```
 
+* SVM运行时间较长，将命令写到脚本中再用qsub提交任务
+* work_mySVR.sh
 ```bash
-# 安装Graphviz绘图包
-$ pip3 install --user graphviz -i https://pypi.tuna.tsinghua.edu.cn/simple
-# DT分类器：在命令行指定训练集、测试集、DT图文件名
-$ python3 myDT.py EI_train.txt EI_test.txt EISplicing_DecisionTreeGraph
+#!/bin/bash
+#$ -S /bin/bash
+#$ -N mySVR
+#$ -j y
+#$ -cwd
+
+# SVR：在命令行指定训练集、测试集，规格化，线性核，10次交叉寻优，图文件名
+echo '------ scale: 1; kernel: linear; numOfCV: 10 --------'
+python3 mySVR.py ACE_train.txt ACE_test.txt 1 linear 10 ObsdYvsPredY_SVR1.pdf
+echo
+
+# 规格化，线性核，不参数寻优
+echo '------ scale: 1; kernel: linear; numOfCV: 0 --------'
+python3 mySVR.py ACE_train.txt ACE_test.txt 1 linear 0 ObsdYvsPredY_SVR2.pdf
+echo
+
+# 规格化，径向基核(rbf)，10次交叉寻优
+echo '------ scale: 1; kernel: rbf; numOfCV: 10 --------'
+python3 mySVR.py ACE_train.txt ACE_test.txt 1 rbf 10 ObsdYvsPredY_SVR3.pdf
+echo
+
+# 规格化，径向基核(rbf)，不参数寻优
+echo '------ scale: 1; kernel: rbf; numOfCV: 0 --------'
+python3 mySVR.py ACE_train.txt ACE_test.txt 1 rbf 0 ObsdYvsPredY_SVR4.pdf
+echo
 ```
-[获得的DT树](https://github.com/ZhijunBioinf/Pattern-Recognition-and-Prediction/blob/master/Lab3_Classifiers_KNN-LR-DT/EISplicing_DecisionTreeGraph.pdf)
+```
+# qsub提交任务
+$ qsub work_mySVR.sh
+```
+
+* 尝试更多的选项搭配，看精度变化，比如数据不规格化时，各种核函数、是否寻优、不同交叉验证次数等情形的预测精度。
 
 ## 作业
-1. 尽量看懂`参考程序`的每一行代码。
-2. 参考程序kSpaceCoding_general.py中，供体位点序列的第71、72位保守二核苷酸GT是在程序中指定的，试着改写程序，实现从命令行传递`位置信息`给程序。
-3. 参考程序getTrainTest.py中，测试集的比例testSize是在程序中指定的，试着改写程序，实现从命令行传递`划分比例`给程序。
-4. 熟练使用sklearn包中的不同分类器。 <br>
+1. 尽量看懂`参考程序`的每一行代码。 <br>
+2. 熟练使用sklearn包中的不同回归模型。 <br>
 不怕报错，犯错越多，进步越快！
 
 ## 参考
 * MLR手册：[sklearn.linear_model.LinearRegression](https://scikit-learn.org/stable/modules/linear_model.html#ordinary-least-squares)
 * PLSR手册：[sklearn.cross_decomposition.PLSRegression](https://scikit-learn.org/stable/modules/cross_decomposition.html)
-* DT手册：[sklearn.tree.DecisionTreeClassifier](https://scikit-learn.org/stable/modules/tree.html#classification)
+* SVR手册：[sklearn.svm.SVR](https://scikit-learn.org/stable/modules/svm.html#regression)
