@@ -173,6 +173,7 @@ import sys
 from sklearn import preprocessing # 导入数据预处理包
 from sklearn.model_selection import GridSearchCV # 导入参数寻优包
 import matplotlib.pyplot as plt
+from random import sample
 
 def optimise_svm_cv(X, y, kernelFunction, numOfFolds):
     C_range = np.power(2, np.arange(-1, 6, 1.0)) # 指定C的范围
@@ -191,9 +192,11 @@ if __name__ == '__main__':
     test = np.loadtxt(sys.argv[2], delimiter='\t') # 载入测试集
     modelName = 'SVR'
 
-    trX = train[:,1:]
+    numX = train.shape[1]-1
+    randVec = np.array(sample(range(numX), 100)) + 1 # 考虑到特征数较多，SVM运行时间较长，随机抽100个特征用于后续建模
+    trX = train[:,randVec]
     trY = train[:,0]
-    teX = test[:,1:]
+    teX = test[:,randVec]
     teY = test[:,0]
 
     isScale = int(sys.argv[3]) # 建模前，是否将每个特征归一化到[-1,1]
