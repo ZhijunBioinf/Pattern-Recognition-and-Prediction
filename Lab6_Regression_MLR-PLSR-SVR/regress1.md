@@ -48,19 +48,25 @@ import numpy as np
 from sklearn import linear_model # 导入MLR包
 import sys
 import matplotlib.pyplot as plt
+from sklearn import preprocessing
 
 train = np.loadtxt(sys.argv[1], delimiter='\t') # 载入训练集
 test = np.loadtxt(sys.argv[2], delimiter='\t') # 载入测试集
 isNormalizeX = bool(int(sys.argv[3])) # 是否标准化每个x
 modelName = 'MLR'
 
-reg = linear_model.LinearRegression(normalize = isNormalizeX) # 创建一个MLR的实例
 trX = train[:,1:]
 trY = train[:,0]
-reg.fit(trX, trY) # 训练模型
-
 teX = test[:,1:]
 teY = test[:,0]
+
+if isNormalizeX:
+    scaler = preprocessing.StandardScaler()
+    trX = scaler.fit_transform(trX)
+    teX = scaler.transform(teX)
+
+reg = linear_model.LinearRegression() # 创建一个MLR的实例
+reg.fit(trX, trY) # 训练模型
 predY = reg.predict(teX) # 预测测试集
 
 R2 = 1- sum((teY - predY) ** 2) / sum((teY - teY.mean()) ** 2)
@@ -87,6 +93,8 @@ plt.savefig(plotFileName)
 ```bash
 # MLR模型：在命令行指定训练集、测试集、是否对特征标准化、图名
 $ python3 myMLR.py ACE_train.txt ACE_test.txt 0 ObsdYvsPredY_MLR.pdf
+# 试试对数据标准化
+$ python3 myMLR.py ACE_train.txt ACE_test.txt 1 ObsdYvsPredY_MLR1.pdf
 ```
 
 ## 3. 以PLSR完成ACE抑制剂活性预测
