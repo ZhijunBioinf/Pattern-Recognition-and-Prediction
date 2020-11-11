@@ -173,6 +173,10 @@ $ python3 myPLSR.py ACE_train.txt ACE_test.txt 20 ObsdYvsPredY_PLSR.pdf
 ```
 
 ## 4. 以SVR完成ACE抑制剂活性预测
+```sh
+# 安装tictoc程序计时包
+$ pip3 install --user pytictoc -i https://pypi.tuna.tsinghua.edu.cn/simple
+```
 * 参考程序：mySVR.py
 ```python3
 import numpy as np
@@ -182,6 +186,7 @@ from sklearn import preprocessing # 导入数据预处理包
 from sklearn.model_selection import GridSearchCV # 导入参数寻优包
 import matplotlib.pyplot as plt
 from random import sample
+from pytictoc import TicToc
 
 def optimise_svm_cv(X, y, kernelFunction, numOfFolds):
     C_range = np.power(2, np.arange(-1, 6, 1.0)) # 指定C的范围
@@ -215,9 +220,12 @@ if __name__ == '__main__':
         min_max_scaler = preprocessing.MinMaxScaler(feature_range=(-1,1))
         trX = min_max_scaler.fit_transform(trX)
         teX = min_max_scaler.transform(teX)
-
+    
+    t = TicToc() # 创建一个TicToc实例
+    t.tic()
     if numOfFolds > 2: # 如果k-fold > 2, 则进行参数寻优
         grid = optimise_svm_cv(trX, trY, kernelFunction, numOfFolds)
+        print('Time cost in optimising c-g-p: %gs' % t.tocvalue(restart=True))
         bestC = grid.best_params_['C']
         bestGamma = grid.best_params_['gamma']
         bestEpsilon = grid.best_params_['epsilon']
@@ -226,7 +234,9 @@ if __name__ == '__main__':
         reg = svm.SVR(kernel=kernelFunction)
         
     reg.fit(trX, trY) # 训练模型
+    print('Time cost in building model: %gs' % t.tocvalue(restart=True))
     predY = reg.predict(teX) # 预测测试集
+    print('Time cost in predicting Y of test set: %gs\n' % t.tocvalue(restart=True))
 
     R2 = 1- sum((teY - predY) ** 2) / sum((teY - teY.mean()) ** 2)
     RMSE = np.sqrt(sum((teY - predY) ** 2)/len(teY))
