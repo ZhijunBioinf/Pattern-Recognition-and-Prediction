@@ -12,7 +12,7 @@
 
 ## 实验六 [回归模型之多元线性回归、偏最小二乘回归、支持向量回归](https://github.com/ZhijunBioinf/Pattern-Recognition-and-Prediction/blob/master/Lab6_Regression_MLR-PLSR-SVR/regress1.md)
 
-## 实验七 [因子分解(主成分分析)与特征选择(互信息过滤、迭代特征剔除、随机森林)]
+## 实验七 [因子分解与特征选择](https://github.com/ZhijunBioinf/Pattern-Recognition-and-Prediction/blob/master/Lab7_FeatureReduction/dimReduction.md)
 
 ## 实验八 [无监督学习之K-均值聚类]
 
