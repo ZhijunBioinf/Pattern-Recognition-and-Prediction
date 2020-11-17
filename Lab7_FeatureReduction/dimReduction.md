@@ -16,25 +16,12 @@ $ ln -s ../lab_06/ACE_train.txt
 $ ln -s ../lab_06/ACE_test.txt
 ```
 
-## 1. 使用PCA进行特征压缩降维，以保留主成分建立SVR模型
-* 参考程序：myPCA_SVR.py
+## 准备SVM参数寻优函数
+* 将以下程序保存为：optimise_svm_cv.py
 ```python3
-import numpy as np
-from sklearn import svm # 导入svm包
-import sys
-from sklearn import preprocessing # 导入数据预处理包
 from sklearn.model_selection import GridSearchCV # 导入参数寻优包
-import matplotlib.pyplot as plt
-from pytictoc import TicToc # 导入程序计时包
-from sklearn.decomposition import PCA # 导入PCA包
-
-def do_PCA(trX, teX, percentVar=0.9, solver='full'):
-    pca = PCA(n_components = percentVar, svd_solver = solver) # 创建一个PCA实例
-    trX = pca.fit_transform(trX)
-    teX = pca.transform(teX)
-    print("The cummulative percentage of variance explained: %s" % np.cumsum(pca.explained_variance_ratio_))
-    print("The estimated number of components: %d" % pca.n_components_)
-    return trX, teX
+import numpy as np
+from sklearn import svm
 
 def optimise_svm_cv(X, y, kernelFunction, numOfFolds):
     C_range = np.power(2, np.arange(-1, 6, 1.0)) # 指定C的范围
@@ -47,8 +34,16 @@ def optimise_svm_cv(X, y, kernelFunction, numOfFolds):
     grid.fit(X, y) # grid寻优c, g, p
     print("The best parameters are %s with a score of %g" % (grid.best_params_, grid.best_score_))
     return grid
+```
+
+## 准备预测表现作图函数
+* 将以下程序保存为：do_plot.py
+```
+import matplotlib.pyplot as plt
+import numpy as np
 
 def do_plot(teY, predY, modelName, plotFileName):
+    R2 = 1- sum((teY - predY) ** 2) / sum((teY - teY.mean()) ** 2)
     plt.figure()
     plt.scatter(teY, predY,  color='black') # 做测试集的真实Y值vs预测Y值的散点图
     parameter = np.polyfit(teY, predY, 1) # 插入拟合直线
@@ -63,6 +58,34 @@ def do_plot(teY, predY, modelName, plotFileName):
     plt.text(textPosX, textPosY, r2text, bbox=dict(edgecolor='red', fill=False, alpha=0.5))
     plt.savefig(plotFileName)
     print('Plot of prediction performance is save into %s' % plotFileName)
+```
+
+## 准备PCA函数
+* 将以下程序保存为：do_PCA.py
+```
+from sklearn.decomposition import PCA # 导入PCA包
+import numpy as np
+
+def do_PCA(trX, teX, percentVar=0.9, solver='full'):
+    pca = PCA(n_components = percentVar, svd_solver = solver) # 创建一个PCA实例
+    trX = pca.fit_transform(trX)
+    teX = pca.transform(teX)
+    print("The cummulative percentage of variance explained: %s" % np.cumsum(pca.explained_variance_ratio_))
+    print("The estimated number of components: %d" % pca.n_components_)
+    return trX, teX
+```
+
+## 1. 使用PCA进行特征压缩降维，以保留主成分建立SVR模型
+* 参考程序：myPCA_SVR.py
+```python3
+import numpy as np
+from sklearn import svm # 导入svm包
+import sys
+from sklearn import preprocessing # 导入数据预处理包
+from pytictoc import TicToc # 导入程序计时包
+from do_PCA import * # 导入自编函数
+from optimise_svm_cv import * # 导入自编函数
+from do_plot import * # 导入自编函数
 
 if __name__ == '__main__':
     train = np.loadtxt(sys.argv[1], delimiter='\t') # 载入训练集
@@ -80,7 +103,7 @@ if __name__ == '__main__':
 
     percentVar = float(sys.argv[6]) # 主成分累计解释的百分比
     if percentVar < 1 and percentVar > 0:
-        trX, teX = do_PCA(trX, teX, percentVar)
+        trX, teX = do_PCA(trX, teX, percentVar) # 调用自编函数
     else:
         np.warnings.warn('Incorrect percentage of explained variance specified!! The PCA will be omitted!!')
 
@@ -92,7 +115,7 @@ if __name__ == '__main__':
     t = TicToc() # 创建一个TicToc实例
     t.tic()
     if numOfFolds > 2: # 如果k-fold > 2, 则进行参数寻优
-        grid = optimise_svm_cv(trX, trY, kernelFunction, numOfFolds)
+        grid = optimise_svm_cv(trX, trY, kernelFunction, numOfFolds) # 调用自编函数
         print('Time cost in optimising c-g-p: %gs' % t.tocvalue(restart=True))
         bestC = grid.best_params_['C']
         bestGamma = grid.best_params_['gamma']
@@ -114,7 +137,7 @@ if __name__ == '__main__':
     # Plot outputs
     if len(sys.argv) > 7:
         plotFileName = sys.argv[7]
-        do_plot(teY, predY, modelName, plotFileName)
+        do_plot(teY, predY, modelName, plotFileName) # 调用自编函数
     
 ```
 
