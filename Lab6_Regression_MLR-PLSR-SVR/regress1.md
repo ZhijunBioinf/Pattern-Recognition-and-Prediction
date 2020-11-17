@@ -200,18 +200,39 @@ def optimise_svm_cv(X, y, kernelFunction, numOfFolds):
     print("The best parameters are %s with a score of %g" % (grid.best_params_, grid.best_score_))
     return grid
 
+def do_plot(teY, predY, modelName, plotFileName):
+    R2 = 1- sum((teY - predY) ** 2) / sum((teY - teY.mean()) ** 2)
+    plt.figure()
+    plt.scatter(teY, predY,  color='black') # 做测试集的真实Y值vs预测Y值的散点图
+    parameter = np.polyfit(teY, predY, 1) # 插入拟合直线
+    f = np.poly1d(parameter)
+    plt.plot(teY, f(teY), color='blue', linewidth=3)
+    plt.xlabel('Observed Y')
+    plt.ylabel('Predicted Y')
+    plt.title('Prediction performance using %s' % modelName)
+    r2text = 'Predicted R2: %g' % R2
+    textPosX = min(teY) + 0.2*(max(teY)-min(teY))
+    textPosY = max(predY) - 0.2*(max(predY)-min(predY))
+    plt.text(textPosX, textPosY, r2text, bbox=dict(edgecolor='red', fill=False, alpha=0.5))
+    plt.savefig(plotFileName)
+    print('Plot of prediction performance is save into %s' % plotFileName)
+    
 if __name__ == '__main__':
     train = np.loadtxt(sys.argv[1], delimiter='\t') # 载入训练集
     test = np.loadtxt(sys.argv[2], delimiter='\t') # 载入测试集
     modelName = 'SVR'
 
-    numX = train.shape[1]-1
-    randVec = np.array(sample(range(numX), 100)) + 1 # 考虑到特征数较多，SVM运行时间较长，随机抽100个特征用于后续建模
-    trX = train[:,randVec]
     trY = train[:,0]
-    teX = test[:,randVec]
+    trX = train[:,1:]
+    teX = test[:,1:]
     teY = test[:,0]
-
+    numX = trX.shape[1]
+    if numX > 200:
+        randVec = np.array(sample(range(numX), 100)) + 1 # 考虑到特征数较多，SVM运行时间较长，随机抽100个特征用于后续建模
+        print('Note: 100 features are randomly selected to speed up modeling')
+        trX = train[:,randVec]
+        teX = test[:,randVec]
+    
     isScale = int(sys.argv[3]) # 建模前，是否将每个特征归一化到[-1,1]
     kernelFunction = sys.argv[4] # {‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’}, default=’rbf’
     numOfFolds = int(sys.argv[5]) # 是否寻找最优参数：c, g, p
@@ -244,20 +265,9 @@ if __name__ == '__main__':
     print('Predicted RMSE(root mean squared error) of %s: %g' % (modelName, RMSE))
 
     # Plot outputs
-    plotFileName = sys.argv[6]
-    plt.figure()
-    plt.scatter(teY, predY,  color='black') # 做测试集的真实Y值vs预测Y值的散点图
-    parameter = np.polyfit(teY, predY, 1) # 插入拟合直线
-    f = np.poly1d(parameter)
-    plt.plot(teY, f(teY), color='blue', linewidth=3)
-    plt.xlabel('Observed Y')
-    plt.ylabel('Predicted Y')
-    plt.title('Prediction performance using %s' % modelName)
-    r2text = 'Predicted R2: %g' % R2
-    textPosX = min(teY) + 0.2*(max(teY)-min(teY))
-    textPosY = max(predY) - 0.2*(max(predY)-min(predY))
-    plt.text(textPosX, textPosY, r2text, bbox=dict(edgecolor='red', fill=False, alpha=0.5))
-    plt.savefig(plotFileName)
+    if len(sys.argv) > 6:
+        plotFileName = sys.argv[6]
+        do_plot(teY, predY, modelName, plotFileName)
     
 ```
 
