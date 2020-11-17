@@ -29,12 +29,12 @@ from pytictoc import TicToc # 导入程序计时包
 from sklearn.decomposition import PCA # 导入PCA包
 
 def do_PCA(trX, teX, percentVar=0.9, solver='full'):
-	pca = PCA(n_components = percentVar, svd_solver = solver) # 创建一个PCA实例
-	trX = pca.fit_transform(trX)
-	teX = pca.transform(teX)
-	print("The cummulative percentage of variance explained: %s" % np.cumsum(pca.explained_variance_ratio_))
-	print("The estimated number of components: %d" % pca.n_components_)
-	return trX, teX
+    pca = PCA(n_components = percentVar, svd_solver = solver) # 创建一个PCA实例
+    trX = pca.fit_transform(trX)
+    teX = pca.transform(teX)
+    print("The cummulative percentage of variance explained: %s" % np.cumsum(pca.explained_variance_ratio_))
+    print("The estimated number of components: %d" % pca.n_components_)
+    return trX, teX
 
 def optimise_svm_cv(X, y, kernelFunction, numOfFolds):
     C_range = np.power(2, np.arange(-1, 6, 1.0)) # 指定C的范围
@@ -80,9 +80,9 @@ if __name__ == '__main__':
 
     percentVar = float(sys.argv[6]) # 主成分累计解释的百分比
     if percentVar < 1 and percentVar > 0:
-    	trX, teX = do_PCA(trX, teX, percentVar)
+        trX, teX = do_PCA(trX, teX, percentVar)
     else:
-    	np.warnings.warn('Incorrect percentage of explained variance specified!! The PCA will be omitted!!')
+        np.warnings.warn('Incorrect percentage of explained variance specified!! The PCA will be omitted!!')
 
     if isScale:
         min_max_scaler = preprocessing.MinMaxScaler(feature_range=(-1,1))
@@ -113,8 +113,110 @@ if __name__ == '__main__':
 
     # Plot outputs
     if len(sys.argv) > 7:
-    	plotFileName = sys.argv[7]
-    	do_plot(teY, predY, modelName, plotFileName)
+        plotFileName = sys.argv[7]
+        do_plot(teY, predY, modelName, plotFileName)
+    
+```
+
+## 2. 使用MI-filter进行特征选择，以保留变量建立SVR模型
+* 参考程序：myMIFilter_SVR.py
+```python3
+import numpy as np
+from sklearn import svm # 导入svm包
+import sys
+from sklearn import preprocessing # 导入数据预处理包
+from sklearn.model_selection import GridSearchCV # 导入参数寻优包
+import matplotlib.pyplot as plt
+from pytictoc import TicToc # 导入程序计时包
+from sklearn.decomposition import PCA # 导入PCA包
+
+def do_PCA(trX, teX, percentVar=0.9, solver='full'):
+    pca = PCA(n_components = percentVar, svd_solver = solver) # 创建一个PCA实例
+    trX = pca.fit_transform(trX)
+    teX = pca.transform(teX)
+    print("The cummulative percentage of variance explained: %s" % np.cumsum(pca.explained_variance_ratio_))
+    print("The estimated number of components: %d" % pca.n_components_)
+    return trX, teX
+
+def optimise_svm_cv(X, y, kernelFunction, numOfFolds):
+    C_range = np.power(2, np.arange(-1, 6, 1.0)) # 指定C的范围
+    gamma_range = np.power(2, np.arange(0, -8, -1.0)) # 指定g的范围
+    epsilon_range = np.power(2, np.arange(-8, -1, 1.0)) # 指定p的范围
+    parameters = dict(gamma=gamma_range, C=C_range, epsilon=epsilon_range) # 将c, g, p组成字典，用于参数的grid遍历
+    
+    reg = svm.SVR(kernel=kernelFunction) # 创建一个SVR的实例
+    grid = GridSearchCV(reg, param_grid=parameters, cv=numOfFolds) # 创建一个GridSearchCV实例
+    grid.fit(X, y) # grid寻优c, g, p
+    print("The best parameters are %s with a score of %g" % (grid.best_params_, grid.best_score_))
+    return grid
+
+def do_plot(teY, predY, modelName, plotFileName):
+    plt.figure()
+    plt.scatter(teY, predY,  color='black') # 做测试集的真实Y值vs预测Y值的散点图
+    parameter = np.polyfit(teY, predY, 1) # 插入拟合直线
+    f = np.poly1d(parameter)
+    plt.plot(teY, f(teY), color='blue', linewidth=3)
+    plt.xlabel('Observed Y')
+    plt.ylabel('Predicted Y')
+    plt.title('Prediction performance using %s' % modelName)
+    r2text = 'Predicted R2: %g' % R2
+    textPosX = min(teY) + 0.2*(max(teY)-min(teY))
+    textPosY = max(predY) - 0.2*(max(predY)-min(predY))
+    plt.text(textPosX, textPosY, r2text, bbox=dict(edgecolor='red', fill=False, alpha=0.5))
+    plt.savefig(plotFileName)
+    print('Plot of prediction performance is save into %s' % plotFileName)
+
+if __name__ == '__main__':
+    train = np.loadtxt(sys.argv[1], delimiter='\t') # 载入训练集
+    test = np.loadtxt(sys.argv[2], delimiter='\t') # 载入测试集
+    modelName = 'SVR'
+
+    trX = train[:,1:]
+    trY = train[:,0]
+    teX = test[:,1:]
+    teY = test[:,0]
+
+    isScale = int(sys.argv[3]) # 建模前，是否将每个特征归一化到[-1,1]
+    kernelFunction = sys.argv[4] # {‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’}, default=’rbf’
+    numOfFolds = int(sys.argv[5]) # 是否寻找最优参数：c, g, p
+
+    percentVar = float(sys.argv[6]) # 主成分累计解释的百分比
+    if percentVar < 1 and percentVar > 0:
+        trX, teX = do_PCA(trX, teX, percentVar)
+    else:
+        np.warnings.warn('Incorrect percentage of explained variance specified!! The PCA will be omitted!!')
+
+    if isScale:
+        min_max_scaler = preprocessing.MinMaxScaler(feature_range=(-1,1))
+        trX = min_max_scaler.fit_transform(trX)
+        teX = min_max_scaler.transform(teX)
+    
+    t = TicToc() # 创建一个TicToc实例
+    t.tic()
+    if numOfFolds > 2: # 如果k-fold > 2, 则进行参数寻优
+        grid = optimise_svm_cv(trX, trY, kernelFunction, numOfFolds)
+        print('Time cost in optimising c-g-p: %gs' % t.tocvalue(restart=True))
+        bestC = grid.best_params_['C']
+        bestGamma = grid.best_params_['gamma']
+        bestEpsilon = grid.best_params_['epsilon']
+        reg = svm.SVR(kernel=kernelFunction, C=bestC, gamma=bestGamma, epsilon=bestEpsilon)
+    else: # 否则不寻优，使用svm默认参数
+        reg = svm.SVR(kernel=kernelFunction)
+        
+    reg.fit(trX, trY) # 训练模型
+    print('Time cost in building model: %gs' % t.tocvalue(restart=True))
+    predY = reg.predict(teX) # 预测测试集
+    print('Time cost in predicting Y of test set: %gs\n' % t.tocvalue(restart=True))
+
+    R2 = 1- sum((teY - predY) ** 2) / sum((teY - teY.mean()) ** 2)
+    RMSE = np.sqrt(sum((teY - predY) ** 2)/len(teY))
+    print('Predicted R2(coefficient of determination) of %s: %g' % (modelName, R2))
+    print('Predicted RMSE(root mean squared error) of %s: %g' % (modelName, RMSE))
+
+    # Plot outputs
+    if len(sys.argv) > 7:
+        plotFileName = sys.argv[7]
+        do_plot(teY, predY, modelName, plotFileName)
     
 ```
 
@@ -127,9 +229,14 @@ if __name__ == '__main__':
 #$ -j y
 #$ -cwd
 
-# SVR：在命令行指定训练集、测试集，规格化，线性核，10次交叉寻优，图文件名
-echo '------ scale: 1; kernel: linear; numOfCV: 10 --------'
-python3 mySVR.py ACE_train.txt ACE_test.txt 1 linear 10 ObsdYvsPredY_SVR1.pdf
+# 1. 数据规格化，径向基核，10次交叉寻优
+echo '------ scale: 1; kernel: rbf; numOfCV: 10 --------'
+python3 myPCA_SVR.py ACE_train.txt ACE_test.txt 1 rbf 10 -1 ObsdYvsPredY_allX_SVR.pdf
+echo
+
+# 2. 数据规格化，径向基核，10次交叉寻优，主成分累计解释的百分比
+echo '------ scale: 1; kernel: rbf; numOfCV: 10; percentVar: 0.95 --------'
+python3 myPCA_SVR.py ACE_train.txt ACE_test.txt 1 rbf 10 0.95 ObsdYvsPredY_PCA_SVR.pdf
 echo
 
 # 规格化，线性核，不参数寻优
@@ -156,7 +263,7 @@ $ qsub work_mySVR.sh
 
 ## 作业
 1. 尽量看懂`参考程序`的每一行代码。 <br>
-2. 熟练使用sklearn包中的不同回归模型。 <br>
+2. 熟练使用sklearn包中的不同特征降维/选择方法。 <br>
 不怕报错，犯错越多，进步越快！
 
 ## 参考
