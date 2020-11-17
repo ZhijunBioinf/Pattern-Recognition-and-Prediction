@@ -1,8 +1,8 @@
-# 实验七：因子分解(PCA)与特征选择(MI-filter, SVM-RFE, RF)
+# 实验七：特征降维/选择(PCA, MI-filter, SVM-RFE, RF)
 
 ## 实验目的
 * 1）数据：[实验六](https://github.com/ZhijunBioinf/Pattern-Recognition-and-Prediction/blob/master/Lab6_Regression_MLR-PLSR-SVR/regress1.md)ACE抑制剂的训练集与测试集；基本模型：SVR
-* 2）使用主成分分析(Principal Component Analysis, PCA)进行特征压缩降维，再以SVR建模预测，比较`实验六`的SVR结果。
+* 2）使用主成分分析(Principal Component Analysis, PCA)进行特征压缩降维，再以SVR建模预测，对比`实验六`的预测结果。
 * 3）使用基于互信息的单变量过滤法(Mutual Information-based Filter)进行特征选择，后续同(2)。
 * 4）使用基于SVM的迭代特征剔除(SVM Recursive Feature Elimination, SVM-RFE)进行特征选择，后续同(2)。
 * 5）使用随机森林(Random Forest, RF)进行特征选择，后续同(2)。
@@ -16,170 +16,8 @@ $ ln -s ../lab_06/ACE_train.txt
 $ ln -s ../lab_06/ACE_test.txt
 ```
 
-## 1. 训练集与测试集构建
-* 参考程序：getTrainTest_regression.py
-```python3
-import numpy as np
-import sys
-from sklearn.model_selection import train_test_split # 用于产生训练集、测试集
-
-DataFileName = sys.argv[1]
-Data = np.loadtxt(DataFileName, delimiter = '\t') # 载入数据
-X = Data[:,1:]
-Y = Data[:,0]
-
-testSize = float(sys.argv[2]) # 命令行指定test set比例
-X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size = testSize)
-
-trainingSetFileName = sys.argv[3]
-testSetFileName = sys.argv[4]
-np.savetxt(trainingSetFileName, np.hstack((y_train.reshape(-1,1), X_train)), fmt='%g', delimiter='\t') # 将Y与X以列组合后，保存到文件
-np.savetxt(testSetFileName, np.hstack((y_test.reshape(-1,1), X_test)), fmt='%g', delimiter='\t')
-print('Generate training set(%d%%) and test set(%d%%): Done!' % ((1-testSize)*100, testSize*100))
-```
-
-```bash
-# 构建训练集与测试集：在命令行指定序列表征数据、测试集比例、train文件名、test文件名
-$ python3 getTrainTest_regression.py ACEtriPeptides_YandAA531.txt 0.2 ACE_train.txt ACE_test.txt
-```
-
-## 2. 以MLR完成ACE抑制剂活性预测
-* 参考程序：myMLR.py
-```python3
-import numpy as np
-from sklearn import linear_model # 导入MLR包
-import sys
-import matplotlib.pyplot as plt
-from sklearn import preprocessing
-
-train = np.loadtxt(sys.argv[1], delimiter='\t') # 载入训练集
-test = np.loadtxt(sys.argv[2], delimiter='\t') # 载入测试集
-isNormalizeX = bool(int(sys.argv[3])) # 是否标准化每个x
-modelName = 'MLR'
-
-trX = train[:,1:]
-trY = train[:,0]
-teX = test[:,1:]
-teY = test[:,0]
-
-if isNormalizeX:
-    scaler = preprocessing.StandardScaler()
-    trX = scaler.fit_transform(trX)
-    teX = scaler.transform(teX)
-
-reg = linear_model.LinearRegression() # 创建一个MLR的实例
-reg.fit(trX, trY) # 训练模型
-predY = reg.predict(teX) # 预测测试集
-
-R2 = 1- sum((teY - predY) ** 2) / sum((teY - teY.mean()) ** 2)
-RMSE = np.sqrt(sum((teY - predY) ** 2)/len(teY))
-print('Predicted R2(coefficient of determination) of %s: %g' % (modelName, R2))
-print('Predicted RMSE(root mean squared error) of %s: %g' % (modelName, RMSE))
-
-# Plot outputs
-plotFileName = sys.argv[4]
-plt.scatter(teY, predY,  color='black') # 做测试集的真实Y值vs预测Y值的散点图
-parameter = np.polyfit(teY, predY, 1) # 插入拟合直线
-f = np.poly1d(parameter)
-plt.plot(teY, f(teY), color='blue', linewidth=3)
-plt.xlabel('Observed Y')
-plt.ylabel('Predicted Y')
-plt.title('Prediction performance using %s' % modelName)
-r2text = 'Predicted R2: %g' % R2
-textPosX = min(teY) + 0.2*(max(teY)-min(teY))
-textPosY = max(predY) - 0.2*(max(predY)-min(predY))
-plt.text(textPosX, textPosY, r2text, bbox=dict(edgecolor='red', fill=False, alpha=0.5))
-plt.savefig(plotFileName)
-```
-
-```bash
-# MLR模型：在命令行指定训练集、测试集、是否对特征标准化、图名
-$ python3 myMLR.py ACE_train.txt ACE_test.txt 0 ObsdYvsPredY_MLR.pdf
-# 试试对数据标准化
-$ python3 myMLR.py ACE_train.txt ACE_test.txt 1 ObsdYvsPredY_MLR1.pdf
-```
-
-## 3. 以PLSR完成ACE抑制剂活性预测
-* 参考程序：myPLSR.py
-```python3
-import numpy as np
-from sklearn.cross_decomposition import PLSRegression # 导入PLSR包
-import sys
-import matplotlib.pyplot as plt
-from sklearn.model_selection import cross_val_predict # 导入交叉验证包
-
-def optimise_pls_cv(X, y, nCompMax): # 以交叉验证技术获得不同潜变量个数情形下的MSE
-    MSEVec = []
-    nCompVec = np.arange(1, nCompMax)
-    for n_comp in nCompVec:
-        pls = PLSRegression(n_components=n_comp) # 创建一个PLSR的实例
-        y_cv = cross_val_predict(pls, X, y, cv=10) # 获得10次交叉的预测Y
-        mse = sum((y - y_cv.ravel()) ** 2)/len(y) # 计算MSE, NOTE: y_cv维度为2，需转成向量
-        MSEVec.append(mse)
-    bestNComp = np.argmin(MSEVec) # 获得最小MSE对应的下标，即最优潜变量个数
-    
-    with plt.style.context('ggplot'): # 以潜变量个数为x轴，对应的MSE为y轴，作图
-        plt.plot(nCompVec, np.array(MSEVec), '-v', color='blue', mfc='blue') # 带标记点的折线图
-        plt.plot(nCompVec[bestNComp], np.array(MSEVec)[bestNComp], 'P', ms=10, mfc='red') # 在图上标记出最小MSE对应的点
-        plt.xlabel('Number of PLS components')
-        plt.xticks = nCompVec
-        plt.ylabel('MSE')
-        plt.title('Optimise the number of PLS components')
-        plt.savefig('optimizePLSComponents.pdf')
-        
-    return bestNComp
-
-if __name__ == '__main__':
-    train = np.loadtxt(sys.argv[1], delimiter='\t') # 载入训练集
-    test = np.loadtxt(sys.argv[2], delimiter='\t') # 载入测试集
-    nCompMax = int(sys.argv[3]) # 潜变量个数上限
-    modelName = 'PLSR'
-
-    trX = train[:,1:]
-    trY = train[:,0]
-    bestNComp = optimise_pls_cv(trX, trY, nCompMax)+1 # 得到最优潜变量个数（特征降维思想）
-    print('The best number of PLS components: %d' % bestNComp)
-    reg = PLSRegression(n_components = bestNComp) # 创建一个PLSR的实例
-    reg.fit(trX, trY) # 训练模型
-
-    teX = test[:,1:]
-    teY = test[:,0]
-    predY = reg.predict(teX) # 预测测试集
-    predY = predY.ravel() # NOTE: predY维度为2，需转成向量
-
-    R2 = 1- sum((teY - predY) ** 2) / sum((teY - teY.mean()) ** 2)
-    RMSE = np.sqrt(sum((teY - predY) ** 2)/len(teY))
-    print('Predicted R2(coefficient of determination) of %s: %g' % (modelName, R2))
-    print('Predicted RMSE(root mean squared error) of %s: %g' % (modelName, RMSE))
-
-    # Plot outputs
-    plotFileName = sys.argv[4]
-    plt.figure()
-    plt.scatter(teY, predY,  color='black') # 做测试集的真实Y值vs预测Y值的散点图
-    parameter = np.polyfit(teY, predY, 1) # 插入拟合直线
-    f = np.poly1d(parameter)
-    plt.plot(teY, f(teY), color='blue', linewidth=3)
-    plt.xlabel('Observed Y')
-    plt.ylabel('Predicted Y')
-    plt.title('Prediction performance using %s' % modelName)
-    r2text = 'Predicted R2: %g' % R2
-    textPosX = min(teY) + 0.2*(max(teY)-min(teY))
-    textPosY = max(predY) - 0.2*(max(predY)-min(predY))
-    plt.text(textPosX, textPosY, r2text, bbox=dict(edgecolor='red', fill=False, alpha=0.5))
-    plt.savefig(plotFileName)
-```
-
-```bash
-# PLSR模型：在命令行指定训练集、测试集、最大潜变量个数(e.g.: 20)、图名
-$ python3 myPLSR.py ACE_train.txt ACE_test.txt 20 ObsdYvsPredY_PLSR.pdf
-```
-
-## 4. 以SVR完成ACE抑制剂活性预测
-```sh
-# 安装tictoc程序计时包
-$ pip3 install --user pytictoc -i https://pypi.tuna.tsinghua.edu.cn/simple
-```
-* 参考程序：mySVR.py
+## 1. 使用PCA进行特征压缩降维，以保留主成分建立SVR模型
+* 参考程序：myPCA_SVR.py
 ```python3
 import numpy as np
 from sklearn import svm # 导入svm包
@@ -187,9 +25,10 @@ import sys
 from sklearn import preprocessing # 导入数据预处理包
 from sklearn.model_selection import GridSearchCV # 导入参数寻优包
 import matplotlib.pyplot as plt
-from random import sample
-from pytictoc import TicToc
+from pytictoc import TicToc # 导入程序计时包
+from sklearn.decomposition import PCA # 导入PCA包
 
+def do_PCA():
 def optimise_svm_cv(X, y, kernelFunction, numOfFolds):
     C_range = np.power(2, np.arange(-1, 6, 1.0)) # 指定C的范围
     gamma_range = np.power(2, np.arange(0, -8, -1.0)) # 指定g的范围
