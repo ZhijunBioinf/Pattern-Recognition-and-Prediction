@@ -5,7 +5,7 @@
 * 2）使用主成分分析(Principal Component Analysis, PCA)进行特征压缩降维，再以SVR建模预测，对比`实验六`的预测结果。
 * 3）使用基于互信息的单变量过滤法(Mutual Information-based Filter)进行特征选择，后续同(2)。
 * 4）使用基于SVM的迭代特征剔除(SVM Recursive Feature Elimination, SVM-RFE)进行特征选择，后续同(2)。
-* 5）使用随机森林(Random Forest, RF)进行特征选择（用于剪接位点识别），后续同(2)。
+* 5）使用随机森林(Random Forest, RF)进行特征选择（用于剪接位点识别），再以SVC建模预测。
 
 ## 准备工作目录与数据
 ```bash
