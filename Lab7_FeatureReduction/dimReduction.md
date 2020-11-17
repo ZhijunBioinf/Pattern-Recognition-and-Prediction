@@ -8,7 +8,7 @@
 * 5）使用随机森林(Random Forest, RF)进行特征选择，后续同(2)。
 
 ## 准备工作目录与数据
-```
+```bash
 $ mkdir lab_07
 $ cd lab_07
 # 对lab_06路径中的ACE抑制剂训练集与测试集建立软链接
@@ -38,7 +38,7 @@ def optimise_svm_cv(X, y, kernelFunction, numOfFolds):
 
 ## 准备预测表现作图函数
 * 将以下程序保存为：do_plot.py
-```
+```python3
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -62,7 +62,7 @@ def do_plot(teY, predY, modelName, plotFileName):
 
 ## 准备PCA函数
 * 将以下程序保存为：do_PCA.py
-```
+```python3
 from sklearn.decomposition import PCA # 导入PCA包
 import numpy as np
 
