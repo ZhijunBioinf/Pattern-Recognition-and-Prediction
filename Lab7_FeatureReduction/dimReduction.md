@@ -28,7 +28,14 @@ import matplotlib.pyplot as plt
 from pytictoc import TicToc # 导入程序计时包
 from sklearn.decomposition import PCA # 导入PCA包
 
-def do_PCA():
+def do_PCA(trX, teX, percentVar=0.9, solver='full'):
+	pca = PCA(n_components = percentVar, svd_solver = solver) # 创建一个PCA实例
+	trX = pca.fit_transform(trX)
+	teX = pca.transform(teX)
+	print("The cummulative percentage of variance explained: %s" % np.cumsum(pca.explained_variance_ratio_))
+	print("The estimated number of components: %d" % pca.n_components_)
+	return trX, teX
+
 def optimise_svm_cv(X, y, kernelFunction, numOfFolds):
     C_range = np.power(2, np.arange(-1, 6, 1.0)) # 指定C的范围
     gamma_range = np.power(2, np.arange(0, -8, -1.0)) # 指定g的范围
@@ -41,21 +48,41 @@ def optimise_svm_cv(X, y, kernelFunction, numOfFolds):
     print("The best parameters are %s with a score of %g" % (grid.best_params_, grid.best_score_))
     return grid
 
+def do_plot(teY, predY, modelName, plotFileName):
+    plt.figure()
+    plt.scatter(teY, predY,  color='black') # 做测试集的真实Y值vs预测Y值的散点图
+    parameter = np.polyfit(teY, predY, 1) # 插入拟合直线
+    f = np.poly1d(parameter)
+    plt.plot(teY, f(teY), color='blue', linewidth=3)
+    plt.xlabel('Observed Y')
+    plt.ylabel('Predicted Y')
+    plt.title('Prediction performance using %s' % modelName)
+    r2text = 'Predicted R2: %g' % R2
+    textPosX = min(teY) + 0.2*(max(teY)-min(teY))
+    textPosY = max(predY) - 0.2*(max(predY)-min(predY))
+    plt.text(textPosX, textPosY, r2text, bbox=dict(edgecolor='red', fill=False, alpha=0.5))
+    plt.savefig(plotFileName)
+    print('Plot of prediction performance is save into %s' % plotFileName)
+
 if __name__ == '__main__':
     train = np.loadtxt(sys.argv[1], delimiter='\t') # 载入训练集
     test = np.loadtxt(sys.argv[2], delimiter='\t') # 载入测试集
     modelName = 'SVR'
 
-    numX = train.shape[1]-1
-    randVec = np.array(sample(range(numX), 100)) + 1 # 考虑到特征数较多，SVM运行时间较长，随机抽100个特征用于后续建模
-    trX = train[:,randVec]
+    trX = train[:,1:]
     trY = train[:,0]
-    teX = test[:,randVec]
+    teX = test[:,1:]
     teY = test[:,0]
 
     isScale = int(sys.argv[3]) # 建模前，是否将每个特征归一化到[-1,1]
     kernelFunction = sys.argv[4] # {‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’}, default=’rbf’
     numOfFolds = int(sys.argv[5]) # 是否寻找最优参数：c, g, p
+
+    percentVar = float(sys.argv[6]) # 主成分累计解释的百分比
+    if percentVar < 1 and percentVar > 0:
+    	trX, teX = do_PCA(trX, teX, percentVar)
+    else:
+    	np.warnings.warn('Incorrect percentage of explained variance specified!! The PCA will be omitted!!')
 
     if isScale:
         min_max_scaler = preprocessing.MinMaxScaler(feature_range=(-1,1))
@@ -85,20 +112,9 @@ if __name__ == '__main__':
     print('Predicted RMSE(root mean squared error) of %s: %g' % (modelName, RMSE))
 
     # Plot outputs
-    plotFileName = sys.argv[6]
-    plt.figure()
-    plt.scatter(teY, predY,  color='black') # 做测试集的真实Y值vs预测Y值的散点图
-    parameter = np.polyfit(teY, predY, 1) # 插入拟合直线
-    f = np.poly1d(parameter)
-    plt.plot(teY, f(teY), color='blue', linewidth=3)
-    plt.xlabel('Observed Y')
-    plt.ylabel('Predicted Y')
-    plt.title('Prediction performance using %s' % modelName)
-    r2text = 'Predicted R2: %g' % R2
-    textPosX = min(teY) + 0.2*(max(teY)-min(teY))
-    textPosY = max(predY) - 0.2*(max(predY)-min(predY))
-    plt.text(textPosX, textPosY, r2text, bbox=dict(edgecolor='red', fill=False, alpha=0.5))
-    plt.savefig(plotFileName)
+    if len(sys.argv) > 7:
+    	plotFileName = sys.argv[7]
+    	do_plot(teY, predY, modelName, plotFileName)
     
 ```
 
