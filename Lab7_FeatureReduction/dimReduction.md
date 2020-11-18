@@ -95,6 +95,7 @@ import numpy as np
 from sklearn.feature_selection import RFE # 导入RFE包
 from sklearn.svm import SVR # 导入SVR包
 from pytictoc import TicToc
+from random import sample
 
 trainFile = sys.argv[1]
 testFile = sys.argv[2]
@@ -105,6 +106,13 @@ trY = train[:,0]
 teX = test[:,1:]
 teY = test[:,0]
 
+numX = trX.shape[1]
+if numX > 200:
+    randVec = np.array(sample(range(numX), 100)) + 1 # 考虑到特征数较多，SVM运行时间较长，随机抽100个特征用于后续建模
+    print('Note: 100 features are randomly selected to speed up modeling')
+    trX = train[:,randVec]
+    teX = test[:,randVec]
+    
 n_features = int(sys.argv[3])
 estimator = SVR(kernel="linear")
 t = TicToc()
@@ -131,8 +139,8 @@ print('New training set is saved into: %s\nNew test set is saved into: %s' % (ne
 #$ -j y
 #$ -cwd
 
-# 设置保留100个特征
-python3 mySVMRFE.py ACE_train.txt ACE_test.txt 100 train_svmrfe.txt test_svmrfe.txt
+# 设置保留10个特征
+python3 mySVMRFE.py ACE_train.txt ACE_test.txt 10 train_svmrfe.txt test_svmrfe.txt
 ```
 
 ```bash
