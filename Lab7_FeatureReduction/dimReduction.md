@@ -136,7 +136,7 @@ print('%d features are selected.' % trX.shape[1])
 print('New training set is saved into: %s\nNew test set is saved into: %s' % (newTrainFile, newTestFile))
 ```
 
-* SVM-RFE运行时间较长，将命令写到脚本中再用qsub提交任务
+* SVM-RFE运行时间较长，将命令写到脚本中再用qsub提交任务。Note: 命令脚本中也需要先激活base环境，才可用python3
 * work_mySVMRFE.sh
 ```bash
 #!/bin/bash
