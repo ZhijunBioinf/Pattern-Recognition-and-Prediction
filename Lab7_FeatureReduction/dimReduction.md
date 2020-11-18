@@ -184,8 +184,8 @@ print('Time cost in selecting fetures with Random-Forest: %gs' % t.tocvalue())
 
 newTrainFile = sys.argv[4]
 newTestFile = sys.argv[5]
-np.savetxt(newTrainFile, np.hstack((trY.reshape(-1,1), trX)), fmt='%g', delimiter='\t') # 将Y与X以列组合后，保存到文件
-np.savetxt(newTestFile, np.hstack((teY.reshape(-1,1), teX)), fmt='%g', delimiter='\t')
+np.savetxt(newTrainFile, np.hstack((trY.reshape(-1,1), trX)), fmt='%g', delimiter=',') # 将Y与X以列组合后，保存到文件
+np.savetxt(newTestFile, np.hstack((teY.reshape(-1,1), teX)), fmt='%g', delimiter=',')
 print('%d features are selected.' % trX.shape[1])
 print('New training set is saved into: %s\nNew test set is saved into: %s' % (newTrainFile, newTestFile))
 ```
