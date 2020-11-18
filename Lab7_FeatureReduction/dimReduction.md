@@ -14,6 +14,10 @@ $ cd lab_07
 # 对lab_06路径中的ACE抑制剂训练集与测试集建立软链接
 $ ln -s ../lab_06/ACE_train.txt
 $ ln -s ../lab_06/ACE_test.txt
+
+# 若python3不可用，需先激活base环境
+$ source /opt/miniconda3/bin/activate
+$ conda activate
 ```
 
 ## 1. 使用PCA进行特征压缩降维，再以保留主成分建立SVR模型
