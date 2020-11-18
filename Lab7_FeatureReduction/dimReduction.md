@@ -41,6 +41,7 @@ pca = PCA(n_components = percentVar, svd_solver = 'full') # 创建一个PCA实�
 trX = pca.fit_transform(trX)
 teX = pca.transform(teX)
 
+print('Number of principal components: %d' % trX.shape[1])
 newTrainFile = sys.argv[4]
 newTestFile = sys.argv[5]
 np.savetxt(newTrainFile, np.hstack((trY.reshape(-1,1), trX)), fmt='%g', delimiter='\t') # 将Y与X以列组合后，保存到文件
