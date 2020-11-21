@@ -145,8 +145,10 @@ print('New training set is saved into: %s\nNew test set is saved into: %s' % (ne
 #$ -j y
 #$ -cwd
 
+# 激活base环境，保证计算节点上正常使用python3
 source /opt/miniconda3/bin/activate
 conda activate
+
 # 设置保留10个特征
 python3 mySVMRFE.py ACE_train.txt ACE_test.txt 10 train_svmrfe.txt test_svmrfe.txt
 ```
