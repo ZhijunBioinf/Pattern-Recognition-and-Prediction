@@ -12,6 +12,10 @@ $ mkdir lab_06
 $ cd lab_06
 # 对lab_05路径中的ACE抑制剂多肽活性及序列的AA531特征(result.txt)建立软链接，并重命名为'ACEtriPeptides_YandAA531.txt'
 $ ln -s ../lab_05/result.txt ACEtriPeptides_YandAA531.txt
+
+# 集群上若python3不可用，需先激活base环境
+$ source /opt/miniconda3/bin/activate
+$ conda activate
 ```
 
 ## 1. 训练集与测试集构建
@@ -279,6 +283,10 @@ if __name__ == '__main__':
 #$ -N mySVR
 #$ -j y
 #$ -cwd
+
+# 激活base环境，保证计算节点上正常使用python3
+source /opt/miniconda3/bin/activate
+conda activate
 
 # SVR：在命令行指定训练集、测试集，规格化，线性核，10次交叉寻优，图文件名
 echo '------ scale: 1; kernel: linear; numOfCV: 10 --------'
