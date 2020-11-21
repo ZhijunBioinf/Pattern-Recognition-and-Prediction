@@ -32,6 +32,10 @@
 # 建立lab_05文件夹
 $ mkdir lab_05
 $ cd lab_05
+
+# 集群上若python3不可用，需先激活base环境
+$ source /opt/miniconda3/bin/activate
+$ conda activate
 ```
 
 ## 6. 序列表征
