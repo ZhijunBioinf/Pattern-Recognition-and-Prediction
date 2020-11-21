@@ -10,6 +10,10 @@ $ mkdir lab_04
 $ cd lab_04
 # 建立lab_03路径中供体位点训练集、测试集文件的软链接
 $ ln -s ../lab_03/EI_train.txt ../lab_03/EI_test.txt ./
+
+# 集群上若python3不可用，需先激活base环境
+$ source /opt/miniconda3/bin/activate
+$ conda activate
 ```
 
 ## 1. 以NB进行剪接位点识别
@@ -96,6 +100,10 @@ work_mySVC.sh
 #$ -N mySVC
 #$ -j y
 #$ -cwd
+
+# 激活base环境，保证计算节点上正常运行python3
+source /opt/miniconda3/bin/activate
+conda activate
 
 # SVC分类器：在命令行指定训练集、测试集，规格化，线性核，参数寻优，10次交叉
 echo '------ scale: 1; kernel: linear; chooseCG: 1; numOfCV: 10 --------'
