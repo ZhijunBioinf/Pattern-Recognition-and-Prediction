@@ -12,6 +12,10 @@ $ mkdir lab_03
 $ cd lab_03
 # 建立lab_02路径中供体true位点、false位点序列文件的软链接
 $ ln -s ../lab_02/EI_true.seq ../lab_02/EI_false.seq ./
+
+# 集群上若python3不可用，需先激活base环境
+$ source /opt/miniconda3/bin/activate
+$ conda activate
 ```
 
 ## 1. 训练集与测试集构建
