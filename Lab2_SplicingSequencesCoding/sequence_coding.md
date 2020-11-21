@@ -34,6 +34,10 @@
 $ mkdir lab_02
 $ cd lab_02
 
+# 集群上若python3不可用，需先激活base环境
+$ source /opt/miniconda3/bin/activate
+$ conda activate
+
 # 首先要安装Python的包管理工具pip
 $ curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py   # 下载安装脚本
 $ python3 get-pip.py    # 运行安装脚本
