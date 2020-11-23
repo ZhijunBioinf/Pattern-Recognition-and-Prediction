@@ -110,10 +110,7 @@ if __name__ == '__main__':
 ```
 
 ```bash
-# 设置主成分累计解释的百分比为95%
-$ python3 myPCA.py ACE_train.txt ACE_test.txt 0.95 train_pca.txt test_pca.txt
-# 以SVR建模预测：规格化、rbf核、10次交叉寻优
-$ python3 ../lab_06/mySVR.py train_pca.txt test_pca.txt 1 rbf 10 ObsdYvsPredY_PCA_SVR.pdf
+$ python3 myKMeansDigits.py
 ```
 
 ## 2. 使用MI-filter进行特征选择，再以保留变量建立SVR模型
