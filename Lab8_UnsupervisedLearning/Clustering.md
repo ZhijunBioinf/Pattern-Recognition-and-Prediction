@@ -1,26 +1,30 @@
 # 实验八：无监督学习之聚类分析(K-Means, Hierarchical clustering, DBSCAN)
 
 ## 实验目的
-* 1）数据：[实验六](https://github.com/ZhijunBioinf/Pattern-Recognition-and-Prediction/blob/master/Lab6_Regression_MLR-PLSR-SVR/regress1.md)ACE抑制剂的训练集与测试集；基本模型：SVR
-* 2）使用主成分分析(Principal Component Analysis, PCA)进行特征压缩降维，再以SVR建模预测，对比`实验六`的预测结果。
-* 3）Filter: 使用基于互信息的单变量过滤法(Mutual Information-based Filter)进行特征选择，后续同(2)。
-* 4）Wrapper: 使用基于SVM的迭代特征剔除(SVM Recursive Feature Elimination, SVM-RFE)进行特征选择，后续同(2)。
-* 5）Embed: 使用随机森林(Random Forest, RF)进行特征选择（用于剪接位点识别），再以SVC建模预测。
+* 1）使用K-means完成聚类分析。
+* 2）使用Hierarchical clustering完成聚类分析。
+* 3）使用DBSCAN完成聚类分析。
+* 4）比较三种聚类分析方法的效果。
 
-## 准备工作目录与数据
+## 准备工作目录
 ```bash
-$ mkdir lab_07
-$ cd lab_07
-# 对lab_06路径中的ACE抑制剂训练集与测试集建立软链接
-$ ln -s ../lab_06/ACE_train.txt
-$ ln -s ../lab_06/ACE_test.txt
+$ mkdir lab_08
+$ cd lab_08
 
 # 若python3不可用，需先激活base环境
 $ source /opt/miniconda3/bin/activate
 $ conda activate
 ```
 
-## 1. 使用PCA进行特征压缩降维，再以保留主成分建立SVR模型
+## 背景
+* [无监督学习](https://en.wikipedia.org/wiki/Unsupervised_learning): is a type of machine learning that looks for previously undetected patterns in a data set with no pre-existing labels and with a minimum of human supervision. In contrast to supervised learning that usually makes use of human-labeled data, unsupervised learning, also known as self-organization allows for modeling of probability densities over inputs. It forms one of the three main categories of machine learning, along with supervised and reinforcement learning. Semi-supervised learning, a related variant, makes use of supervised and unsupervised techniques.
+* [聚类分析](https://en.wikipedia.org/wiki/Cluster_analysis): is the task of grouping a set of objects in such a way that objects in the same group (called a cluster) are more similar (in some sense) to each other than to those in other groups (clusters). It is a main task of exploratory data mining, and a common technique for statistical data analysis, used in many fields, including pattern recognition, image analysis, information retrieval, bioinformatics, data compression, computer graphics and machine learning.
+* 经典聚类模型包括但不限于：
+> * Centroid models: [k-means](https://en.wikipedia.org/wiki/K-means_clustering), k-means++, [Mean Shift](https://scikit-learn.org/stable/modules/clustering.html#mean-shift), etc.
+> * Connectivity models: [hierarchical clustering](https://en.wikipedia.org/wiki/Hierarchical_clustering), [BIRCH(Balanced Iterative Reducing and Clustering using Hierarchies)](https://en.wikipedia.org/wiki/BIRCH), etc.
+> * Density models: [DBSCAN(Density-Based Spatial Clustering of Applications with Noise)](https://en.wikipedia.org/wiki/DBSCAN), [OPTICS(Ordering Points To Identify the Clustering Structure)](https://en.wikipedia.org/wiki/OPTICS), etc.
+
+## 1. 使用K-means完成聚类分析
 * 参考程序：myPCA.py
 ```python3
 import sys
