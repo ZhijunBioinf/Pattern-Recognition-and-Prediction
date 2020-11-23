@@ -14,5 +14,5 @@
 
 ## 实验七 [特征降维/选择](https://github.com/ZhijunBioinf/Pattern-Recognition-and-Prediction/blob/master/Lab7_FeatureReduction/dimReduction.md)
 
-## 实验八 [无监督学习之K-均值聚类]
+## 实验八 [无监督学习之聚类分析](./Lab8_UnsupervisedLearning/Clustering.md)
 
