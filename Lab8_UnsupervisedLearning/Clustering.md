@@ -24,33 +24,20 @@ $ conda activate
 > * Connectivity models: [hierarchical clustering](https://en.wikipedia.org/wiki/Hierarchical_clustering), [BIRCH(Balanced Iterative Reducing and Clustering using Hierarchies)](https://en.wikipedia.org/wiki/BIRCH), etc.
 > * Density models: [DBSCAN(Density-Based Spatial Clustering of Applications with Noise)](https://en.wikipedia.org/wiki/DBSCAN), [OPTICS(Ordering Points To Identify the Clustering Structure)](https://en.wikipedia.org/wiki/OPTICS), etc.
 
-## 1. 使用K-means完成聚类分析
-* 参考程序：myPCA.py
+## 1. 使用K-means完成`手写数字`聚类分析
+* 参考程序：myKMeansDigits.py
 ```python3
 import sys
+from time import time # 函数的计时包
 import numpy as np
-from sklearn.decomposition import PCA # 导入PCA包
+import matplotlib.pyplot as plt
+from sklearn import metrics # 聚类效果指标包
+from sklearn.cluster import KMeans # KMeans包
+from sklearn.datasets import load_digits #
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import scale
 
-trainFile = sys.argv[1]
-testFile = sys.argv[2]
-train = np.loadtxt(trainFile, delimiter='\t') # 载入训练集
-test = np.loadtxt(testFile, delimiter='\t') # 载入测试集
-trX = train[:,1:]
-trY = train[:,0]
-teX = test[:,1:]
-teY = test[:,0]
 
-percentVar = float(sys.argv[3]) # 主成分累计解释的百分比
-pca = PCA(n_components = percentVar, svd_solver = 'full') # 创建一个PCA实例
-trX = pca.fit_transform(trX)
-teX = pca.transform(teX)
-
-print('Number of principal components: %d' % trX.shape[1])
-newTrainFile = sys.argv[4]
-newTestFile = sys.argv[5]
-np.savetxt(newTrainFile, np.hstack((trY.reshape(-1,1), trX)), fmt='%g', delimiter='\t') # 将Y与X以列组合后，保存到文件
-np.savetxt(newTestFile, np.hstack((teY.reshape(-1,1), teX)), fmt='%g', delimiter='\t')
-print('New training set is saved into: %s\nNew test set is saved into: %s' % (newTrainFile, newTestFile))
 ```
 
 ```bash
