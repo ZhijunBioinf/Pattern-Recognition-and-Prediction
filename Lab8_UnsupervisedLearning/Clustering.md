@@ -19,7 +19,7 @@ $ conda activate
 * [无监督学习](https://en.wikipedia.org/wiki/Unsupervised_learning): is a type of machine learning that looks for previously undetected patterns in a data set with no pre-existing labels and with a minimum of human supervision. In contrast to supervised learning that usually makes use of human-labeled data, unsupervised learning, also known as self-organization allows for modeling of probability densities over inputs. It forms one of the three main categories of machine learning, along with supervised and reinforcement learning. Semi-supervised learning, a related variant, makes use of supervised and unsupervised techniques.
 * [聚类分析](https://en.wikipedia.org/wiki/Cluster_analysis): is the task of grouping a set of objects in such a way that objects in the same group (called a cluster) are more similar (in some sense) to each other than to those in other groups (clusters). It is a main task of exploratory data mining, and a common technique for statistical data analysis, used in many fields, including pattern recognition, image analysis, information retrieval, bioinformatics, data compression, computer graphics and machine learning.
 * 经典聚类模型包括但不限于：
-> * Centroid models: [k-means](https://en.wikipedia.org/wiki/K-means_clustering), k-means++, [Mean Shift](https://scikit-learn.org/stable/modules/clustering.html#mean-shift), etc.
+> * Centroid models: [K-means](https://en.wikipedia.org/wiki/K-means_clustering), k-means++, [Mean Shift](https://scikit-learn.org/stable/modules/clustering.html#mean-shift), etc.
 > * Connectivity models: [hierarchical clustering](https://en.wikipedia.org/wiki/Hierarchical_clustering), [BIRCH(Balanced Iterative Reducing and Clustering using Hierarchies)](https://en.wikipedia.org/wiki/BIRCH), etc.
 > * Density models: [DBSCAN(Density-Based Spatial Clustering of Applications with Noise)](https://en.wikipedia.org/wiki/DBSCAN), [OPTICS(Ordering Points To Identify the Clustering Structure)](https://en.wikipedia.org/wiki/OPTICS), etc.
 
@@ -113,7 +113,7 @@ if __name__ == '__main__':
 $ python3 myKMeansDigits.py
 ```
 
-## 2. 使用hierarchical clustering完成`手写数字`聚类分析
+## 2. 使用Hierarchical clustering完成`手写数字`聚类分析
 * 参考程序：myHClusteringDigits.py
 ```python3
 from time import time
@@ -158,7 +158,7 @@ if __name__ == '__main__':
         clustering = AgglomerativeClustering(linkage=linkage, n_clusters=10) # 创建一个HClustering的实例
         t0 = time()
         clustering.fit(X_red)
-        print("%s :\t%.2fs" % (linkage, time() - t0))
+        print("## Use '%s' linkage criterion, time = %.2fs" % (linkage, time() - t0))
 
         title = "%s linkage" % linkage
         plotFileName = "hierarchicalClustering_%sLinkage.pdf" % linkage
@@ -173,11 +173,10 @@ $ python3 myHClusteringDigits.py
 
 ## 作业
 1. 尽量看懂`参考程序`的每一行代码。 <br>
-2. 熟练使用kMeans, hierarchical clustering聚类分析。 <br>
+2. 熟练使用K-means, Hierarchical clustering聚类分析。 <br>
 不怕报错，犯错越多，进步越快！
 
 ## 参考
-* PCA手册：[sklearn.decomposition.PCA](https://scikit-learn.org/stable/modules/decomposition.html#principal-component-analysis-pca)
-* MI手册：[sklearn.feature_selection.mutual_info_regression](https://scikit-learn.org/stable/modules/feature_selection.html#univariate-feature-selection)
-* RFE手册：[sklearn.feature_selection.RFE](https://scikit-learn.org/stable/modules/feature_selection.html#recursive-feature-elimination)
-* RandomForest: [sklearn.ensemble.RandomForestClassifier](https://scikit-learn.org/stable/modules/feature_selection.html#tree-based-feature-selection)
+* K-means手册：[sklearn.cluster.KMeans](https://scikit-learn.org/stable/modules/clustering.html#k-means)
+* Hierarchical clustering手册：[sklearn.cluster.AgglomerativeClustering](https://scikit-learn.org/stable/modules/clustering.html#hierarchical-clustering)
+
