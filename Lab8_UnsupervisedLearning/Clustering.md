@@ -139,7 +139,7 @@ def plot_clustering(X_red, y, labels, title, plotFileName): # 聚类结果可视
     plt.axis('off')
     plt.tight_layout(rect=[0, 0.03, 1, 0.95])
     plt.savefig(plotFileName)
-    print("Plot of hierarchical clustering performance using '%s' is save into '%s'" % (title, plotFileName))
+    print("Plot of hierarchical clustering performance using '%s' is save into '%s'\n" % (title, plotFileName))
 
 if __name__ == '__main__':
     X, y = datasets.load_digits(return_X_y=True) # 导入手写数字数据集
@@ -152,7 +152,7 @@ if __name__ == '__main__':
 
     print("Spectral embedding for non-linear dimensionality reduction")
     X_red = manifold.SpectralEmbedding(n_components=2).fit_transform(X) # 非线性降维，使用2个主成分
-    print("Done!")
+    print("Done!\n")
 
     for linkage in ('ward', 'average', 'complete', 'single'): # 使用HC聚类算法的不同连接指标
         clustering = AgglomerativeClustering(linkage=linkage, n_clusters=10) # 创建一个HClustering的实例
