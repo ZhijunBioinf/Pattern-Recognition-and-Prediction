@@ -122,6 +122,7 @@ from scipy import ndimage # 导入图形处理包
 from matplotlib import pyplot as plt
 from sklearn import manifold, datasets # 导入数据降维包manifold，数据集包datasets
 from sklearn.cluster import AgglomerativeClustering # 导入HClustering包
+from sklearn import metrics
 
 def plot_clustering(X_red, y, labels, title, plotFileName): # 聚类结果可视化
     x_min, x_max = np.min(X_red, axis=0), np.max(X_red, axis=0)
@@ -155,14 +156,18 @@ if __name__ == '__main__':
     print("Done!\n")
 
     for linkage in ('ward', 'average', 'complete', 'single'): # 使用HC聚类算法的不同连接指标
-        clustering = AgglomerativeClustering(linkage=linkage, n_clusters=10) # 创建一个HClustering的实例
+        estimator = AgglomerativeClustering(linkage=linkage, n_clusters=10) # 创建一个HClustering的实例
         t0 = time()
-        clustering.fit(X_red)
-        print("## Use '%s' linkage criterion, time = %.2fs" % (linkage, time() - t0))
+        estimator.fit(X_red)
+        homo = metrics.homogeneity_score(y, estimator.labels_) # 由真实labels和估计的labels计算出homo, 下同
+        compl = metrics.completeness_score(y, estimator.labels_)
+        ARI = metrics.adjusted_rand_score(y, estimator.labels_)
+        print("## Use '%s' linkage criterion, time = %.2fs. homoScore: %g, complScore: %g, ARI: %g" % 
+            (linkage, time()-t0, homo, compl, ARI))
 
         title = "%s linkage" % linkage
         plotFileName = "hierarchicalClustering_%sLinkage.pdf" % linkage
-        plot_clustering(X_red, y, clustering.labels_, title, plotFileName)
+        plot_clustering(X_red, y, estimator.labels_, title, plotFileName)
     
 ```
 
@@ -173,7 +178,7 @@ $ python3 myHClusteringDigits.py
 
 ## 作业
 1. 尽量看懂`参考程序`的每一行代码。 <br>
-2. 熟练使用K-means, Hierarchical clustering聚类分析。 <br>
+2. 熟练使用K-means, Hierarchical clustering完成聚类分析。 <br>
 不怕报错，犯错越多，进步越快！
 
 ## 参考
