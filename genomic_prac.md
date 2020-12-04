@@ -3,22 +3,27 @@
 
 ## 一、本地Blast  
 
-1. 准备数据  
-数据已经下载，放在```/data/lab/genomic/prac/blast```目录中。  
-```
-curl -O ftp://ftp.ncbi.nih.gov/refseq/M_musculus/mRNA_Prot/mouse.1.protein.faa.gz
-curl -O ftp://ftp.ncbi.nih.gov/refseq/M_musculus/mRNA_Prot/mouse.2.protein.faa.gz
-curl -O ftp://ftp.ncbi.nih.gov/refseq/D_rerio/mRNA_Prot/zebrafish.1.protein.faa.gz
+### 1. 准备数据  
+```bash
+# 使用curl命令下载数据（Note：数据已经下载，放在`/data/lab/genomic/prac/blast`目录中）
+$ curl -O ftp://ftp.ncbi.nih.gov/refseq/M_musculus/mRNA_Prot/mouse.1.protein.faa.gz
+$ curl -O ftp://ftp.ncbi.nih.gov/refseq/M_musculus/mRNA_Prot/mouse.2.protein.faa.gz
+$ curl -O ftp://ftp.ncbi.nih.gov/refseq/D_rerio/mRNA_Prot/zebrafish.1.protein.faa.gz
+$ gunzip *.faa.gz
+# ------- 以上命令不需运行 ---------
 
-gunzip *.faa.gz
+# 只需要使用ln命令建立数据的软链接
+# 文件夹应有3个文件：mouse.1.protein.faa, mouse.2.protein.faa, zebrafish.1.protein.faa
 ```
-2. 建索引  
+
+### 2. 建索引  
 ```
-makeblastdb -in zebrafish.1.protein.faa -dbtype prot
+$ makeblastdb -in zebrafish.1.protein.faa -dbtype prot
 ```
-3. 运行blastp  
-我们先取2条序列试一下  
-```
+
+### 3. 运行blastp  
+* 我们先取2条序列试一下  
+```bash
 head -n 11 mouse.1.protein.faa > mm-first.faa
 blastp -query mm-first.faa -db zebrafish.1.protein.faa
 blastp -query mm-first.faa -db zebrafish.1.protein.faa -out mm-first.x.zebrafish.txt
@@ -26,10 +31,11 @@ blastp -query mm-first.faa -db zebrafish.1.protein.faa -outfmt 6
 less mm-first.x.zebrafish.txt
 
 head -n 5000 mouse.1.protein.faa > mouse.1_sub5k.faa
-head -n 5000 mouse.2.protein.faa > mouse.2.sub5k.faa
+head -n 5000 mouse.2.protein.faa > mouse.2_sub5k.faa
 ```
-blast1.sh  
-```
+
+* blast1.sh
+```bash
 #!/bin/bash
 #$ -S /bin/bash
 #$ -N blast
@@ -38,8 +44,9 @@ blast1.sh
 blastp -query mouse.1_sub5k.faa -db zebrafish.1.protein.faa -out mouse.1.zebrafish.txt -outfmt 6
 blastp -query mouse.2_sub5k.faa -db zebrafish.1.protein.faa -out mouse.2.zebrafish.txt -outfmt 6
 ```
-4. Visualizing BLAST score distributions in RStudio  
-```
+
+### 4. Visualizing BLAST score distributions in RStudio
+```R
 blast_out1 <- read.table('mouse.1.zebrafish.txt', sep='\t')
 blast_out2 <- read.table('mouse.2.zebrafish.txt', sep='\t')
 colnames(blast_out1) <- c("qseqid", "sseqid", "pident", "length", "mismatch", "gapopen", "qstart", "qend", "sstart", "send", "evalue", "bitscore")
