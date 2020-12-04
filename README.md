@@ -15,4 +15,4 @@
 ## [实验四 全基因组比对(WGA)](https://github.com/ZhijunBioinf/GenomicLab/blob/dzj/Lab4_wga.md)
 ## [实验五 转录组差异基因分析(DE analysis)](https://github.com/ZhijunBioinf/GenomicLab/blob/dzj/Lab5_RNA-Seq.md) 
 
-## [基因组学教学实习](https://github.com/hnnd/GenomicLab/blob/master/genomic_prac.md)
+## [基因组学教学实习](https://github.com/ZhijunBioinf/GenomicLab/blob/dzj/genomic_prac.md)
