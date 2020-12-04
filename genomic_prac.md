@@ -22,16 +22,17 @@ $ makeblastdb -in zebrafish.1.protein.faa -dbtype prot
 ```
 
 ### 3. 运行blastp  
-* 我们先取2条序列试一下  
 ```bash
-head -n 11 mouse.1.protein.faa > mm-first.faa
-blastp -query mm-first.faa -db zebrafish.1.protein.faa
-blastp -query mm-first.faa -db zebrafish.1.protein.faa -out mm-first.x.zebrafish.txt
-blastp -query mm-first.faa -db zebrafish.1.protein.faa -outfmt 6
-less mm-first.x.zebrafish.txt
+# 我们先取2条序列试一下  
+$ head -n 11 mouse.1.protein.faa > mm-first.faa
+$ blastp -query mm-first.faa -db zebrafish.1.protein.faa
+$ blastp -query mm-first.faa -db zebrafish.1.protein.faa -out mm-first.x.zebrafish.txt
+$ blastp -query mm-first.faa -db zebrafish.1.protein.faa -outfmt 6
+$ less mm-first.x.zebrafish.txt
 
-head -n 5000 mouse.1.protein.faa > mouse.1_sub5k.faa
-head -n 5000 mouse.2.protein.faa > mouse.2_sub5k.faa
+# 现在取前5000行，用于后续分析
+$ head -n 5000 mouse.1.protein.faa > mouse.1_sub5k.faa
+$ head -n 5000 mouse.2.protein.faa > mouse.2_sub5k.faa
 ```
 
 * blast1.sh
@@ -43,6 +44,9 @@ head -n 5000 mouse.2.protein.faa > mouse.2_sub5k.faa
 #$ -cwd
 blastp -query mouse.1_sub5k.faa -db zebrafish.1.protein.faa -out mouse.1.zebrafish.txt -outfmt 6
 blastp -query mouse.2_sub5k.faa -db zebrafish.1.protein.faa -out mouse.2.zebrafish.txt -outfmt 6
+```
+```bash
+$ qsub blast1.sh
 ```
 
 ### 4. Visualizing BLAST score distributions in RStudio
