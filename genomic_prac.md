@@ -1,9 +1,9 @@
 # 基因组学教学实习  
 
 
-## 一、本地Blast  
+## 1. 本地Blast  
 
-### 1. 准备数据  
+### 1.1 准备数据  
 ```bash
 # 使用curl命令下载数据（Note：数据已经下载，放在`/data/lab/genomic/prac/blast`目录中）
 $ curl -O ftp://ftp.ncbi.nih.gov/refseq/M_musculus/mRNA_Prot/mouse.1.protein.faa.gz
@@ -16,12 +16,12 @@ $ gunzip *.faa.gz
 # 文件夹应有3个文件：mouse.1.protein.faa, mouse.2.protein.faa, zebrafish.1.protein.faa
 ```
 
-### 2. 建索引  
+### 1.2 建索引  
 ```
 $ makeblastdb -in zebrafish.1.protein.faa -dbtype prot
 ```
 
-### 3. 运行blastp  
+### 1.3 运行blastp  
 ```bash
 # 我们先取2条序列试一下  
 $ head -n 11 mouse.1.protein.faa > mm-first.faa
@@ -49,7 +49,7 @@ blastp -query mouse.2_sub5k.faa -db zebrafish.1.protein.faa -out mouse.2.zebrafi
 $ qsub blast1.sh
 ```
 
-### 4. Visualizing BLAST score distributions in RStudio
+### 1.4 Visualizing BLAST score distributions in RStudio
 ```R
 blast_out1 <- read.table('mouse.1.zebrafish.txt', sep='\t')
 blast_out2 <- read.table('mouse.2.zebrafish.txt', sep='\t')
@@ -63,16 +63,16 @@ plot(blast_out1$pident, blast_out1$bitscore)
 plot(blast_out2$pident, blast_out2$bitscore)
 plot(blast_out1$pident  * (blast_out1$qend - blast_out1$qstart), blast_out1$bitscore)
 ```
-思考题：如果只统计the best hsp evalue，要如何改？  
+思考题：如果只统计the best hsp evalue，要如何改？
 
-## 二、根据blast结果对蛋白序列进行聚类 -- 构建基因家族  
+## 2. 根据blast结果对蛋白序列进行聚类 -- 构建基因家族  
 任务：构建Brevibacillus基因家族  
 构建基因家族可以使用[OrthoMCL](http://orthomcl.org/orthomcl/)，本实验使用的方法与OrthoMCL类似，目的是为了让大家更清楚背后的原理。  
 
 目前在GenBank中有88个菌株的基因组序列已经释放，[https://www.ncbi.nlm.nih.gov/genome/browse#!/overview/Brevibacillus](https://www.ncbi.nlm.nih.gov/genome/browse#!/overview/Brevibacillus)，但在RefSeq中只有80个菌株有基因组序列，我们需要对这80个菌株的蛋白进行聚类分析，构建基因家族  
 ![](https://micans.org/mcl/img/fa75.png) . 
 
-2.1 数据准备：  
+### 2.1 数据准备：  
 请完成以下表格，收集基因组信息：[https://docs.qq.com/sheet/DUEZiWFBEcktGTWRO](https://docs.qq.com/sheet/DUEZiWFBEcktGTWRO)  
 
 ```
@@ -158,7 +158,8 @@ curl -O ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/454/065/GCF_000454065.1_A
 curl -O ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/744/635/GCF_000744635.1_ASM74463v1/GCF_000744635.1_ASM74463v1_protein.faa.gz
 gunzip *.gz
 ```
-1. 对蛋白序列进行两两比对   
+
+### 2.2 对蛋白序列进行两两比对   
 做Blast之前请改下序列名，在各自序列名后面加上GCF编号，如将```WP_003333770.1```改成```WP_003333770.1:GCF_000010165```，将所有蛋白序列合并到一个文件```all_pro.faa```，建索引```makeblastdb -in all_pro.faa -dbtype prot```。  
 blastAll.sh
 ```
@@ -182,12 +183,13 @@ work_diamond.sh
 diamond blastp -d allpep -q all_pro.faa -o allBlast.tsv -f 6
 ```
 
-2. 提取每个hit的score值，构建一个表征两条序列的相似性的特征值  
+### 2.3 提取每个hit的score值，构建一个表征两条序列的相似性的特征值  
 
 ```
 cut -f 1,2,12 allBlast.tsv > allBlast.abc
 ```
-3. 用mcl进行聚类  
+
+### 2.4 用mcl进行聚类  
 work_mcl.sh
 ```
 #!/bin/bash
@@ -208,24 +210,24 @@ clm dist --chain out.data.mci.I{14,20,40}
 统计有多少基因家族，每个基因家族中每个菌株基因数。  
 ![](https://github.com/hnnd/GenomicLab/blob/master/Rplot01.png)
 
-## 三、构建物种进化树（自行完成）  
-1. 提取单拷贝基因家族的基因序列  
+## 3. 构建物种进化树（自行完成）  
+### 3.1 提取单拷贝基因家族的基因序列  
 单拷贝基因家族：所分析的每个物种有且只有一个基因的基因家族。  
 理解为什么要选择单拷贝基因？  
 
-2. 多序列比对  
+### 3.2 多序列比对  
 对每个单拷贝基因家族进行多序列比对。 mafft/muscle ...  
 
-3. 比对后序列合并  
+### 3.3 比对后序列合并  
 将各家族多序列比对后的序列进行合并，形成一个psudo molecular sequences alignment  
 
-4. 构建进化树  
+### 3.4 构建进化树  
 基于合并后的序列构建进化树。 fasttree
 
 
 ## 扩展  
 比较上述基于单拷贝基因构建的物种进化树与[GToTree](https://github.com/AstrobioMike/GToTree)构建的进化树有什么不同？  
 
-# 3. Reference  
+## Reference  
 1. [MCL](https://micans.org/mcl)  
 2. [OrthoMCL](http://orthomcl.org/orthomcl)  
