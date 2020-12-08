@@ -69,7 +69,7 @@ plot(blast_out1$pident  * (blast_out1$qend - blast_out1$qstart), blast_out1$bits
 任务：构建Brevibacillus基因家族  
 构建基因家族可以使用[OrthoMCL](http://orthomcl.org/orthomcl/)，本实验使用的方法与OrthoMCL类似，目的是为了让大家更清楚背后的原理。  
 
-目前在GenBank中有88个菌株的基因组序列已经释放，[https://www.ncbi.nlm.nih.gov/genome/browse#!/overview/Brevibacillus](https://www.ncbi.nlm.nih.gov/genome/browse#!/overview/Brevibacillus)，但在RefSeq中只有80个菌株有基因组序列，我们需要对这80个菌株的蛋白进行聚类分析，构建基因家族  
+截止2020年10月，GenBank中有107个菌株的基因组序列已经释放，[https://www.ncbi.nlm.nih.gov/genome/browse#!/overview/Brevibacillus](https://www.ncbi.nlm.nih.gov/genome/browse#!/overview/Brevibacillus)，但在RefSeq中只有102个菌株有基因组序列，我们选取其中80个菌株的蛋白进行聚类分析，构建基因家族  
 ![](https://micans.org/mcl/img/fa75.png) . 
 
 ### 2.1 数据准备：  
