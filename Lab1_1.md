@@ -151,7 +151,7 @@ $ ~/quast-5.0.2/quast.py -R /data/lab/genomic/lab01/data/ref.fa ecoli.velvet/con
 ```
 #### 查看评价结果  
 ```
-$ less quast_results/report.txt 
+$ less quast_results/latest/report.txt 
 ```
 
 ## 四、作业  
