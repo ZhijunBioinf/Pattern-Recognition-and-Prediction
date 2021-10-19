@@ -143,15 +143,15 @@ $ qsub work_spades.sh
 # 先解压缩quast-5.0.2.tar.gz到HOME目录（也可以自己指定解压缩目录）
 $ tar -zxvf quast-5.0.2.tar.gz -C ~/
 
+# 先回到之前的工作路径
+$ cd ~/YourWorkingPath/lab1/result/
+
 # 可直接在命令行执行，用解压缩后quast.py的绝对路径
-$ ~/quast-5.0.2/quast.py -R /data/lab/genomic/lab01/data/ref.fa \
-   ecoli.velvet/contigs.fa \
-   ecoli.minia.contigs.fa \
-   ecoli.spades/scaffolds.fasta
+$ ~/quast-5.0.2/quast.py -R /data/lab/genomic/lab01/data/ref.fa ecoli.velvet/contigs.fa ecoli.minia.contigs.fa ecoli.spades/scaffolds.fasta
 ```
 #### 查看评价结果  
 ```
-$ less quast_results/latest/report.txt 
+$ less quast_results/report.txt 
 ```
 
 ## 四、作业  
