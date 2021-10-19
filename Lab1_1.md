@@ -112,7 +112,7 @@ $ qsub work_velvet.sh
 #$ -N minia
 #$ -cwd
 #$ -j y
-/opt/bio/bin/minia -in ../data/reads_1.fq.gz,../data/reads_2.fq.gz -kmer-size 57 -out ecoli.minia
+/opt/bio/bin/minia -in ../data/reads_1.fq.gz ../data/reads_2.fq.gz -kmer-size 57 -out ecoli.minia
 ```
 
 ```
