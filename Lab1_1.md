@@ -142,6 +142,8 @@ $ qsub work_spades.sh
 ```
 # 先解压缩quast-5.0.2.tar.gz到HOME目录（也可以自己指定解压缩目录）
 $ tar -zxvf quast-5.0.2.tar.gz -C ~/
+# 为quast.py增加执行权限
+$ chmod a+x ~/quast-5.0.2/quast.py
 
 # 先回到之前的工作路径
 $ cd ~/YourWorkingPath/lab1/result/
