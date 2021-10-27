@@ -329,7 +329,7 @@ def sayHello(who): # 一个参数
 sayHello('Jack') # 输出：Jack says Hello!
 
 # 定义包含2个参数的sayHello函数
-def sayHello(who, friend): # 一个参数
+def sayHello(who, friend): # 两个参数
   print('%s says Hello to %s!' % (who, friend))
 # 调用sayHello函数
 sayHello('Jack', 'Rose') # 输出：Jack says Hello to Rose!
