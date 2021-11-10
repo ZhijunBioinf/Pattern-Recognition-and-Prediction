@@ -139,7 +139,7 @@ teX = test[:,1:]
 teY = test[:,0]
 predY = clf.predict(teX) # 预测测试集
 Acc = sum(predY==teY)/len(teY) # 计算预测正确的样本数
-print('Prediction Accuracy of KNN: %g%%(%d/%d)' % (Acc*100, sum(predY==teY), len(teY)))
+print('Prediction Accuracy of KNN: %g%% (%d/%d)' % (Acc*100, sum(predY==teY), len(teY)))
 ```
 
 ```bash
@@ -167,7 +167,7 @@ teX = test[:,1:]
 teY = test[:,0]
 predY = clf.predict(teX) # 预测测试集
 Acc = sum(predY==teY)/len(teY) # 计算预测正确的样本数
-print('Prediction Accuracy of LR: %g%%(%d/%d)' % (Acc*100, sum(predY==teY), len(teY)))
+print('Prediction Accuracy of LR: %g%% (%d/%d)' % (Acc*100, sum(predY==teY), len(teY)))
 ```
 
 ```bash
@@ -195,7 +195,7 @@ teX = test[:,1:]
 teY = test[:,0]
 predY = clf.predict(teX) # 预测测试集
 Acc = sum(predY==teY)/len(teY) # 计算预测正确的样本数
-print('Prediction Accuracy of DT: %g%%(%d/%d)' % (Acc*100, sum(predY==teY), len(teY)))
+print('Prediction Accuracy of DT: %g%% (%d/%d)' % (Acc*100, sum(predY==teY), len(teY)))
 
 # Export the tree in Graphviz format
 graphFileName = sys.argv[3] # 从命令行指定图文件名称
