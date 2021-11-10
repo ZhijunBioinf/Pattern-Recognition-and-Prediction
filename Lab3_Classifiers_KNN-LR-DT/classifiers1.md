@@ -55,7 +55,7 @@ def file2matrix(filename, bpTable, KMAX=2): # 为KMAX提供默认参数(updated)
         returnMat[lineNum,:] = kSpaceVec
         lineNum += 1
         if (lineNum % 1000) == 0:
-            print('Extracting k-spaced featuers: %d sequences, done!' % lineNum)
+            print('Extracting k-spaced features: %d sequences, done!' % lineNum)
     return returnMat, lineNum
 
 if __name__ == '__main__':
