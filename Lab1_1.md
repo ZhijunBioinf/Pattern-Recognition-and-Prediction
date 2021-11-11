@@ -68,6 +68,7 @@ $ cd data
 $ gunzip genomics_lab1_reads.fastq.gz # 解压缩paired-end reads数据
 $ for i in `seq 1 8 196904`; do let j=$i+3; sed -n "${i},${j}p" genomics_lab1_reads.fastq; done > reads_1.fq
 $ for i in `seq 5 8 196904`; do let j=$i+3; sed -n "${i},${j}p" genomics_lab1_reads.fastq; done > reads_2.fq
+$ gzip reads_1.fq reads_2.fq
 $ gunzip genomics_lab1_ref.fa.gz # 解压缩参考基因组数据
 $ mv genomics_lab1_ref.fa ref.fa
 $ cd ../result
@@ -103,7 +104,7 @@ $ qsub work_kmer.sh
 #$ -j y
 source /opt/miniconda3/bin/activate
 conda activate genomelab
-velveth ecoli.velvet 27 -shortPaired -fastq -separate ../data/reads_1.fq ../data/reads_2.fq
+velveth ecoli.velvet 27 -shortPaired -fastq.gz -separate ../data/reads_1.fq.gz ../data/reads_2.fq.gz
 velvetg ecoli.velvet -exp_cov auto
 ```
 
@@ -120,7 +121,7 @@ $ qsub work_velvet.sh
 #$ -N minia
 #$ -cwd
 #$ -j y
-/opt/bio/bin/minia -in ../data/reads_1.fq ../data/reads_2.fq -kmer-size 27 -out ecoli.minia
+/opt/bio/bin/minia -in ../data/reads_1.fq.gz ../data/reads_2.fq.gz -kmer-size 27 -out ecoli.minia
 ```
 
 ```shell
@@ -138,7 +139,7 @@ $ qsub work_minia.sh
 #$ -j y
 source /opt/miniconda3/bin/activate
 conda activate genomelab
-spades.py -t 4 -1 ../data/reads_1.fq -2 ../data/reads_2.fq -o ecoli.spades
+spades.py -t 4 -1 ../data/reads_1.fq.gz -2 ../data/reads_2.fq.gz -o ecoli.spades
 ```
 
 ```shell
