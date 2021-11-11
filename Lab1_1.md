@@ -22,26 +22,26 @@
 > 2. Construct contigs，搜索路径  
 > 3. Scaffolding and fill gaps，构建scaffold并填洞  
 
-本实验主要介绍使用第二种策略的组装软件velvet, minia和SPAdes的使用  
+本实验主要介绍使用第二种策略的组装软件velvet, minia和SPAdes的使用
 
-### 如何选择合适k  
+### 如何选择合适k
 1. 多试几个k，看组装效果
 2. 利用如[KmerGenie](http://kmergenie.bx.psu.edu/)进行辅助选择  
  
-### 如何选择组装软件  
+### 如何选择组装软件
 1. 选择你熟悉的软件  
 2. 选择大家使用多的软件
 3. 选择适合项目性质的软件，如基因组大小，染色体倍性，杂合度，数据类型，宏基因组，转录组等
 
 > [浏览软件库](https://omictools.com/genome-assembly-category)
 
-## 三、上机操作  
+## 三、上机操作
 ### 进入genomelab环境
 ```
 $ source /opt/miniconda3/bin/activate
 $ conda activate genomelab
 ```
-### 创建工作目录  
+### 创建工作目录
 ```
 #新建一个目录lab1，本实验所有数据和输出都放入该目录中  
 $ mkdir lab1
@@ -52,19 +52,27 @@ $ mkdir result
 
 ### 数据存放位置  
 ```
-数据存放在服务器位置：
-/data/lab/genomic/lab01/data/reads_1.fq.gz
-/data/lab/genomic/lab01/data/reads_2.fq.gz
-#参考基因组
-/data/lab/genomic/lab01/data/ref.fa
+DNA测序数据位于：
+[genomics_lab1_reads.fastq.gz](https://github.com/ZhijunBioinf/GenomicLab/blob/dzj/genomics_lab1_reads.fastq.gz)
+【不可用】/data/lab/genomic/lab01/data/reads_1.fq.gz
+【不可用】/data/lab/genomic/lab01/data/reads_2.fq.gz
+#参考基因组位于：
+[genomics_lab1_ref.fa.gz](https://github.com/ZhijunBioinf/GenomicLab/blob/dzj/genomics_lab1_ref.fa.gz)
+【不可用】/data/lab/genomic/lab01/data/ref.fa
 ```
+
 ### 组装  
 #### 准备数据  
-```
+```shell
 $ cd data
-$ ln -s /data/lab/genomic/lab01/data/reads_1.fq.gz /data/lab/genomic/lab01/data/reads_2.fq.gz ./
+$ gunzip genomics_lab1_reads.fastq.gz # 解压缩paired-end reads数据
+$ for i in `seq 1 8 196904`; do let j=$i+3; sed -n "${i},${j}p" genomics_lab1_reads.fastq; done > reads_1.fq
+$ for i in `seq 5 8 196904`; do let j=$i+3; sed -n "${i},${j}p" genomics_lab1_reads.fastq; done > reads_2.fq
+$ gunzip genomics_lab1_ref.fa.gz # 解压缩参考基因组数据
+$ mv genomics_lab1_ref.fa ref.fa
 $ cd ../result
 ```
+
 #### 估算k值  
 ```
 $ ls ../data/reads_* > reads.file
@@ -83,7 +91,7 @@ $ ls ../data/reads_* > reads.file
 # 用qsub提交任务至计算节点
 $ qsub work_kmer.sh
 ```
-结束后查看结果，选择最优k值57  
+结束后查看结果，选择最优k值27
 
 #### 1. 用velvet组装
 新建一个脚本文件，work_velvet.sh，写下下列内容:  
@@ -95,7 +103,7 @@ $ qsub work_kmer.sh
 #$ -j y
 source /opt/miniconda3/bin/activate
 conda activate genomelab
-velveth ecoli.velvet 57 -shortPaired -fastq.gz -separate ../data/reads_1.fq.gz ../data/reads_2.fq.gz
+velveth ecoli.velvet 27 -shortPaired -fastq.gz -separate ../data/reads_1.fq ../data/reads_2.fq
 velvetg ecoli.velvet -exp_cov auto
 ```
 
@@ -112,7 +120,7 @@ $ qsub work_velvet.sh
 #$ -N minia
 #$ -cwd
 #$ -j y
-/opt/bio/bin/minia -in ../data/reads_1.fq.gz ../data/reads_2.fq.gz -kmer-size 57 -out ecoli.minia
+/opt/bio/bin/minia -in ../data/reads_1.fq ../data/reads_2.fq -kmer-size 27 -out ecoli.minia
 ```
 
 ```
@@ -130,7 +138,7 @@ $ qsub work_minia.sh
 #$ -j y
 source /opt/miniconda3/bin/activate
 conda activate genomelab
-spades.py -t 4 -1 ../data/reads_1.fq.gz -2 ../data/reads_2.fq.gz -o ecoli.spades
+spades.py -t 4 -1 ../data/reads_1.fq -2 ../data/reads_2.fq -o ecoli.spades
 ```
 
 ```
@@ -140,24 +148,22 @@ $ qsub work_spades.sh
 
 #### 组装效果评价  
 ```
-# 先解压缩quast-5.0.2.tar.gz到HOME目录（也可以自己指定解压缩目录）
-$ tar -zxvf quast-5.0.2.tar.gz -C ~/
-# 为quast.py增加执行权限
-$ chmod a+x ~/quast-5.0.2/quast.py
+$ cd
+$ tar -zxvf quast-5.0.2.tar.gz -C ~/ # 解压缩quast-5.0.2.tar.gz
+$ chmod a+x ~/quast-5.0.2/quast.py # 为quast.py增加执行权限
+$ cd ~/YourWorkingPath/lab1/result/ # 返回工作路径
 
-# 先回到之前的工作路径
-$ cd ~/YourWorkingPath/lab1/result/
-
-# 可直接在命令行执行，用解压缩后quast.py的绝对路径
-$ ~/quast-5.0.2/quast.py -R /data/lab/genomic/lab01/data/ref.fa ecoli.velvet/contigs.fa ecoli.minia.contigs.fa ecoli.spades/scaffolds.fasta
+# 用quast评价组装结果
+$ ~/quast-5.0.2/quast.py -R ../data/ref.fa ecoli.velvet/contigs.fa ecoli.minia.contigs.fa ecoli.spades/scaffolds.fasta
 ```
+
 #### 查看评价结果  
 ```
 $ less quast_results/latest/report.txt 
 ```
 
 ## 四、作业  
-1. 不同k-mer值对组装的影响，对velvet和minia用31和57进行组装，比较组装效果  
+1. 不同k-mer值对组装的影响，对velvet和minia用41和51进行组装，比较组装效果  
 2. 熟悉和理解基因组组装一些术语名词，如N50, NG50, contig, scaffold, gap等
 3. 理解k-mer频次分布图，如何根据k-mer频次分布图估算基因组大小及杂合度  
  
