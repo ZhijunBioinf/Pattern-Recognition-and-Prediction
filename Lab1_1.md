@@ -103,7 +103,7 @@ $ qsub work_kmer.sh
 #$ -j y
 source /opt/miniconda3/bin/activate
 conda activate genomelab
-velveth ecoli.velvet 27 -shortPaired -fastq.gz -separate ../data/reads_1.fq ../data/reads_2.fq
+velveth ecoli.velvet 27 -shortPaired -fastq -separate ../data/reads_1.fq ../data/reads_2.fq
 velvetg ecoli.velvet -exp_cov auto
 ```
 
