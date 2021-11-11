@@ -52,13 +52,13 @@ $ mkdir result
 
 ### 数据存放位置  
 DNA测序数据位于：
-[genomics_lab1_reads.fastq.gz](https://github.com/ZhijunBioinf/GenomicLab/blob/dzj/genomics_lab1_reads.fastq.gz)
-【不可用】/data/lab/genomic/lab01/data/reads_1.fq.gz
-【不可用】/data/lab/genomic/lab01/data/reads_2.fq.gz
+[genomics_lab1_reads.fastq.gz](https://github.com/ZhijunBioinf/GenomicLab/blob/dzj/genomics_lab1_reads.fastq.gz)  
+【不可用】/data/lab/genomic/lab01/data/reads_1.fq.gz  
+【不可用】/data/lab/genomic/lab01/data/reads_2.fq.gz  
 
-参考基因组位于：
-[genomics_lab1_ref.fa.gz](https://github.com/ZhijunBioinf/GenomicLab/blob/dzj/genomics_lab1_ref.fa.gz)
-【不可用】/data/lab/genomic/lab01/data/ref.fa
+参考基因组位于：  
+[genomics_lab1_ref.fa.gz](https://github.com/ZhijunBioinf/GenomicLab/blob/dzj/genomics_lab1_ref.fa.gz)  
+【不可用】/data/lab/genomic/lab01/data/ref.fa  
 
 
 ### 组装  
