@@ -148,12 +148,15 @@ spades.py -t 4 -1 ../data/reads_1.fq.gz -2 ../data/reads_2.fq.gz -o ecoli.spades
 $ qsub work_spades.sh
 ```
 
-#### 组装效果评价  
+#### 组装效果评价
+[下载quast](https://sourceforge.net/projects/quast/)    
+上传到集群home目录  
+
 ```shell
 $ cd
-$ tar -zxvf quast-5.0.2.tar.gz -C ~/ # 解压缩quast-5.0.2.tar.gz
-$ chmod a+x ~/quast-5.0.2/quast.py # 为quast.py增加执行权限
-$ cd ~/YourWorkingPath/lab1/result/ # 返回工作路径
+$ tar -zxvf quast-5.0.2.tar.gz -C ./ # 解压缩quast-5.0.2.tar.gz
+$ chmod a+x quast-5.0.2/quast.py # 为quast.py增加执行权限
+$ cd YourWorkingPath/lab1/result/ # 返回工作路径
 
 # 用quast评价组装结果
 $ ~/quast-5.0.2/quast.py -R ../data/ref.fa ecoli.velvet/contigs.fa ecoli.minia.contigs.fa ecoli.spades/scaffolds.fasta
