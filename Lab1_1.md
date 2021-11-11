@@ -156,6 +156,7 @@ $ qsub work_spades.sh
 $ cd
 $ tar -zxvf quast-5.0.2.tar.gz -C ./ # 解压缩quast-5.0.2.tar.gz
 $ chmod a+x quast-5.0.2/quast.py # 为quast.py增加执行权限
+$ rm -f quast-5.0.2.tar.gz
 $ cd YourWorkingPath/lab1/result/ # 返回工作路径
 
 # 用quast评价组装结果
