@@ -37,7 +37,7 @@
 
 ## 三、上机操作
 ### 进入genomelab环境
-```
+```shell
 $ source /opt/miniconda3/bin/activate
 $ conda activate genomelab
 ```
