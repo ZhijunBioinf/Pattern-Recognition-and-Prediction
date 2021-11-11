@@ -53,15 +53,15 @@ $ mkdir results
 ### 实验数据  
 > ../lab1/data/ref.fa (参考序列)  
 > ../lab1/data/reads_1.fq.gz, ../lab1/data/reads_2.fq.gz (illumina reads)  
-> pb_ecoli_0001.fastq (pacbio reads)  
+[pb_ecoli_0001.fastq (pacbio reads)](https://github.com/ZhijunBioinf/GenomicLab/blob/dzj/genomics_lab2_reads.fastq.gz)  
 
 ### (一) Mapping the short reads to the reference genome using bwa   
 
 #### 1. 准备数据和index参考基因组  
 ```shell
 $ cd data
-$ ln -s ../lab1/data/ref.fa ./
-$ ln -s ../lab1/data/reads_* ./
+$ ln -s ../../lab1/data/ref.fa ./
+$ ln -s ../../lab1/data/reads_* ./
 $ gunzip genomics_lab2_reads.fastq.gz
 $ mv genomics_lab2_reads.fastq pb_ecoli_0001.fastq
 
