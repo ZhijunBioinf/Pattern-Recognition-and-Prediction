@@ -42,7 +42,7 @@ $ source /opt/miniconda3/bin/activate
 $ conda activate genomelab
 ```
 ### 创建工作目录
-```
+```shell
 #新建一个目录lab1，本实验所有数据和输出都放入该目录中  
 $ mkdir lab1
 $ cd lab1
@@ -51,14 +51,14 @@ $ mkdir result
 ```
 
 ### 数据存放位置  
-DNA测序数据位于：
-[genomics_lab1_reads.fastq.gz](https://github.com/ZhijunBioinf/GenomicLab/blob/dzj/genomics_lab1_reads.fastq.gz)  
-【不可用】/data/lab/genomic/lab01/data/reads_1.fq.gz  
-【不可用】/data/lab/genomic/lab01/data/reads_2.fq.gz  
+DNA测序数据位于：  
+> [genomics_lab1_reads.fastq.gz](https://github.com/ZhijunBioinf/GenomicLab/blob/dzj/genomics_lab1_reads.fastq.gz)  
+> 【不可用】/data/lab/genomic/lab01/data/reads_1.fq.gz  
+> 【不可用】/data/lab/genomic/lab01/data/reads_2.fq.gz  
 
 参考基因组位于：  
-[genomics_lab1_ref.fa.gz](https://github.com/ZhijunBioinf/GenomicLab/blob/dzj/genomics_lab1_ref.fa.gz)  
-【不可用】/data/lab/genomic/lab01/data/ref.fa  
+> [genomics_lab1_ref.fa.gz](https://github.com/ZhijunBioinf/GenomicLab/blob/dzj/genomics_lab1_ref.fa.gz)  
+> 【不可用】/data/lab/genomic/lab01/data/ref.fa  
 
 
 ### 组装  
@@ -74,11 +74,11 @@ $ cd ../result
 ```
 
 #### 估算k值  
-```
+```shell
 $ ls ../data/reads_* > reads.file
 ```
 新建一个脚本文件，work_kmer.sh，写入以下内容:  
-```
+```shell
 #!/bin/bash
 #$ -S /bin/bash
 #$ -N kmer
@@ -87,7 +87,7 @@ $ ls ../data/reads_* > reads.file
 /opt/bio/kmergenie-1.7048/kmergenie reads.file
 ```
 
-```
+```shell
 # 用qsub提交任务至计算节点
 $ qsub work_kmer.sh
 ```
@@ -95,7 +95,7 @@ $ qsub work_kmer.sh
 
 #### 1. 用velvet组装
 新建一个脚本文件，work_velvet.sh，写下下列内容:  
-```
+```shell
 #!/bin/bash
 #$ -S /bin/bash
 #$ -N velvet
@@ -107,14 +107,14 @@ velveth ecoli.velvet 27 -shortPaired -fastq.gz -separate ../data/reads_1.fq ../d
 velvetg ecoli.velvet -exp_cov auto
 ```
 
-```
+```shell
 # 用qsub提交任务至计算节点
 $ qsub work_velvet.sh
 ```
 
 #### 2.用minia组装  
 新建一个脚本文件，work_minia.sh，写入下列内容:  
-```
+```shell
 #!/bin/bash
 #$ -S /bin/bash
 #$ -N minia
@@ -123,14 +123,14 @@ $ qsub work_velvet.sh
 /opt/bio/bin/minia -in ../data/reads_1.fq ../data/reads_2.fq -kmer-size 27 -out ecoli.minia
 ```
 
-```
+```shell
 # 用qsub提交任务至计算节点
 $ qsub work_minia.sh
 ```
 
 #### 3. 用SPAdes组装  
 新建一个脚本文件，work_spades.sh，写入下列内容:  
-```
+```shell
 #!/bin/bash
 #$ -S /bin/bash
 #$ -N spades
@@ -141,13 +141,13 @@ conda activate genomelab
 spades.py -t 4 -1 ../data/reads_1.fq -2 ../data/reads_2.fq -o ecoli.spades
 ```
 
-```
+```shell
 # 用qsub提交任务至计算节点
 $ qsub work_spades.sh
 ```
 
 #### 组装效果评价  
-```
+```shell
 $ cd
 $ tar -zxvf quast-5.0.2.tar.gz -C ~/ # 解压缩quast-5.0.2.tar.gz
 $ chmod a+x ~/quast-5.0.2/quast.py # 为quast.py增加执行权限
@@ -158,7 +158,7 @@ $ ~/quast-5.0.2/quast.py -R ../data/ref.fa ecoli.velvet/contigs.fa ecoli.minia.c
 ```
 
 #### 查看评价结果  
-```
+```shell
 $ less quast_results/latest/report.txt 
 ```
 
