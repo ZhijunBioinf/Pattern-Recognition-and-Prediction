@@ -69,6 +69,7 @@ $ gunzip genomics_lab1_reads.fastq.gz # 解压缩paired-end reads数据
 $ for i in `seq 1 8 196904`; do let j=$i+3; sed -n "${i},${j}p" genomics_lab1_reads.fastq; done > reads_1.fq
 $ for i in `seq 5 8 196904`; do let j=$i+3; sed -n "${i},${j}p" genomics_lab1_reads.fastq; done > reads_2.fq
 $ gzip reads_1.fq reads_2.fq
+$ rm -f genomics_lab1_reads.fastq
 $ gunzip genomics_lab1_ref.fa.gz # 解压缩参考基因组数据
 $ mv genomics_lab1_ref.fa ref.fa
 $ cd ../result
