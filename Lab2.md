@@ -111,14 +111,14 @@ samtools index mapping.sort.bam
 $ qsub work_bwa.sh
 ```
 
-work_bwa2.sh (using pipe)  
+work_bwa2.sh (using pipe，更便捷)  
 ```shell
 #!/bin/bash
 #$ -S /bin/bash
 #$ -N bwa_pipe
 #$ -j y
 #$ -cwd
-bwa mem ../data/index/REL606.fa ../data/reads_1.fq.gz ../data/reads_2.fq.gz | \
+bwa mem ../data/index/ref.fa ../data/reads_1.fq.gz ../data/reads_2.fq.gz | \
  samtools view -b - | \
  samtools sort -o mapping.sort.2.bam -
 samtools index mapping.sort.2.bam
@@ -133,8 +133,8 @@ work_minimap2.sh
 #$ -N minimap2
 #$ -j y
 #$ -cwd
-minimap2 -ax sr ../data/REL606.fa ../data/reads_1.fq.gz ../data/reads_2.fq.gz |\
- samtools view -b - |\
+minimap2 -ax sr ../data/ref.fa ../data/reads_1.fq.gz ../data/reads_2.fq.gz | \
+ samtools view -b - | \
  samtools sort -o mapping.sort.mm.bam -
 samtools index mapping.sort.mm.bam
 ```
@@ -152,8 +152,8 @@ work_minimap_pb.sh
 #$ -N minimap2
 #$ -j y
 #$ -cwd
-minimap2 -ax map-pb ../data/REL606.fa ../data/pb_ecoli_0001.fastq |\
- samtools view -b - |\
+minimap2 -ax map-pb ../data/ref.fa ../data/pb_ecoli_0001.fastq | \
+ samtools view -b - | \
  samtools sort -o mapping.sort.pb.bam -
 samtools index mapping.sort.pb.bam
 ```
@@ -168,7 +168,7 @@ $ qsub work_minimap_pb.sh
 ![](./igv_snapshot.png) 
 
 ## 四、作业与思考  
-1. 先组装，得到contigs，assemble short reads using SPAdes, assemble pacbio long reads using canu | mecat | miniasm  
+1. 先组装，得到contigs (assemble short reads using SPAdes, assemble pacbio long reads using canu | mecat | miniasm)  
 2. 然后将contigs用bwa mem比对到参考基因组上  
 3. 用igv显示比对结果   
 
