@@ -53,18 +53,20 @@ $ mkdir result
 ### 数据存放位置  
 DNA测序数据位于：  
 > [genomics_lab1_reads.fastq.gz](https://github.com/ZhijunBioinf/GenomicLab/blob/dzj/genomics_lab1_reads.fastq.gz)  
-> 【不可用】/data/lab/genomic/lab01/data/reads_1.fq.gz  
-> 【不可用】/data/lab/genomic/lab01/data/reads_2.fq.gz  
+> 【更靠谱的数据】/data/stdata/genomic/lab01/data/reads_1.fq.gz  
+> 【更靠谱的数据】/data/stdata/genomic/lab01/data/reads_2.fq.gz  
 
 参考基因组位于：  
 > [genomics_lab1_ref.fa.gz](https://github.com/ZhijunBioinf/GenomicLab/blob/dzj/genomics_lab1_ref.fa.gz)  
-> 【不可用】/data/lab/genomic/lab01/data/ref.fa  
+> 【更靠谱的数据】/data/stdata/genomic/lab01/data/ref.fa  
 
 
 ### 组装  
 #### 准备数据  
 ```shell
 $ cd data
+
+# *** 如果使用本地上传的数据，用下面的命令 ***
 $ gunzip genomics_lab1_reads.fastq.gz # 解压缩paired-end reads数据
 $ for i in `seq 1 8 196904`; do let j=$i+3; sed -n "${i},${j}p" genomics_lab1_reads.fastq; done > reads_1.fq
 $ for i in `seq 5 8 196904`; do let j=$i+3; sed -n "${i},${j}p" genomics_lab1_reads.fastq; done > reads_2.fq
@@ -72,6 +74,11 @@ $ gzip reads_1.fq reads_2.fq
 $ rm -f genomics_lab1_reads.fastq
 $ gunzip genomics_lab1_ref.fa.gz # 解压缩参考基因组数据
 $ mv genomics_lab1_ref.fa ref.fa
+
+# *** 如果使用集群上的数据，用下面的命令 ***
+$ ln -s /data/stdata/genomic/lab01/data/reads_* ./
+$ ln -s /data/stdata/genomic/lab01/data/ref.fa ./
+
 $ cd ../result
 ```
 
@@ -93,7 +100,9 @@ $ ls ../data/reads_* > reads.file
 # 用qsub提交任务至计算节点
 $ qsub work_kmer.sh
 ```
-结束后查看结果，选择最优k值27
+
+> 结束后查看结果，选择最优k值27 (对应本地数据)  
+> 结束后查看结果，选择最优k值117 (对应集群数据)  
 
 #### 1. 用velvet组装
 新建一个脚本文件，work_velvet.sh，写下下列内容:  
@@ -105,7 +114,7 @@ $ qsub work_kmer.sh
 #$ -j y
 source /opt/miniconda3/bin/activate
 conda activate genomelab
-velveth ecoli.velvet 27 -shortPaired -fastq.gz -separate ../data/reads_1.fq.gz ../data/reads_2.fq.gz
+velveth ecoli.velvet 27 -shortPaired -fastq.gz -separate ../data/reads_1.fq.gz ../data/reads_2.fq.gz # (若使用集群数据，请设置k为117)
 velvetg ecoli.velvet -exp_cov auto
 ```
 
@@ -122,7 +131,7 @@ $ qsub work_velvet.sh
 #$ -N minia
 #$ -cwd
 #$ -j y
-/opt/bio/bin/minia -in ../data/reads_1.fq.gz,../data/reads_2.fq.gz -kmer-size 27 -out ecoli.minia
+/opt/bio/bin/minia -in ../data/reads_1.fq.gz,../data/reads_2.fq.gz -kmer-size 27 -out ecoli.minia # (若使用集群数据，请设置k为117)
 ```
 
 ```shell
