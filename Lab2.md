@@ -100,7 +100,7 @@ work_bwa.sh
 #$ -N bwa
 #$ -j y
 #$ -cwd
-bwa mem ../data/index/REL606.fa ../data/reads_1.fq.gz ../data/reads_2.fq.gz > mapping.sam
+bwa mem ../data/index/ref.fa ../data/reads_1.fq.gz ../data/reads_2.fq.gz > mapping.sam
 samtools view -b mapping.sam > mapping.bam
 samtools sort -o mapping.sort.bam mapping.bam
 samtools index mapping.sort.bam
