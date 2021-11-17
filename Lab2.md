@@ -98,6 +98,7 @@ work_bwa.sh
 #$ -N bwa
 #$ -j y
 #$ -cwd
+
 bwa mem ../data/index/ref.fa ../data/reads_1.fq.gz ../data/reads_2.fq.gz > mapping.sam
 samtools view -b mapping.sam > mapping.bam
 samtools sort -o mapping.sort.bwa.bam mapping.bam
@@ -116,6 +117,7 @@ work_bwa2.sh (using pipe，更便捷)
 #$ -N bwa_pipe
 #$ -j y
 #$ -cwd
+
 bwa mem ../data/index/ref.fa ../data/reads_1.fq.gz ../data/reads_2.fq.gz | \
  samtools view -b - | \
  samtools sort -o mapping.sort.bwa2.bam -
@@ -131,6 +133,7 @@ work_minimap2.sh
 #$ -N minimap2
 #$ -j y
 #$ -cwd
+
 minimap2 -ax sr ../data/ref.fa ../data/reads_1.fq.gz ../data/reads_2.fq.gz | \
  samtools view -b - | \
  samtools sort -o mapping.sort.mm.bam -
@@ -150,6 +153,7 @@ work_minimap_pb.sh
 #$ -N minimap2
 #$ -j y
 #$ -cwd
+
 minimap2 -ax map-pb ../data/ref.fa ../data/pb_ecoli_0001.fastq | \
  samtools view -b - | \
  samtools sort -o mapping.sort.pb.bam -
