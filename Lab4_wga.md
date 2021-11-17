@@ -9,44 +9,45 @@ Whole-genome alignment (WGA) is the prediction of evolutionary relationships at 
 
 ## 三、上机操作  
 ### 进入genomelab环境
-```
+```shell
 $ source /opt/miniconda3/bin/activate
 $ conda activate genomelab
 ```
 
 ### 数据存放位置及工作目录准备  
-```
-# Data: /data/lab/genomic/lab04/data
+```shell
+# Data: /data/stdata/genomic/lab04/data
 $ mkdir lab4
 $ cd lab4
 $ mkdir data results
 $ cd data
-$ ln -s /data/lab/genomic/lab04/data/B011.fasta
-$ ln -s /data/lab/genomic/lab04/data/NF2.fasta
-$ ln -s /data/lab/genomic/lab04/data/X23.fasta
+$ ln -s /data/stdata/genomic/lab04/data/DZQ7.fasta
+$ ln -s /data/stdata/genomic/lab04/data/HK544.fasta
+$ ln -s /data/stdata/genomic/lab04/data/X23.fasta
 $ cd ../results
 ```
 
 ### 1. 两个基因组WGA
 work_nucmer.sh
-```
+```shell
 #!/bin/bash
 #$ -S /bin/bash
 #$ -N nucmer
 #$ -j y
 #$ -cwd
-nucmer -p X23_B011 ../data/X23.fasta ../data/B011.fasta
-dnadiff -p X23_B011 -d X23_B011.delta
+
+nucmer -p DZQ7_HK544 ../data/DZQ7.fasta ../data/HK544.fasta
+dnadiff -p DZQ7_HK544 -d DZQ7_HK544.delta
 ```
 
-```
+```shell
 # 提交任务
 $ qsub work_nucmer.sh
 ```
 
-结果文件：X23_B011.delta  
+结果文件：DZQ7_HK544.delta  
 dnadiff 结果
-```
+```shell
 OUTPUT:
     .report  - Summary of alignments, differences and SNPs
     .delta   - Standard nucmer alignment output
@@ -62,45 +63,46 @@ OUTPUT:
 ```
 
 查看结果  
-```
-$ mummerplot --layout --small --postscript -p X23_B011 X23_B011.delta
-$ ps2pdf X23_B011.ps X23_B011.pdf
+```shell
+$ mummerplot --layout --small --postscript -p DZQ7_HK544 DZQ7_HK544.delta
+$ ps2pdf DZQ7_HK544.ps DZQ7_HK544.pdf
 ```
 
 比对结果：
-[X23_B011.pdf](https://github.com/ZhijunBioinf/GenomicLab/blob/dzj/X23_B011.pdf)
+[DZQ7_HK544.pdf](https://github.com/ZhijunBioinf/GenomicLab/blob/dzj/DZQ7_HK544.pdf)
 
 [mummer使用说明](http://mummer.sourceforge.net/manual/)
 
 ### 2. 多基因组WGA
 
-```
+```shell
 $ cat ../data/*.fasta > genome.fasta
 ```
 
 work_mauve.sh  
-```
+```shell
 #!/bin/bash
 #$ -S /bin/bash
 #$ -N mauve
 #$ -j y
 #$ -cwd
+
 mauveAligner --output=my_seqs.xmfa genome.fasta 
 ```
 
-```
+```shell
 # 提交任务（Note: Mauve运行时间较长）
 $ qsub work_mauve.sh
 ```
 
 查看结果
 * 集群上查看（Note: 需要X11图形支持）
-```
+```shell
 $ Mauve my_seqs.xmfa
 ```
 
 * Windows系统查看
-> 1. 安装[Mauve](http://darlinglab.org/mauve/download.html)
+> 1. 安装[Mauve](http://darlinglab.org/mauve/download.html) (需要64位JRE支持)
 > 2. 将my_seqs.xmfa下载到本地，用Mauve打开，观察结果
 
 [mauve.jpg](https://github.com/ZhijunBioinf/GenomicLab/blob/dzj/mauve.jpg)
