@@ -40,6 +40,9 @@ $ conda activate
 
 # 首先要安装Python的包管理工具pip
 $ curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py   # 下载安装脚本
+# 如果curl报错，用wget下载
+$ wget https://bootstrap.pypa.io/get-pip.py
+
 $ python3 get-pip.py    # 运行安装脚本
 
 # 安装3个常用包：矩阵运算包numpy、数值计算scipy包、矩阵作图包matplotlib
