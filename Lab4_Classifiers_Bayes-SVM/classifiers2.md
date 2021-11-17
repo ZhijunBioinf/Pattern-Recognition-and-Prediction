@@ -130,12 +130,13 @@ echo
 $ qsub work_mySVC.sh
 ```
 
-* 尝试更多的选项搭配，看精度变化，比如数据不规格化时，各种核函数、是否寻优、不同交叉验证次数等情形的预测精度。
+* 尝试更多的选项搭配，看精度变化，比如数据不规格化时，各种核函数、是否参数寻优、不同交叉验证次数等情形的预测精度。
 
 ## 作业
-1. 尽量看懂`参考程序`的每一行代码。
-2. 熟练使用sklearn包中的NB, SVC分类器。 <br>
-不怕报错，犯错越多，进步越快！
+1. 尽量看懂`参考程序`的每一行代码。  
+2. 熟练使用sklearn包中的NB, SVC分类器。  
+3. 完成受体剪接位点的NB、SVC分类预测。  
+不怕报错，犯错越多，进步越快！  
 
 ## 参考
 * NB手册：[sklearn.naive_bayes.GaussianNB](https://scikit-learn.org/stable/modules/naive_bayes.html#gaussian-naive-bayes)
