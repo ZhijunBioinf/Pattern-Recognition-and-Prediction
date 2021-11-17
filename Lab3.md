@@ -20,86 +20,90 @@
 
 ## 三、上机操作
 ### 进入genomelab环境
-```
+```shell
 $ source /opt/miniconda3/bin/activate
 $ conda activate genomelab
 ```
+
 ### 数据存放位置  
-```
-/data/lab/genomic/lab03/data/
-```
+> /data/stdata/genomic/lab03/data/  
 
 ### 数据及工作目录准备  
-```
+```shell
 $ mkdir lab3
 $ cd lab3
-$ ln -s /data/lab/genomic/lab03/data/ ./
+$ ln -s /data/stdata/genomic/lab03/data/ ./
 $ mkdir results
 ```
 
 ## (一) 原核生物基因组注释--prokka    
-```
+```shell
 cd results
-
 ```
 
 work_prokka.sh  
-```
+```shell
 #!/bin/bash
 #$ -S /bin/bash
 #$ -N prokka
 #$ -j y
 #$ -cwd
+
 source /opt/miniconda3/bin/activate
 conda activate prokka
-prokka --outdir anno --prefix PROKKA ../data/REL606.fa
+prokka --outdir anno --prefix PROKKA ../data/ref.fa
 ```
 
-```
+```shell
 # 用qsub提交任务至计算节点
 $ qsub work_prokka.sh
 ```
 注释结果存放在anno目录中，查看结果，了解基因组注释常见的几种格式。  
 
 ## （二）真核生物基因组--maker  
-```
+```shell
 # create control files for maker
 $ maker -CTL
 ```
 会产生4个参数设置文件：
-```
+```shell
 -rw-rw-r-- 1 wangys wangys  1479 Oct 22 08:22 maker_bopts.ctl  
 -rw-rw-r-- 1 wangys wangys   893 Oct 22 08:22 maker_evm.ctl  
 -rw-rw-r-- 1 wangys wangys  1488 Oct 22 08:22 maker_exe.ctl  
 -rw-rw-r-- 1 wangys wangys  4765 Oct 22 08:22 maker_opts.ctl  
 ```
+
 编辑maker_opts.ctl文件，改变以下几个参数，几他的用默认参数：  
-```
+```shell
 genome=../data/dpp_contig.fasta  
 est=../data/dpp_est.fasta  
 protein=../data/dpp_protein.fasta  
 est2genome=1  
 ```
+
 work_maker.sh
-```
+```shell
 #!/bin/bash
 #$ -S /bin/bash
 #$ -N maker
 #$ -j y
 #$ -cwd
+
 maker
 ```
 
-```
+```shell
 # 用qsub提交任务至计算节点
 $ qsub work_maker.sh
 ```
 
-真核生物基因组注释比较复杂，这里只是向大家介绍了maker的一般使用，如果要使用maker注释新的基因组，建议参阅：[http://gmod.org/wiki/MAKER_Tutorial](http://gmod.org/wiki/MAKER_Tutorial)  
+真核生物基因组注释比较复杂，这里只是向大家介绍了maker的一般使用，如果要使用maker注释新的基因组，建议参阅：  
+[http://gmod.org/wiki/MAKER_Tutorial](http://gmod.org/wiki/MAKER_Tutorial)  
+
 查看结果文件：  
-```
+```shell
 $ cd dpp_contig.maker.output/dpp_contig_datastore/05/1F/contig-dpp-500-500
-$ ls -l
+$ ls -lh
 -rw-rw-r-- 1 wangys wangys 65341 Oct 22 08:30 contig-dpp-500-500.gff  
 -rw-rw-r-- 1 wangys wangys   717 Oct 22 08:30 contig-dpp-500-500.maker.proteins.fasta  
 -rw-rw-r-- 1 wangys wangys  4443 Oct 22 08:30 contig-dpp-500-500.maker.transcripts.fasta  
@@ -110,7 +114,7 @@ drwxrwxr-x 3 wangys wangys  4096 Oct 22 08:30 theVoid.contig-dpp-500-500
 ### 用Artemis查看注释结果（选做）  
 这一部分是在本地台式机上完成。  
 下载地址：http://www.sanger.ac.uk/science/tools/artemis  
-将prokka注释得到的prokka.gff文件拷到本地电脑上(用scp)  
+将prokka注释得到的prokka.gff文件拷到本地电脑上  
 打开Artemis，装载注释结果  
 >    1. Start Artemis  
 >    2. Click OK  
