@@ -105,11 +105,11 @@ $ qsub work_maker.sh
 ```shell
 $ cd dpp_contig.maker.output/dpp_contig_datastore/05/1F/contig-dpp-500-500
 $ ls -lh
--rw-rw-r-- 1 wangys wangys 65341 Oct 22 08:30 contig-dpp-500-500.gff  
--rw-rw-r-- 1 wangys wangys   717 Oct 22 08:30 contig-dpp-500-500.maker.proteins.fasta  
--rw-rw-r-- 1 wangys wangys  4443 Oct 22 08:30 contig-dpp-500-500.maker.transcripts.fasta  
--rw-rw-r-- 1 wangys wangys  4120 Oct 22 08:30 run.log  
-drwxrwxr-x 3 wangys wangys  4096 Oct 22 08:30 theVoid.contig-dpp-500-500  
+-rw-rw-r-- 1 daizj daizj  64K Nov 17 18:32 contig-dpp-500-500.gff
+-rw-rw-r-- 1 daizj daizj  717 Nov 17 18:32 contig-dpp-500-500.maker.proteins.fasta
+-rw-rw-r-- 1 daizj daizj 4.4K Nov 17 18:32 contig-dpp-500-500.maker.transcripts.fasta
+-rw-rw-r-- 1 daizj daizj 4.2K Nov 17 18:32 run.log
+drwxrwxr-x 3 daizj daizj 4.0K Nov 17 18:32 theVoid.contig-dpp-500-500
 ```
 
 ### 用Artemis查看注释结果（选做）  
