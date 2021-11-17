@@ -150,7 +150,7 @@ work_minimap_pb.sh
 ```shell
 #!/bin/bash
 #$ -S /bin/bash
-#$ -N minimap2
+#$ -N mm_map-pb
 #$ -j y
 #$ -cwd
 
