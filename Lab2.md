@@ -91,7 +91,7 @@ $ qsub work_bwaIndex.sh
 cd ../../results
 ```
 
-work_bwa.sh
+work_bwa.sh  
 ```shell
 #!/bin/bash
 #$ -S /bin/bash
@@ -99,29 +99,15 @@ work_bwa.sh
 #$ -j y
 #$ -cwd
 
-bwa mem ../data/index/ref.fa ../data/reads_1.fq.gz ../data/reads_2.fq.gz > mapping.sam
-samtools view -b mapping.sam > mapping.bam
-samtools sort -o mapping.sort.bwa.bam mapping.bam
+bwa mem ../data/index/ref.fa ../data/reads_1.fq.gz ../data/reads_2.fq.gz | \
+  samtools view -b - | \
+  samtools sort -o mapping.sort.bwa.bam -
 samtools index mapping.sort.bwa.bam
 ```
 
 ```shell
 # 用qsub提交任务至计算节点
 $ qsub work_bwa.sh
-```
-
-work_bwa2.sh (using pipe，更便捷)  
-```shell
-#!/bin/bash
-#$ -S /bin/bash
-#$ -N bwa_pipe
-#$ -j y
-#$ -cwd
-
-bwa mem ../data/index/ref.fa ../data/reads_1.fq.gz ../data/reads_2.fq.gz | \
- samtools view -b - | \
- samtools sort -o mapping.sort.bwa2.bam -
-samtools index mapping.sort.bwa2.bam
 ```
 
 ### (二)Mapping the short reads to the reference genome using minimap2  
