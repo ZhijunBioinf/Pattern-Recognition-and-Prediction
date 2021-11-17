@@ -100,8 +100,8 @@ work_bwa.sh
 #$ -cwd
 bwa mem ../data/index/ref.fa ../data/reads_1.fq.gz ../data/reads_2.fq.gz > mapping.sam
 samtools view -b mapping.sam > mapping.bam
-samtools sort -o mapping.sort.bam mapping.bam
-samtools index mapping.sort.bam
+samtools sort -o mapping.sort.bwa.bam mapping.bam
+samtools index mapping.sort.bwa.bam
 ```
 
 ```shell
@@ -118,8 +118,8 @@ work_bwa2.sh (using pipe，更便捷)
 #$ -cwd
 bwa mem ../data/index/ref.fa ../data/reads_1.fq.gz ../data/reads_2.fq.gz | \
  samtools view -b - | \
- samtools sort -o mapping.sort.2.bam -
-samtools index mapping.sort.2.bam
+ samtools sort -o mapping.sort.bwa2.bam -
+samtools index mapping.sort.bwa2.bam
 ```
 
 ### (二)Mapping the short reads to the reference genome using minimap2  
