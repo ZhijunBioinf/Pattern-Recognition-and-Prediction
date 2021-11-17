@@ -32,7 +32,8 @@ $ conda activate genomelab
 ```shell
 $ mkdir lab3
 $ cd lab3
-$ ln -s /data/stdata/genomic/lab03/data/ ./
+$ ln -s /data/stdata/genomic/lab03/data/ref.fa ./
+$ ln -s /data/stdata/genomic/lab03/data/*.fasta ./
 $ mkdir results
 ```
 
@@ -67,10 +68,10 @@ $ maker -CTL
 ```
 会产生4个参数设置文件：
 ```shell
--rw-rw-r-- 1 wangys wangys  1479 Oct 22 08:22 maker_bopts.ctl  
--rw-rw-r-- 1 wangys wangys   893 Oct 22 08:22 maker_evm.ctl  
--rw-rw-r-- 1 wangys wangys  1488 Oct 22 08:22 maker_exe.ctl  
--rw-rw-r-- 1 wangys wangys  4765 Oct 22 08:22 maker_opts.ctl  
+-rw-rw-r-- 1 daizj daizj 1.5K Nov 17 17:19 maker_bopts.ctl
+-rw-rw-r-- 1 daizj daizj  893 Nov 17 17:19 maker_evm.ctl
+-rw-rw-r-- 1 daizj daizj 1.7K Nov 17 17:19 maker_exe.ctl
+-rw-rw-r-- 1 daizj daizj 4.7K Nov 17 17:19 maker_opts.ctl
 ```
 
 编辑maker_opts.ctl文件，改变以下几个参数，几他的用默认参数：  
