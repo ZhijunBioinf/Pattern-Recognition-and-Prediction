@@ -163,7 +163,7 @@ write.csv(res.IRGA409[order(res.IRGA409$pvalue),],"Results_409.csv")
 * 可以退出到登录集群时的默认环境，其中的R版本已经安装好tidyverse, DESeq2包，不需另外安装
 ```shell
 $ conda activate
-$ Rscirpt my_deseg2.R
+$ Rscript my_deseg2.R
 ```
 
 ## 四、作业与思考  
