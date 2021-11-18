@@ -53,8 +53,12 @@ Ref: /data/stdata/genomic/lab05/data/Ref-data
 $ cd /data/stdata/genomic/bioinfo2019
 $ mkdir YourStudentID
 $ mkdir YourStudentID/lab5
-$ mkdir YourStudentID/lab5/result
-$ cd YourStudentID/lab5/result
+$ cd YourStudentID/lab5
+
+$ ln -s /data/stdata/genomic/lab05/data/
+$ ln -s /data/stdata/genomic/lab05/data/Ref-data/ ref
+$ mkdir result
+$ cd result
 ```
 
 ### 1. Mapping(较慢，运行约8小时)
@@ -73,7 +77,7 @@ data=/data/stdata/genomic/lab05/data
 ref=/data/stdata/genomic/lab05/data/Ref-data
 for i in $(seq 291 302)
 do 
-  hisat2 -p 1 -x ${ref}/index/osa -q ${data}/SRR7760${i}.1.fastq | \
+  hisat2 -p 1 -x ../ref/index/osa -q ../data/SRR7760${i}.1.fastq | \
   samtools view -b - | \
   samtools sort -o SRR7760${i}.sort.bam - > SRR7760${i}.log
 done
@@ -95,8 +99,8 @@ work_count.sh
 
 source /opt/miniconda3/bin/activate
 conda activate genomelab
-ref=/data/stdata/genomic/lab05/data/Ref-data
-TPMCalculator -g ${ref}/Oryza_sativa.IRGSP-1.0.gtf -d ./ -a
+
+TPMCalculator -g ../ref/Oryza_sativa.IRGSP-1.0.gtf -d ./ -a
 ```
 
 ```shell
