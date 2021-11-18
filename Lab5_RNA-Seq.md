@@ -52,15 +52,11 @@ Ref: /data/stdata/genomic/lab05/data/Ref-data
 $ mkdir lab5
 $ cd lab5
 
-# 建立data和ref的软链接
-$ ln -s /data/stdata/genomic/lab05/data/
-$ ln -s /data/stdata/genomic/lab05/data/Ref-data/ ref
-
-# 按自己学号(YourStudentID)建立result路径软链接
+# 按自己学号(YourStudentID)建立result路径的软链接
 $ mkdir /data/stdata/genomic/bioinfo2019/YourStudentID
-$ mkdir /data/stdata/genomic/bioinfo2019/YourStudentID/lab5/
+$ mkdir /data/stdata/genomic/bioinfo2019/YourStudentID/lab5
 $ mkdir /data/stdata/genomic/bioinfo2019/YourStudentID/lab5/result
-$ ln -s /data/stdata/genomic/bioinfo2019/YourStudentID/lab5/result/ result
+$ ln -s /data/stdata/genomic/bioinfo2019/YourStudentID/lab5/result/
 $ cd result
 ```
 
@@ -76,9 +72,11 @@ work_mapping.sh
 source /opt/miniconda3/bin/activate
 conda activate genomelab
 
+data=/data/stdata/genomic/lab05/data
+ref=/data/stdata/genomic/lab05/data/Ref-data
 for i in $(seq 291 302)
 do 
-  hisat2 -p 1 -x ../ref/index/osa -q ../data/SRR7760${i}.1.fastq | \
+  hisat2 -p 1 -x ${ref}/index/osa -q ${data}/SRR7760${i}.1.fastq | \
   samtools view -b - | \
   samtools sort -o SRR7760${i}.sort.bam - > SRR7760${i}.log
 done
@@ -100,7 +98,8 @@ work_count.sh
 
 source /opt/miniconda3/bin/activate
 conda activate genomelab
-TPMCalculator -g ../ref/Oryza_sativa.IRGSP-1.0.gtf -d ./ -a
+ref=/data/stdata/genomic/lab05/data/Ref-data
+TPMCalculator -g ${ref}/Oryza_sativa.IRGSP-1.0.gtf -d ./ -a
 ```
 
 ```shell
