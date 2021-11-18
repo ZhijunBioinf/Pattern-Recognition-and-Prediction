@@ -57,7 +57,10 @@ $ ln -s /data/stdata/genomic/lab05/data/
 $ ln -s /data/stdata/genomic/lab05/data/Ref-data/ ref
 
 # 按自己学号(YourStudentID)建立result路径软链接
-$ ln -s /data/stdata/genomic/bioinfo2019/YourStudentID/result result
+$ mkdir /data/stdata/genomic/bioinfo2019/YourStudentID
+$ mkdir /data/stdata/genomic/bioinfo2019/YourStudentID/lab5/
+$ mkdir /data/stdata/genomic/bioinfo2019/YourStudentID/lab5/result
+$ ln -s /data/stdata/genomic/bioinfo2019/YourStudentID/lab5/result/ result
 $ cd result
 ```
 
