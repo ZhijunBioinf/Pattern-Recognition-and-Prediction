@@ -73,8 +73,6 @@ work_mapping.sh
 source /opt/miniconda3/bin/activate
 conda activate genomelab
 
-data=/data/stdata/genomic/lab05/data
-ref=/data/stdata/genomic/lab05/data/Ref-data
 for i in $(seq 291 302)
 do 
   hisat2 -p 1 -x ../ref/index/osa -q ../data/SRR7760${i}.1.fastq | \
