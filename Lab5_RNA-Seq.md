@@ -39,29 +39,30 @@
 
 ## 三、上机操作  
 ### 进入genomelab环境
-```
+```shell
 $ source /opt/miniconda3/bin/activate
 $ conda activate genomelab
 ```
+
 ### 数据存放位置及工作目录准备  
-```
-Data: /data/lab/genomic/lab05/data
-Ref: /data/lab/genomic/lab05/ref
+```shell
+Data: /data/stdata/genomic/lab05/data
+Ref: /data/stdata/genomic/lab05/data/Ref-data
 
 $ mkdir lab5
 $ cd lab5
 
 # 建立data和ref的软链接
-$ ln -s /data/lab/genomic/lab05/data/
-$ ln -s /data/lab/genomic/lab05/ref/
+$ ln -s /data/stdata/genomic/lab05/data/
+$ ln -s /data/stdata/genomic/lab05/data/Ref-data ref
 
-$ mkdir results
-$ cd results
+$ mkdir result
+$ cd result
 ```
 
 ### 1. Mapping(较慢，运行约8小时)
 work_mapping.sh  
-```
+```shell
 #!/bin/bash
 #$ -S /bin/bash
 #$ -N hisat2
@@ -72,20 +73,20 @@ source /opt/miniconda3/bin/activate
 conda activate genomelab
 for i in $(seq 291 302)
 do 
- hisat2 -p 1 -x ../ref/index/osa -q ../data/SRR7760${i}.fastq | \
+ hisat2 -p 1 -x ../ref/index/osa -q ../data/SRR7760${i}.1.fastq | \
  samtools view -b - | \
  samtools sort -o SRR7760${i}.sort.bam - > SRR7760${i}.log
 done
 ```
 
-```
+```shell
 # 提交任务
 $ qsub work_mapping.sh
 ```
 
 ### 2. Count（运行约1小时）
 work_count.sh  
-```
+```shell
 #!/bin/bash
 #$ -S /bin/bash
 #$ -N count
@@ -94,16 +95,16 @@ work_count.sh
 
 source /opt/miniconda3/bin/activate
 conda activate genomelab
-TPMCalculator -g ../ref/Oryza_sativa.IRGSP-1.0.41.gtf -d ./ -a
+TPMCalculator -g ../ref/Oryza_sativa.IRGSP-1.0.gtf -d ./ -a
 ```
 
-```
+```shell
 # 提交任务
 $ qsub work_count.sh
 ```
 
 ### 3. Merge the counting matrix（直接运行paste, sed命令）
-```
+```shell
 $ paste <(cut -f 1,6 SRR7760291.sort_genes.out) \
 <(cut -f 6 SRR7760292.sort_genes.out) \
 <(cut -f 6 SRR7760293.sort_genes.out) \
@@ -124,7 +125,7 @@ $ sed -i '1c\GeneID\tSRR7760291\tSRR7760292\tSRR7760293\tSRR7760294\tSRR7760295\
 ### 4. DE analysis(使用R包实现)
 * 如果在genomelab环境，其中的R没有安装以下需要的包。
 * 可以退出到登录集群时的默认环境，其中的R版本已经安装好tidyverse, DESeq2包，不需另外安装
-```
+```shell
 $ conda activate
 # 进入R
 $ R
