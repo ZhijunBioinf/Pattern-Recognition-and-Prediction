@@ -3,6 +3,7 @@
 ## 实验目的
 * 1）使用朴素贝叶斯(Naive Bayes, NB)完成剪接位点识别
 * 2）使用支持向量分类(Support Vector Classification, SVC)完成剪接位点识别
+* 3）理解交叉验证（cross validation）过程。
 
 ## 准备工作目录
 ```
