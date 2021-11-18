@@ -54,9 +54,10 @@ $ cd lab5
 
 # 建立data和ref的软链接
 $ ln -s /data/stdata/genomic/lab05/data/
-$ ln -s /data/stdata/genomic/lab05/data/Ref-data ref
+$ ln -s /data/stdata/genomic/lab05/data/Ref-data/ ref
 
-$ mkdir result
+# 按自己学号(YourStudentID)建立result路径软链接
+$ ln -s /data/stdata/genomic/bioinfo2019/YourStudentID/result result
 $ cd result
 ```
 
@@ -71,11 +72,12 @@ work_mapping.sh
 
 source /opt/miniconda3/bin/activate
 conda activate genomelab
+
 for i in $(seq 291 302)
 do 
- hisat2 -p 1 -x ../ref/index/osa -q ../data/SRR7760${i}.1.fastq | \
- samtools view -b - | \
- samtools sort -o SRR7760${i}.sort.bam - > SRR7760${i}.log
+  hisat2 -p 1 -x ../ref/index/osa -q ../data/SRR7760${i}.1.fastq | \
+  samtools view -b - | \
+  samtools sort -o SRR7760${i}.sort.bam - > SRR7760${i}.log
 done
 ```
 
