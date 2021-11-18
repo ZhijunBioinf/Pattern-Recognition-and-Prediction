@@ -49,15 +49,12 @@ $ conda activate genomelab
 Data: /data/stdata/genomic/lab05/data
 Ref: /data/stdata/genomic/lab05/data/Ref-data
 
-$ mkdir lab5
-$ cd lab5
-
-# 按自己学号(YourStudentID)建立result路径的软链接
-$ mkdir /data/stdata/genomic/bioinfo2019/YourStudentID
-$ mkdir /data/stdata/genomic/bioinfo2019/YourStudentID/lab5
-$ mkdir /data/stdata/genomic/bioinfo2019/YourStudentID/lab5/result
-$ ln -s /data/stdata/genomic/bioinfo2019/YourStudentID/lab5/result/
-$ cd result
+# 按自己学号(YourStudentID)建立文件夹
+$ cd /data/stdata/genomic/bioinfo2019
+$ mkdir YourStudentID
+$ mkdir YourStudentID/lab5
+$ mkdir YourStudentID/lab5/result
+$ cd YourStudentID/lab5/result
 ```
 
 ### 1. Mapping(较慢，运行约8小时)
