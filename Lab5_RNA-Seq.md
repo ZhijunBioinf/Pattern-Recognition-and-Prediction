@@ -130,10 +130,12 @@ $ sed -i '1c\GeneID\tSRR7760291\tSRR7760292\tSRR7760293\tSRR7760294\tSRR7760295\
 # 进入R
 $ R
 ```
+
 ```R
 # 安装tidyverse包，DESeq2包
 > install.packages("tidyverse", repos = "https://mirror.lzu.edu.cn/CRAN/")
 > BiocManager::install("DESeq2")
+> q()
 ```
 
 * 参考程序：my_deseq2.R  
