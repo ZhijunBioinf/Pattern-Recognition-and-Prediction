@@ -126,18 +126,23 @@ $ sed -i '1c\GeneID\tSRR7760291\tSRR7760292\tSRR7760293\tSRR7760294\tSRR7760295\
 ```
 
 ### 4. DE analysis(使用R包实现)
+```shell
+# 进入R
+$ R
+
+```R
+# 安装tidyverse包，DESeq2包
+> install.packages("tidyverse", repos = "https://mirror.lzu.edu.cn/CRAN/")
+> BiocManager::install("DESeq2")
+```
+
 * 参考程序：my_deseq2.R  
 ```R
-if(require(tidyverse) == FALSE)
-  install.packages("tidyverse", repos = "https://mirror.lzu.edu.cn/CRAN/")
-if(require(DESeq2) == FALSE)
-  install.packages("BiocManager", repos = "https://mirror.lzu.edu.cn/CRAN/")
-  BiocManager::install("DESeq2")
+library(tidyverse) # 载入tidyverse包
+library(DESeq2) # 载入DESeq2包
 
-require(tidyverse)
-require(DESeq2)
-cts <- read_tsv("counts.tsv") %>% as.data.frame()
-rownames(cts) <- cts$GeneID
+cts <- read_tsv("counts.tsv") %>% as.data.frame() # 载入12个样本的基因表达矩阵数据counts.tsv
+rownames(cts) <- cts$GeneID # 将GeneID设置为行名
 cts <- cts[,-1]
 colData <- data.frame(SampleID=c("SRR7760291","SRR7760292","SRR7760293",
                                  "SRR7760294","SRR7760295","SRR7760296",
@@ -150,15 +155,14 @@ colData <- data.frame(SampleID=c("SRR7760291","SRR7760292","SRR7760293",
 dds <- DESeqDataSetFromMatrix(countData = cts,
                               colData = colData,
                               design = ~ Group)
-dds <- DESeq(dds)
-res.IRGA428 <- results(dds, contrast=c("Group","IRGA428_C","IRGA428_T"))
-res.IRGA409 <- results(dds, contrast=c("Group","IRGA409_C","IRGA409_T"))
+dds <- DESeq(dds) # 对dds进行差异表达基因检测
+
+res.IRGA428 <- results(dds, contrast=c("Group","IRGA428_C","IRGA428_T")) # 按实验分组（高温vs常温）取出不耐热品种（IRGA428）的差异表达结果
+res.IRGA409 <- results(dds, contrast=c("Group","IRGA409_C","IRGA409_T")) # 按实验分组（高温vs常温）取出耐热品种（IRGA409）的差异表达结果
 write.csv(res.IRGA428[order(res.IRGA428$pvalue),],"Results_428.csv")
 write.csv(res.IRGA409[order(res.IRGA409$pvalue),],"Results_409.csv")
 ```
 
-* 如果在genomelab环境，其中的R没有安装以下需要的包。
-* 可以退出到登录集群时的默认环境，其中的R版本已经安装好tidyverse, DESeq2包，不需另外安装
 ```shell
 $ conda activate
 $ Rscript my_deseg2.R
