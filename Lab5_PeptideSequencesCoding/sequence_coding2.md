@@ -44,8 +44,28 @@ $ conda activate
 import numpy as np
 import sys
 
-def file2matrix(filename, seqLength, AA531Dict):
-    fr = open(filename) # 打开文件
+# 1. 将AA531properties.txt做成字典
+# def makeAA531Dict(filename):
+AA531FileName = 'AA531properties.txt'
+    fr = open(AA531FileName) # 打开文件
+    arrayOLines = fr.readlines() # 读取所有内容
+    del(arrayOLines[0]) # 删除head行
+    fr.close() # 及时关闭文件
+
+    AA531Dict = {}
+    for line in arrayOLines:
+        line = line.strip()
+        listFromLine = line.split('\t')
+        AA = listFromLine[0]
+        properties = [float(i) for i in listFromLine[1:]] # 从文件读取的数值默认是字符串类型，需要转换为浮点型
+        AA531Dict[AA] = properties
+    #return AA531Dict
+
+# 2. 肽序列表征
+# def file2matrix(filename, seqLength, AA531Dict):
+AASeqFileName = 'ACEtriPeptidesSequencesActivities.txt'
+seqLength = 3
+    fr = open(AASeqFileName) # 打开文件
     arrayOLines = fr.readlines() # 读取所有内容
     fr.close() # 及时关闭文件
 
@@ -71,43 +91,31 @@ def file2matrix(filename, seqLength, AA531Dict):
 
         returnMat[lineNum,:] = np.array(feaVec)
         lineNum += 1
-    return Y, returnMat, lineNum
+    #return Y, returnMat, lineNum
 
-def makeAA531Dict(filename):
-    fr = open(filename) # 打开文件
-    arrayOLines = fr.readlines() # 读取所有内容
-    del(arrayOLines[0]) # 删除head行
-    fr.close() # 及时关闭文件
+# 3. 将结果写入文件
+#if __name__ == '__main__':
+#    AASeqFileName = sys.argv[1]
+#    AA531FileName = sys.argv[2]
+#    seqLength = int(sys.argv[3])
+#    outputFileName = sys.argv[4]
+#    AA531Dict = makeAA531Dict(AA531FileName)
+#    Y, AA531Mat, SeqNum = file2matrix(AASeqFileName, seqLength, AA531Dict)
 
-    AA531Dict = {}
-    for line in arrayOLines:
-        line = line.strip()
-        listFromLine = line.split('\t')
-        AA = listFromLine[0]
-        properties = [float(i) for i in listFromLine[1:]] # 从文件读取的数值默认是字符串类型，需要转换为浮点型
-        AA531Dict[AA] = properties
-    return AA531Dict
-
-
-if __name__ == '__main__':
-    AASeqFileName = sys.argv[1]
-    AA531FileName = sys.argv[2]
-    seqLength = int(sys.argv[3])
-    outputFileName = sys.argv[4]
-
-    AA531Dict = makeAA531Dict(AA531FileName)
-    Y, AA531Mat, SeqNum = file2matrix(AASeqFileName, seqLength, AA531Dict)
-    np.savetxt(outputFileName, np.hstack((Y, AA531Mat)), fmt='%g', delimiter='\t')
-    print('The number of sequences is %d. Matrix of features is saved in %s' % (SeqNum, outputFileName))
+outputFileName = 'result.txt'
+np.savetxt(outputFileName, np.hstack((Y, returnMat)), fmt='%g', delimiter='\t')
+print('The number of sequences is %d. Matrix of features is saved in %s' % (lineNum, outputFileName))
 
 ```
 ```sh
-# 运行程序AA531Coding.py实现以AA531表征序列。在命令行指定ACE抑制剂三肽序列文件名、AA531属性文件名、序列长度、输出文件名。
-$ python3 AA531Coding.py ACEtriPeptidesSequencesActivities.txt AA531properties.txt 3 result.txt
+# 运行程序AA531Coding.py实现以AA531表征序列（不需要运行）。在命令行指定ACE抑制剂三肽序列文件名、AA531属性文件名、序列长度、输出文件名。
+$ python3 AA531Coding.py ACEtriPeptidesSequencesActivities.txt AA531properties.txt 3 result.txt （不需要运行）
 ```
 
 ## 作业
-自己独立编写序列表征程序。不怕报错，犯错越多，进步越快！
+> 1. 自己独立编写序列表征程序。  
+> 2. 将[AAindex](https://www.genome.jp/ftp/db/community/aaindex/aaindex1)文件中的氨基酸理化性质整理成'AA531properties.txt'的文件格式。  
+不怕报错，犯错越多，进步越快！  
 
 ## 参考文献
 [1] 代志军. 特征选择与样本选择用于癌分类与药物构效关系研究(湖南农业大学博士学位论文). 2014. <br>
