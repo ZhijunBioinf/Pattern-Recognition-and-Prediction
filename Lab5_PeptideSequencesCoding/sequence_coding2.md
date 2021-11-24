@@ -36,6 +36,9 @@ $ cd lab_05
 # 集群上若python3不可用，需先激活base环境
 $ source /opt/miniconda3/bin/activate
 $ conda activate
+
+# 进入Python
+$ python3
 ```
 
 ## 6. 序列表征
