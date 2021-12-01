@@ -117,7 +117,7 @@ $ python3 AA531Coding.py ACEtriPeptidesSequencesActivities.txt AA531properties.t
 
 ## 作业
 > 1. 自己独立编写序列表征程序。  
-> 2. 将[AAindex](https://www.genome.jp/ftp/db/community/aaindex/aaindex1)文件中的氨基酸理化性质整理成'AA531properties.txt'的文件格式(用Python或R实现都可，建议Python)。  
+> 2. 将[AAindex](https://www.genome.jp/ftp/db/community/aaindex/aaindex1)文件中的氨基酸理化性质整理成'AA531properties.txt'的文件格式（用Python或R实现都可，建议Python）。  
 不怕报错，犯错越多，进步越快！  
 
 ## 参考文献
