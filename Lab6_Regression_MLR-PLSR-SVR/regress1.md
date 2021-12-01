@@ -290,22 +290,22 @@ conda activate
 
 # SVR：在命令行指定训练集、测试集，规格化，线性核，10次交叉寻优，图文件名
 echo '------ scale: 1; kernel: linear; numOfCV: 10 --------'
-python3 mySVR.py ACE_train.txt ACE_test.txt 1 linear 10 ObsdYvsPredY_SVR1.pdf
+python3 mySVR.py ACE_train.txt ACE_test.txt 1 linear 10 ObsdYvsPredY_SVR_1-linear-cv10.pdf
 echo
 
 # 规格化，线性核，不参数寻优
 echo '------ scale: 1; kernel: linear; numOfCV: 0 --------'
-python3 mySVR.py ACE_train.txt ACE_test.txt 1 linear 0 ObsdYvsPredY_SVR2.pdf
+python3 mySVR.py ACE_train.txt ACE_test.txt 1 linear 0 ObsdYvsPredY_SVR_1-linear-noCV.pdf
 echo
 
 # 规格化，径向基核(rbf)，10次交叉寻优
 echo '------ scale: 1; kernel: rbf; numOfCV: 10 --------'
-python3 mySVR.py ACE_train.txt ACE_test.txt 1 rbf 10 ObsdYvsPredY_SVR3.pdf
+python3 mySVR.py ACE_train.txt ACE_test.txt 1 rbf 10 ObsdYvsPredY_SVR_1-rbf-cv10.pdf
 echo
 
 # 规格化，径向基核(rbf)，不参数寻优
 echo '------ scale: 1; kernel: rbf; numOfCV: 0 --------'
-python3 mySVR.py ACE_train.txt ACE_test.txt 1 rbf 0 ObsdYvsPredY_SVR4.pdf
+python3 mySVR.py ACE_train.txt ACE_test.txt 1 rbf 0 ObsdYvsPredY_SVR_1-rbf-noCV.pdf
 echo
 ```
 ```
