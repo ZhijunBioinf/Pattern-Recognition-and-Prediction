@@ -17,7 +17,7 @@ $ gunzip *.faa.gz
 ```
 
 ### 1.2 建索引  
-```
+```sh
 $ makeblastdb -in zebrafish.1.protein.faa -dbtype prot
 ```
 
@@ -75,7 +75,7 @@ plot(blast_out1$pident  * (blast_out1$qend - blast_out1$qstart), blast_out1$bits
 ### 2.1 数据准备：  
 请完成以下表格，收集基因组信息：[https://docs.qq.com/sheet/DUEZiWFBEcktGTWRO](https://docs.qq.com/sheet/DUEZiWFBEcktGTWRO)  
 
-```
+```sh
 curl -O ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/003/963/515/GCF_003963515.1_ASM396351v1/GCF_003963515.1_ASM396351v1_protein.faa.gz
 curl -O ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/006/715/575/GCF_006715575.1_ASM671557v1/GCF_006715575.1_ASM671557v1_protein.faa.gz
 curl -O ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/006/170/445/GCF_006170445.1_ASM617044v1/GCF_006170445.1_ASM617044v1_protein.faa.gz
@@ -161,8 +161,9 @@ gunzip *.gz
 
 ### 2.2 对蛋白序列进行两两比对   
 做Blast之前请改下序列名，在各自序列名后面加上GCF编号，如将```WP_003333770.1```改成```WP_003333770.1:GCF_000010165```，将所有蛋白序列合并到一个文件```all_pro.faa```，建索引```makeblastdb -in all_pro.faa -dbtype prot```。  
+
 blastAll.sh
-```
+```sh
 #!/bin/bash
 #$ -S /bin/bash
 #$ -N blastall
@@ -175,7 +176,7 @@ Blast速度太慢！！！建设大家换成diamond比对，diamond速度是blas
 * 首先对蛋白序列进行建库，`diamond makedb --in all_pro.faa -d allpep`，然后用diamond进行两两比对  
 
 work_diamond.sh
-```
+```sh
 #!/bin/bash
 #$ -S /bin/bash
 #$ -N diamond
@@ -186,13 +187,13 @@ diamond blastp -d allpep -q all_pro.faa -o allBlast.tsv -f 6
 
 ### 2.3 提取每个hit的score值，构建一个表征两条序列的相似性的特征值  
 
-```
+```sh
 cut -f 1,2,12 allBlast.tsv > allBlast.abc
 ```
 
 ### 2.4 用mcl进行聚类  
 work_mcl.sh
-```
+```sh
 #!/bin/bash
 #$ -S /bin/bash
 #$ -N MCL
