@@ -1,13 +1,11 @@
 # 基因组学 实验  
 
-**上机之前**  
-请熟悉集群使用基础，参考[这里](https://github.com/ZhijunBioinf/bcl)  
 
-**登录服务器**
-
-> Linux或Mac上登录集群
+## [实验前准备 熟悉Linux命令、计算集群作业系统](https://github.com/ZhijunBioinf/bcl)
+### 登录服务器  
+> Linux或Mac上登录集群  
 > `ssh -l username 10.100.128.160`  (须校园内网登录)  
-> Windows机器上登录用[putty](https://the.earth.li/~sgtatham/putty/latest/x86/putty.exe)或[MobaXterm](https://mobaxterm.mobatek.net/download.html)客户端登陆，推荐MobaXterm
+> Windows机器上登录用[putty](https://the.earth.li/~sgtatham/putty/latest/x86/putty.exe)或[MobaXterm](https://mobaxterm.mobatek.net/download.html)客户端登陆，推荐MobaXterm  
 
 ## [实验一 基因组组装(Assemble)](https://github.com/ZhijunBioinf/GenomicLab/blob/dzj/Lab1_1.md)   
 ## [实验二 基因组回帖(Mapping)](https://github.com/ZhijunBioinf/GenomicLab/blob/dzj/Lab2.md)  
