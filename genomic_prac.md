@@ -4,7 +4,7 @@
 ## 1. 本地Blast  
 
 ### 1.1 准备数据  
-```bash
+```sh
 # 使用curl命令下载数据（Note：数据已经下载，放在`/data/lab/genomic/prac/blast`目录中）
 $ curl -O ftp://ftp.ncbi.nih.gov/refseq/M_musculus/mRNA_Prot/mouse.1.protein.faa.gz
 $ curl -O ftp://ftp.ncbi.nih.gov/refseq/M_musculus/mRNA_Prot/mouse.2.protein.faa.gz
