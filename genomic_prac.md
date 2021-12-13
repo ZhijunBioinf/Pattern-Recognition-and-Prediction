@@ -160,7 +160,7 @@ gunzip *.gz
 ```
 
 ### 2.2 对蛋白序列进行两两比对   
-做Blast之前请改下序列名，在各自序列名后面加上GCF编号，如将```WP_003333770.1```改成```WP_003333770.1:GCF_000010165```，将所有蛋白序列合并到一个文件```all_pro.faa```，建索引```makeblastdb -in all_pro.faa -dbtype prot```。  
+做Blast之前请改下序列名，在各自序列名后面加上GCF编号，如将`WP_003333770.1`改成`WP_003333770.1:GCF_000010165`，将所有蛋白序列合并到一个文件`all_pro.faa`，建索引`makeblastdb -in all_pro.faa -dbtype prot`。  
 
 blastAll.sh
 ```sh
