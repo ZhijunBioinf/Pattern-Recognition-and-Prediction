@@ -1,5 +1,7 @@
 # 基因组学教学实习  
 
+## 学生工作目录
+/data/stdata/genomic/bioinfo2019/
 
 ## 1. 本地Blast  
 
