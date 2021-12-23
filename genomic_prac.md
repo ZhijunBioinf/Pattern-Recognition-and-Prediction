@@ -173,7 +173,7 @@ blastAll.sh
 #$ -cwd
 blastp -query all_pro.faa -db all_pro.faa -out allBlast.tsv -outfmt 6 -evalue 1e-10
 ```
-Blast速度太慢！！！建设大家换成diamond比对，diamond速度是blast的500-20000倍。  
+Blast速度太慢！！！建议大家换成diamond比对，diamond速度是blast的500-20000倍。  
 
 * 首先对蛋白序列进行建库，`diamond makedb --in all_pro.faa -d allpep`，然后用diamond进行两两比对  
 
