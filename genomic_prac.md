@@ -4,7 +4,7 @@
 /data/stdata/genomic/bioinfo2019/
 
 ## 进入genomelab环境
-$ source /opt/miniconda3/bin/activate
+$ source /opt/miniconda3/bin/activate  
 $ conda activate genomelab
 
 ## 1. 本地Blast  
