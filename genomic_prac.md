@@ -3,6 +3,10 @@
 ## 学生工作目录
 /data/stdata/genomic/bioinfo2019/
 
+## 进入genomelab环境
+$ source /opt/miniconda3/bin/activate
+$ conda activate genomelab
+
 ## 1. 本地Blast  
 
 ### 1.1 准备数据  
@@ -44,6 +48,7 @@ $ head -n 5000 mouse.2.protein.faa > mouse.2_sub5k.faa
 #$ -N blast
 #$ -j y
 #$ -cwd
+
 blastp -query mouse.1_sub5k.faa -db zebrafish.1.protein.faa -out mouse.1.zebrafish.txt -outfmt 6
 blastp -query mouse.2_sub5k.faa -db zebrafish.1.protein.faa -out mouse.2.zebrafish.txt -outfmt 6
 ```
@@ -184,6 +189,10 @@ work_diamond.sh
 #$ -N diamond
 #$ -j y
 #$ -cwd
+
+source /opt/miniconda3/bin/activate
+conda activate genomelab
+
 diamond blastp -d allpep -q all_pro.faa -o allBlast.tsv -f 6
 ```
 
@@ -201,6 +210,9 @@ work_mcl.sh
 #$ -N MCL
 #$ -j y
 #$ -cwd
+
+source /opt/miniconda3/bin/activate
+conda activate genomelab
 
 mcxload -abc allBlast.abc --stream-mirror -write-tab data.tab -o data.mci
 mcl data.mci -I 1.4
