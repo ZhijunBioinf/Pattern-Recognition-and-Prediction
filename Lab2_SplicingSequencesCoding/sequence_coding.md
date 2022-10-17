@@ -20,7 +20,7 @@
 ## 3. 数据集
 * HS<sup>3</sup>D数据集拥有从GenBank Rel.123中提取的所有人类基因外显子、内含子和剪接区域，为训练和评估基因预测模型提供了标准化的材料，是目前人类基因剪接位点预测研究通用的大型数据集[8]。该数据集包含2796/2880个真实供体/受体位点和271937/329374个虚假供体/受体位点；所有位点均遵循“GT-AG”规则，由长度为140bp的序列样本表示，其中保守的二核苷酸GT位于序列第71、72位，保守的二核苷酸AG位于序列第69、70 位；所有序列均已剔除非ACGT碱基，且已去除冗余序列。
 * 从HS<sup>3</sup>D数据集的所有虚假剪接位点序列中，随机抽取2796/2880条虚假供体/受体位点序列，与所有真实剪接位点序列构建正负样本均衡的数据集。
-* 供体(EI)、受体(IE)位点序列：[EI_true.seq, EI_false.seq; IE_true.seq, IE_false.seq](https://github.com/dai0992/Pattern-Recognition-and-Prediction/blob/master/Lab2_SplicingSequencesCoding/EI-true-false_IE-true-false_seq.zip)
+* 供体(EI)、受体(IE)位点序列：[EI_true.seq, EI_false.seq; IE_true.seq, IE_false.seq](./EI-true-false_IE-true-false_seq.zip)
 
 ## 4. 基于序列组分的特征：k-spaced氨基酸/碱基对组分[9]
 * 被k个任意碱基隔开的碱基对(base pairs)在核酸序列中的出现频率。
