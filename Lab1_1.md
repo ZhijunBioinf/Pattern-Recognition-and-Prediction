@@ -33,7 +33,7 @@
 2. 选择大家使用多的软件
 3. 选择适合项目性质的软件，如基因组大小，染色体倍性，杂合度，数据类型，宏基因组，转录组等
 
-> [浏览软件库](https://bioinformaticshome.com/tools/wga/wga.html)
+> [98 Free Whole Genome Assembly (WGA) Analysis Tools](https://bioinformaticshome.com/tools/wga/wga.html)
 
 ## 三、上机操作
 ### 进入genomelab环境
