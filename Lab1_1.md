@@ -221,7 +221,7 @@ $ less quast_results/latest/report.txt
 3. 理解k-mer频次分布图，如何根据k-mer频次分布图估算基因组大小及杂合度  
  
 ## 五、参考文献  
-1. [velvet手册](https://github.com/dzerbino/velvet/blob/master/Manual.pdf)
-2. [mimia手册](https://github.com/GATB/minia#introduction)
-3. [SPAdes手册](https://github.com/ablab/spades)
+1. [velvet手册](./Velvet-Manual.pdf)
+2. [mimia手册](https://github.com/ZhijunBioinf/minia)
+3. [SPAdes手册](https://github.com/ZhijunBioinf/spades)
 
