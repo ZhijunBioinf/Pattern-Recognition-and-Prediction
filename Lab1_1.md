@@ -41,6 +41,13 @@
 $ source /opt/miniconda3/bin/activate
 $ conda create -n r_env r-essentials r-base
 ```
+### 如果不成功，需要自己先安装[miniconda](https://repo.anaconda.com/miniconda/Miniconda3-py37_4.12.0-Linux-x86_64.sh)
+```shell
+# 按步骤输入yes
+$ sh Miniconda3-py37_4.12.0-Linux-x86_64.sh
+# 可能需要重启shell终端，在conda中安装R环境
+$ conda create -n r_env r-essentials r-base
+```
 
 ### 创建工作目录
 ```shell
@@ -143,7 +150,7 @@ $ qstat # 查看自己用户名下的kmer任务是否运行起来（r状态）
 #$ -N velvet
 #$ -cwd
 #$ -j y
-velveth ecoli.velvet 27 -shortPaired -fastq.gz -separate ../data/reads_1.fq.gz ../data/reads_2.fq.gz # (若使用集群数据，请设置k为117)
+velveth ecoli.velvet 27 -shortPaired -fastq.gz -separate ../data/reads_1.fq.gz ../data/reads_2.fq.gz # (若使用集群数据，请设置k为111)
 velvetg ecoli.velvet -exp_cov auto
 ```
 
@@ -160,7 +167,7 @@ $ qsub work_velvet.sh
 #$ -N minia
 #$ -cwd
 #$ -j y
-/opt/bio/bin/minia -in ../data/reads_1.fq.gz,../data/reads_2.fq.gz -kmer-size 27 -out ecoli.minia # (若使用集群数据，请设置k为117)
+minia -in ../data/reads_1.fq.gz,../data/reads_2.fq.gz -kmer-size 27 -out ecoli.minia # (若使用集群数据，请设置k为111)
 ```
 
 ```shell
