@@ -199,15 +199,15 @@ $ qsub work_spades.sh
 
 ```shell
 $ cd
-$ tar -zxvf quast-5.0.2.tar.gz -C ./ # 解压缩quast-5.0.2.tar.gz
-$ chmod a+x quast-5.0.2/quast.py # 为quast.py增加执行权限
-$ rm -f quast-5.0.2.tar.gz
+$ tar -zxvf quast-5.2.0.tar.gz -C ./quast # 解压缩
+$ chmod a+x quast/quast.py # 为quast.py增加执行权限
+$ rm -f quast-5.2.0.tar.gz
 $ cd YourStudentID/lab1/result/ # 返回工作路径
 $ ln -s ecoli.velvet/contigs.fa velvet.contigs.fa # 在当前路径建立组装结果文件的软链接，方便比较
 $ ln -s ecoli.spades/scaffolds.fasta spades.scaffolds.fa
 
 # 用quast评价组装结果
-$ ~/quast-5.0.2/quast.py -R ../data/ref.fa velvet.contigs.fa ecoli.minia.contigs.fa spades.scaffolds.fa
+$ ~/quast/quast.py -R ../data/ref.fa velvet.contigs.fa ecoli.minia.contigs.fa spades.scaffolds.fa
 ```
 
 #### 查看评价结果  
