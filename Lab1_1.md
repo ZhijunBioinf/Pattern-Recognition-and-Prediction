@@ -36,10 +36,11 @@
 > [98 Free Whole Genome Assembly (WGA) Analysis Tools](https://bioinformaticshome.com/tools/wga/wga.html)
 
 ## 三、上机操作
-### 进入genomelab环境
+### 在conda中重新安装R
 ```shell
 $ source /opt/miniconda3/bin/activate
-$ conda activate genomelab
+$ conda create -n r_env r-essentials r-base
+$ conda activate r_env
 ```
 ### 创建工作目录
 ```shell
