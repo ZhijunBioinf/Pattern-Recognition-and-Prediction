@@ -43,6 +43,16 @@ $ conda activate genomelab
 ```
 ### 创建工作目录
 ```shell
+# 每个用户home目录下限额使用10G硬盘，主要存放代码。做实验需用到大量数据，因此在专门路径中做实验
+# 先按自己的学号建立专属文件夹
+$ cd /data/stdata/genomic/grade2020
+$ mkdir 你的学号
+$ cd # 回到home路径
+
+# 建立工作路径的软链接
+$ ln -s /data/stdata/genomic/grade2020/你的学号
+$ cd 你的学号
+
 #新建一个目录lab1，本实验所有数据和输出都放入该目录中  
 $ mkdir lab1
 $ cd lab1
@@ -52,14 +62,13 @@ $ mkdir result
 
 ### 数据存放位置  
 DNA测序数据位于：  
-> [genomics_lab1_reads.fastq.gz](https://github.com/ZhijunBioinf/GenomicLab/blob/dzj/genomics_lab1_reads.fastq.gz)  
+> [genomics_lab1_reads.fastq.gz](./genomics_lab1_reads.fastq.gz)  
 > 【更靠谱的数据】/data/stdata/genomic/lab01/data/reads_1.fq.gz  
 > 【更靠谱的数据】/data/stdata/genomic/lab01/data/reads_2.fq.gz  
 
 参考基因组位于：  
-> [genomics_lab1_ref.fa.gz](https://github.com/ZhijunBioinf/GenomicLab/blob/dzj/genomics_lab1_ref.fa.gz)  
+> [genomics_lab1_ref.fa.gz](./genomics_lab1_ref.fa.gz)  
 > 【更靠谱的数据】/data/stdata/genomic/lab01/data/ref.fa  
-
 
 ### 组装  
 #### 准备数据  
@@ -86,6 +95,11 @@ $ cd ../result
 ```shell
 $ ls ../data/reads_* > reads.file
 ```
+
+准备kmergenie软件
+1. 下载：[kmergenie](http://kmergenie.bx.psu.edu/)
+2. 
+
 新建一个脚本文件，work_kmer.sh，写入以下内容:  
 ```shell
 #!/bin/bash
@@ -94,11 +108,13 @@ $ ls ../data/reads_* > reads.file
 #$ -cwd
 #$ -j y
 /opt/bio/kmergenie-1.7048/kmergenie reads.file
+
 ```
 
 ```shell
 # 用qsub提交任务至计算节点
 $ qsub work_kmer.sh
+$ qstat # 查看自己用户名下的kmer任务是否运行起来（r状态）
 ```
 
 > 结束后查看结果，选择最优k值27 (对应本地数据)  
