@@ -223,6 +223,6 @@ $ less quast_results/latest/report.txt
  
 ## 五、参考文献  
 1. [velvet手册](./Velvet-Manual.pdf)
-2. [mimia手册](https://github.com/ZhijunBioinf/minia)
-3. [SPAdes手册](https://github.com/ZhijunBioinf/spades)
+2. [mimia手册](https://gitee.com/ZhijunBioinf/minia)
+3. [SPAdes手册](https://gitee.com/ZhijunBioinf/spades)
 
