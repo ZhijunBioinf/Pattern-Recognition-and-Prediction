@@ -54,12 +54,12 @@ $ conda create -n r_env r-essentials r-base
 # 每个用户home目录下限额使用10G硬盘，主要存放代码。做实验需用到大量数据，因此在专门路径中做实验
 # 先按自己的学号建立专属文件夹
 $ cd /data/stdata/genomic/grade2020
-$ mkdir 你的学号
+$ mkdir YourStudentID
 $ cd # 回到home路径
 
 # 建立工作路径的软链接
 $ ln -s /data/stdata/genomic/grade2020/你的学号
-$ cd 你的学号
+$ cd YourStudentID
 
 #新建一个目录lab1，本实验所有数据和输出都放入该目录中  
 $ mkdir lab1
@@ -202,7 +202,7 @@ $ cd
 $ tar -zxvf quast-5.0.2.tar.gz -C ./ # 解压缩quast-5.0.2.tar.gz
 $ chmod a+x quast-5.0.2/quast.py # 为quast.py增加执行权限
 $ rm -f quast-5.0.2.tar.gz
-$ cd YourWorkingPath/lab1/result/ # 返回工作路径
+$ cd YourStudentID/lab1/result/ # 返回工作路径
 $ ln -s ecoli.velvet/contigs.fa velvet.contigs.fa # 在当前路径建立组装结果文件的软链接，方便比较
 $ ln -s ecoli.spades/scaffolds.fasta spades.scaffolds.fa
 
