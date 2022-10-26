@@ -97,18 +97,18 @@ $ cd ../result
 $ ls ../data/reads_* > reads.file
 ```
 
-# 准备kmergenie软件（如果未安装kmergenie）
-# 1. 下载：[kmergenie](http://kmergenie.bx.psu.edu/)
-# 2. 上传到集群并解压缩：
+#### 准备kmergenie软件（如果未安装kmergenie）
+> 1. 下载：[kmergenie](http://kmergenie.bx.psu.edu/)
+> 2. 上传到集群并解压缩：
 ```shell
 $ tar -zxfv kmergenie-1.7051.tar.gz
 ```
-# 3. 进入kmergenie-1.7051文件夹并编译
+> 3. 进入kmergenie-1.7051文件夹并编译
 ```shell
 $ cd kmergenie-1.7051
 $ make
 ```
-# 4. 将kmergenie加入到系统路径，方便调用（先回忆熟悉vi的使用）
+> 4. 将kmergenie加入到系统路径，方便调用（先回忆熟悉vi的使用）
 ```shell
 $ vi ~/.bash_profile
 PATH=$PATH:$HOME/software/kmergenie-1.7051
