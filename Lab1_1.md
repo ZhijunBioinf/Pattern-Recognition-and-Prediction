@@ -143,8 +143,6 @@ $ qstat # 查看自己用户名下的kmer任务是否运行起来（r状态）
 #$ -N velvet
 #$ -cwd
 #$ -j y
-source /opt/miniconda3/bin/activate
-conda activate genomelab
 velveth ecoli.velvet 27 -shortPaired -fastq.gz -separate ../data/reads_1.fq.gz ../data/reads_2.fq.gz # (若使用集群数据，请设置k为117)
 velvetg ecoli.velvet -exp_cov auto
 ```
