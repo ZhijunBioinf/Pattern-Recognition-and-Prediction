@@ -40,8 +40,8 @@
 ```shell
 $ source /opt/miniconda3/bin/activate
 $ conda create -n r_env r-essentials r-base
-$ conda activate r_env
 ```
+
 ### 创建工作目录
 ```shell
 # 每个用户home目录下限额使用10G硬盘，主要存放代码。做实验需用到大量数据，因此在专门路径中做实验
@@ -118,8 +118,8 @@ $ source ~/.bash_profile
 #$ -N kmer
 #$ -cwd
 #$ -j y
-/opt/bio/kmergenie-1.7048/kmergenie reads.file
-
+conda activate r_env
+kmergenie reads.file
 ```
 
 ```shell
@@ -129,7 +129,7 @@ $ qstat # 查看自己用户名下的kmer任务是否运行起来（r状态）
 ```
 
 > 结束后查看结果，选择最优k值27 (对应本地数据)  
-> 结束后查看结果，选择最优k值117 (对应集群数据)  
+> 结束后查看结果，选择最优k值111 (对应集群数据)  
 
 #### 1. 用velvet组装
 新建一个脚本文件，work_velvet.sh，写下下列内容:  
