@@ -199,8 +199,8 @@ $ qsub work_spades.sh
 
 ```shell
 $ cd
-$ tar -zxvf quast-5.2.0.tar.gz -C ./quast # 解压缩
-$ chmod a+x quast/quast.py # 为quast.py增加执行权限
+$ tar -zxvf quast-5.2.0.tar.gz -C ./ # 解压缩
+$ chmod a+x quast-5.2.0/quast.py # 为quast.py增加执行权限
 $ rm -f quast-5.2.0.tar.gz
 $ cd YourStudentID/lab1/result/ # 返回工作路径
 $ ln -s ecoli.velvet/contigs.fa velvet.contigs.fa # 在当前路径建立组装结果文件的软链接，方便比较
@@ -219,6 +219,7 @@ $ less quast_results/latest/report.txt
 1. 不同k-mer值对组装的影响，对velvet和minia用41和51进行组装，比较组装效果  
 2. 熟悉和理解基因组组装一些术语名词，如N50, NG50, contig, scaffold, gap等
 3. 理解k-mer频次分布图，如何根据k-mer频次分布图估算基因组大小及杂合度  
+
  
 ## 五、参考文献  
 1. [velvet手册](./Velvet-Manual.pdf)
