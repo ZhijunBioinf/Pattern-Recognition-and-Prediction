@@ -207,7 +207,7 @@ $ ln -s ecoli.velvet/contigs.fa velvet.contigs.fa # 在当前路径建立组装�
 $ ln -s ecoli.spades/scaffolds.fasta spades.scaffolds.fa
 
 # 用quast评价组装结果
-$ ~/quast/quast.py -R ../data/ref.fa velvet.contigs.fa ecoli.minia.contigs.fa spades.scaffolds.fa
+$ ~/quast-5.2.0/quast.py -R ../data/ref.fa velvet.contigs.fa ecoli.minia.contigs.fa spades.scaffolds.fa
 ```
 
 #### 查看评价结果  
