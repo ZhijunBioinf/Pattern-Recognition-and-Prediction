@@ -58,7 +58,7 @@ $ mkdir YourStudentID
 $ cd # 回到home路径
 
 # 建立工作路径的软链接
-$ ln -s /data/stdata/genomic/grade2020/你的学号
+$ ln -s /data/stdata/genomic/grade2020/YourStudentID
 $ cd YourStudentID
 
 #新建一个目录lab1，本实验所有数据和输出都放入该目录中  
