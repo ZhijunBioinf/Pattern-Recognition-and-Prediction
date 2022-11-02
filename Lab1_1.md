@@ -106,7 +106,7 @@ $ ls ../data/reads_* > reads.file
 
 #### 准备kmergenie软件（如果未安装kmergenie）
 > 1. 下载：[kmergenie](http://kmergenie.bx.psu.edu/)
-> 2. 上传到集群并解压缩：
+> 2. 上传到集群并解压缩（### 注意：在home目录下解压缩）：
 ```shell
 $ tar -zxfv kmergenie-1.7051.tar.gz
 ```
