@@ -162,8 +162,8 @@ $ qsub work_minimap_pb.sh
 3. 用igv显示比对结果   
 
 ## 五、参考资料  
-[bwa](https://github.com/lh3/bwa)  
-[minimap2](https://github.com/lh3/minimap2)  
+[bwa](https://bio-bwa.sourceforge.net/bwa.shtml)  
+[minimap2](https://lh3.github.io/minimap2/minimap2.html)  
 [samtools](http://www.htslib.org/)  
 [IGV](http://software.broadinstitute.org/software/igv/)  
 
