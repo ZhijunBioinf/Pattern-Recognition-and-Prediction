@@ -47,17 +47,17 @@ $ conda create -n r_env r-essentials r-base
 $ ln -s /data/stdata/genomic/software/Miniconda3-py37_4.12.0-Linux-x86_64.sh
 $ sh Miniconda3-py37_4.12.0-Linux-x86_64.sh
 
+# 若conda未自动设置环境变量，将conda加入到系统路径中
+$ vi ~/.bashrc
+export PATH=$HOME/miniconda3/bin:$PATH
+$ source ~/.bashrc
+
 # conda默认的安装软件源可能很慢，可尝试添加清华镜像源
 $ conda config --remove-key channels
 $ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/
 $ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
 $ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
 $ conda config --set show_channel_urls yes
-
-# 若conda未自动设置环境变量，将conda加入到系统路径中
-$ vi ~/.bashrc
-export PATH=$HOME/miniconda3/bin:$PATH
-$ source ~/.bashrc
 
 # 可能需要重启shell终端，在conda中安装R环境
 $ conda create -n r_env r-essentials r-base
