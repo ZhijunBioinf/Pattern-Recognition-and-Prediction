@@ -44,7 +44,16 @@ $ conda create -n r_env r-essentials r-base
 ### 如果不成功，需要自己先安装[miniconda](https://repo.anaconda.com/miniconda/Miniconda3-py37_4.12.0-Linux-x86_64.sh)
 ```shell
 # 按步骤输入yes
+$ ln -s /data/stdata/genomic/software/Miniconda3-py37_4.12.0-Linux-x86_64.sh
 $ sh Miniconda3-py37_4.12.0-Linux-x86_64.sh
+
+# conda默认的安装软件源可能很慢，可尝试添加清华镜像源
+$ conda config --remove-key channels
+$ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/
+$ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
+$ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+$ conda config --set show_channel_urls yes
+
 # 可能需要重启shell终端，在conda中安装R环境
 $ conda create -n r_env r-essentials r-base
 ```
