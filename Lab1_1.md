@@ -54,6 +54,11 @@ $ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/clou
 $ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
 $ conda config --set show_channel_urls yes
 
+# 若conda未自动设置环境变量，将conda加入到系统路径中
+$ vi ~/.bashrc
+export PATH=$HOME/miniconda3/bin:$PATH
+$ source ~/.bashrc
+
 # 可能需要重启shell终端，在conda中安装R环境
 $ conda create -n r_env r-essentials r-base
 ```
