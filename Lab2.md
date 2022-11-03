@@ -154,7 +154,7 @@ $ qsub work_minimap_pb.sh
 
 ### (四) 显示和比较比对结果  
 [使用IGV](https://blog.csdn.net/qq_22253901/article/details/119845652)查看比对结果  
-![](./igv_snapshot.png) 
+![](./Lab2_IGV.png) 
 
 ## 四、作业与思考  
 1. 先组装，得到contigs (assemble short reads using SPAdes, assemble pacbio long reads using canu | mecat | miniasm)  
