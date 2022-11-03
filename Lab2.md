@@ -44,6 +44,7 @@ $ conda activate genomelab
 ```
 ### 创建工作目录  
 ```shell
+$ cd YourStudentID/genomicLab
 $ mkdir lab2
 $ cd lab2
 $ mkdir data
