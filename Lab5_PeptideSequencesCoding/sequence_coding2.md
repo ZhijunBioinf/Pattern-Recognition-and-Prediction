@@ -25,7 +25,7 @@
 * An amino acid index is a set of 20 numerical values representing any of the different physicochemical and biological properties of amino acids. The AAindex1 section of the Amino Acid Index Database is a collection of published indices together with the result of cluster analysis using the correlation coefficient as the distance between two indices. This section currently contains 544 indices.
 * 某些氨基酸缺失了部分理化属性，预处理后，符合条件的生理生化属性共531个。
 * 对于每条ACE三肽序列，以每个位置氨基酸对应的531个理化属性依次替换序列，可获得531x3 = 1593个特征。
-* [AA531properties.txt](https://github.com/ZhijunBioinf/Pattern-Recognition-and-Prediction/blob/master/Lab5_PeptideSequencesCoding/AA531properties.txt)
+* [AA531properties.txt](./AA531properties.txt)
 
 ## 5. 工作目录准备
 ```sh
