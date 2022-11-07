@@ -19,7 +19,7 @@
 
 ## 3. 数据集
 * ACE_tri-peptides_150数据集的肽序列及其活性(lg(IC<sub>50</sub>))来源于文献[4].
-* [ACEtriPeptidesSequencesActivities.txt](https://github.com/ZhijunBioinf/Pattern-Recognition-and-Prediction/blob/master/Lab5_PeptideSequencesCoding/ACEtriPeptidesSequencesActivities.txt)
+* [ACEtriPeptidesSequencesActivities.txt](./ACEtriPeptidesSequencesActivities.txt)
 
 ## 4. 基于[AA531](http://www.genome.jp/aaindex)的序列表征
 * An amino acid index is a set of 20 numerical values representing any of the different physicochemical and biological properties of amino acids. The AAindex1 section of the Amino Acid Index Database is a collection of published indices together with the result of cluster analysis using the correlation coefficient as the distance between two indices. This section currently contains 544 indices.
