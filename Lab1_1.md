@@ -47,7 +47,7 @@ $ conda create -n r_env r-essentials r-base
 $ ln -s /data/stdata/genomic/software/Miniconda3-py37_4.12.0-Linux-x86_64.sh
 $ sh Miniconda3-py37_4.12.0-Linux-x86_64.sh
 
-# 若conda未自动设置环境变量，将conda加入到系统路径中
+# 若conda未自动设置环境变量，将conda加入到系统路径中（注意：需要在.bashrc文件末尾加入新的路径）
 $ vi ~/.bashrc
 export PATH=$HOME/miniconda3/bin:$PATH
 $ source ~/.bashrc
