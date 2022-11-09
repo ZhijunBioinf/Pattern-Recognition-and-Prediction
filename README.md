@@ -6,7 +6,7 @@
 > Linux或Mac系统：`ssh -l username 10.7.254.22`  (须校园内网登录)  
 > Windows系统：可用[putty](https://the.earth.li/~sgtatham/putty/latest/x86/putty.exe)或[MobaXterm](https://mobaxterm.mobatek.net/download.html)客户端登陆，推荐MobaXterm  
 
-## [实验一：基因组组装(Assemble)](./Lab1_1.md)   
+## [实验一：基因组组装(Assembly)](./Lab1_1.md)   
 ## [实验二：基因组回帖(Mapping)](./Lab2.md)  
 ## [实验三：基因组注释(Annotation)](./Lab3.md)  
 ## [实验四：基因组进化分析(WGA)](./Lab4_wga.md)
