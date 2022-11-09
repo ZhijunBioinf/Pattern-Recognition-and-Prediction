@@ -87,7 +87,7 @@ bwa index ref.fa
 $ qsub work_bwaIndex.sh
 ```
 
-#### 3. Mapping the reads to the reference genome using bwa  
+#### 3. Mapping the reads to the reference genome using [bwa](https://www.jianshu.com/p/19f58a07e6f4)  
 ```shell
 cd ../../results
 ```
