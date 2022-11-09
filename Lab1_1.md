@@ -213,7 +213,8 @@ $ qsub work_spades.sh
 
 ```shell
 $ cd
-$ tar -zxvf quast-5.2.0.tar.gz -C ./ # 解压缩
+$ ln -s /data/stdata/genomic/software/quast-5.2.0.tar.gz # 如果下载不了quast，可以建立软连接
+$ tar -zxvf quast-5.2.0.tar.gz # 解压缩
 $ chmod a+x quast-5.2.0/quast.py # 为quast.py增加执行权限
 $ rm -f quast-5.2.0.tar.gz
 $ cd YourStudentID/lab1/result/ # 返回工作路径
