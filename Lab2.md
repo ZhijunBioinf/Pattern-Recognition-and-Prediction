@@ -111,7 +111,7 @@ samtools index mapping.sort.bwa.bam
 $ qsub work_bwa.sh
 ```
 
-### (二)Mapping the short reads to the reference genome using minimap2  
+### (二)Mapping the short reads to the reference genome using [minimap2](https://www.jianshu.com/p/d1868194b65e)  
 
 work_minimap2.sh  
 ```shell
