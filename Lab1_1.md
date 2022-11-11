@@ -122,6 +122,8 @@ $ ls ../data/reads_* > reads.file
 > 1. 下载：[kmergenie](http://kmergenie.bx.psu.edu/)
 > 2. 上传到集群并解压缩（### 注意：在home目录下解压缩）：
 ```shell
+$ cd
+$ ln -s /data/stdata/genomic/software/kmergenie-1.7051.tar.gz # 如果下载不了kmergenie，可以建立软连接
 $ tar -zxvf kmergenie-1.7051.tar.gz
 ```
 > 3. 进入kmergenie-1.7051文件夹并编译
