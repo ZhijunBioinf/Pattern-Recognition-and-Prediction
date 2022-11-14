@@ -131,14 +131,14 @@ $ tar -zxvf kmergenie-1.7051.tar.gz
 $ cd kmergenie-1.7051
 $ make
 ```
-> 4. 将kmergenie加入到系统路径，方便调用（先回忆熟悉vi的使用）
+> 4. 将kmergenie加入到系统路径，方便调用（先回忆熟悉vi的使用，另外注意：老师的文件路径不是你的路径）
 ```shell
 $ vi ~/.bash_profile
 PATH=$PATH:$HOME/software/kmergenie-1.7051
 $ source ~/.bash_profile
 ```
 
-新建一个脚本文件，work_kmer.sh，写入以下内容:  
+新建一个脚本文件，work_kmer.sh，写入以下内容（注意当前路径是否在lab1/result）:  
 ```shell
 #!/bin/bash
 #$ -S /bin/bash
