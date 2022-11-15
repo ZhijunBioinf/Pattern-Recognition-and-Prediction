@@ -106,7 +106,8 @@ $ qsub work_maker.sh
 
 查看结果文件：  
 ```shell
-$ cd dpp_contig.maker.output/dpp_contig_datastore/05/1F/contig-dpp-500-500
+$ ln -s dpp_contig.maker.output/dpp_contig_datastore/05/1F/contig-dpp-500-500
+$ cd contig-dpp-500-500/
 $ ls -lh
 -rw-rw-r-- 1 daizj daizj  64K Nov 17 18:32 contig-dpp-500-500.gff
 -rw-rw-r-- 1 daizj daizj  717 Nov 17 18:32 contig-dpp-500-500.maker.proteins.fasta
