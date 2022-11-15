@@ -82,7 +82,7 @@ $ python3 kSpaceCoding_general.py EI_false.seq EI_false_kSpace.txt 4
 * 2）以序列表征文件构建训练集、测试集 <br>
 ```bash
 # 首先安装机器学习包sklearn
-$ pip3 install --user sklearn -i https://pypi.tuna.tsinghua.edu.cn/simple
+$ pip3 install --user scikit-learn -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
 参考程序：getTrainTest.py
