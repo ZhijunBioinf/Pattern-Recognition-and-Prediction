@@ -32,9 +32,12 @@ $ conda activate genomelab
 ```shell
 $ mkdir lab3
 $ cd lab3
+$ mkdir data
+$ mkdir results
+$ cd data
 $ ln -s /data/stdata/genomic/lab03/data/ref.fa ./
 $ ln -s /data/stdata/genomic/lab03/data/*.fasta ./
-$ mkdir results
+$ cd ../results
 ```
 
 ## (一) 原核生物基因组注释--prokka    
