@@ -115,16 +115,15 @@ $ ls -lh
 drwxrwxr-x 3 daizj daizj 4.0K Nov 17 18:32 theVoid.contig-dpp-500-500
 ```
 
-### 用Artemis查看注释结果（选做）  
-这一部分是在本地台式机上完成。  
+### 用Artemis查看注释结果（请在本地完成）  
 下载地址：http://www.sanger.ac.uk/science/tools/artemis  
-将prokka注释得到的prokka.gff文件拷到本地电脑上  
+将prokka注释得到的prokka.gff文件传到本地电脑上  
 打开Artemis，装载注释结果  
 >    1. Start Artemis  
 >    2. Click OK  
 >    3. Go to File -> Open File Manager  
 >    4. Navigate to the folder  
->    5. Choose the prokka.gff file you copied from the server
+>    5. Choose the prokka.gff file you downloaded from the server
 
 ## 四、作业与思考  
 1. 尝试用其他原核生物基因预测软件进行基因预测，如[GLIMMER](http://ccb.jhu.edu/software/glimmer/index.shtml)，或者[GeneMark](http://topaz.gatech.edu/GeneMark/)，并比较不同软件注释结果有什么不同
