@@ -24,6 +24,8 @@ $ cd lab_01
 * Windows系统：Win+R打开'运行'，输入cmd
 * Linux系统：远程用Xshell, Putty, MobaXterm都可以
 * Mac系统：本地打开Terminal App
+* Python IDE: PyCharm, PythonSpider, Jupyter Notebook(推荐)
+
 ```
 $ python3
 # 第一声啼哭：在命令行输入
