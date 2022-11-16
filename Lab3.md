@@ -131,6 +131,6 @@ drwxrwxr-x 3 daizj daizj 4.0K Nov 17 18:32 theVoid.contig-dpp-500-500
 2. 了解真核生物基因组注释软件，如[Augustus](http://bioinf.uni-greifswald.de/augustus/), [GlimmerHMM](http://ccb.jhu.edu/software/glimmerhmm/), [maker](http://www.yandell-lab.org/software/maker.html)
 
 ## 五、参考资料  
-1. [prokka github](https://github.com/tseemann/prokka)
+1. [prokka github/gitee](https://gitee.com/ZhijunBioinf/genomicSoftware-prokka)
 2. [maker tutorial](http://gmod.org/wiki/MAKER_Tutorial)
  
