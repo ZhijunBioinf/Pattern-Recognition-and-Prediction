@@ -77,7 +77,7 @@ $ maker -CTL
 -rw-rw-r-- 1 daizj daizj 4.7K Nov 17 17:19 maker_opts.ctl
 ```
 
-编辑maker_opts.ctl文件，改变以下几个参数，几他的用默认参数：  
+编辑maker_opts.ctl文件，改变以下几个参数，几他的用默认参数（建议用vi编辑）：  
 ```shell
 genome=../data/dpp_contig.fasta  
 est=../data/dpp_est.fasta  
