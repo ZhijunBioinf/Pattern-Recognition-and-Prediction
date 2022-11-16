@@ -19,7 +19,7 @@
 2. 掌握用maker注释真核生物基因组  
 
 ## 三、上机操作
-### 进入genomelab环境
+### 进入genomelab环境（可不进入genomelab环境）
 ```shell
 $ source /opt/miniconda3/bin/activate
 $ conda activate genomelab
