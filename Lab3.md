@@ -117,7 +117,7 @@ drwxrwxr-x 3 daizj daizj 4.0K Nov 17 18:32 theVoid.contig-dpp-500-500
 ```
 
 ### 用Artemis查看注释结果（请在本地完成）  
-下载地址：http://www.sanger.ac.uk/science/tools/artemis  
+下载地址：http://sanger-pathogens.github.io/Artemis/  
 将prokka注释得到的PROKKA.gff文件传到本地电脑上  
 打开Artemis，装载注释结果  
 >    1. Start Artemis  
