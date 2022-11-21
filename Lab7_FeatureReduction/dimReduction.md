@@ -151,7 +151,10 @@ conda activate
 # 设置保留10个特征
 python3 mySVMRFE.py ACE_train.txt ACE_test.txt 10 train_svmrfe.txt test_svmrfe.txt
 ```
-
+```bash
+# 提交任务
+$ qsub work_mySVMRFE.sh
+```
 ```bash
 # 以SVR建模预测：规格化、rbf核、10次交叉寻优
 $ python3 ../lab_06/mySVR.py train_svmrfe.txt test_svmrfe.txt 1 rbf 10 ObsdYvsPredY_RFE_SVR.pdf
