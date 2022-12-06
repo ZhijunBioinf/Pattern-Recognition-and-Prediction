@@ -21,7 +21,7 @@ $ conda activate
 ## 1. 训练集与测试集构建
 * 1）编写更好用的k-spaced碱基对组分特征表征程序（用于HS3D数据的供体真实/虚假位点序列表征）<br>
 参考程序：kSpaceCoding_general.py, 该程序避免了每次在程序中修改文件名和其他参数的麻烦。
-```python3
+```python
 import numpy as np # 导入numpy包，并重命名为np
 import sys # 导入sys包，用于从命令行传递参数给python程序
 
@@ -86,7 +86,7 @@ $ pip3 install --user scikit-learn -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
 参考程序：getTrainTest.py
-```python3
+```python
 import numpy as np
 import sys
 from random import sample # 导入sample函数，用于从虚假位点数据中随机抽取样本
@@ -120,7 +120,7 @@ $ python3 getTrainTest.py EI_true_kSpace.txt EI_false_kSpace.txt EI_train.txt EI
 
 ## 2. 以KNN进行剪接位点识别
 参考程序：myKNN.py
-```python3
+```python
 import numpy as np
 from sklearn import neighbors # 导入KNN包
 import sys
@@ -149,7 +149,7 @@ $ python3 myKNN.py EI_train.txt EI_test.txt 10
 
 ## 3. 以Logistic回归进行剪接位点识别
 参考程序：myLR.py
-```python3
+```python
 import numpy as np
 from sklearn import linear_model # 导入线性模型包
 import sys
@@ -177,7 +177,7 @@ $ python3 myLR.py EI_train.txt EI_test.txt 1000
 
 ## 4. 以Decision Tree进行剪接位点识别
 参考程序：myDT.py
-```python3
+```python
 import numpy as np
 from sklearn import tree # 导入Decision Trees包
 import sys
