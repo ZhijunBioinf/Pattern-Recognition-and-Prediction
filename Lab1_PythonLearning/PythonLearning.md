@@ -204,20 +204,20 @@ if x1 < 10 and x2 < 10:
 if x1 < x2:
   print('x1 is less than x2')
 else:
-  print('x1 is more than x2')
+  print('x1 is greater than x2')
 
 # if...elif...else语句
 if x1 > x2: # 可以通过设置x1, x2的大小，来得到不同的输出
   print('x1 is more than x2')
 elif x1 > 10:
-  print('x1 is less than x2, but x1 is more than 10')
+  print('x1 is less than x2, but x1 is greater than 10')
 else:
   print('x1 is less than x2, and x1 is less than 10')
 
 # if的嵌套
 if x1 < 10:
   if x2 > 10:
-    print('x1 is less than 10, but x2 is more than 10')
+    print('x1 is less than 10, but x2 is greater than 10')
   else:
     print('x1 and x2 are both less than 10')
 ```
@@ -264,7 +264,7 @@ while 1: # 最粗暴的判断条件，1代表无限循环，即死循环
   iter_m = iter_m+1
   print('Iteration %d: x1 is %d' % (iter_m, x1))
   if x1 > 10:
-    print('x1 is more than 10 and the while loop should be break!')
+    print('x1 is greater than 10 and the while loop should be break!')
     break # 如果没有break语句，循环将无限进行下去
 ```
 
