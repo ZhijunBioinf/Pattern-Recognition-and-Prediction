@@ -52,7 +52,7 @@ $ pip3 install --user numpy scipy matplotlib -i https://pypi.tuna.tsinghua.edu.c
 ## 6. 序列表征
 * 参考程序：kSpaceCoding.py
 * 将以下代码保存为一个.py文件(如kSpaceCoding.py). 程序功能：读取'EI_true1.seq', 计算kSpace特征，并将结果保存至输出文件(如'EI_true1_kSpace.txt')
-```python3
+```python
 import numpy as np # 导入numpy包，并重命名为np
 
 def file2matrix(filename, KMAX, bpTable):
