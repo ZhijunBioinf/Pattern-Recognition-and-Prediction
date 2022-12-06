@@ -278,7 +278,7 @@ while x1 < 10:
   if x1 % 2 == 0: # 如果x1是偶数，则打印提示，并结束本次循环
     print('x1 is an even number: %d' % x1)
     continue
-  print('Iteration %d: x1 is a odd number %d' % (iter_m, x1)) # 如果x1是奇数，打印提示与数值
+  print('Iteration %d: x1 is an odd number %d' % (iter_m, x1)) # 如果x1是奇数，打印提示与数值
 ```
 
 ## 4. 读写文件
